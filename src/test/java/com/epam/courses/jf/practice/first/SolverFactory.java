@@ -18,11 +18,11 @@ class SolverFactory {
      * @return Объект, реализующий первое задание
      */
     static ISolver getInstance() {
-        URL ruURL = Thread.currentThread().getContextClassLoader().getResource("ru");
+        URL ruURL = Thread.currentThread().getContextClassLoader().getResource(".");
         if (ruURL == null) {
             throw new IllegalArgumentException("There is no package with Solver!");
         }
-        File rootFile = new File(ruURL.getPath()).getParentFile().getParentFile();
+        File rootFile = new File(ruURL.getPath()).getParentFile();
         File studentDirectory = new File(rootFile.getAbsolutePath() + "/classes/" + SOLVER_PACKAGE.replace(".", "/"));
         return SolverFactory.find(studentDirectory);
     }
