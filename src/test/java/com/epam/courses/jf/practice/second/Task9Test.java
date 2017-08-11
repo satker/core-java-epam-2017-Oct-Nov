@@ -50,6 +50,6 @@ public class Task9Test extends AbstractTaskWithResourcesTest {
         expected.add("qwerty");
         expected.add("test");
         expected.add("words");
-        test(prepareFile(getResource("ru/spb/epam/second/task9_10/text.txt")), expected);
+        test(prepareFile(getResource("com/epam/courses/jf/practice/second/task9_10/text.txt")), expected);
     }
 }

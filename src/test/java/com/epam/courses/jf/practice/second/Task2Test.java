@@ -17,7 +17,7 @@ import java.util.Set;
 public class Task2Test extends AbstractTaskWithResourcesTest {
 
     /** Директория, в которой располагаются ресурсы, связанные с задачей */
-    private static final String RESOURCE_PATH = "ru/spb/epam/second/task2";
+    private static final String RESOURCE_PATH = "com/epam/courses/jf/practice/second/task2";
 
     /**
      * @param directory Директория.

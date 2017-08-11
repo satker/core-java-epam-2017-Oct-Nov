@@ -44,7 +44,7 @@ public class Task1Test extends AbstractTaskWithResourcesTest {
     @org.junit.Test (timeout = 2000)
     public void test1() throws Exception {
         List<String> expected = Arrays.asList("a", "b", "c", "d", "e", "f", "g");
-        test(prepareFile(getResource("ru/spb/epam/second/task1/test1.txt")), expected);
+        test(prepareFile(getResource("com/epam/courses/jf/practice/second/task1/test1.txt")), expected);
     }
 
     /** Пустой файл. */
