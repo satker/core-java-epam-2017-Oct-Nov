@@ -21,11 +21,11 @@ public abstract class AbstractTaskTest {
      * @return Объект, реализующий второе задание.
      */
     private static ITaskStorage getStorage() {
-        URL ruURL = Thread.currentThread().getContextClassLoader().getResource("ru");
+        URL ruURL = Thread.currentThread().getContextClassLoader().getResource(".");
         if (ruURL == null) {
             throw new IllegalArgumentException("There is no package with TaskStorage!");
         }
-        File rootFile = new File(ruURL.getPath()).getParentFile().getParentFile();
+        File rootFile = new File(ruURL.getPath()).getParentFile();
         File studentDirectory = new File(rootFile.getAbsolutePath() + "/classes/" + STORAGE_PACKAGE.replace(".", "/"));
         return AbstractTaskTest.find(studentDirectory);
     }
