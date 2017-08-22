@@ -13,25 +13,6 @@ import java.util.stream.Stream;
 @SuppressWarnings("unused")
 public class StreamSolver {
 
-    public void task1() {
-        Scanner scanner = new Scanner(System.in);
-        int countLines = Integer.valueOf(scanner.nextLine());
-
-        String minimal = scanner.nextLine();
-        String maximal = minimal;
-        for (int i = 1; i < countLines; ++i) {
-            String current = scanner.nextLine();
-            if (minimal.length() >= current.length()) {
-                minimal = current;
-            }
-            if (maximal.length() <= current.length()) {
-                maximal = current;
-            }
-        }
-        System.out.printf("MIN (%d): \"%s\"%n", minimal.length(), minimal);
-        System.out.printf("MAX (%d): \"%s\"%n", maximal.length(), maximal);
-    }
-
     private static Stream<String> readWordsAsStream() {
         Scanner scanner = new Scanner(System.in);
         return IntStream.range(0, Integer.valueOf(scanner.nextLine()))
@@ -89,8 +70,8 @@ public class StreamSolver {
 
     public void task6() {
         System.out.println(readWordsAsStream().filter(StreamSolver::containIncreasingSymbols)
-                .findFirst()
-                .orElse("NOT FOUND"));
+                                              .findFirst()
+                                              .orElse("NOT FOUND"));
     }
 
     /**
@@ -112,7 +93,8 @@ public class StreamSolver {
     }
 
     public void task8() {
-        String[] palindromes = readWordsAsStream().filter(StreamSolver::isNumericPalindrome).toArray(String[]::new);
+        String[] palindromes = readWordsAsStream().filter(StreamSolver::isNumericPalindrome)
+                                                  .toArray(String[]::new);
         System.out.println(palindromes.length == 1 ? palindromes[0]
                                                    : palindromes.length >= 2 ? palindromes[1]
                                                                              : "NOT FOUND");
