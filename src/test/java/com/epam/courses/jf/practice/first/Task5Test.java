@@ -58,7 +58,7 @@ public class Task5Test extends AbstractTaskTest {
     /**
      * Передается некоторое количество слов. Ни одно из них не состоит из букв английского алфавита.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test1() throws Exception {
         this.test(new String[]{"1", "1", "1", "1"}, 0);
     }
@@ -68,7 +68,7 @@ public class Task5Test extends AbstractTaskTest {
      * Некоторые из них состоят из букв английского алфавита.
      * Но ни одно из них не содержит одинаковое количество гласных и согласных.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test2() throws Exception {
         this.test(new String[]{"1", "1", "a", "b", "abc"}, 0);
     }
@@ -78,7 +78,7 @@ public class Task5Test extends AbstractTaskTest {
      * Некоторые из них состоят из букв английского алфавита.
      * Одно из них содержит одинаковое количество гласных и согласных.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test3() throws Exception {
         this.test(new String[]{"1", "1", "a", "b", "ab"}, 1);
     }
@@ -88,7 +88,7 @@ public class Task5Test extends AbstractTaskTest {
      * Некоторые из них состоят из букв английского алфавита.
      * Три из них содержат одинаковое количество гласных и согласных.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test4() throws Exception {
         this.test(new String[]{"1", "1", "a", "b", "ab", "ce", "uz"}, 3);
     }

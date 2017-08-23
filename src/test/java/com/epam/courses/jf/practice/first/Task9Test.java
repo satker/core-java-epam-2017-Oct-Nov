@@ -58,7 +58,7 @@ public class Task9Test extends AbstractTaskTest {
     /**
      * Единичная матрица.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test1() throws Exception {
         this.test(1);
     }
@@ -66,7 +66,7 @@ public class Task9Test extends AbstractTaskTest {
     /**
      * Матрица размерности 100.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test2() throws Exception {
         this.test(10);
     }

@@ -36,7 +36,7 @@ public class Task16Test extends AbstractTaskTest {
     /**
      * Единичная матрица.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test1() throws Exception {
         this.test(SquareIntMatrix.IDENTITY_MATRIX, SquareIntMatrix.IDENTITY_MATRIX);
     }
@@ -44,7 +44,7 @@ public class Task16Test extends AbstractTaskTest {
     /**
      * Матрица размерности 5.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test2() throws Exception {
         this.test(new SquareIntMatrix(new Integer[][] {
                         {  0,  2,  3,  4,  5 },

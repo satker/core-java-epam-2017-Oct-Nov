@@ -52,7 +52,7 @@ public class Task15Test extends AbstractTaskTest {
     /**
      * Единичная матрица.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test1() throws Exception {
         this.test(SquareIntMatrix.IDENTITY_MATRIX, 0);
     }
@@ -60,7 +60,7 @@ public class Task15Test extends AbstractTaskTest {
     /**
      * Матрица размерности 5, в каждой строке есть положительные элементы.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test2() throws Exception {
         this.test(new SquareIntMatrix(new Integer[][] {
                         { 2,   0,  3,  4,  5 },
@@ -75,7 +75,7 @@ public class Task15Test extends AbstractTaskTest {
     /**
      * Матрица размерности 3, нет положительных элементов.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test3() throws Exception {
         this.test(new SquareIntMatrix(new Integer[][] {
                         { 2,   0,  3,  4,  5 },

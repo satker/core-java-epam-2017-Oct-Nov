@@ -74,7 +74,7 @@ public class Task3Test extends AbstractTaskTest {
     /**
      * Передается некоторое количество строк различной длины.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test1() throws Exception {
         this.test(new String[]{
                 "_______8\n",
@@ -91,7 +91,7 @@ public class Task3Test extends AbstractTaskTest {
      * Передаются три строки.
      * При округлении среднего отбрасывается средняя по длине строка (т.к. в условии сказано о строгом неравенстве).
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test2() throws Exception {
         this.test(new String[]{
                 "_______8\n",
@@ -106,7 +106,7 @@ public class Task3Test extends AbstractTaskTest {
      * Передаются четыре строки.
      * При округлении среднего отбрасывается строка длины 9 (т.к. среднее равно 9.25).
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test3() throws Exception {
         this.test(new String[]{
                 "_______8\n",
@@ -122,7 +122,7 @@ public class Task3Test extends AbstractTaskTest {
      * Передаются четыре строки.
      * Проверяется округление среднего в меньшую сторону до 9 (среднее равно 9.75).
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test4() throws Exception {
         this.test(new String[]{
                 "_______8\n",

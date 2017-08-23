@@ -36,7 +36,7 @@ public class Task19Test extends AbstractTaskTest {
     /**
      * Единичная матрица.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test1() throws Exception {
         this.test(SquareIntMatrix.IDENTITY_MATRIX, SquareIntMatrix.IDENTITY_MATRIX);
     }
@@ -45,7 +45,7 @@ public class Task19Test extends AbstractTaskTest {
      * Матрица размерности 4 с одним "нулевым" столбцом.
      * В результате уплотнения получается прямоугольная матрица.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test2() throws Exception {
         this.test(new SquareIntMatrix(new Integer[][] {
                         {  4,  2, 0,  1 },
@@ -65,7 +65,7 @@ public class Task19Test extends AbstractTaskTest {
      * Матрица размерности 4 с одним "нулевым" столбцом и двумя "нулевыми" строками.
      * В результате уплотнения получается прямоугольная матрица.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test3() throws Exception {
         this.test(new SquareIntMatrix(new Integer[][] {
                         { 4, 2, 0,  1 },

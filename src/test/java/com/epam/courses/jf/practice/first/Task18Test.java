@@ -36,7 +36,7 @@ public class Task18Test extends AbstractTaskTest {
     /**
      * Матрица размерности 2 с одним максимальным элементом.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test1() throws Exception {
         this.test(new SquareIntMatrix(new Integer[][]{
                 { 0, 1 },
@@ -47,7 +47,7 @@ public class Task18Test extends AbstractTaskTest {
     /**
      * Матрица размерности 4 с двумя максимальными элементами, в разных строках и столбцах.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test2() throws Exception {
         this.test(new SquareIntMatrix(new Integer[][] {
                         {  4,  2, 0,  1 },
@@ -65,7 +65,7 @@ public class Task18Test extends AbstractTaskTest {
      * Матрица размерности 5 с двумя максимальными элементами в одной строке.
      * В результате должна получиться прямоугольная матрица.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test3() throws Exception {
         this.test(new SquareIntMatrix(new Integer[][] {
                         { 2,   0,  3,  4,  0 },

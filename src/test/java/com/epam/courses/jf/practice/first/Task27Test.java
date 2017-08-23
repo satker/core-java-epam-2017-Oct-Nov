@@ -38,7 +38,7 @@ public class Task27Test extends AbstractTaskTest {
     /**
      * Единичная матрица.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test1() throws Exception {
         this.test(SquareIntMatrix.IDENTITY_MATRIX, SquareIntMatrix.IDENTITY_MATRIX);
     }
@@ -47,7 +47,7 @@ public class Task27Test extends AbstractTaskTest {
      * Матрица размерности 2.
      * Изменения не требуются.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test2() throws Exception {
         this.test(new SquareIntMatrix(new Integer[][] {
                 { -1, -2 },
@@ -62,7 +62,7 @@ public class Task27Test extends AbstractTaskTest {
      * Матрица размерности 4.
      * Требуется перестановка всех столбцов.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test3() throws Exception {
         this.test(new SquareIntMatrix(new Integer[][] {
                 {  0, 0, 0, 0 },
@@ -81,7 +81,7 @@ public class Task27Test extends AbstractTaskTest {
      * Матрица размерности 4.
      * Требуется перестановка крайних столбцов.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test4() throws Exception {
         this.test(new SquareIntMatrix(new Integer[][] {
                 {  0, 0, 0, 0 },

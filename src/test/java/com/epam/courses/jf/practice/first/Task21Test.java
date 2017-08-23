@@ -36,7 +36,7 @@ public class Task21Test extends AbstractTaskTest {
     /**
      * Единичная матрица.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test1() throws Exception {
         this.test(SquareIntMatrix.IDENTITY_MATRIX, SquareIntMatrix.IDENTITY_MATRIX);
     }
@@ -45,7 +45,7 @@ public class Task21Test extends AbstractTaskTest {
      * Матрица размерности 4.
      * Элементы равные нулю отсутствуют.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test2() throws Exception {
         SquareNumberMatrix<Integer> matrix = new SquareIntMatrix(new Integer[][]{
                 { -2, -4,  1, 2  },
@@ -60,7 +60,7 @@ public class Task21Test extends AbstractTaskTest {
      * Матрица размерности 4.
      * В различных строках присутствуют элементы равные нулю.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test3() throws Exception {
         this.test(new SquareIntMatrix(new Integer[][] {
                 {  2,  4, 2,  1 },
@@ -79,7 +79,7 @@ public class Task21Test extends AbstractTaskTest {
      * Матрица размерности 4.
      * Две строки заполнены полностью нулями.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test4() throws Exception {
         this.test(new SquareIntMatrix(new Integer[][] {
                 { 0, 4, 2,  1 },

@@ -73,7 +73,7 @@ public class Task1Test extends AbstractTaskTest {
      * Передается некоторое количество строк различной длины.
      * Одна из них самая длинная, другая - самая короткая.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test1() throws Exception {
         this.test(new String[]{
                 "_______________________25\n",
@@ -90,7 +90,7 @@ public class Task1Test extends AbstractTaskTest {
      * Передается некоторое количество строк различной длины.
      * Две из них являются самыми короткими, две - самыми длинными.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test2() throws Exception {
         this.test(new String[]{
                         "++++++++++++++++++++++24\n",
@@ -106,7 +106,7 @@ public class Task1Test extends AbstractTaskTest {
     /**
      * Передается несколько строк одинаковой длины.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test3() throws Exception {
         this.test(new String[]{
                         "++++++++++++++++++++22\n",
@@ -120,7 +120,7 @@ public class Task1Test extends AbstractTaskTest {
     /**
      * Передается одна строка.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test4() throws Exception {
         this.test(new String[]{
                         "____________________22\n"

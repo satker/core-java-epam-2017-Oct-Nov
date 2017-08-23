@@ -56,7 +56,7 @@ public class Task14Test extends AbstractTaskTest {
     /**
      * Последовательность, не содержащая возрастающих подпоследовательностей.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test1() throws Exception {
         this.test(0, 6, 5, 4, 3, 2, 1, 0, -1);
     }
@@ -64,7 +64,7 @@ public class Task14Test extends AbstractTaskTest {
     /**
      * Последовательность, являющаяся полностью возрастающей.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test2() throws Exception {
         this.test(5, 1, 2, 3, 4, 100500);
     }
@@ -72,7 +72,7 @@ public class Task14Test extends AbstractTaskTest {
     /**
      * Последовательность, состоящая из одного элемента.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test3() throws Exception {
         this.test(0, -1);
     }
@@ -80,7 +80,7 @@ public class Task14Test extends AbstractTaskTest {
     /**
      * Последовательность, содержащая две возрастающих подпоследовательности одинаковой длины.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test4() throws Exception {
         this.test(3, 1, 2, 3, 2, 1, 2, 3, 2);
     }
@@ -88,7 +88,7 @@ public class Task14Test extends AbstractTaskTest {
     /**
      * Последовательность, содержащая две возрастающих подпоследовательности разной длины.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test5() throws Exception {
         this.test(4, 1, 2, 3, 2, 1, 2, 3, 4);
     }
@@ -96,7 +96,7 @@ public class Task14Test extends AbstractTaskTest {
     /**
      * Последовательность, содержащая одинаковые элементы.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test6() throws Exception {
         this.test(4, 1, 1, 1, 2, 1, 2, 3, 4);
     }
@@ -104,7 +104,7 @@ public class Task14Test extends AbstractTaskTest {
     /**
      * Последовательность, состоящая только из одинаковых элементов.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test7() throws Exception {
         this.test(0, 1, 1, 1, 1);
     }

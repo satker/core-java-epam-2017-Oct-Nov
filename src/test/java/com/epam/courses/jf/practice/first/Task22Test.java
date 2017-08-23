@@ -36,7 +36,7 @@ public class Task22Test extends AbstractTaskTest {
     /**
      * Единичная матрица.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test1() throws Exception {
         this.test(new SquareDoubleMatrix(new Double[][]{{0.999}}), SquareIntMatrix.IDENTITY_MATRIX);
     }
@@ -45,7 +45,7 @@ public class Task22Test extends AbstractTaskTest {
      * Матрица размерности 4.
      * Требуется округление элементов как в большую, так и в меньшую сторону.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test2() throws Exception {
         this.test(new SquareDoubleMatrix(new Double[][] {
                 {  2.0,  4.0,  2.6,  1.0 },

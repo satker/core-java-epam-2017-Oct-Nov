@@ -60,7 +60,7 @@ public class Task4Test extends AbstractTaskTest {
      * Передается некоторое количество слов.
      * Одно из них содержит минимальное количество различных символов.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test1() throws Exception {
         this.test(new String[]{"abcd", "abc", "ab", "aa", "ba"}, "aa");
     }
@@ -69,7 +69,7 @@ public class Task4Test extends AbstractTaskTest {
      * Передается некоторое количество слов.
      * Два из них содержат минимальное количество различных символов.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test2() throws Exception {
         this.test(new String[]{"aBcd", "aBc", "bb", "aa"}, "bb");
     }
@@ -78,7 +78,7 @@ public class Task4Test extends AbstractTaskTest {
      * Передается некоторое количество слов.
      * Два из них содержат минимальное количество различных символов и при этом одинаковы.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test3() throws Exception {
         this.test(new String[]{"abcd", "abc", "BB", "BB"}, "BB");
     }
@@ -87,7 +87,7 @@ public class Task4Test extends AbstractTaskTest {
      * Передается некоторое количество слов.
      * Два из них одинаковой длины, но одно содержит одинаковые буквы в разном регистре, а второе - совсем разные.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test4() throws Exception {
         this.test(new String[]{"AbCd", "abc", "ab", "bB"}, "ab");
     }
@@ -95,7 +95,7 @@ public class Task4Test extends AbstractTaskTest {
     /**
      * Передается одно слово.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test5() throws Exception {
         this.test(new String[]{"abcd"}, "abcd");
     }

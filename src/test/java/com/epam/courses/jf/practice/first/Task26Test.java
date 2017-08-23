@@ -58,7 +58,7 @@ public class Task26Test extends AbstractTaskTest {
     /**
      * Единичная матрица.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test1() throws Exception {
         this.test(SquareIntMatrix.IDENTITY_MATRIX, "1");
     }
@@ -67,7 +67,7 @@ public class Task26Test extends AbstractTaskTest {
      * Матрица размерности 4.
      * Присутствуют два одинаковых локальных максимума (в углах).
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test2() throws Exception {
         this.test(new SquareIntMatrix(new Integer[][]{
                 {  4,  0,  1, 0 },
@@ -81,7 +81,7 @@ public class Task26Test extends AbstractTaskTest {
      * Матрица размерности 4.
      * Присутствуют два различных локальных максимума (в углах).
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test3() throws Exception {
         this.test(new SquareIntMatrix(new Integer[][]{
                 { 3,  0,  1, 0 },
@@ -95,7 +95,7 @@ public class Task26Test extends AbstractTaskTest {
      * Матрица размерности 4.
      * Присутствуют три различных локальных максимума.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test4() throws Exception {
         this.test(new SquareIntMatrix(new Integer[][]{
                 { 2,  0,  1, 0 },

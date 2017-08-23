@@ -63,7 +63,7 @@ public class Task8Test extends AbstractTaskTest {
     /**
      * Одно число-палиндром.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test1() throws Exception {
         this.test(new String[]{"121"}, "121");
     }
@@ -71,7 +71,7 @@ public class Task8Test extends AbstractTaskTest {
     /**
      * Два числа-палиндрома.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test2() throws Exception {
         this.test(new String[]{"121", "222"}, "222");
     }
@@ -79,7 +79,7 @@ public class Task8Test extends AbstractTaskTest {
     /**
      * Число-палиндром и слово-палиндром.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test3() throws Exception {
         this.test(new String[]{"121", "aba"}, "121");
     }
@@ -87,7 +87,7 @@ public class Task8Test extends AbstractTaskTest {
     /**
      * Только слова-палиндромы.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test4() throws Exception {
         this.test(new String[]{"cdc", "aba", "www"}, NOT_FOUND);
     }
@@ -95,7 +95,7 @@ public class Task8Test extends AbstractTaskTest {
     /**
      * Длинное число-палиндром (больше long).
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test5() throws Exception {
         this.test(new String[]{"121", "1234567890987654321"}, "1234567890987654321");
     }

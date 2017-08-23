@@ -36,7 +36,7 @@ public class Task24Test extends AbstractTaskTest {
     /**
      * Единичная матрица.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test1() throws Exception {
         this.test(SquareIntMatrix.IDENTITY_MATRIX, SquareIntMatrix.IDENTITY_MATRIX);
     }
@@ -45,7 +45,7 @@ public class Task24Test extends AbstractTaskTest {
      * Матрица размерности 4.
      * Сумма каждой строки различна, перестановки не требуются.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test2() throws Exception {
         this.test(new SquareIntMatrix(new Integer[][] {
                 { -4, -4,  0,  2 },
@@ -64,7 +64,7 @@ public class Task24Test extends AbstractTaskTest {
      * Матрица размерности 4.
      * Сумма каждой строки различна, требуются перестановки.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test3() throws Exception {
         this.test(new SquareIntMatrix(new Integer[][] {
                 {  2,  1, -1, -1 },
@@ -83,7 +83,7 @@ public class Task24Test extends AbstractTaskTest {
      * Матрица размерности 4.
      * Суммы двух строк одинаковы, требуются перестановки.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test4() throws Exception {
         this.test(new SquareIntMatrix(new Integer[][] {
                 {  2,  1, -1, -1 },

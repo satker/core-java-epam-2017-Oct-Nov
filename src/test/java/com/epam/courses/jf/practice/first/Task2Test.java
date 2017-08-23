@@ -57,7 +57,7 @@ public class Task2Test extends AbstractTaskTest {
     /**
      * Передается некоторое количество строк различной длины.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test1() throws Exception {
         this.test(new String[]{
                 "_______________________25\n",
@@ -76,7 +76,7 @@ public class Task2Test extends AbstractTaskTest {
      * Передается некоторое количество строк.
      * Некоторые из них равной длины, но разные по содержанию.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test2() throws Exception {
         this.test(new String[]{
                 "_________________________27\n",
@@ -95,7 +95,7 @@ public class Task2Test extends AbstractTaskTest {
      * Передается некоторое количество строк.
      * Некоторые из них полностью совпадают.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test3() throws Exception {
         this.test(new String[]{
                 "_________________________27\n",
@@ -113,7 +113,7 @@ public class Task2Test extends AbstractTaskTest {
     /**
      * Передается одна строка.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test4() throws Exception {
         this.test(new String[]{
                 "_________________________27\n"
@@ -125,7 +125,7 @@ public class Task2Test extends AbstractTaskTest {
     /**
      * Проверяется лексикографический порядок строк.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test5() throws Exception {
         this.test(new String[]{
                 "_________________________27\n",

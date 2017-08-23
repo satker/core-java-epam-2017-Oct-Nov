@@ -93,7 +93,7 @@ public class Task10Test extends AbstractTaskTest {
     /**
      * Нет корней уравнения.
      */
-    @org.junit.Test
+    @org.junit.Test(timeout = 2000)
     public void test1() throws Exception {
         this.test(4, 2, 1);
     }
@@ -101,7 +101,7 @@ public class Task10Test extends AbstractTaskTest {
     /**
      * Один корень уравнения.
      */
-    @org.junit.Test
+    @org.junit.Test(timeout = 2000)
     public void test2() throws Exception {
         this.test(4, 4, 1, -0.5);
     }
@@ -109,7 +109,7 @@ public class Task10Test extends AbstractTaskTest {
     /**
      * Два корня уравнения
      */
-    @org.junit.Test
+    @org.junit.Test(timeout = 2000)
     public void test3() throws Exception {
         this.test(1, 6, 1, -5.83, -0.17);
     }

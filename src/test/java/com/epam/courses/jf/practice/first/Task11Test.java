@@ -34,7 +34,7 @@ public class Task11Test extends AbstractTaskTest {
     /**
      * Получение существующего месяца.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test1() throws Exception {
         this.test("2", "February");
     }
@@ -42,7 +42,7 @@ public class Task11Test extends AbstractTaskTest {
     /**
      * Получение по номеру, большему 12.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test2() throws Exception {
         this.test("13", "INCORRECT INPUT DATA");
     }
@@ -50,7 +50,7 @@ public class Task11Test extends AbstractTaskTest {
     /**
      * Проверка значения, лежащего за пределами int.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test3() throws Exception {
         this.test("11111111111111111111111111111111111111111", "INCORRECT INPUT DATA");
     }
@@ -58,7 +58,7 @@ public class Task11Test extends AbstractTaskTest {
     /**
      * Проверка обработки не числовых значений.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test4() throws Exception {
         this.test("abc", "INCORRECT INPUT DATA");
     }

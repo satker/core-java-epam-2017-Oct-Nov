@@ -61,7 +61,7 @@ public class Task7Test extends AbstractTaskTest {
     /**
      * Одно слово, удовлетворяющее условию.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test1() throws Exception {
         this.test(new String[]{"abc"}, "abc");
     }
@@ -69,7 +69,7 @@ public class Task7Test extends AbstractTaskTest {
     /**
      * Два слова, удовлетворяюющие условию.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test2() throws Exception {
         this.test(new String[]{"abc", "abc"}, "abc");
     }
@@ -77,7 +77,7 @@ public class Task7Test extends AbstractTaskTest {
     /**
      * Слово из одного символа и одно слово, не удовлетворяющее условиям.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test3() throws Exception {
         this.test(new String[]{"a", "cc"}, "a");
     }
@@ -85,7 +85,7 @@ public class Task7Test extends AbstractTaskTest {
     /**
      * Слово, содержащее специальные символы.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test4() throws Exception {
         this.test(new String[]{"ab123_'c"}, "ab123_'c");
     }
@@ -93,7 +93,7 @@ public class Task7Test extends AbstractTaskTest {
     /**
      * Слова, удовлетворяющие условию отсутствуют.
      */
-    @org.junit.Test
+    @org.junit.Test (timeout = 2000)
     public void test5() throws Exception {
         this.test(new String[]{"aa", "cc"}, NOT_FOUND);
     }
