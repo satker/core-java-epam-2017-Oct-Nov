@@ -29,8 +29,14 @@ public class Task9Test extends AbstractTaskWithResourcesTest {
         // Run
         HashSet<String> result = solver.getUniqueWords(input);
 
-        // Asserts
-        Assert.assertEquals(expected, result);
+        nextWord: for (String expectedWord : expected) {
+            for (String foundWord : result) {
+                if (expectedWord.equalsIgnoreCase(foundWord)) {
+                    continue nextWord;
+                }
+            }
+            Assert.fail("Wasn't found expected word: " + expectedWord);
+        }
     }
 
     /**
