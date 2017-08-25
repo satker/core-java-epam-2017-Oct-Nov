@@ -44,7 +44,7 @@ public class Task17Test extends AbstractTaskTest {
      * Одна точка пересечения.
      */
     @org.junit.Test (timeout = 2000)
-    public void test2() throws Exception {
+    public void test1() throws Exception {
         Set<ISegment> segments = new HashSet<>(2);
         segments.add(new Segment(new Point2D(0, 0), new Point2D(2, 2)));
         segments.add(new Segment(new Point2D(2, 0), new Point2D(0, 2)));
@@ -55,7 +55,7 @@ public class Task17Test extends AbstractTaskTest {
      * Две точки пересечения с разной абсциссой.
      */
     @org.junit.Test (timeout = 2000)
-    public void test3() throws Exception {
+    public void test2() throws Exception {
         Set<ISegment> segments = new HashSet<>(3);
         segments.add(new Segment(new Point2D(0, 0), new Point2D(0, 2)));
         segments.add(new Segment(new Point2D(2, 0), new Point2D(2, 2)));
@@ -67,7 +67,7 @@ public class Task17Test extends AbstractTaskTest {
      * Три точки пересечения, две из них имеют минимальную абсциссу
      */
     @org.junit.Test (timeout = 2000)
-    public void test4() throws Exception {
+    public void test3() throws Exception {
         Set<ISegment> segments = new HashSet<>(3);
         segments.add(new Segment(new Point2D(0, 0), new Point2D(0, 2)));
         segments.add(new Segment(new Point2D(0, 2), new Point2D(2, 0)));
