@@ -10,7 +10,5 @@ import java.io.StringBufferInputStream;
 public class Main {
 
     public static void main(String[] args) {
-        InputStream a;
-        a.available()
     }
 }
