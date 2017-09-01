@@ -1,4 +1,4 @@
-package com.epam.courses.jf.se7;
+package com.epam.courses.jf.se7.interrupted;
 
 import java.util.concurrent.TimeUnit;
 
@@ -10,12 +10,13 @@ public class Talk extends Thread {
 
     @Override
     public void run() {
-        for (int i = 0; i < 8; i++) {
-            System.out.println("Talking");
+        for (int i = 0; !isInterrupted(); i++) {
+            System.out.println("Talking: " + i);
             try {
                 TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                interrupt();
             }
         }
     }
