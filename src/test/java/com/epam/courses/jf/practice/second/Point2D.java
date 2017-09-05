@@ -2,10 +2,12 @@ package com.epam.courses.jf.practice.second;
 
 import com.epam.courses.jf.practice.common.second.I2DPoint;
 
+import java.io.Serializable;
+
 /**
  * Точка на двумерной плоскости.
  */
-public class Point2D implements I2DPoint, Comparable<I2DPoint> {
+public class Point2D implements I2DPoint, Comparable<I2DPoint>, Serializable {
 
     private final double X;
 
