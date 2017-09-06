@@ -1,6 +1,7 @@
 package com.epam.courses.jf.practice.first.data;
 
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 /**
@@ -18,7 +19,7 @@ public class SquareDoubleMatrix extends SquareNumberMatrix<Double> {
         builder.append(this.getDimension()).append("\n");
         for (Double[] row : DATA) {
             String line = Arrays.stream(row)
-                                .map(elem -> String.format("%.3f", elem))
+                                .map(elem -> String.format(Locale.FRANCE, "%.3f", elem))
                                 .collect(Collectors.joining(" "));
             builder.append(line);
             builder.append(System.lineSeparator());
