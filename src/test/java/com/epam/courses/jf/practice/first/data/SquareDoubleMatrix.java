@@ -1,7 +1,7 @@
 package com.epam.courses.jf.practice.first.data;
 
-import java.util.Formatter;
-import java.util.Locale;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  * Квадратная матрица десятичных чисел.
@@ -17,9 +17,11 @@ public class SquareDoubleMatrix extends SquareNumberMatrix<Double> {
         StringBuilder builder = new StringBuilder(this.getDimension() * 5);
         builder.append(this.getDimension()).append("\n");
         for (Double[] row : DATA) {
-            for (Double element : row) {
-                builder.append(String.format("%.3f%n", element));
-            }
+            String line = Arrays.stream(row)
+                                .map(elem -> String.format("%.3f", elem))
+                                .collect(Collectors.joining(" "));
+            builder.append(line);
+            builder.append(System.lineSeparator());
         }
         return builder.toString();
     }
