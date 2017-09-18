@@ -13,7 +13,6 @@ import java.util.List;
 public class MarshalMain {
 
     public static void main(String[] args) {
-        // MarshalMainLOG.info("MarshalMain started" + 1 + obj);
         try {
             JAXBContext context = JAXBContext.newInstance(Student.class);
             Marshaller m = context.createMarshaller();
