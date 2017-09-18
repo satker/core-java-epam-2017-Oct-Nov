@@ -75,6 +75,7 @@ public class ConnectionPool {
     }
 
     public void closeConnections() {
+
         int releaseNumber = connectionNumber - semaphore.availablePermits();
         semaphore.release(releaseNumber);
     }
@@ -95,6 +96,10 @@ public class ConnectionPool {
             }
             freeConnections.add(this);
             semaphore.release();
+        }
+
+        void realClose() {
+
         }
 
         @Override
