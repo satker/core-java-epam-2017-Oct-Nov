@@ -69,10 +69,10 @@ public class Task17Test extends AbstractTaskTest {
     @org.junit.Test (timeout = 2000)
     public void test3() throws Exception {
         Set<ISegment> segments = new HashSet<>(3);
-        segments.add(new Segment(new Point2D(0, 0), new Point2D(0, 2)));
-        segments.add(new Segment(new Point2D(0, 2), new Point2D(2, 0)));
-        segments.add(new Segment(new Point2D(0, 0), new Point2D(2, 2)));
-        test(segments, new HashSet<I2DPoint>(Arrays.asList(new Point2D(0, 2), new Point2D(0, 0))));
+        segments.add(new Segment(new Point2D(0, 0), new Point2D(0, 3)));
+        segments.add(new Segment(new Point2D(0, 3), new Point2D(3, 0)));
+        segments.add(new Segment(new Point2D(0, 0), new Point2D(3, 3)));
+        test(segments, new HashSet<I2DPoint>(Arrays.asList(new Point2D(0, 3), new Point2D(0, 0))));
     }
 
     /**
