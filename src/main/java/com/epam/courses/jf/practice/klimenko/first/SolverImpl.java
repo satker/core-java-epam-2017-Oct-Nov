@@ -176,7 +176,14 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task9() {
-
+        int size = new Scanner(System.in).nextInt();
+        for (int row = 0; row < size; ++row) {
+            for (int col = 0; col < size; ++col) {
+                int element = row * size + col + 1;
+                System.out.printf("%d ", element);
+            }
+            System.out.println();
+        }
     }
 
     @Override
