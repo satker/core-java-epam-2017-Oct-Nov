@@ -188,7 +188,29 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task10() {
+        Scanner scanner = new Scanner(System.in);
+        int coefA = scanner.nextInt();
+        int coefB = scanner.nextInt();
+        int coefC = scanner.nextInt();
+        double det = coefB * coefB - 4 * coefA * coefC;
 
+        if (det < 0) {
+            System.out.println("No solution");
+            return;
+        }
+
+        double sqrtDet = Math.sqrt(det);
+
+        if (det == 0) {
+            double solution = (sqrtDet - coefB) / (2 * coefA);
+            System.out.printf("One solution: %f\n", solution);
+            return;
+        }
+
+        double solutionA = (-coefB - sqrtDet) / (2 * coefA);
+        double solutionB = (-coefB + sqrtDet) / (2 * coefA);
+        // TODO: Get rid of trailing zeroes
+        System.out.printf("Two solutions: %f, %f\n", solutionA, solutionB);
     }
 
     @Override
