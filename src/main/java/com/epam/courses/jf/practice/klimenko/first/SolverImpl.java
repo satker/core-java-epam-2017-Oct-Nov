@@ -144,7 +144,31 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task7() {
+        Scanner scanner = new Scanner(System.in);
+        int wordsNumber = scanner.nextInt();
+        List<String> words = readWords(scanner, wordsNumber);
+        Set<String> matchedWords = new HashSet<>();
 
+        for (String word : words) {
+            Set<Character> charset = new HashSet<>();
+            boolean matched = true;
+
+            for (int i = 0; i < word.length(); ++i) {
+                Character c = Character.toLowerCase(word.charAt(i));
+                if (charset.contains(c)) {
+                    matched = false;
+                    break;
+                }
+                charset.add(c);
+            }
+
+            if (matched) {
+                if (!matchedWords.contains(word)) {
+                    System.out.printf("%s ", word);
+                    matchedWords.add(word);
+                }
+            }
+        }
     }
 
     @Override
