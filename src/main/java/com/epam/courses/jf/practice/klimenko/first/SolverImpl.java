@@ -161,7 +161,17 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task8() {
+        List<String> words = readWords(new Scanner(System.in));
+        int matchNmber = 0;
 
+        for (String word : words) {
+            if (word.matches("[0-9]+")
+                    && new StringBuilder(word).reverse().toString().equals(word)) {
+                if (++matchNmber == 2) {
+                    System.out.println(word);
+                }
+            }
+        }
     }
 
     @Override
