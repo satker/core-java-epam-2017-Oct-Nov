@@ -215,12 +215,69 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task11() {
+        int monthIndex = new Scanner(System.in).nextInt();
+        String monthName = "???";
 
+        switch (monthIndex) {
+            case 1:
+                monthName = "January";
+                break;
+            case 2:
+                monthName = "February";
+                break;
+            case 3:
+                monthName = "March";
+                break;
+            case 4:
+                monthName = "April";
+                break;
+            case 5:
+                monthName = "May";
+                break;
+            case 6:
+                monthName = "June";
+                break;
+            case 7:
+                monthName = "July";
+                break;
+            case 8:
+                monthName = "August";
+                break;
+            case 9:
+                monthName = "September";
+                break;
+            case 10:
+                monthName = "October";
+                break;
+            case 11:
+                monthName = "November";
+                break;
+            case 12:
+                monthName = "December";
+                break;
+            default:
+                monthName = "INCORRECT INPUT DATA";
+                break;
+        }
+
+        System.out.println(monthName);
     }
 
     @Override
     public void task12() {
+        Scanner scanner = new Scanner(System.in);
+        int column = scanner.nextInt();
+        int[][] matrix = readMatrix(scanner);
 
+        Arrays.asList(matrix).sort(Comparator.comparing((int[] row) -> row[column]));
+
+        System.out.println(matrix.length);
+        for (int row = 0; row < matrix.length; ++row) {
+            for (int col = 0; col < matrix[row].length; ++col) {
+                System.out.printf("%d ", matrix[row][col]);
+            }
+            System.out.println();
+        }
     }
 
     @Override
@@ -317,5 +374,16 @@ public class SolverImpl implements ISolver {
             list.add(scanner.next());
         }
         return list;
+    }
+
+    private int[][] readMatrix(Scanner scanner) {
+        int count = scanner.nextInt();
+        int[][] mat = new int[count][count];
+        for (int row = 0; row < count; ++row) {
+            for (int col = 0; col < count; ++col) {
+                mat[row][col] = scanner.nextInt();
+            }
+        }
+        return mat;
     }
 }
