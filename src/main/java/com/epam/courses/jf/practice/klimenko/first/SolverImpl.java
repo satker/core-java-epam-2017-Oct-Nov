@@ -31,9 +31,7 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task2() {
-        Scanner scanner = new Scanner(System.in);
-        int linesNumber = scanner.nextInt();
-        List<String> list = readLines(scanner, linesNumber, true);
+        List<String> list = readLines(new Scanner(System.in));
 
         list.sort(Comparator
                 .comparing((String str) -> str.length())
@@ -47,16 +45,14 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task3() {
-        Scanner scanner = new Scanner(System.in);
-        int linesNumber = scanner.nextInt();
-        List<String> list = readLines(scanner, linesNumber, true);
+        List<String> list = readLines(new Scanner(System.in));
         int sumOfLengths = 0;
         int averageLength;
 
         for (String string : list) {
             sumOfLengths += string.length();
         }
-        averageLength = sumOfLengths / linesNumber;
+        averageLength = sumOfLengths / list.size();
 
         System.out.printf("AVERAGE (%d)%n", averageLength);
         for (String string : list) {
@@ -68,9 +64,7 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task4() {
-        Scanner scanner = new Scanner(System.in);
-        int wordsNumber = scanner.nextInt();
-        List<String> words = readWords(scanner, wordsNumber);
+        List<String> words = readWords(new Scanner(System.in));
         String minWord = "???";
         int minCharset = -1;
 
@@ -90,9 +84,7 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task5() {
-        Scanner scanner = new Scanner(System.in);
-        int wordsNumber = scanner.nextInt();
-        List<String> words = readWords(scanner, wordsNumber);
+        List<String> words = readWords(new Scanner(System.in));
         int matchedWordsCount = 0;
         String vowels = "aeiouy";
 
@@ -119,9 +111,7 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task6() {
-        Scanner scanner = new Scanner(System.in);
-        int wordsNumber = scanner.nextInt();
-        List<String> words = readWords(scanner, wordsNumber);
+        List<String> words = readWords(new Scanner(System.in));
         String matchedWord = "";
 
         for (String word : words) {
@@ -144,9 +134,7 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task7() {
-        Scanner scanner = new Scanner(System.in);
-        int wordsNumber = scanner.nextInt();
-        List<String> words = readWords(scanner, wordsNumber);
+        List<String> words = readWords(new Scanner(System.in));
         Set<String> matchedWords = new HashSet<>();
 
         for (String word : words) {
@@ -271,12 +259,11 @@ public class SolverImpl implements ISolver {
 
     }
 
-    private List<String> readLines(Scanner scanner, int count, boolean ignoreFirst) {
+    private List<String> readLines(Scanner scanner) {
         List<String> ret = new ArrayList<>();
+        int count = scanner.nextInt();
+        scanner.nextLine();
 
-        if (ignoreFirst) {
-            scanner.nextLine();
-        }
         for (int i = 0; i < count; ++i) {
             ret.add(scanner.nextLine());
         }
@@ -284,7 +271,8 @@ public class SolverImpl implements ISolver {
         return ret;
     }
 
-    private List<String> readWords(Scanner scanner, int count) {
+    private List<String> readWords(Scanner scanner) {
+        int count = scanner.nextInt();
         List<String> list = new ArrayList<>();
         for (int i = 0; i < count; ++i) {
             list.add(scanner.next());
