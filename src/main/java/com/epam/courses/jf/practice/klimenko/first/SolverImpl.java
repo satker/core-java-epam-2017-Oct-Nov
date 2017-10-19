@@ -119,7 +119,27 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task6() {
-        
+        Scanner scanner = new Scanner(System.in);
+        int wordsNumber = scanner.nextInt();
+        List<String> words = readWords(scanner, wordsNumber);
+        String matchedWord = "";
+
+        for (String word : words) {
+            boolean sorted = word.length() > 1;
+            for (int i = 1; i < word.length(); ++i) {
+                // TODO: Convert to lowercase before comparing codes
+                if (word.codePointAt(i - 1) >= word.codePointAt(i)) {
+                    sorted = false;
+                    break;
+                }
+            }
+            if (sorted) {
+                matchedWord = word;
+                break;
+            }
+        }
+
+        System.out.println(matchedWord);
     }
 
     @Override
