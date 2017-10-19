@@ -2,6 +2,8 @@ package com.epam.courses.jf.practice.vkostin.first;
 
 import com.epam.courses.jf.practice.common.first.ISolver;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Scanner;
@@ -94,7 +96,7 @@ public class Solver implements ISolver {
      */
     @Override
     public void task4() {
-        // not done
+
     }
 
     /**
@@ -149,7 +151,15 @@ public class Solver implements ISolver {
      */
     @Override
     public void task9() {
+        Scanner input = new Scanner(System.in);
+        int N = input.nextInt();
 
+        for (int i = 0; i < N; ++i) {
+            for (int j = 0; j < N; ++j) {
+                System.out.print((i * N + j + 1) + "\t");
+            }
+            System.out.println();
+        }
     }
 
     /**
@@ -157,7 +167,30 @@ public class Solver implements ISolver {
      */
     @Override
     public void task10() {
+        Scanner input = new Scanner(System.in);
+        int coefA = input.nextInt();
+        int coefB = input.nextInt();
+        int coefC = input.nextInt();
 
+        int discriminant = coefB * coefB - 4 * coefA * coefC;
+
+        if (discriminant > 0) {
+            BigDecimal bigDecimalRoot1 = new BigDecimal(
+                    (double) ((-coefB - Math.sqrt(discriminant)) / 2 / coefA))
+                    .setScale(2, BigDecimal.ROUND_HALF_UP);
+            BigDecimal bigDecimalRoot2 = new BigDecimal(
+                    (double) (-coefB + Math.sqrt(discriminant)) / 2 / coefA)
+                    .setScale(2, BigDecimal.ROUND_HALF_UP);
+            System.out.println("Two solutions: "
+                    + bigDecimalRoot1 + ", " + bigDecimalRoot2);
+        } else if (discriminant == 0) {
+            BigDecimal bigDecimalRoot = new BigDecimal(
+                    (double) (-coefB / 2 / coefA))
+                    .setScale(2, BigDecimal.ROUND_HALF_UP);
+            System.out.println("One solution: " + bigDecimalRoot);
+        } else {
+            System.out.println("No solution");
+        }
     }
 
     /**
@@ -216,6 +249,17 @@ public class Solver implements ISolver {
     THE MATRIX PART
      */
 
+    // test matrices
+    final private int[][] MATRIX_3x3 = { {2,1,-3}, {-2,3,2}, {-1,0,0} };
+    final private int[][] MATRIX_4x4 = { {0,1,3,-2}, {-1,3,-5,1}, {1,1,-2,-3}, {3,-4,-2,1} };
+    final private int[][] MATRIX_5x5 = {
+            {0, 3, -1, 2, 6},
+            {2, 1, 0, 0, 3},
+            {-2, -1, 0, 2, 5},
+            {-5, 7, 1, 1, 1},
+            {2, 0, 2, -2, 1}
+    };
+
     /** A simple method that allows you to read the matrix from the console.
      *
      * @param scanner Scanner class
@@ -234,14 +278,39 @@ public class Solver implements ISolver {
         return matrix;
     }
 
+    /** A simple method that allows you to read the double matrix from the console.
+     *
+     * @param scanner Scanner class
+     * @return square double matrix
+     */
+    private double[][] readMatrixD(Scanner scanner) {
+        final int DIMENSION = scanner.nextInt();
+        double[][] matrix = new double[DIMENSION][DIMENSION];
+
+        for (int row = 0; row < DIMENSION; ++row) {
+            for (int col = 0; col < DIMENSION; ++col) {
+                matrix[row][col] = scanner.nextDouble();
+            }
+        }
+
+        return matrix;
+    }
+
     /** A simple method that allows you to display the matrix on the console.
      *
      * @param matrix Square matrix
      */
-    private void printMatrix(int matrix[][]) {
-        for (int i = 0; i < matrix[0].length; ++i) {
+    private void printMatrix(int matrix[][], boolean printDimension) {
+        if (printDimension) {
+            System.out.println(matrix.length);
+            if (matrix.length != matrix[0].length) {
+                System.out.println(matrix[0].length);
+            }
+        }
+
+        for (int[] aMatrix : matrix) {
             for (int j = 0; j < matrix[0].length; ++j) {
-                System.out.print(matrix[i][j] + " ");
+                System.out.print(aMatrix[j] + " ");
             }
             System.out.println();
         }
@@ -252,7 +321,19 @@ public class Solver implements ISolver {
      */
     @Override
     public void task12() {
+        Scanner input = new Scanner(System.in);
+        int columnNumber = input.nextInt();
+        int matrix[][] = readMatrix(input);
 
+        for (int i = matrix.length - 1; i > 0; --i) {
+            for (int j = 0; j < i; ++j) {
+                if (matrix[j][columnNumber] > matrix[j + 1][columnNumber]) {
+                    swapTwoRows(matrix[j], matrix[j + 1]);
+                }
+            }
+        }
+
+        printMatrix(matrix, true);
     }
 
     /**
@@ -260,7 +341,39 @@ public class Solver implements ISolver {
      */
     @Override
     public void task13() {
+        Scanner input = new Scanner(System.in);
+        int numberOfShits = input.nextInt();
+        int matrix[][] = readMatrix(input);
 
+        if ((numberOfShits != 0)
+                || (Math.abs(numberOfShits) % matrix.length != 0)) {
+            if (Math.abs(numberOfShits) > matrix.length) {
+                numberOfShits = numberOfShits % matrix.length;
+            }
+            if (numberOfShits > 0) {
+                for (int i = 0; i < numberOfShits; ++i) {
+                    for (int j = matrix.length - 1; j > 0; --j) {
+                        if (j == matrix.length - 1) {
+                            swapTwoRows(matrix[0], matrix[j]);
+                        } else  {
+                            swapTwoRows(matrix[j], matrix[j + 1]);
+                        }
+                    }
+                }
+            } else {
+                for (int i = 0; i < -numberOfShits; ++i) {
+                    for (int j = 0; j < matrix.length - 1; ++j) {
+                        if (j == 0) {
+                            swapTwoRows(matrix[matrix.length - 1], matrix[0]);
+                        } else {
+                            swapTwoRows(matrix[j], matrix[j - 1]);
+                        }
+                    }
+                }
+            }
+        }
+
+        printMatrix(matrix, true);
     }
 
     /**
@@ -335,8 +448,7 @@ public class Solver implements ISolver {
             }
         }
 
-        System.out.println(matrixRotated[0].length);
-        printMatrix(matrixRotated);
+        printMatrix(matrixRotated, false);
     }
 
     /** A simple method allows recursively to calculate the determinant of the matrix.
@@ -380,16 +492,76 @@ public class Solver implements ISolver {
      */
     @Override
     public void task17() {
-//        int matrix[][] = readMatrix(new Scanner(System.in));
-        int matrix[][] = {
-                {0, 3, -1, 2, 6},
-                {2, 1, 0, 0, 3},
-                {-2, -1, 0, 2, 5},
-                {-5, 7, 1, 1, 1},
-                {2, 0, 2, -2, 1}};
-//        int matrix[][] = { {0,1,3,-2}, {-1,3,-5,1}, {1,1,-2,-3}, {3,-4,-2,1} };
-//        int matrix[][] = { {-2,1,2}, {0,-1,0}, {1,-2,3} };
+        int matrix[][] = readMatrix(new Scanner(System.in));
+        // for example
+        // int matrix[][] = MATRIX_5x5;
         System.out.println(getDeterminant(matrix));
+    }
+
+    /** The method allows you to compact the matrix by deleting the specified row and column numbers.
+     *
+     * @param originalMatrix The matrix, which is to be sealed
+     * @param limitationRow The row numbers to remove from the "originalMatrix"
+     * @param limitationCol The column numbers to remove from the "originalMatrix"
+     * @return compact matrix
+     */
+    private int[][] compactTheMatrix(
+            int originalMatrix[][],
+            ArrayList<Integer> limitationRow,
+            ArrayList<Integer> limitationCol) {
+
+        // Create new matrix without rows and columns witch contains Zero
+        int purposeMatrix[][] = new int[originalMatrix.length - limitationRow.size()]
+                [originalMatrix[0].length - limitationCol.size()];
+
+        byte rowShift = 0;
+        byte colShift;
+
+        for (int i = 0; i < originalMatrix.length; ++i) {
+            if (limitationRow.contains(i)) {
+                rowShift++;
+            } else {
+                colShift = 0;
+                for (int j = 0; j < originalMatrix[0].length; ++j) {
+                    if (limitationCol.contains(j)) {
+                        colShift++;
+                    } else {
+                        purposeMatrix[i-rowShift][j-colShift] = originalMatrix[i][j];
+                    }
+                }
+            }
+        }
+        return purposeMatrix;
+    }
+
+    /** Find elem with extremum value in original matrix.
+     *
+     * @param matrix original matrix
+     * @param type "max" or "min"
+     * @return extremumValue
+     */
+    private int findExtremum(int matrix[][], String type) {
+        int extremumValue = matrix[0][0];
+
+        for (int[] aMatrix : matrix) {
+            for (int j = 0; j < matrix[0].length; ++j) {
+                switch (type) {
+                    case "max":
+                        if (aMatrix[j] > extremumValue) {
+                            extremumValue = aMatrix[j];
+                        }
+                        break;
+                    case "min":
+                        if (aMatrix[j] < extremumValue) {
+                            extremumValue = aMatrix[j];
+                        }
+                        break;
+                    default:
+                        return 0;
+                }
+            }
+        }
+        return extremumValue;
     }
 
     /**
@@ -397,7 +569,27 @@ public class Solver implements ISolver {
      */
     @Override
     public void task18() {
+        int matrix[][] = readMatrix(new Scanner(System.in));
+        ArrayList<Integer> rowMaxValue = new ArrayList<Integer>();
+        ArrayList<Integer> colMaxValue = new ArrayList<Integer>();
 
+        int maxValue = findExtremum(matrix, "max");
+
+        // Find indices of rows and columns witch contains maxValue
+        for (int i = 0; i < matrix[0].length; ++i) {
+            for (int j = 0; j < matrix[0].length; ++j) {
+                if (matrix[i][j] == maxValue) {
+                    if (!rowMaxValue.contains(i)) {
+                        rowMaxValue.add(i);
+                    }
+                    if (!colMaxValue.contains(j)) {
+                        colMaxValue.add(j);
+                    }
+                }
+            }
+        }
+
+        printMatrix(compactTheMatrix(matrix, rowMaxValue, colMaxValue), true);
     }
 
     /**
@@ -405,7 +597,34 @@ public class Solver implements ISolver {
      */
     @Override
     public void task19() {
+        int matrix[][] = readMatrix(new Scanner(System.in));
 
+        ArrayList<Integer> rowContainsZero = new ArrayList<Integer>();
+        ArrayList<Integer> colContainsZero = new ArrayList<Integer>();
+
+        // Find indices of rows witch contains Zero
+        for (int i = 0; i < matrix.length; ++i) {
+            for (int j = 0; j < matrix[0].length; ++j) {
+                if (matrix[i][j] != 0) {
+                    break;
+                } else if (j == matrix[0].length - 1) {
+                    rowContainsZero.add(i);
+                }
+            }
+        }
+
+        // Find indices of columns witch contains Zero
+        for (int j = 0; j < matrix[0].length; ++j) {
+            for (int i = 0; i < matrix.length; ++i) {
+                if (matrix[i][j] != 0) {
+                    break;
+                } else if (i == matrix[0].length - 1) {
+                    colContainsZero.add(j);
+                }
+            }
+        }
+
+        printMatrix(compactTheMatrix(matrix, rowContainsZero, colContainsZero), false);
     }
 
     /**
@@ -413,7 +632,40 @@ public class Solver implements ISolver {
      */
     @Override
     public void task20() {
+        Scanner input = new Scanner(System.in);
 
+        int goalElemRowIndex = input.nextInt();
+        int goalElemColIndex = input.nextInt();
+        int minValueRowIndex = 0;
+        int minValueColIndex = 0;
+        int matrix[][] = readMatrix(input);
+
+        int minValue = findExtremum(matrix, "min");
+
+        for (int i = 0; i < matrix.length; ++i) {
+            for (int j = 0; j < matrix[0].length; ++j) {
+                if (matrix[i][j] == minValue) {
+                    minValueRowIndex = i;
+                    minValueColIndex = j;
+                }
+            }
+        }
+
+        // swap all needed elems by columns
+        for (int i = 0; i < matrix.length; ++i) {
+            matrix[i][goalElemColIndex] ^= matrix[i][minValueColIndex];
+            matrix[i][minValueColIndex] ^= matrix[i][goalElemColIndex];
+            matrix[i][goalElemColIndex] ^= matrix[i][minValueColIndex];
+        }
+
+        // swap all needed elems by rows
+        for (int j = 0; j < matrix[0].length; ++j) {
+            matrix[goalElemRowIndex][j] ^= matrix[minValueRowIndex][j];
+            matrix[minValueRowIndex][j] ^= matrix[goalElemRowIndex][j];
+            matrix[goalElemRowIndex][j] ^= matrix[minValueRowIndex][j];
+        }
+
+        printMatrix(matrix, true);
     }
 
     /**
@@ -421,7 +673,19 @@ public class Solver implements ISolver {
      */
     @Override
     public void task21() {
+        int matrix[][] = readMatrix(new Scanner(System.in));
 
+        for (int i = 0; i < matrix.length; ++i) {
+            for (int j = 0; j < matrix[0].length - 1; ++j) {
+                if (matrix[i][j] == 0) {
+                    matrix[i][j] ^= matrix[i][j+1];
+                    matrix[i][j+1] ^= matrix[i][j];
+                    matrix[i][j] ^= matrix[i][j+1];
+                }
+            }
+        }
+
+        printMatrix(matrix, true);
     }
 
     /**
@@ -429,7 +693,16 @@ public class Solver implements ISolver {
      */
     @Override
     public void task22() {
+        double matrix[][] = readMatrixD(new Scanner(System.in));
+        int matrixRound[][] = new int[matrix.length][matrix[0].length];
 
+        for (int i = 0; i < matrix.length; ++i) {
+            for (int j = 0; j < matrix[0].length; ++j) {
+                matrixRound[i][j] = (int) Math.round(matrix[i][j]);
+            }
+        }
+
+        printMatrix(matrixRound, true);
     }
 
     /**
@@ -437,7 +710,63 @@ public class Solver implements ISolver {
      */
     @Override
     public void task23() {
+//        int matrix[][] = readMatrix(new Scanner(System.in));
+        int matrix[][] = {
+                {2,3,5,2},
+                {2,4,6,2},
+                {-2,7,2,0},
+                {0,0,0,0}
+        };
+        int numberOfSaddlePoints = 0;
 
+        int minElemInRow;
+        int maxElemInCol;
+
+        ArrayList<Integer> minRowX = new ArrayList<Integer>();
+        ArrayList<Integer> maxRowY = new ArrayList<Integer>();
+
+        for (int i = 0; i < matrix.length; ++i) {
+            minElemInRow = matrix[i][0];
+            maxElemInCol = matrix[i][0];
+            minRowX.clear();
+            maxRowY.clear();
+            for (int j = 0; j < matrix[0].length; ++j) {
+                if (matrix[i][j] <= minElemInRow) {
+                    minElemInRow = matrix[i][j];
+                    minRowX.add(j);
+                }
+            }
+            for (int k = 0; k < matrix.length; ++k) {
+                if (matrix[k][minRowX.get(0)] >= maxElemInCol) {
+                    maxElemInCol = matrix[k][minRowX.get(0)];
+                    maxRowY.add(k);
+                }
+            }
+            if (maxRowY.contains(i)) {
+                numberOfSaddlePoints++;
+            }
+        }
+/*
+2 3 5 2
+2 4 6 2
+-2 7 2 0
+0 0 0 0
+ */
+        System.out.println(numberOfSaddlePoints);
+
+    }
+
+    /** Swap elements of two different rows.
+     *
+     * @param row1 first row
+     * @param row2 second row
+     */
+    private void swapTwoRows(int[] row1, int[] row2) {
+        for (int i = 0; i < row1.length; ++i) {
+            row1[i] ^= row2[i];
+            row2[i] ^= row1[i];
+            row1[i] ^= row2[i];
+        }
     }
 
     /**
@@ -445,7 +774,26 @@ public class Solver implements ISolver {
      */
     @Override
     public void task24() {
+        int matrix[][] = readMatrix(new Scanner(System.in));
+        int sumPre;
+        int sumPost;
 
+        // Old good sorting bubble...
+        for (int i = matrix.length - 1; i > 0; --i) {
+            for (int k = 0; k < i; ++k) {
+                sumPre = 0;
+                sumPost = 0;
+                for (int j = 0; j < matrix[0].length; ++j) {
+                    sumPre += matrix[k][j];
+                    sumPost += matrix[k + 1][j];
+                }
+                if (sumPost < sumPre) {
+                    swapTwoRows(matrix[k], matrix[k + 1]);
+                }
+            }
+        }
+
+        printMatrix(matrix, true);
     }
 
     /**
@@ -469,6 +817,28 @@ public class Solver implements ISolver {
      */
     @Override
     public void task27() {
+        int matrix[][] = readMatrix(new Scanner(System.in));
+        int sumPre;
+        int sumPost;
 
+        for (int i = matrix[0].length - 1; i > 0; --i) {
+            for (int k = 0; k < i; ++k) {
+                sumPre = 0;
+                sumPost = 0;
+                for (int[] aMatrix : matrix) {
+                    sumPre += Math.abs(aMatrix[k]);
+                    sumPost += Math.abs(aMatrix[k + 1]);
+                }
+                if (sumPost > sumPre) {
+                    for (int j2 = 0; j2 < matrix.length; ++j2) {
+                        matrix[j2][k] ^= matrix[j2][k + 1];
+                        matrix[j2][k + 1] ^= matrix[j2][k];
+                        matrix[j2][k] ^= matrix[j2][k + 1];
+                    }
+                }
+            }
+        }
+
+        printMatrix(matrix, true);
     }
 }
