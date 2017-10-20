@@ -306,7 +306,23 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task14() {
+        Scanner scanner = new Scanner(System.in);
+        int prevValue;
+        int count = scanner.nextInt();
+        int currentValue = scanner.nextInt();
+        int currentLength = 0, maxLength = 0;
 
+        for (int i = 1; i < count; ++i) {
+            prevValue = currentValue;
+            currentValue = scanner.nextInt();
+            ++currentLength;
+            if (currentValue <= prevValue) {
+                currentLength = 1;
+            }
+            maxLength = Math.max(maxLength, currentLength);
+        }
+
+        System.out.println(maxLength);
     }
 
     @Override
