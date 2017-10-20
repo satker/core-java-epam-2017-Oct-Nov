@@ -466,7 +466,36 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task20() {
+        Scanner scanner = new Scanner(System.in);
+        int y = scanner.nextInt();
+        int x = scanner.nextInt();
+        int[][] matrix = readMatrix(scanner);
+        int matrixSize = matrix.length;
+        int imin = 0, jmin = 0, minValue = matrix[0][0];
 
+        for (int i = 0; i < matrixSize; ++i) {
+            for (int j = 0; j < matrixSize; ++j) {
+                if (matrix[i][j] < minValue) {
+                    minValue = matrix[i][j];
+                    imin = i;
+                    jmin = j;
+                }
+            }
+        }
+
+        {
+            int[] tmp = matrix[y];
+            matrix[y] = matrix[imin];
+            matrix[imin] = tmp;
+        }
+
+        for (int i = 0; i < matrixSize; ++i) {
+            int tmp = matrix[i][x];
+            matrix[i][x] = matrix[i][jmin];
+            matrix[i][jmin] = tmp;
+        }
+
+        printMatrix(matrix);
     }
 
     @Override
