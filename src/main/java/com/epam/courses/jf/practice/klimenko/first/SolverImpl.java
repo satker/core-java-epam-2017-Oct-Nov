@@ -295,6 +295,7 @@ public class SolverImpl implements ISolver {
         }
         matrix = newMatrix;
 
+        System.out.println(matrixSize);
         for (int[] row : matrix) {
             for (int val : row) {
                 System.out.printf("%d ", val);
