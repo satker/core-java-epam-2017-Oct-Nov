@@ -406,7 +406,54 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task18() {
+        int[][] matrix = readMatrix(new Scanner(System.in));
+        int matrixSize = matrix.length;
+        Set<Integer> rowsToDelete = new HashSet<>();
+        Set<Integer> columnsToDelete = new HashSet<>();
+        int maxValue = matrix[0][0];
 
+        for (int[] row : matrix) {
+            for (int val : row) {
+                maxValue = Math.max(maxValue, val);
+            }
+        }
+
+        for (int rowIndex = 0; rowIndex < matrixSize; ++rowIndex) {
+            for (int colIndex = 0; colIndex < matrixSize; ++colIndex) {
+                if (matrix[rowIndex][colIndex] == maxValue) {
+                    rowsToDelete.add(rowIndex);
+                    columnsToDelete.add(colIndex);
+                }
+            }
+        }
+
+        int newWidth = matrixSize - columnsToDelete.size();
+        int newHeight = matrixSize - rowsToDelete.size();
+        int[][] newMatrix = new int[newHeight][newWidth];
+
+        int i1 = 0;
+        for (int i = 0; i < matrixSize; ++i) {
+            if (!rowsToDelete.contains(i)) {
+                int j1 = 0;
+                for (int j = 0; j < matrixSize; ++j) {
+                    if (!columnsToDelete.contains(j)) {
+                        newMatrix[i1][j1] = matrix[i][j];
+                        ++j1;
+                    }
+                }
+                ++i1;
+            }
+        }
+        matrix = newMatrix;
+
+        System.out.println(newHeight);
+        System.out.println(newWidth);
+        for (int[] row : matrix) {
+            for (int val : row) {
+                System.out.printf("%d ", val);
+            }
+            System.out.println();
+        }
     }
 
     @Override
