@@ -446,14 +446,7 @@ public class SolverImpl implements ISolver {
         }
         matrix = newMatrix;
 
-        System.out.println(newHeight);
-        System.out.println(newWidth);
-        for (int[] row : matrix) {
-            for (int val : row) {
-                System.out.printf("%d ", val);
-            }
-            System.out.println();
-        }
+        printMatrix(matrix);
     }
 
     @Override
@@ -534,7 +527,12 @@ public class SolverImpl implements ISolver {
     }
 
     private void printMatrix(int[][] matrix) {
-        System.out.println(matrix.length);
+        int height = matrix.length;
+        int width = matrix[0].length;
+        System.out.println(height);
+        if (width != height) {
+            System.out.println(width);
+        }
         for (int[] row : matrix) {
             for (int val : row) {
                 System.out.printf("%d ", val);
