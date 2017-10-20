@@ -162,12 +162,12 @@ public class SolverImpl implements ISolver {
     @Override
     public void task8() {
         List<String> words = readWords(new Scanner(System.in));
-        int matchNmber = 0;
+        int matchNumber = 0;
 
         for (String word : words) {
             if (word.matches("[0-9]+")
                     && new StringBuilder(word).reverse().toString().equals(word)) {
-                if (++matchNmber == 2) {
+                if (++matchNumber == 2) {
                     System.out.println(word);
                 }
             }
@@ -271,13 +271,7 @@ public class SolverImpl implements ISolver {
 
         Arrays.asList(matrix).sort(Comparator.comparing((int[] row) -> row[column]));
 
-        System.out.println(matrix.length);
-        for (int row = 0; row < matrix.length; ++row) {
-            for (int col = 0; col < matrix[row].length; ++col) {
-                System.out.printf("%d ", matrix[row][col]);
-            }
-            System.out.println();
-        }
+        printMatrix(matrix);
     }
 
     @Override
@@ -295,13 +289,7 @@ public class SolverImpl implements ISolver {
         }
         matrix = newMatrix;
 
-        System.out.println(matrixSize);
-        for (int[] row : matrix) {
-            for (int val : row) {
-                System.out.printf("%d ", val);
-            }
-            System.out.println();
-        }
+        printMatrix(matrix);
     }
 
     @Override
@@ -317,9 +305,9 @@ public class SolverImpl implements ISolver {
             currentValue = scanner.nextInt();
             ++currentLength;
             if (currentValue <= prevValue) {
+                maxLength = Math.max(maxLength, currentLength);
                 currentLength = 1;
             }
-            maxLength = Math.max(maxLength, currentLength);
         }
 
         System.out.println(maxLength);
@@ -352,7 +340,20 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task16() {
+        int[][] matrix = readMatrix(new Scanner(System.in));
+        int matrixSize = matrix.length;
+        int[][] newMatrix = new int[matrixSize][matrixSize];
 
+        for (int i = 0; i < matrixSize; ++i) {
+            for (int j = 0; j < matrixSize; ++j) {
+                int i1 = matrixSize - j - 1;
+                int j1 = i;
+                newMatrix[i1][j1] = matrix[i][j];
+            }
+        }
+        matrix = newMatrix;
+
+        printMatrix(matrix);
     }
 
     @Override
@@ -440,5 +441,15 @@ public class SolverImpl implements ISolver {
             }
         }
         return mat;
+    }
+
+    private void printMatrix(int[][] matrix) {
+        System.out.println(matrix.length);
+        for (int[] row : matrix) {
+            for (int val : row) {
+                System.out.printf("%d ", val);
+            }
+            System.out.println();
+        }
     }
 }
