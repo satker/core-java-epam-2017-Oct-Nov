@@ -358,7 +358,50 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task17() {
+        Scanner scanner = new Scanner(System.in);
+        int matrixSize = scanner.nextInt();
+        double[][] matrix = new double[matrixSize][matrixSize];
+        double determinant = 1;
 
+        for (double[] row : matrix) {
+            for (int i = 0; i < matrixSize; ++i) {
+                row[i] = scanner.nextInt();
+            }
+        }
+
+        for (int rowIndex = 0; rowIndex < matrixSize; ++rowIndex) {
+            int lead = -1;
+            for (int i = rowIndex; i < matrixSize; ++i) {
+                if (matrix[i][rowIndex] != 0
+                        && (lead == -1
+                        || Math.abs(matrix[i][rowIndex]) > Math.abs(matrix[lead][rowIndex]))
+                        ) {
+                    lead = i;
+                }
+            }
+            if (lead == -1) {
+                determinant = 0;
+                break;
+            }
+
+            double[] tmp = matrix[rowIndex];
+            matrix[rowIndex] = matrix[lead];
+            matrix[lead] = tmp;
+
+            if ((lead - rowIndex) % 2 == 1) {
+                determinant *= -1;
+            }
+            determinant *= matrix[rowIndex][rowIndex];
+
+            for (int i = rowIndex + 1; i < matrixSize; ++i) {
+                double multiplier = matrix[i][rowIndex] / matrix[rowIndex][rowIndex];
+                for (int j = rowIndex; j < matrixSize; ++j) {
+                    matrix[i][j] -= matrix[rowIndex][j] * multiplier;
+                }
+            }
+        }
+
+        System.out.println(determinant);
     }
 
     @Override
