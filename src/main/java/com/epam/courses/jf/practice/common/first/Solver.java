@@ -1,19 +1,25 @@
 package com.epam.courses.jf.practice.common.first;
 
-import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Solver implements ISolver {
-    private Scanner scanner;
+    private Reader reader;
     public Solver(){
-        scanner = new Scanner(System.in);
+        reader = new Reader(System.in);
+    }
+
+    public static void main(String[] args) {
+        Solver solver = new Solver();
+        solver.task2();
     }
     @Override
     public void task1() {
-        int n = scanner.nextInt();
-        String maxString = scanner.nextLine();
+        int n = Integer.parseInt(reader.readLine());
+        String maxString = reader.readLine();
         String minString = maxString;
         for(int i = 1; i < n; ++i){
-            String str = scanner.nextLine();
+            String str = reader.readLine();
             if(str.length() >= maxString.length()){
                 maxString = str;
             }
@@ -23,5 +29,20 @@ public class Solver implements ISolver {
         }
         System.out.printf("MIN (%d): \"%s\"%n", minString.length(), minString);
         System.out.printf("MAX (%d): \"%s\"%n", maxString.length(), maxString);
+    }
+
+    @Override
+    public void task2(){
+        Set<String> stringSet = new TreeSet<>((s1,s2) ->
+                s1.length() < s2.length() ? -1 : (s1.length() > s2.length() ? 1 : s1.compareTo(s2))
+        );
+
+        int n = Integer.parseInt(reader.readLine());
+
+        for(int i = 0; i < n; ++i){
+            stringSet.add(reader.readLine());
+        }
+
+        stringSet.forEach(s -> System.out.printf("(%d): \"%s\"%n", s.length(), s));
     }
 }
