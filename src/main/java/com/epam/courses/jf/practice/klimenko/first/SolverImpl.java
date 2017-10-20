@@ -427,31 +427,41 @@ public class SolverImpl implements ISolver {
             }
         }
 
-        int newWidth = matrixSize - columnsToDelete.size();
-        int newHeight = matrixSize - rowsToDelete.size();
-        int[][] newMatrix = new int[newHeight][newWidth];
-
-        int i1 = 0;
-        for (int i = 0; i < matrixSize; ++i) {
-            if (!rowsToDelete.contains(i)) {
-                int j1 = 0;
-                for (int j = 0; j < matrixSize; ++j) {
-                    if (!columnsToDelete.contains(j)) {
-                        newMatrix[i1][j1] = matrix[i][j];
-                        ++j1;
-                    }
-                }
-                ++i1;
-            }
-        }
-        matrix = newMatrix;
+        matrix = filterMatrix(matrix, rowsToDelete, columnsToDelete);
 
         printMatrix(matrix);
     }
 
     @Override
     public void task19() {
+        int[][] matrix = readMatrix(new Scanner(System.in));
+        int matrixSize = matrix.length;
+        Set<Integer> rowsToDelete = new HashSet<>();
+        Set<Integer> columnsToDelete = new HashSet<>();
 
+        for (int i = 0; i < matrixSize; ++i) {
+            boolean allZeroes = true;
+            for (int j = 0; j < matrixSize; ++j) {
+                allZeroes &= matrix[i][j] == 0;
+            }
+            if (allZeroes) {
+                rowsToDelete.add(i);
+            }
+        }
+
+        for (int j = 0; j < matrixSize; ++j) {
+            boolean allZeroes = true;
+            for (int i = 0; i < matrixSize; ++i) {
+                allZeroes &= matrix[i][j] == 0;
+            }
+            if (allZeroes) {
+                columnsToDelete.add(j);
+            }
+        }
+
+        matrix = filterMatrix(matrix, rowsToDelete, columnsToDelete);
+
+        printMatrix(matrix);
     }
 
     @Override
@@ -539,5 +549,28 @@ public class SolverImpl implements ISolver {
             }
             System.out.println();
         }
+    }
+
+    private int[][] filterMatrix(int[][] matrix, Set<Integer> rowsToDelete, Set<Integer> columnsToDelete) {
+        int matrixSize = matrix.length;
+        int newWidth = matrixSize - columnsToDelete.size();
+        int newHeight = matrixSize - rowsToDelete.size();
+        int[][] newMatrix = new int[newHeight][newWidth];
+        int i1 = 0;
+
+        for (int i = 0; i < matrixSize; ++i) {
+            if (!rowsToDelete.contains(i)) {
+                int j1 = 0;
+                for (int j = 0; j < matrixSize; ++j) {
+                    if (!columnsToDelete.contains(j)) {
+                        newMatrix[i1][j1] = matrix[i][j];
+                        ++j1;
+                    }
+                }
+                ++i1;
+            }
+        }
+
+        return newMatrix;
     }
 }
