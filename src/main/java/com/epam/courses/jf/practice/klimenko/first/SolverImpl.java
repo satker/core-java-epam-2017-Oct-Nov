@@ -282,7 +282,25 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task13() {
+        Scanner scanner = new Scanner(System.in);
+        int offset = scanner.nextInt();
+        int[][] matrix = readMatrix(scanner);
+        int matrixSize = matrix.length;
+        int[][] newMatrix = new int[matrixSize][];
 
+        offset = (offset % matrixSize + matrixSize) % matrixSize;
+        for (int i = 0; i < matrixSize; ++i) {
+            int shifted = (i + offset) % matrixSize;
+            newMatrix[shifted] = matrix[i];
+        }
+        matrix = newMatrix;
+
+        for (int[] row : matrix) {
+            for (int val : row) {
+                System.out.printf("%d ", val);
+            }
+            System.out.println();
+        }
     }
 
     @Override
