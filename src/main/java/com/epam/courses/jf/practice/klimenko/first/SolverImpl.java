@@ -327,7 +327,27 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task15() {
+        int[][] matrix = readMatrix(new Scanner(System.in));
+        int matrixSize = matrix.length;
+        int matrixSum = 0;
 
+        for (int[] row : matrix) {
+            List<Integer> positiveIndex = new ArrayList<>();
+            for (int i = 0; i < row.length; ++i) {
+                if (row[i] > 0) {
+                    positiveIndex.add(i);
+                }
+            }
+            int rowSum = 0;
+            if (positiveIndex.size() > 1) {
+                for (int i = positiveIndex.get(0) + 1; i < positiveIndex.get(1); ++i) {
+                    rowSum += row[i];
+                }
+            }
+            matrixSum += rowSum;
+        }
+
+        System.out.println(matrixSum);
     }
 
     @Override
