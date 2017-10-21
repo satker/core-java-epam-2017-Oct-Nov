@@ -2,6 +2,9 @@ package com.epam.courses.jf.practice.klimenko.first;
 
 import com.epam.courses.jf.practice.common.first.ISolver;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class SolverImpl implements ISolver {
@@ -510,13 +513,27 @@ public class SolverImpl implements ISolver {
                 return 0;
             });
         }
-        
+
         printMatrix(matrix);
     }
 
     @Override
     public void task22() {
+        DecimalFormat format = new DecimalFormat("");
+        Scanner scanner = new Scanner(System.in);
+        int matrixSize = scanner.nextInt();
+        System.out.println(matrixSize);
 
+        for (int i = 0; i < matrixSize; ++i) {
+            for (int j = 0; j < matrixSize; ++j) {
+                double val = scanner.nextDouble();
+                BigDecimal bd = new BigDecimal(val);
+                bd = bd.setScale(0, RoundingMode.HALF_UP);
+                val = bd.doubleValue();
+                System.out.print(format.format(val) + " ");
+            }
+            System.out.println();
+        }
     }
 
     @Override
