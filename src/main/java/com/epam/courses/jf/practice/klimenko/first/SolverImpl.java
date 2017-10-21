@@ -647,7 +647,32 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task27() {
+        Integer[][] matrix = readMatrix(new Scanner(System.in));
+        int matrixSize = matrix.length;
+        Integer[] colIndex = new Integer[matrixSize];
 
+        for (int i = 0; i < matrixSize; ++i) {
+            colIndex[i] = i;
+        }
+
+        Arrays.sort(colIndex, (Integer a, Integer b) -> {
+            int charA = 0, charB = 0;
+            for (int i = 0; i < matrixSize; ++i) {
+                charA += Math.abs(matrix[i][a]);
+                charB += Math.abs(matrix[i][b]);
+            }
+            return charB - charA;
+        });
+
+        for (int i = 0; i < matrixSize; ++i) {
+            Integer[] newRow = new Integer[matrixSize];
+            for (int j = 0; j < matrixSize; ++j) {
+                newRow[j] = matrix[i][colIndex[j]];
+            }
+            matrix[i] = newRow;
+        }
+
+        printMatrix(matrix);
     }
 
     private static final int[] xOffset8 = {1, 1, 0, -1, -1, -1, 0, 1};
