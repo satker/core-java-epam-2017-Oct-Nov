@@ -595,7 +595,7 @@ public class SolverImpl implements ISolver {
                 for (int direction = 0; direction < 8; ++direction) {
                     int i1 = i + yOffset8[direction];
                     int j1 = j + xOffset8[direction];
-                    if (i1 >= 0 && i1 < matrixSize && j1 >= 0 && j1 < matrixSize && val >= matrix[i1][j1]) {
+                    if (validIndexes(i1, j1, matrixSize) && val >= matrix[i1][j1]) {
                         minimum = false;
                         break;
                     }
@@ -612,7 +612,37 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task26() {
+        Integer[][] matrix = readMatrix(new Scanner(System.in));
+        int matrixSize = matrix.length;
+        boolean found = false;
+        int maxMax = -1;
 
+        for (int i = 0; i < matrixSize; ++i) {
+            for (int j = 0; j < matrixSize; ++j) {
+                boolean maximum = true;
+                Integer val = matrix[i][j];
+
+                for (int direction = 0; direction < 8; ++direction) {
+                    int i1 = i + yOffset8[direction];
+                    int j1 = j + xOffset8[direction];
+                    if (validIndexes(i1, j1, matrixSize) && val <= matrix[i1][j1]) {
+                        maximum = false;
+                        break;
+                    }
+                }
+
+                if (maximum && (!found || val > maxMax)) {
+                    maxMax = val;
+                    found = true;
+                }
+            }
+        }
+
+        if (found) {
+            System.out.println(maxMax);
+        } else {
+            System.out.println("NOT FOUND");
+        }
     }
 
     @Override
@@ -623,7 +653,11 @@ public class SolverImpl implements ISolver {
     private static final int[] xOffset8 = {1, 1, 0, -1, -1, -1, 0, 1};
     private static final int[] yOffset8 = {0, -1, -1, -1, 0, 1, 1, 1};
 
-    private List<String> readLines(Scanner scanner) {
+    private static boolean validIndexes(int i, int j, int size) {
+        return i >= 0 && i < size && j >= 0 && j < size;
+    }
+
+    private static List<String> readLines(Scanner scanner) {
         List<String> ret = new ArrayList<>();
         int count = scanner.nextInt();
         scanner.nextLine();
@@ -635,7 +669,7 @@ public class SolverImpl implements ISolver {
         return ret;
     }
 
-    private List<String> readWords(Scanner scanner) {
+    private static List<String> readWords(Scanner scanner) {
         int count = scanner.nextInt();
         List<String> list = new ArrayList<>();
         for (int i = 0; i < count; ++i) {
@@ -644,7 +678,7 @@ public class SolverImpl implements ISolver {
         return list;
     }
 
-    private Integer[][] readMatrix(Scanner scanner) {
+    private static Integer[][] readMatrix(Scanner scanner) {
         int count = scanner.nextInt();
         Integer[][] mat = new Integer[count][count];
         for (int row = 0; row < count; ++row) {
@@ -655,7 +689,7 @@ public class SolverImpl implements ISolver {
         return mat;
     }
 
-    private void printMatrix(Integer[][] matrix) {
+    private static void printMatrix(Integer[][] matrix) {
         int height = matrix.length;
         int width = matrix[0].length;
         System.out.println(height);
@@ -670,7 +704,7 @@ public class SolverImpl implements ISolver {
         }
     }
 
-    private Integer[][] filterMatrix(Integer[][] matrix, Set<Integer> rowsToDelete, Set<Integer> columnsToDelete) {
+    private static Integer[][] filterMatrix(Integer[][] matrix, Set<Integer> rowsToDelete, Set<Integer> columnsToDelete) {
         int matrixSize = matrix.length;
         int newWidth = matrixSize - columnsToDelete.size();
         int newHeight = matrixSize - rowsToDelete.size();
