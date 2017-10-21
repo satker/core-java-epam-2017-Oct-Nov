@@ -583,7 +583,33 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task25() {
+        Integer[][] matrix = readMatrix(new Scanner(System.in));
+        int matrixSize = matrix.length;
+        int count = 0;
+        final int[] xOffset = {1, 1, 0, -1, -1, -1, 0, 1};
+        final int[] yOffset = {0, -1, -1, -1, 0, 1, 1, 1};
 
+        for (int i = 0; i < matrixSize; ++i) {
+            for (int j = 0; j < matrixSize; ++j) {
+                Integer val = matrix[i][j];
+                boolean minimum = true;
+
+                for (int direction = 0; direction < 8; ++direction) {
+                    int i1 = i + yOffset[direction];
+                    int j1 = j + xOffset[direction];
+                    if (i1 >= 0 && i1 < matrixSize && j1 >= 0 && j1 < matrixSize && val >= matrix[i1][j1]) {
+                        minimum = false;
+                        break;
+                    }
+                }
+
+                if (minimum) {
+                    ++count;
+                }
+            }
+        }
+
+        System.out.println(count);
     }
 
     @Override
