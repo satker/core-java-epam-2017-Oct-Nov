@@ -538,7 +538,30 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task23() {
+        Integer[][] matrix = readMatrix(new Scanner(System.in));
+        int matrixSize = matrix.length;
+        Integer[] maxColValue = new Integer[matrixSize];
+        Integer[] minRowValue = new Integer[matrixSize];
+        int count = 0;
 
+        for (int index = 0; index < matrixSize; ++index) {
+            maxColValue[index] = matrix[0][index];
+            minRowValue[index] = matrix[index][0];
+            for (int i = 0; i < matrixSize; ++i) {
+                maxColValue[index] = Math.max(maxColValue[index], matrix[i][index]);
+                minRowValue[index] = Math.min(minRowValue[index], matrix[index][i]);
+            }
+        }
+
+        for (int i = 0; i < matrixSize; ++i) {
+            for (int j = 0; j < matrixSize; ++j) {
+                if (matrix[i][j] == minRowValue[i] && matrix[i][j] == maxColValue[j]) {
+                    ++count;
+                }
+            }
+        }
+
+        System.out.println(count);
     }
 
     @Override
