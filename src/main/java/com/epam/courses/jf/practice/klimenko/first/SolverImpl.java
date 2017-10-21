@@ -566,7 +566,19 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task24() {
+        Integer[][] matrix = readMatrix(new Scanner(System.in));
+        int matrixSize = matrix.length;
 
+        Arrays.sort(matrix, (Integer[] a, Integer[] b) -> {
+            Integer asum = 0, bsum = 0;
+            for (int i = 0; i < matrixSize; ++i) {
+                asum += a[i];
+                bsum += b[i];
+            }
+            return asum - bsum;
+        });
+
+        printMatrix(matrix);
     }
 
     @Override
