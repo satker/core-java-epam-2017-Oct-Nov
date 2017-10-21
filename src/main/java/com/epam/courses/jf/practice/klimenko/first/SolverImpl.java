@@ -586,8 +586,6 @@ public class SolverImpl implements ISolver {
         Integer[][] matrix = readMatrix(new Scanner(System.in));
         int matrixSize = matrix.length;
         int count = 0;
-        final int[] xOffset = {1, 1, 0, -1, -1, -1, 0, 1};
-        final int[] yOffset = {0, -1, -1, -1, 0, 1, 1, 1};
 
         for (int i = 0; i < matrixSize; ++i) {
             for (int j = 0; j < matrixSize; ++j) {
@@ -595,8 +593,8 @@ public class SolverImpl implements ISolver {
                 boolean minimum = true;
 
                 for (int direction = 0; direction < 8; ++direction) {
-                    int i1 = i + yOffset[direction];
-                    int j1 = j + xOffset[direction];
+                    int i1 = i + yOffset8[direction];
+                    int j1 = j + xOffset8[direction];
                     if (i1 >= 0 && i1 < matrixSize && j1 >= 0 && j1 < matrixSize && val >= matrix[i1][j1]) {
                         minimum = false;
                         break;
@@ -621,6 +619,9 @@ public class SolverImpl implements ISolver {
     public void task27() {
 
     }
+
+    private static final int[] xOffset8 = {1, 1, 0, -1, -1, -1, 0, 1};
+    private static final int[] yOffset8 = {0, -1, -1, -1, 0, 1, 1, 1};
 
     private List<String> readLines(Scanner scanner) {
         List<String> ret = new ArrayList<>();
