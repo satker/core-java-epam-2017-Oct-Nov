@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Scanner;
+import java.util.List;
 
 public class Solver implements ISolver {
 
@@ -107,7 +108,46 @@ public class Solver implements ISolver {
 
     }
 
+    @Override
+    public void task5() {
+
+        Scanner scanner = new Scanner(System.in);
+        int n = Integer.parseInt(scanner.nextLine());
+        String[] words = scanner.nextLine().split(" ");
+
+        final Character[] temp = {'a', 'e', 'i', 'o', 'u', 'y'};
+        final List<Character> vowels = Arrays.asList(temp);
+        int result = 0;
+
+        for (String s : words) {
+            char[] chars = s.toLowerCase().toCharArray();
+            int vowelCount = 0;
+            int consonantCount = 0;
+            boolean isLatin = true;
+
+            for (Character c : chars) {
+                if (c <= 'z' && c >= 'a') {
+                    if (vowels.contains(c)) {
+                        vowelCount++;
+                    } else {
+                        consonantCount++;
+                    }
+                } else {
+                    isLatin = false;
+                    break;
+                }
+            }
+
+            if (isLatin && consonantCount == vowelCount) {
+                result++;
+            }
+        }
+
+        System.out.println(result);
+
+    }
+
     public static void main(String[] args) {
-        new Solver().task4();
+        new Solver().task5();
     }
 }
