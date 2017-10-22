@@ -494,7 +494,53 @@ public class Solver implements ISolver {
 
     }
 
+    @Override
+    public void task17() {
+
+        int[][] temp = readMatrix(new Scanner(System.in));
+        double[][] matrix = new double[temp.length][temp.length];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                matrix[i][j] = temp[i][j];
+            }
+        }
+
+        for (int k = 0; k < matrix.length; k++) {
+            if (matrix[k][k] == 0) {
+                boolean isMatrixDegenerate = true;
+                for (int i = k; i < matrix.length; i++) {
+                    if (matrix[i][k] != 0) {
+                        isMatrixDegenerate = false;
+                        double[] swap = matrix[i];
+                        matrix[i] = matrix[k];
+                        matrix[k] = swap;
+                        break;
+                    }
+                }
+                if (isMatrixDegenerate) {
+                    System.out.println(0);
+                    return;
+                }
+            }
+
+            for (int i = k + 1; i < matrix.length; i++) {
+                double coefficient = matrix[i][k] / matrix[k][k];
+                for (int j = k; j < matrix[0].length; j++) {
+                    matrix[i][j] -= coefficient * matrix[k][j];
+                }
+            }
+        }
+
+        double result = 1.0;
+        for (int i = 0; i < matrix.length; i++) {
+            result *= matrix[i][i];
+        }
+
+        System.out.println((int) result);
+
+    }
+
     public static void main(String[] args) {
-        new Solver().task16();
+        new Solver().task17();
     }
 }
