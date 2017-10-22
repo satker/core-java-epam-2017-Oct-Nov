@@ -2,6 +2,7 @@ package com.epam.courses.jf.practice.common.first;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class Solver implements ISolver {
@@ -79,7 +80,34 @@ public class Solver implements ISolver {
 
     }
 
+    @Override
+    public void task4() {
+
+        Scanner scanner = new Scanner(System.in);
+        int n = Integer.parseInt(scanner.nextLine());
+        String[] words = scanner.nextLine().split(" ");
+        int minDifference = 2 * 26 + 1; //Number of different symbols in english alphabet + 1
+        String result = "";
+
+        for (String s : words) {
+            char[] chars = s.toCharArray();
+            HashSet<Character> set = new HashSet<>();
+
+            for (Character c : chars) {
+                set.add(c);
+            }
+
+            if (set.size() < minDifference) {
+                result = s;
+                minDifference = set.size();
+            }
+        }
+
+        System.out.println(result);
+
+    }
+
     public static void main(String[] args) {
-        new Solver().task3();
+        new Solver().task4();
     }
 }
