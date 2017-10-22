@@ -269,6 +269,7 @@ public class Solver implements ISolver {
 
     private static void printMatrix(int[][] input) {
 
+        System.out.println(input.length);
         for (int[] row : input) {
             for (int i = 0; i < row.length; i++) {
                 if (i != row.length - 1) {
@@ -383,7 +384,20 @@ public class Solver implements ISolver {
 
     }
 
+    @Override
+    public void task12(){
+
+        Scanner scanner = new Scanner(System.in);
+        int k = Integer.parseInt(scanner.nextLine());
+        int[][] matrix = readMatrix(scanner);
+
+        Arrays.sort(matrix, Comparator.comparingInt(arr -> arr[k]));
+
+        printMatrix(matrix);
+
+    }
+
     public static void main(String[] args) {
-        new Solver().task11();
+        new Solver().task12();
     }
 }
