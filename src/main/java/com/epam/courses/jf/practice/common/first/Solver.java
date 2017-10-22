@@ -147,7 +147,36 @@ public class Solver implements ISolver {
 
     }
 
+    @Override
+    public void task6() {
+
+        Scanner scanner = new Scanner(System.in);
+        int n = Integer.parseInt(scanner.nextLine());
+        String[] words = scanner.nextLine().split(" ");
+
+        loop:
+        for (String s : words) {
+            char[] chars = s.toCharArray();
+
+            if (chars.length == 1) {
+                continue;
+            }
+
+            for (int j = 0; j < chars.length - 1; j++) {
+                if (chars[j] >= chars[j + 1]) {
+                    continue loop;
+                }
+            }
+
+            System.out.println(s);
+            return;
+        }
+
+        System.out.println("NOT FOUND");
+
+    }
+
     public static void main(String[] args) {
-        new Solver().task5();
+        new Solver().task6();
     }
 }
