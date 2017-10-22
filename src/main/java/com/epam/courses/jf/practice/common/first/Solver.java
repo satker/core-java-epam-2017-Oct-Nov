@@ -1,12 +1,17 @@
 package com.epam.courses.jf.practice.common.first;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+
+import static java.lang.Math.sqrt;
 
 public class Solver implements ISolver {
 
@@ -293,7 +298,32 @@ public class Solver implements ISolver {
 
     }
 
+    @Override
+    public void task10() {
+
+        Scanner scanner = new Scanner(System.in);
+        final int A = scanner.nextInt();
+        final int B = scanner.nextInt();
+        final int C = scanner.nextInt();
+
+        final double D = B * B - 4 * A * C;
+        if (D < 0) {
+            System.out.println("No solution");
+        } else if (D == 0) {
+            BigDecimal result = new BigDecimal((double) -B / (2 * A));
+            result = result.round(new MathContext(2, RoundingMode.HALF_UP));
+            System.out.println("One solution: " + result);
+        } else {
+            BigDecimal result1 = new BigDecimal( (-B - sqrt(D)) / (2 * A));
+            BigDecimal result2 = new BigDecimal( (-B + sqrt(D)) / (2 * A));
+            result1 = result1.round(new MathContext(2, RoundingMode.HALF_UP));
+            result2 = result2.round(new MathContext(2, RoundingMode.HALF_UP));
+            System.out.println("Two solutions: " + result1 + ", " + result2);
+        }
+
+    }
+
     public static void main(String[] args) {
-        new Solver().task9();
+        new Solver().task10();
     }
 }
