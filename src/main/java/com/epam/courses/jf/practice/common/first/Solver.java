@@ -11,6 +11,7 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
+import static java.lang.Math.max;
 import static java.lang.Math.sqrt;
 
 public class Solver implements ISolver {
@@ -416,7 +417,37 @@ public class Solver implements ISolver {
 
     }
 
+    @Override
+    public void task14() {
+
+        Scanner scanner = new Scanner(System.in);
+        int n = Integer.parseInt(scanner.nextLine());
+        int[] numbers = new int[n];
+        for (int i = 0; i < n; i++) {
+            numbers[i] = scanner.nextInt();
+        }
+
+        int maxRow = 1;
+        int tempRow = 1;
+        if (n == 1) {
+            System.out.println(n);
+            return;
+        }
+
+        for (int i = 1; i < numbers.length; i++) {
+            if (numbers[i] > numbers[i - 1]) {
+                tempRow++;
+            } else {
+                maxRow = max(maxRow, tempRow);
+                tempRow = 1;
+            }
+        }
+
+        System.out.println(maxRow);
+
+    }
+
     public static void main(String[] args) {
-        new Solver().task13();
+        new Solver().task14();
     }
 }
