@@ -247,7 +247,53 @@ public class Solver implements ISolver {
 
     }
 
+    private static int[][] readMatrix(Scanner scanner) {
+
+        final int DIMENSION = scanner.nextInt();
+        int[][] matrix = new int[DIMENSION][DIMENSION];
+
+        for (int row = 0; row < DIMENSION; row++) {
+            for (int col = 0; col < DIMENSION; col++) {
+                matrix[row][col] = scanner.nextInt();
+            }
+        }
+
+        return matrix;
+
+    }
+
+    private static void printMatrix(int[][] input) {
+
+        for (int[] row : input) {
+            for (int i = 0; i < row.length; i++) {
+                if (i != row.length - 1) {
+                    System.out.print(row[i] + "\t");
+                } else {
+                    System.out.println(row[i]);
+                }
+            }
+        }
+
+    }
+
+    @Override
+    public void task9() {
+
+        Scanner scanner = new Scanner(System.in);
+        final int n = Integer.parseInt(scanner.nextLine());
+
+        int[][] result = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                result[i][j] = i * n + j + 1;
+            }
+        }
+
+        printMatrix(result);
+
+    }
+
     public static void main(String[] args) {
-        new Solver().task8();
+        new Solver().task9();
     }
 }
