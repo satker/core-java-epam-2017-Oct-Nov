@@ -17,4 +17,35 @@ public class Solver implements ISolver {
 
     }
 
+    @Override
+    public void task1() {
+
+        Scanner scanner = new Scanner(System.in);
+        String[] strings = readStrings(scanner);
+
+        String minString = strings[0];
+        String maxString = strings[0];
+        int minLength = minString.length();
+        int maxLength = maxString.length();
+
+        for (String s : strings) {
+            if (s.length() <= minLength) {
+                minString = s;
+                minLength = s.length();
+            }
+
+            if (s.length() >= maxLength) {
+                maxString = s;
+                maxLength = s.length();
+            }
+        }
+
+        System.out.printf("MIN (%d): \"%s\"%n", minLength, minString);
+        System.out.printf("MAX (%d): \"%s\"%n", maxLength, maxString);
+
+    }
+
+    public static void main(String[] args) {
+        new Solver().task1();
+    }
 }
