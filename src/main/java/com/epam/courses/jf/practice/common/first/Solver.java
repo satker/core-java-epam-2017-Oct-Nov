@@ -385,7 +385,7 @@ public class Solver implements ISolver {
     }
 
     @Override
-    public void task12(){
+    public void task12() {
 
         Scanner scanner = new Scanner(System.in);
         int k = Integer.parseInt(scanner.nextLine());
@@ -397,7 +397,26 @@ public class Solver implements ISolver {
 
     }
 
+    @Override
+    public void task13() {
+
+        Scanner scanner = new Scanner(System.in);
+        int k = Integer.parseInt(scanner.nextLine());
+        int[][] matrix = readMatrix(scanner);
+        int[][] result = new int[matrix.length][];
+
+
+        for (int i = 0; i < result.length; i++) {
+            int positionInMatrix = (i - k) % result.length;
+            positionInMatrix = positionInMatrix < 0 ? positionInMatrix + result.length : positionInMatrix;
+            result[i] = matrix[positionInMatrix].clone();
+        }
+
+        printMatrix(result);
+
+    }
+
     public static void main(String[] args) {
-        new Solver().task12();
+        new Solver().task13();
     }
 }
