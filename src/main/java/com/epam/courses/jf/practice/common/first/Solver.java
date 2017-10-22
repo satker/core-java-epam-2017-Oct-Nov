@@ -22,8 +22,7 @@ public class Solver implements ISolver {
     @Override
     public void task1() {
 
-        Scanner scanner = new Scanner(System.in);
-        String[] strings = readStrings(scanner);
+        String[] strings = readStrings(new Scanner(System.in));
 
         String minString = strings[0];
         String maxString = strings[0];
@@ -50,8 +49,7 @@ public class Solver implements ISolver {
     @Override
     public void task2() {
 
-        Scanner scanner = new Scanner(System.in);
-        String[] strings = readStrings(scanner);
+        String[] strings = readStrings(new Scanner(System.in));
 
         Arrays.sort(strings, Comparator.comparingInt(String::length).thenComparing(String::compareTo));
 
@@ -61,7 +59,27 @@ public class Solver implements ISolver {
 
     }
 
+    @Override
+    public void task3() {
+
+        String[] strings = readStrings(new Scanner(System.in));
+
+        long averageLength = 0L;
+        for (String s : strings) {
+            averageLength += s.length();
+        }
+        averageLength /= strings.length;
+        System.out.printf("AVERAGE (%d)%n", averageLength);
+
+        for (String s : strings) {
+            if (s.length() < averageLength) {
+                System.out.printf("(%d): \"%s\"%n", s.length(), s);
+            }
+        }
+
+    }
+
     public static void main(String[] args) {
-        new Solver().task2();
+        new Solver().task3();
     }
 }
