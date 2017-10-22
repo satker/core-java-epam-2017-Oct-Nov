@@ -81,12 +81,17 @@ public class Solver implements ISolver {
 
     }
 
+    private static String[] readWords(Scanner scanner) {
+
+        int n = Integer.parseInt(scanner.nextLine());
+        return scanner.nextLine().split(" ");
+
+    }
+
     @Override
     public void task4() {
 
-        Scanner scanner = new Scanner(System.in);
-        int n = Integer.parseInt(scanner.nextLine());
-        String[] words = scanner.nextLine().split(" ");
+        String[] words = readWords(new Scanner(System.in));
         int minDifference = 2 * 26 + 1; //Number of different symbols in english alphabet + 1
         String result = "";
 
@@ -111,9 +116,7 @@ public class Solver implements ISolver {
     @Override
     public void task5() {
 
-        Scanner scanner = new Scanner(System.in);
-        int n = Integer.parseInt(scanner.nextLine());
-        String[] words = scanner.nextLine().split(" ");
+        String[] words = readWords(new Scanner(System.in));
 
         final Character[] temp = {'a', 'e', 'i', 'o', 'u', 'y'};
         final List<Character> vowels = Arrays.asList(temp);
@@ -150,9 +153,7 @@ public class Solver implements ISolver {
     @Override
     public void task6() {
 
-        Scanner scanner = new Scanner(System.in);
-        int n = Integer.parseInt(scanner.nextLine());
-        String[] words = scanner.nextLine().split(" ");
+        String[] words = readWords(new Scanner(System.in));
 
         loop:
         for (String s : words) {
@@ -176,7 +177,44 @@ public class Solver implements ISolver {
 
     }
 
+    @Override
+    public void task7() {
+
+        String[] words = readWords(new Scanner(System.in));
+        HashSet<String> wordSet = new HashSet<>();
+        StringBuilder builder = new StringBuilder();
+
+        loop:
+        for (String s : words) {
+            char[] chars = s.toCharArray();
+            HashSet<Character> charSet = new HashSet<>();
+
+            for (char c : chars) {
+                if (!charSet.add(c)) {
+                    continue loop;
+                }
+            }
+
+            if (wordSet.add(s)) {
+                if (builder.length() == 0) {
+                    builder.append(s);
+                } else {
+                    builder.append(" ");
+                    builder.append(s);
+                }
+            }
+
+        }
+
+        if (builder.length() != 0) {
+            System.out.println(builder.toString());
+        } else {
+            System.out.println("NOT FOUND");
+        }
+
+    }
+
     public static void main(String[] args) {
-        new Solver().task6();
+        new Solver().task7();
     }
 }
