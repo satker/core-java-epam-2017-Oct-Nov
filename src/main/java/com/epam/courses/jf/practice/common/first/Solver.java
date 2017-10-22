@@ -460,15 +460,15 @@ public class Solver implements ISolver {
 
             for (int element : row) {
                 if (!wasPositive) {
-                    if (element > 0){
+                    if (element > 0) {
                         wasPositive = true;
                     }
                 } else {
                     if (element > 0) {
-                        result+=sumBetweenPositivs;
+                        result += sumBetweenPositivs;
                         break;
                     } else {
-                        sumBetweenPositivs+=element;
+                        sumBetweenPositivs += element;
                     }
                 }
             }
@@ -478,7 +478,23 @@ public class Solver implements ISolver {
 
     }
 
+    @Override
+    public void task16() {
+
+        int[][] matrix = readMatrix(new Scanner(System.in));
+        int[][] result = new int[matrix.length][matrix[0].length];
+
+        for (int i = 0; i < result.length; i++) {
+            for (int j = 0; j < result[0].length; j++) {
+                result[i][j] = matrix[j][matrix.length - 1 - i];
+            }
+        }
+
+        printMatrix(result);
+
+    }
+
     public static void main(String[] args) {
-        new Solver().task15();
+        new Solver().task16();
     }
 }
