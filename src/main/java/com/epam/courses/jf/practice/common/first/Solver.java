@@ -1,5 +1,7 @@
 package com.epam.courses.jf.practice.common.first;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class Solver implements ISolver {
@@ -45,7 +47,21 @@ public class Solver implements ISolver {
 
     }
 
+    @Override
+    public void task2() {
+
+        Scanner scanner = new Scanner(System.in);
+        String[] strings = readStrings(scanner);
+
+        Arrays.sort(strings, Comparator.comparingInt(String::length).thenComparing(String::compareTo));
+
+        for (String s : strings) {
+            System.out.printf("(%d): \"%s\"%n", s.length(), s);
+        }
+
+    }
+
     public static void main(String[] args) {
-        new Solver().task1();
+        new Solver().task2();
     }
 }
