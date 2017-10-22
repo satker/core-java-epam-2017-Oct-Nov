@@ -1,10 +1,12 @@
 package com.epam.courses.jf.practice.common.first;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.List;
+import java.util.ArrayList;
 
 public class Solver implements ISolver {
 
@@ -214,7 +216,38 @@ public class Solver implements ISolver {
 
     }
 
+    @Override
+    public void task8() {
+
+        String[] words = readWords(new Scanner(System.in));
+        List<BigInteger> polyndroms = new ArrayList<>();
+
+        loop:
+        for (String s : words) {
+            char[] chars = s.toCharArray();
+            for (char c : chars) {
+                if (!(c <= '9' && c >= '0')) {
+                    continue loop;
+                }
+            }
+            BigInteger number = new BigInteger(s);
+
+            if (s.equals(new StringBuilder(s).reverse().toString())) {
+                polyndroms.add(number);
+            }
+        }
+
+        if (polyndroms.size() == 1) {
+            System.out.println(polyndroms.get(0));
+        } else if (polyndroms.size() > 1) {
+            System.out.println(polyndroms.get(1));
+        } else {
+            System.out.println("NOT FOUND");
+        }
+
+    }
+
     public static void main(String[] args) {
-        new Solver().task7();
+        new Solver().task8();
     }
 }
