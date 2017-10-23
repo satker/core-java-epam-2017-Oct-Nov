@@ -13,7 +13,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Task1 implements ITestableTask1{
+public class Task1 implements ITestableTask1 {
     public List<String> reverseFile(File input, File output) {
         List<String> result = new ArrayList<>();
         try {
@@ -21,8 +21,7 @@ public class Task1 implements ITestableTask1{
                     .collect(Collectors.toList());
             Collections.reverse(result);
             Files.write(Paths.get(output.getPath()), result, StandardCharsets.ISO_8859_1);
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Error");
         }
         return result;

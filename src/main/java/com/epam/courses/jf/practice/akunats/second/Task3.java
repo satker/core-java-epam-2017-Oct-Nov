@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Task3 implements ITestableTask3{
+public class Task3 implements ITestableTask3 {
     public List<String> sortPoems(Set<IPoem> poems, String author) {
         List<String> result = new ArrayList<>();
         for (IPoem poem : poems) {
