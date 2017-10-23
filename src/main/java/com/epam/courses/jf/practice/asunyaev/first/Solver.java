@@ -44,5 +44,29 @@ public class Solver implements ISolver {
         System.out.printf("MIN (%d): \"%s\"%n", minLength, minString);
         System.out.printf("MAX (%d): \"%s\"%n", maxLength, maxString);
     }
-    
+
+    @Override
+    public void task2() {
+        Scanner scan = new Scanner(System.in);
+        int N = scan.nextInt();
+        HashMap<Integer, String> lines = new HashMap<>();
+        int[] lengths = new int[N];
+        String currentString;
+
+        scan.nextLine();
+
+        for (int i = 0; i < N; i++) {
+            currentString = scan.nextLine();
+            lengths[i] = currentString.length();
+            lines.put(lengths[i], currentString);
+        }
+
+        Arrays.sort(lengths);
+
+        for (int i = 0; i < N; i++) {
+            lines.get(lengths[i]);
+            System.out.printf("(%d): \"%s\"%n", lengths[i], lines.get(lengths[i]));
+        }
+    }
+
 }
