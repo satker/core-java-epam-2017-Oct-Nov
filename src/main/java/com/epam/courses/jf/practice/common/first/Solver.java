@@ -622,7 +622,7 @@ public class Solver implements ISolver {
         loop:
         for (int j = 0; j < matrix.length; j++) {
             for (int[] row : matrix) {
-                if (row[j] != 0){
+                if (row[j] != 0) {
                     continue loop;
                 }
             }
@@ -650,7 +650,68 @@ public class Solver implements ISolver {
 
     }
 
+    @Override
+    public void task20() {
+
+        Scanner scanner = new Scanner(System.in);
+        int x = Integer.parseInt(scanner.nextLine());
+        int y = Integer.parseInt(scanner.nextLine());
+        int[][] matrix = readMatrix(scanner);
+
+        int minX = 0;
+        int minY = 0;
+        int minElement = matrix[0][0];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                if (minElement > matrix[i][j]) {
+                    minElement = matrix[i][j];
+                    minX = i;
+                    minY = j;
+                }
+            }
+        }
+
+        //Rotate rows
+        int[] swap = matrix[minX];
+        if (x < minX) {
+            System.arraycopy(matrix, x, matrix, x + 1, minX - x);
+            matrix[x] = swap;
+        } else if (x > minX) {
+            System.arraycopy(matrix, minX + 1, matrix, minX, x - minX);
+            matrix[x] = swap;
+        }
+
+        //Rotate columns
+        swap = new int[matrix.length];
+        for (int j = 0; j < matrix.length; j++) {
+            swap[j] = matrix[j][minY];
+        }
+
+        if (y < minY) {
+            for (int j = minY; j > y; j--) {
+                for (int i = 0; i < matrix.length; i++) {
+                    matrix[i][j] = matrix[i][j - 1];
+                }
+            }
+            for (int i = 0; i < matrix.length; i++) {
+                matrix[i][y] = swap[i];
+            }
+        } else if (y > minY) {
+            for (int j = minY; j < y; j++) {
+                for (int i = 0; i < matrix.length; i++) {
+                    matrix[i][j] = matrix[i][j + 1];
+                }
+            }
+            for (int i = 0; i < matrix.length; i++) {
+                matrix[i][y] = swap[i];
+            }
+        }
+
+        printMatrix(matrix);
+
+    }
+
     public static void main(String[] args) {
-        new Solver().task19();
+        new Solver().task20();
     }
 }
