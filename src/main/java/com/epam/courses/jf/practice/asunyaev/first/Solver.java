@@ -5,12 +5,13 @@ import com.epam.courses.jf.practice.common.first.ISolver;
 import java.util.Scanner;
 import java.util.HashMap;
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class Solver implements ISolver {
 
     public static void main(String[] args) {
         Solver solver = new Solver();
-        solver.task11();
+        solver.task12();
     }
 
     @Override
@@ -162,6 +163,42 @@ public class Solver implements ISolver {
             }
         } catch(NumberFormatException e) {
             System.out.println("INCORRECT INPUT DATA");
+        }
+    }
+
+    @Override
+    public void task12() {
+        Scanner scanner = new Scanner(System.in);
+        final int k = scanner.nextInt();
+        final int DIMENSION = scanner.nextInt();
+        int[][] matrix = readMatrix(scanner, DIMENSION);
+        Arrays.sort(matrix, new Comparator<int[]>() {
+            @Override
+            public int compare(final int[] row1, final int[] row2) {
+                final Integer value1 = row1[k];
+                final Integer value2 = row2[k];
+                return value1.compareTo(value2);
+            }
+        });
+        printMatrix(matrix, DIMENSION);
+    }
+
+    private int[][] readMatrix(Scanner scanner, int dimension) {
+        int[][] matrix = new int[dimension][dimension];
+        for (int row = 0; row < dimension; ++row) {
+            for (int col = 0; col < dimension; ++col) {
+                matrix[row][col] = scanner.nextInt();
+            }
+        }
+        return matrix;
+    }
+
+    private void printMatrix(int[][] matrix, int dimension) {
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < dimension; j++) {
+                System.out.print(matrix[i][j] + "\t");
+            }
+            System.out.println();
         }
     }
 
