@@ -1,9 +1,11 @@
 package com.epam.courses.jf.practice.akunats.second;
 
+import com.epam.courses.jf.practice.common.second.ITestableTask8;
+
 import java.util.Arrays;
 import java.util.Stack;
 
-public class Task8 {
+public class Task8 implements ITestableTask8{
     public boolean isNormalBrackets(String string) {
         Stack<String> stackSymbols = new Stack<>();
         // убираем все элементы кроме скобок и записываемв стек
