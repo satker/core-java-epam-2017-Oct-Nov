@@ -69,4 +69,31 @@ public class Solver implements ISolver {
         }
     }
 
+    @Override
+    public void task3() {
+        Scanner scan = new Scanner(System.in);
+        int N = scan.nextInt();
+        int averageLength = 0;
+        HashMap<Integer, String> lines = new HashMap<>();
+        int[] lengths = new int[N];
+        String currentString;
+
+        scan.nextLine();
+
+        for (int i = 0; i < N; i++) {
+            currentString  = scan.nextLine();
+            lengths[i] = currentString.length();
+            lines.put(lengths[i], currentString);
+        }
+
+        averageLength = (int) Arrays.stream(lengths).average().getAsDouble();
+        System.out.printf("AVERAGE (%d)%n", averageLength);
+
+        for (int i = 0; i < N; i++) {
+            if (lengths[i] < averageLength) {
+                System.out.printf("(%d): \"%s\"%n", lengths[i], lines.get(lengths[i]));
+            }
+        }
+    }
+
 }
