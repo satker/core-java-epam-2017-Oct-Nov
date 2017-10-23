@@ -96,4 +96,19 @@ public class Solver implements ISolver {
         }
     }
 
+    @Override
+    public void task9() {
+        Scanner scan = new Scanner(System.in);
+        int N = scan.nextInt();
+        int k = 1;
+
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                System.out.print(k + "\t");
+                k++;
+            }
+            System.out.println();
+        }
+    }
+
 }
