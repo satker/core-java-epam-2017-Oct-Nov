@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import static java.lang.Math.min;
 import static java.lang.Math.max;
 import static java.lang.Math.round;
 import static java.lang.Math.sqrt;
@@ -774,7 +775,37 @@ public class Solver implements ISolver {
 
     }
 
+    @Override
+    public void task23() {
+
+        int[][] matrix = readMatrix(new Scanner(System.in));
+
+        int result = 0;
+        for (int[] row : matrix) {
+
+            int minInRow = row[0];
+            for (int element : row) {
+                minInRow = min(minInRow, element);
+            }
+
+            loop:
+            for (int j = 0; j < row.length; j++) {
+                if (row[j] == minInRow) {
+                    for (int[] tempRow : matrix) {
+                        if (tempRow[j] > minInRow) {
+                            continue loop;
+                        }
+                    }
+                    result++;
+                }
+            }
+        }
+
+        System.out.println(result);
+
+    }
+
     public static void main(String[] args) {
-        new Solver().task22();
+        new Solver().task23();
     }
 }
