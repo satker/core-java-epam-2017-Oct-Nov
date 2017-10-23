@@ -4,14 +4,18 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import static java.lang.Math.max;
+import static java.lang.Math.round;
 import static java.lang.Math.sqrt;
 
 public class Solver implements ISolver {
@@ -734,7 +738,43 @@ public class Solver implements ISolver {
 
     }
 
+    private double[][] readDoubleMatrix(Scanner scanner) {
+
+        NumberFormat format = NumberFormat.getInstance(Locale.FRANCE);
+        final int DIMENSION = scanner.nextInt();
+        double[][] matrix = new double[DIMENSION][DIMENSION];
+
+        for (int row = 0; row < DIMENSION; row++) {
+            for (int col = 0; col < DIMENSION; col++) {
+                try {
+                    matrix[row][col] = format.parse(scanner.next()).doubleValue();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return matrix;
+
+    }
+
+    @Override
+    public void task22() {
+
+        double[][] matrix = readDoubleMatrix(new Scanner(System.in));
+        int[][] result = new int[matrix.length][matrix[0].length];
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                result[i][j] = (int) round(matrix[i][j]);
+            }
+        }
+
+        printMatrix(result);
+
+    }
+
     public static void main(String[] args) {
-        new Solver().task21();
+        new Solver().task22();
     }
 }
