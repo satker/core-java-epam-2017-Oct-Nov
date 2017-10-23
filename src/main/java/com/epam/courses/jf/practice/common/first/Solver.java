@@ -540,7 +540,69 @@ public class Solver implements ISolver {
 
     }
 
+    private void printNonSquareMatrix(int[][] input) {
+
+        System.out.println(input.length);
+        System.out.println(input[0].length);
+
+        for (int[] row : input) {
+            for (int i = 0; i < row.length; i++) {
+                if (i != row.length - 1) {
+                    System.out.print(row[i] + "\t");
+                } else {
+                    System.out.println(row[i]);
+                }
+            }
+        }
+
+    }
+
+    @Override
+    public void task18() {
+
+        int[][] matrix = readMatrix(new Scanner(System.in));
+
+        int maxElement = matrix[0][0];
+        for (int[] row : matrix) {
+            for (int element : row) {
+                maxElement = max(maxElement, element);
+            }
+        }
+
+        HashSet<Integer> rowsToDelete = new HashSet<>();
+        HashSet<Integer> columnsToDelete = new HashSet<>();
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                if (matrix[i][j] == maxElement) {
+                    rowsToDelete.add(i);
+                    columnsToDelete.add(j);
+                }
+            }
+        }
+
+        int[][] result = new int[matrix.length - rowsToDelete.size()][matrix.length - columnsToDelete.size()];
+        int rowNumber = 0;
+        for (int i = 0; i < matrix.length; i++) {
+            if (rowsToDelete.contains(i)) {
+                continue;
+            }
+            int columnNumber = 0;
+            for (int j = 0; j < matrix[0].length; j++) {
+                if (columnsToDelete.contains(j)) {
+                    continue;
+                }
+                result[rowNumber][columnNumber] = matrix[i][j];
+                columnNumber++;
+            }
+            rowNumber++;
+        }
+
+        printNonSquareMatrix(result);
+
+    }
+
     public static void main(String[] args) {
-        new Solver().task17();
+        new Solver().task18();
     }
 }
