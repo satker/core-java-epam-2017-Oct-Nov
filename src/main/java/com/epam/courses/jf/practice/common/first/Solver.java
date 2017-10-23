@@ -711,7 +711,30 @@ public class Solver implements ISolver {
 
     }
 
+    @Override
+    public void task21() {
+
+        int[][] matrix = readMatrix(new Scanner(System.in));
+        int[][] result = new int[matrix.length][matrix[0].length];
+
+        for (int i = 0; i < matrix.length; i++) {
+            int columnCounter = 0;
+            for (int j = 0; j < matrix[0].length; j++) {
+                if (matrix[i][j] != 0) {
+                    result[i][columnCounter] = matrix[i][j];
+                    columnCounter++;
+                }
+            }
+            for (int j = columnCounter; j < result[0].length; j++) {
+                result[i][j] = 0;
+            }
+        }
+
+        printMatrix(result);
+
+    }
+
     public static void main(String[] args) {
-        new Solver().task20();
+        new Solver().task21();
     }
 }
