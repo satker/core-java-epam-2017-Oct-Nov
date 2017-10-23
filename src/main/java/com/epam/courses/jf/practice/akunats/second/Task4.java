@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Task4 implements ITestableTask4 {
-    
+
     public Set<Integer> intersection(Set<Integer> first, Set<Integer> second) {
         Set<Integer> result = new HashSet<>();
         for (Integer s : second) {
