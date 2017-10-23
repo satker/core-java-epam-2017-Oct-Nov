@@ -805,7 +805,46 @@ public class Solver implements ISolver {
 
     }
 
+    private static int compareStructures(Object o1, Object o2) {
+
+        Object[] tmp1 = (Object[]) o1;
+        Object[] tmp2 = (Object[]) o2;
+        if ((int) tmp1[1] == (int) tmp2[1]) {
+            return (int) tmp1[2] - (int) tmp2[2];
+        } else {
+            return (int) tmp1[1] - (int) tmp2[1];
+        }
+
+    }
+
+    @Override
+    public void task24() {
+
+        int[][] matrix = readMatrix(new Scanner(System.in));
+
+        ArrayList<Object[]> tempStructure = new ArrayList<>();
+
+        for (int i = 0; i < matrix.length; i++) {
+            int sum = 0;
+            for (int element : matrix[i]) {
+                sum += element;
+            }
+            tempStructure.add(new Object[]{matrix[i], sum, i});
+        }
+        Object[] arrayStructure = tempStructure.toArray();
+
+        Arrays.sort(arrayStructure, Solver::compareStructures);
+
+        int[][] result = new int[matrix.length][];
+        for (int i = 0; i < result.length; i++) {
+            result[i] = (int[]) ((Object[]) arrayStructure[i])[0];
+        }
+
+        printMatrix(result);
+
+    }
+
     public static void main(String[] args) {
-        new Solver().task23();
+        new Solver().task24();
     }
 }
