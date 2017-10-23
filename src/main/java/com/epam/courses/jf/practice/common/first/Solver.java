@@ -602,7 +602,55 @@ public class Solver implements ISolver {
 
     }
 
+    @Override
+    public void task19() {
+
+        int[][] matrix = readMatrix(new Scanner(System.in));
+
+        ArrayList<Integer> rowsToDelete = new ArrayList<>();
+        loop:
+        for (int i = 0; i < matrix.length; i++) {
+            for (int element : matrix[i]) {
+                if (element != 0) {
+                    continue loop;
+                }
+            }
+            rowsToDelete.add(i);
+        }
+
+        ArrayList<Integer> columnsToDelete = new ArrayList<>();
+        loop:
+        for (int j = 0; j < matrix.length; j++) {
+            for (int[] row : matrix) {
+                if (row[j] != 0){
+                    continue loop;
+                }
+            }
+            columnsToDelete.add(j);
+        }
+
+        int[][] result = new int[matrix.length - rowsToDelete.size()][matrix.length - columnsToDelete.size()];
+        int rowNumber = 0;
+        for (int i = 0; i < matrix.length; i++) {
+            if (rowsToDelete.contains(i)) {
+                continue;
+            }
+            int columnNumber = 0;
+            for (int j = 0; j < matrix[0].length; j++) {
+                if (columnsToDelete.contains(j)) {
+                    continue;
+                }
+                result[rowNumber][columnNumber] = matrix[i][j];
+                columnNumber++;
+            }
+            rowNumber++;
+        }
+
+        printNonSquareMatrix(result);
+
+    }
+
     public static void main(String[] args) {
-        new Solver().task18();
+        new Solver().task19();
     }
 }
