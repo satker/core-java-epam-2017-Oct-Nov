@@ -12,16 +12,16 @@ import java.util.Set;
 public class Task15 implements ITestableTask15 {
     @Override
     public IFileWithLines analyze(Set<I2DPoint> points, File output) {
-        ArrayList<I2DPoint> previousStep = new ArrayList<>();
+        ArrayList<I2DPoint> previousStep = new ArrayList<>(); // Исключенные точки из перебора
         Set<ILine> lines = new HashSet<>();
 
         Iterator<I2DPoint> iter = points.iterator();
-        while (iter.hasNext()) {
+        while (iter.hasNext()) { // первый шаг
             I2DPoint point = iter.next();
 
-            Set<I2DPoint> interList = new HashSet<>();
+            Set<I2DPoint> interList = new HashSet<>(); // Исключенные элементы из выборки на втором шаге
 
-            for (I2DPoint pointForSearchEquation : points) {
+            for (I2DPoint pointForSearchEquation : points) { // второй шаг
                 Set<I2DPoint> interSet = new HashSet<>();
                 if (!pointForSearchEquation.equals(point)) {
                     // Считаем коэффициенты уравнение прямой Ax + By + C = 0
@@ -33,20 +33,20 @@ public class Task15 implements ITestableTask15 {
                     for (I2DPoint pointForSearch : points) {
                         if (!interList.contains(pointForSearch)) {
                             if (previousStep.size() == 0) {
-                                if (!pointForSearch.equals(point)
-                                        && !pointForSearch.equals(pointForSearchEquation)
-                                        && (A * pointForSearch.getX() - B * pointForSearch.getY() + C) == 0) {
-                                    interSet.add(pointForSearch);
-                                    interList.add(pointForSearch);
+                                if (!pointForSearch.equals(point) // Элемент не равный точке с первого шага
+                                        && !pointForSearch.equals(pointForSearchEquation) // Элемент не равный точке со второго шага
+                                        && (A * pointForSearch.getX() - B * pointForSearch.getY() + C) == 0) { // Лежит ли точка на прямой
+                                    interSet.add(pointForSearch); // точка для добавления в ILine
+                                    interList.add(pointForSearch); // исключаем элемент из поиска
                                     countTrue++;
                                 }
                             } else {
-                                for (I2DPoint p : previousStep) {
+                                for (I2DPoint p : previousStep) { // Перебираем обработанные элементы
                                     // Ограничение выборки
-                                    if ((A * p.getX() - B * p.getY() + C) != 0) {
-                                        if (!pointForSearch.equals(point)
-                                                && !pointForSearch.equals(pointForSearchEquation)
-                                                && (A * pointForSearch.getX() - B * pointForSearch.getY() + C) == 0) {
+                                    if ((A * p.getX() - B * p.getY() + C) != 0) { // обработанные точки не должны лежать на прямой, для предотвращения дублирования
+                                        if (!pointForSearch.equals(point)// Элемент не равный точке с первого шага
+                                                && !pointForSearch.equals(pointForSearchEquation)// Элемент не равный точке со второго шага
+                                                && (A * pointForSearch.getX() - B * pointForSearch.getY() + C) == 0) {// Лежит ли точка на прямой
                                             interSet.add(pointForSearch);
                                             interList.add(pointForSearch);
                                             countTrue++;
@@ -56,18 +56,18 @@ public class Task15 implements ITestableTask15 {
                             }
                         }
                     }
-                    if (countTrue > 0) {
+                    if (countTrue > 0) { // если точек больше 2 то все ОК
                         interSet.add(point);
                         interSet.add(pointForSearchEquation);
                     }
-                    interList.add(pointForSearchEquation);
+                    interList.add(pointForSearchEquation);// Исключаем элемент из проверки
                 }
                 if (!interSet.isEmpty()) {
-                    lines.add(new ILineImpl(interSet));
+                    lines.add(new ILineImpl(interSet)); // добавляем элементы в коллекцию результата
                 }
             }
-            previousStep.add(point);
-            iter.remove();
+            previousStep.add(point);// Исключаем элемент из проверки
+            iter.remove();//удаляем исключенный элемент
         }
         return new IFileWithLinesImpl(lines, output);
     }
