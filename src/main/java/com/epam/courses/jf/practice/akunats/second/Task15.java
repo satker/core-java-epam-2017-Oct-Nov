@@ -12,13 +12,11 @@ import java.util.Set;
 public class Task15 implements ITestableTask15 {
     @Override
     public IFileWithLines analyze(Set<I2DPoint> points, File output) {
-        //Set<String> result = new HashSet<>();
         ArrayList<I2DPoint> previousStep = new ArrayList<>();
         Set<ILine> lines = new HashSet<>();
         Iterator<I2DPoint> iter = points.iterator();
         while (iter.hasNext()) {
             I2DPoint point = iter.next();
-
             Set<I2DPoint> nextStep = new HashSet<>(points);//
             Iterator<I2DPoint> iterNext = nextStep.iterator();
             Set<I2DPoint> interList = new HashSet<>();
@@ -44,6 +42,7 @@ public class Task15 implements ITestableTask15 {
                                 }
                             } else {
                                 for (I2DPoint p : previousStep) {
+                                    // Ограничение выборки
                                     if ((A * p.getX() - B * p.getY() + C) != 0) {
                                         if (!pointForSearch.equals(point)
                                                 && !pointForSearch.equals(pointForSearchEquation)
@@ -62,6 +61,9 @@ public class Task15 implements ITestableTask15 {
                         interSet.add(pointForSearchEquation);
                     }
                     interList.add(pointForSearchEquation);
+                }
+                if (!interSet.isEmpty()) {
+                    lines.add(new ILineImpl(interSet));
                 }
             }
             previousStep.add(point);
