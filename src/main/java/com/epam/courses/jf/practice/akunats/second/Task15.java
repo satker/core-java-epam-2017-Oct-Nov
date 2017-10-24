@@ -14,14 +14,14 @@ public class Task15 implements ITestableTask15 {
     public IFileWithLines analyze(Set<I2DPoint> points, File output) {
         ArrayList<I2DPoint> previousStep = new ArrayList<>();
         Set<ILine> lines = new HashSet<>();
+
         Iterator<I2DPoint> iter = points.iterator();
         while (iter.hasNext()) {
             I2DPoint point = iter.next();
-            Set<I2DPoint> nextStep = new HashSet<>(points);//
-            Iterator<I2DPoint> iterNext = nextStep.iterator();
+
             Set<I2DPoint> interList = new HashSet<>();
-            while (iterNext.hasNext()) {
-                I2DPoint pointForSearchEquation = iterNext.next();
+
+            for (I2DPoint pointForSearchEquation : points) {
                 Set<I2DPoint> interSet = new HashSet<>();
                 if (!pointForSearchEquation.equals(point)) {
                     // Считаем коэффициенты уравнение прямой Ax + By + C = 0
