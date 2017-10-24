@@ -18,6 +18,7 @@ import static java.lang.Math.min;
 import static java.lang.Math.max;
 import static java.lang.Math.round;
 import static java.lang.Math.sqrt;
+import static java.lang.Math.abs;
 
 public class Solver implements ISolver {
 
@@ -805,18 +806,6 @@ public class Solver implements ISolver {
 
     }
 
-    private static int compareStructures(Object o1, Object o2) {
-
-        Object[] tmp1 = (Object[]) o1;
-        Object[] tmp2 = (Object[]) o2;
-        if ((int) tmp1[1] == (int) tmp2[1]) {
-            return (int) tmp1[2] - (int) tmp2[2];
-        } else {
-            return (int) tmp1[1] - (int) tmp2[1];
-        }
-
-    }
-
     @Override
     public void task24() {
 
@@ -832,7 +821,13 @@ public class Solver implements ISolver {
             tempStructure.add(new Object[]{matrix[i], sum, i});
         }
 
-        tempStructure.sort(Solver::compareStructures);
+        tempStructure.sort((o1, o2) -> {
+            if ((int) o1[1] == (int) o2[1]) {
+                return (int) o1[2] - (int) o2[2];
+            } else {
+                return (int) o1[1] - (int) o2[1];
+            }
+        });
 
         int[][] result = new int[matrix.length][];
         for (int i = 0; i < result.length; i++) {
@@ -936,8 +931,46 @@ public class Solver implements ISolver {
 
     }
 
+    @Override
+    public void task27() {
+
+        int[][] matrix = readMatrix(new Scanner(System.in));
+
+        ArrayList<Object[]> tempStructure = new ArrayList<>();
+
+        for (int j = 0; j < matrix[0].length; j++) {
+            int sum = 0;
+            int[] column = new int[matrix.length];
+            for (int i = 0; i < matrix.length; i++) {
+                column[i] = matrix[i][j];
+                sum += abs(matrix[i][j]);
+            }
+            tempStructure.add(new Object[]{column, sum, j});
+        }
+
+        tempStructure.sort((o1, o2) -> {
+            if ((int) o1[1] == (int) o2[1]) {
+                return (int) o1[2] - (int) o2[2];
+            } else {
+                return (int) o2[1] - (int) o1[1];
+            }
+        });
+
+        int[][] result = new int[matrix.length][matrix[0].length];
+        for (int j = 0; j < result[0].length; j++) {
+            int[] column = (int[]) tempStructure.get(j)[0];
+            for (int i = 0; i < result.length; i++) {
+                result[i][j] = column[i];
+            }
+        }
+
+        printMatrix(result);
+
+
+    }
+
     public static void main(String[] args) {
-        new Solver().task24();
+        new Solver().task27();
     }
 
 }
