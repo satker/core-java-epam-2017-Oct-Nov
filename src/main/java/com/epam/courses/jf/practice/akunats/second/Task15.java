@@ -4,6 +4,7 @@ import com.epam.courses.jf.practice.common.second.I2DPoint;
 import com.epam.courses.jf.practice.common.second.ITestableTask15;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -12,11 +13,17 @@ public class Task15 implements ITestableTask15 {
     @Override
     public IFileWithLines analyze(Set<I2DPoint> points, File output) {
         //Set<String> result = new HashSet<>();
+        ArrayList<I2DPoint> previousStep = new ArrayList<>();
         Set<ILine> lines = new HashSet<>();
         Iterator<I2DPoint> iter = points.iterator();
         while (iter.hasNext()) {
             I2DPoint point = iter.next();
-            for (I2DPoint pointForSearchEquation : points) {
+
+            Set<I2DPoint> nextStep = new HashSet<>(points);//
+            Iterator<I2DPoint> iterNext = nextStep.iterator();
+            Set<I2DPoint> interList = new HashSet<>();
+            while (iterNext.hasNext()) {
+                I2DPoint pointForSearchEquation = iterNext.next();
                 Set<I2DPoint> interSet = new HashSet<>();
                 if (!pointForSearchEquation.equals(point)) {
                     // Считаем коэффициенты уравнение прямой Ax + By + C = 0
@@ -26,31 +33,40 @@ public class Task15 implements ITestableTask15 {
                             - point.getX() * (pointForSearchEquation.getY() - point.getY());
                     int countTrue = 0; // Подсчет колическтва точек удовлетворяющих уравнению
                     for (I2DPoint pointForSearch : points) {
-                        if (!pointForSearch.equals(point)
-                                && !pointForSearch.equals(pointForSearchEquation)
-                                && (A * pointForSearch.getX() - B * pointForSearch.getY() + C) == 0) {
-                            interSet.add(pointForSearch);
-                            countTrue++;
+                        if (!interList.contains(pointForSearch)) {
+                            if (previousStep.size() == 0) {
+                                if (!pointForSearch.equals(point)
+                                        && !pointForSearch.equals(pointForSearchEquation)
+                                        && (A * pointForSearch.getX() - B * pointForSearch.getY() + C) == 0) {
+                                    interSet.add(pointForSearch);
+                                    interList.add(pointForSearch);
+                                    countTrue++;
+                                }
+                            } else {
+                                for (I2DPoint p : previousStep) {
+                                    if ((A * p.getX() - B * p.getY() + C) != 0) {
+                                        if (!pointForSearch.equals(point)
+                                                && !pointForSearch.equals(pointForSearchEquation)
+                                                && (A * pointForSearch.getX() - B * pointForSearch.getY() + C) == 0) {
+                                            interSet.add(pointForSearch);
+                                            interList.add(pointForSearch);
+                                            countTrue++;
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                     if (countTrue > 0) {
                         interSet.add(point);
                         interSet.add(pointForSearchEquation);
-                        //String strForAdd = A + "x + " + B + "y + " + C + " = 0";
-                        //result.add(strForAdd);
                     }
-                }
-                if (!interSet.isEmpty()) {
-                    lines.add(new ILineImpl(interSet));
+                    interList.add(pointForSearchEquation);
                 }
             }
+            previousStep.add(point);
             iter.remove();
         }
-        /*try {
-            Files.write(Paths.get(output.getPath()), result, StandardCharsets.ISO_8859_1);
-        } catch (IOException e) {
-            System.out.println("Error");
-        }*/
         return new IFileWithLinesImpl(lines, output);
     }
 
