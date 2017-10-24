@@ -886,8 +886,59 @@ public class Solver implements ISolver {
 
     }
 
+    @Override
+    public void task26() {
+
+        int[][] matrix = readMatrix(new Scanner(System.in));
+        boolean isLocalMaxExist = false;
+        int result = 0;
+
+        int[][] tempMatrix = new int[matrix.length + 2][matrix.length + 2];
+        int min = matrix[0][0];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
+                tempMatrix[i + 1][j + 1] = matrix[i][j];
+                min = max(min, matrix[i][j]);
+            }
+        }
+
+        for (int i = 0; i < tempMatrix.length; i++) {
+            tempMatrix[i][0] = min;
+            tempMatrix[i][tempMatrix.length - 1] = min;
+            tempMatrix[0][i] = min;
+            tempMatrix[tempMatrix.length - 1][i] = min;
+        }
+
+        for (int i = 1; i < matrix.length + 1; i++) {
+            for (int j = 1; j < matrix.length + 1; j++) {
+                if (tempMatrix[i][j] > tempMatrix[i + 1][j - 1] &&
+                        tempMatrix[i][j] > tempMatrix[i + 1][j] &&
+                        tempMatrix[i][j] > tempMatrix[i + 1][j + 1] &&
+                        tempMatrix[i][j] > tempMatrix[i][j - 1] &&
+                        tempMatrix[i][j] > tempMatrix[i][j + 1] &&
+                        tempMatrix[i][j] > tempMatrix[i - 1][j - 1] &&
+                        tempMatrix[i][j] > tempMatrix[i - 1][j] &&
+                        tempMatrix[i][j] > tempMatrix[i - 1][j + 1]) {
+                    if (!isLocalMaxExist) {
+                        result = tempMatrix[i][j];
+                        isLocalMaxExist = true;
+                    } else {
+                        result = max(result, tempMatrix[i][j]);
+                    }
+                }
+            }
+        }
+
+        if (isLocalMaxExist) {
+            System.out.println(result);
+        } else {
+            System.out.println("NOT FOUND");
+        }
+
+    }
+
     public static void main(String[] args) {
-        new Solver().task25();
+        new Solver().task26();
     }
 
 }
