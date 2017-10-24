@@ -831,13 +831,12 @@ public class Solver implements ISolver {
             }
             tempStructure.add(new Object[]{matrix[i], sum, i});
         }
-        Object[] arrayStructure = tempStructure.toArray();
 
-        Arrays.sort(arrayStructure, Solver::compareStructures);
+        tempStructure.sort(Solver::compareStructures);
 
         int[][] result = new int[matrix.length][];
         for (int i = 0; i < result.length; i++) {
-            result[i] = (int[]) ((Object[]) arrayStructure[i])[0];
+            result[i] = (int[]) tempStructure.get(i)[0];
         }
 
         printMatrix(result);
@@ -938,7 +937,7 @@ public class Solver implements ISolver {
     }
 
     public static void main(String[] args) {
-        new Solver().task26();
+        new Solver().task24();
     }
 
 }
