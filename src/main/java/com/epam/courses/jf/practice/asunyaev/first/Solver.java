@@ -11,7 +11,7 @@ public class Solver implements ISolver {
 
     public static void main(String[] args) {
         Solver solver = new Solver();
-        solver.task12();
+        solver.task13();
     }
 
     @Override
@@ -181,6 +181,36 @@ public class Solver implements ISolver {
             }
         });
         printMatrix(matrix, DIMENSION);
+    }
+
+    @Override
+    public void task13() {
+        Scanner scanner = new Scanner(System.in);
+        final int shift = scanner.nextInt();
+        final int DIMENSION = scanner.nextInt();
+        int[][] matrix = readMatrix(scanner, DIMENSION);
+        int newIndex = 0;
+        int[][] shiftedMatrix = new int[DIMENSION][DIMENSION];
+
+        if (shift == 0) {
+            printMatrix(matrix, DIMENSION);
+        } else {
+            for (int index = 0; index < DIMENSION; index++) {
+                newIndex = index + shift >= 0
+                            ? (index + shift) % DIMENSION
+                            : (index + shift) + DIMENSION;
+                copyRow(matrix, index, shiftedMatrix, newIndex);
+            }
+        }
+
+        printMatrix(shiftedMatrix, DIMENSION);
+
+    }
+
+    private void copyRow(int[][] fromMatrix, int rowIndex1, int[][] toMatrix, int rowIndex2) {
+        for (int i = 0; i < fromMatrix.length; i++) {
+            toMatrix[rowIndex2][i] = fromMatrix[rowIndex1][i];
+        }
     }
 
     private int[][] readMatrix(Scanner scanner, int dimension) {
