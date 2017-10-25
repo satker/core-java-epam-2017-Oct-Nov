@@ -2,16 +2,18 @@ package com.epam.courses.jf.practice.asunyaev.first;
 
 import com.epam.courses.jf.practice.common.first.ISolver;
 
-import java.util.Scanner;
-import java.util.HashMap;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Scanner;
 
 public class Solver implements ISolver {
 
     public static void main(String[] args) {
         Solver solver = new Solver();
-        solver.task13();
+        solver.task4();
     }
 
     @Override
@@ -95,6 +97,35 @@ public class Solver implements ISolver {
                 System.out.printf("(%d): \"%s\"%n", lengths[i], lines.get(lengths[i]));
             }
         }
+    }
+
+    @Override
+    public void task4() {
+        Scanner scan = new Scanner(System.in);
+        int N = scan.nextInt();
+        scan.nextLine();
+        HashMap<String, HashSet> words = new HashMap<>();
+        String currentWord;
+        String maxWord = "";
+        int maxLength = 80;
+
+        for (int i = 0; i < N; i++) {
+            currentWord = scan.next();
+            HashSet letters = new HashSet();
+            for (int j = 0; j < currentWord.length(); j++) {
+                letters.add(currentWord.charAt(j));
+            }
+            words.put(currentWord, letters);
+        }
+
+        for(Map.Entry<String, HashSet> entry : words.entrySet()) {
+            int currentLength = entry.getValue().size();
+            if (currentLength < maxLength) {
+                maxLength = currentLength;
+                maxWord = entry.getKey();
+            }
+        }
+        System.out.println(maxWord);
     }
 
     @Override
