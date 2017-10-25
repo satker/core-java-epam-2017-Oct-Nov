@@ -68,7 +68,16 @@ public class SolverTest {
 
     @Test
     public void task5() throws Exception{
-
+        String inputData = "5\nЯзык программирования Java is widespread\n";
+        InputStream inputDataStream = new ByteArrayInputStream(inputData.getBytes("UTF-8"));
+        InputStream oldSystemStream = System.in;
+        try {
+            System.setIn(inputDataStream);
+            Solver solver = new Solver();
+            solver.task5();
+        } finally {
+            System.setIn(oldSystemStream);
+        }
     }
 
     @Test

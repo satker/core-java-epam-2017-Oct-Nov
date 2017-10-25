@@ -147,7 +147,6 @@ public class Solver implements ISolver {
 
     }
 
-    //TODO: needs to be finished
     @Override
     public void task5() {
         Scanner inputData = new Scanner(System.in);
@@ -160,21 +159,34 @@ public class Solver implements ISolver {
 
         String[] inputStrings = inputData.nextLine().split(" ");
 
+        int count = 0;
+
         for (String string : inputStrings) {
 
             String lowerCaseString = string.toLowerCase();
-            Pattern pattern = Pattern.compile("([a-z])\\w+");
-            int count = 0;
 
             if(lowerCaseString.matches("([a-z])\\w+")){
 
-                Matcher matcher = pattern.matcher(lowerCaseString);
+                Pattern vowels = Pattern.compile("([aeiouy])");
+                Pattern consonants = Pattern.compile("([bcdfghjklmnpqrstvwxz])");
 
-                while(matcher.find()){
+                Matcher vowelsMatcher = vowels.matcher(lowerCaseString);
+                Matcher consonantsMatcher = consonants.matcher(lowerCaseString);
+                int vowelsCount = 0;
+                int consonantsCount = 0;
+                while (vowelsMatcher.find()) {
+                    vowelsCount++;
+                }
+                while (consonantsMatcher.find()) {
+                    consonantsCount++;
+                }
+
+                if(vowelsCount == consonantsCount){
                     count++;
                 }
             }
         }
+        System.out.println(count);
     }
 
     @Override
@@ -354,9 +366,6 @@ public class Solver implements ISolver {
         if(d < 0){
             System.out.printf("No solution\n");
         }
-
-
-
 
     }
 
