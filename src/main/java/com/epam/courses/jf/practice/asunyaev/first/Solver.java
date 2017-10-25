@@ -8,12 +8,14 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Solver implements ISolver {
 
     public static void main(String[] args) {
         Solver solver = new Solver();
-        solver.task4();
+        solver.task5();
     }
 
     @Override
@@ -126,6 +128,25 @@ public class Solver implements ISolver {
             }
         }
         System.out.println(maxWord);
+    }
+
+    @Override
+    public void task5() {
+        Scanner scan = new Scanner(System.in);
+        int N = scan.nextInt();
+        scan.nextLine();
+        String currentWord;
+        int result = 0;
+        int currentWordVocals = 0;
+
+        for (int i = 0; i < N; i++) {
+            currentWord = scan.next();
+            currentWordVocals = countEnglishVocals(currentWord);
+            if (currentWord.length() - currentWordVocals == currentWordVocals) {
+                result++;
+            }
+        }
+        System.out.println(result);
     }
 
     @Override
@@ -263,4 +284,13 @@ public class Solver implements ISolver {
         }
     }
 
+    private int countEnglishVocals(String string) {
+        Pattern vocals = Pattern.compile("(?iu)[aeiou]");
+        Matcher m = vocals.matcher(string);
+        int vocalCounter = 0;
+        while (m.find()) {
+            vocalCounter++;
+        }
+        return vocalCounter;
+    }
 }
