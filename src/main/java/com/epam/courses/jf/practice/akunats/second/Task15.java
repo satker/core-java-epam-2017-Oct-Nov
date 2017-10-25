@@ -3,11 +3,13 @@ package com.epam.courses.jf.practice.akunats.second;
 import com.epam.courses.jf.practice.common.second.I2DPoint;
 import com.epam.courses.jf.practice.common.second.ITestableTask15;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Task15 implements ITestableTask15 {
     @Override
@@ -79,6 +81,13 @@ public class Task15 implements ITestableTask15 {
         IFileWithLinesImpl(Set<ILine> points, File file) {
             this.file = file;
             this.lines = points;
+            try {
+                Files.write(Paths.get(file.getPath()),
+                        (Iterable<? extends CharSequence>) lines,
+                        StandardCharsets.ISO_8859_1);
+            } catch (IOException e) {
+                System.out.println("Error write file.");
+            }
         }
 
         @Override
@@ -88,7 +97,16 @@ public class Task15 implements ITestableTask15 {
 
         @Override
         public Set<ILine> getLines() {
-            return lines;
+            try (ObjectInput input = new ObjectInputStream(
+                    new BufferedInputStream(new FileInputStream(file)))) {
+                return (Set<ILine>) input.readObject();
+            } catch (IOException e) {
+                System.out.println("Error read file");
+                return null;
+            } catch (ClassNotFoundException e) {
+                System.out.println("Class Not Found");
+                return null;
+            }
         }
     }
 
