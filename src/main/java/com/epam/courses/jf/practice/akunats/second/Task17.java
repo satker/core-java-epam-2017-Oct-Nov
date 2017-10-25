@@ -11,6 +11,9 @@ import java.util.Set;
 public class Task17 implements ITestableTask17 {
     @Override
     public Set<I2DPoint> analyze(Set<ISegment> segments) {
+        if (segments.size() < 2 || segments.size() >20) {
+            throw new IllegalArgumentException("You enter wrong data.");
+        }
         Set<I2DPoint> result = new HashSet<>();
         Iterator<ISegment> iter = segments.iterator();
         while (iter.hasNext()) { // первый шаг
