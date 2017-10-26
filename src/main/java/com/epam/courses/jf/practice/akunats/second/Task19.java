@@ -18,21 +18,31 @@ public class Task19 implements ITestableTask19 {
                     // на последующем шаге убираем проверенную быструю машину
                     for (ICar car : cars) {
                         if (!car.equals(i) && i.getSpeed() > car.getSpeed()) {
+                            // если скорость одинаковая, то обгона никогда не будет
+                            if (car.getSpeed() == i.getSpeed()){
+                                list.add(0);
+                                break;
+                            }
                             // через какое расстояние быстрый обгонит медленного первый раз,
                             // так как старт с разных дистанций
-                            double firthOvertaking = 0;
+                            double firthOvertaking;
                             if (i.getStartPosition() > car.getStartPosition()) {
                                 // первый обгон если более быстрый впереди медленного
                                 firthOvertaking = (double) (i.getStartPosition() * car.getSpeed()
                                         - car.getStartPosition() * i.getSpeed()
                                         - lengthLap * car.getSpeed()) / (double) (car.getSpeed() - i.getSpeed());
+                                // если расстояние от старта одинаковое то принимаем его за единицу
+                            } else if ((i.getStartPosition() - car.getStartPosition()) == 0) {
+                                // первый обгон если более медленный впереди быстрого
+                                firthOvertaking = (double) (car.getSpeed())
+                                        / (double) (i.getSpeed() - car.getSpeed());
                             } else {
-                                // первый обгон если более медленного впереди быстрый
+                                // первый обгон если более медленный впереди быстрого
                                 firthOvertaking = (double) (car.getSpeed() * (car.getStartPosition() - i.getStartPosition()))
                                         / (double) (i.getSpeed() - car.getSpeed());
                             }
                             // количество обгонов при старте с одинаковой позиции
-                            double continueOvertaking = (double) lengthLap / (double) (i.getSpeed() - car.getSpeed());
+                            double continueOvertaking = (double) (lengthLap * car.getSpeed()) / (double) (i.getSpeed() - car.getSpeed());
                             // Записываем полученное число обгонов в коллекцию
                             double numOvertaking = (lengthLap * numberLaps - firthOvertaking) / continueOvertaking;
                             list.add((int) numOvertaking);

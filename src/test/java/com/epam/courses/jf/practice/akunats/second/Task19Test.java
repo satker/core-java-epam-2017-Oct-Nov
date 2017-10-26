@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class Task19Test extends GroovyTestCase {
     @Test
     void getNumberOvertaking() {
@@ -19,7 +17,7 @@ class Task19Test extends GroovyTestCase {
         cars.add(c1);
         cars.add(c2);
         cars.add(c3);
-        System.out.println(new Task19().getNumberOvertaking(cars, 10,5));
+        System.out.println(new Task19().getNumberOvertaking(cars, 10,2));
     }
 
 }
