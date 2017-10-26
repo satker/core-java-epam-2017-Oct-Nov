@@ -67,24 +67,4 @@ public class Task17 implements ITestableTask17 {
         }
         return result;
     }
-
-    private class Segment implements ISegment {
-        private I2DPoint first;
-        private I2DPoint second;
-
-        Segment(I2DPoint first, I2DPoint second) {
-            this.first = first;
-            this.second = second;
-        }
-
-        @Override
-        public I2DPoint first() {
-            return first;
-        }
-
-        @Override
-        public I2DPoint second() {
-            return second;
-        }
-    }
 }
