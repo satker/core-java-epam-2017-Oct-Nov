@@ -81,10 +81,9 @@ public class Task15 implements ITestableTask15 {
         IFileWithLinesImpl(Set<ILine> points, File file) {
             this.file = file;
             this.lines = points;
-            try {
-                Files.write(Paths.get(file.getPath()),
-                        (Iterable<? extends CharSequence>) lines,
-                        StandardCharsets.ISO_8859_1);
+            try(ObjectOutput output = new ObjectOutputStream(
+                    new BufferedOutputStream(new FileOutputStream(file)))) {
+                output.writeObject(lines);
             } catch (IOException e) {
                 System.out.println("Error write file.");
             }
