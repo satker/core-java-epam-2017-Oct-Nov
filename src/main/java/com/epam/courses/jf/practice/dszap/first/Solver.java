@@ -1,4 +1,4 @@
-package com.epam.courses.jf.practice.dszap;
+package com.epam.courses.jf.practice.dszap.first;
 
 import com.epam.courses.jf.practice.common.first.ISolver;
 
