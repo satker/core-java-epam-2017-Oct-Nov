@@ -510,6 +510,7 @@ public class Solver implements ISolver {
                 matrix[i][j] = temp[i][j];
             }
         }
+        double result = 1.0;
 
         for (int k = 0; k < matrix.length; k++) {
             if (matrix[k][k] == 0) {
@@ -520,6 +521,7 @@ public class Solver implements ISolver {
                         double[] swap = matrix[i];
                         matrix[i] = matrix[k];
                         matrix[k] = swap;
+                        result *= -1;
                         break;
                     }
                 }
@@ -537,7 +539,6 @@ public class Solver implements ISolver {
             }
         }
 
-        double result = 1.0;
         for (int i = 0; i < matrix.length; i++) {
             result *= matrix[i][i];
         }
