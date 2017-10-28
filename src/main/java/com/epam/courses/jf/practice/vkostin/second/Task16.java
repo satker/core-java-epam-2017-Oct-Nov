@@ -43,7 +43,7 @@ public class Task16 implements ITestableTask16 {
             for (double y = yCenter + radius; y >= yCenter - radius; --y) {
                 distance = Math.sqrt(((x - xCenter) * (x - xCenter))
                         + ((y - yCenter) * (y - yCenter)));
-                if (distance <= radius) {
+                if (distance < radius) {
                     points.put(new TwoDPoint(x, y), distance);
                 }
             }
