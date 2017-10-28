@@ -176,16 +176,15 @@ public class Solver implements ISolver {
 
         if (discriminant > 0) {
             BigDecimal bigDecimalRoot1 = new BigDecimal(
-                    (double) ((-coefB - Math.sqrt(discriminant)) / 2 / coefA))
+                    ((-coefB - Math.sqrt(discriminant)) / 2d / coefA))
                     .setScale(2, BigDecimal.ROUND_HALF_UP);
             BigDecimal bigDecimalRoot2 = new BigDecimal(
-                    (double) (-coefB + Math.sqrt(discriminant)) / 2 / coefA)
+                    (-coefB + Math.sqrt(discriminant)) / 2d / coefA)
                     .setScale(2, BigDecimal.ROUND_HALF_UP);
             System.out.println("Two solutions: "
                     + bigDecimalRoot1 + ", " + bigDecimalRoot2);
         } else if (discriminant == 0) {
-            BigDecimal bigDecimalRoot = new BigDecimal(
-                    (double) (-coefB / 2 / coefA))
+            BigDecimal bigDecimalRoot = new BigDecimal((-coefB / 2d / coefA))
                     .setScale(2, BigDecimal.ROUND_HALF_UP);
             System.out.println("One solution: " + bigDecimalRoot);
         } else {
