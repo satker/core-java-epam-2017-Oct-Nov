@@ -36,8 +36,16 @@ public class Task11 implements ITestableTask11 {
             } else {
                 // ++i simply because after each deleted element the size of the array decreases
                 // so each "+1" is actually "+2"
-                for (int i = 0; i < peoples.size(); ++i) {
-                    peoples.remove(i);
+                if (peoples.size() % 2 != 0) {
+                    String wantToDoCircle = peoples.get(peoples.size() - 1);
+                    for (int i = 0; i < peoples.size(); ++i) {
+                        peoples.remove(i);
+                    }
+                    peoples.add(0, wantToDoCircle);
+                } else {
+                    for (int i = 0; i < peoples.size(); ++i) {
+                        peoples.remove(i);
+                    }
                 }
             }
         }
