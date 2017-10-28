@@ -26,10 +26,9 @@ public class Task2 implements ITestableTask2 {
 
         assert currentDirFiles != null;
         for (File elem : currentDirFiles) {
+            files.add(elem);
             if (elem.isDirectory()) {
                 files.addAll(getFiles(elem));
-            } else {
-                files.add(elem);
             }
         }
 
