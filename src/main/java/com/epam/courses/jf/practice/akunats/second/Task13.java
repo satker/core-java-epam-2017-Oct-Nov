@@ -19,7 +19,7 @@ public class Task13 implements ITestableTask13 {
 
         AbstractGraph(int numberNodes) {
             super(numberNodes);
-            for (int i = 1; i <= numberNodes; i++) {
+            for (int i = 0; i < numberNodes; i++) {
                 graph.put(i, new HashSet<>());
             }
         }

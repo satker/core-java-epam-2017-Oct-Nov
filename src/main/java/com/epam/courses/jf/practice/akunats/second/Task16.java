@@ -5,30 +5,24 @@ import com.epam.courses.jf.practice.common.second.ITestableTask16;
 
 import java.io.*;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.SortedMap;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
-public class Task16 implements ITestableTask16, Comparator<Double> {
-    public static void main(String[] args) {
-        Task16 task = new Task16();
+public class Task16 implements ITestableTask16 {
 
-        I2DPoint centerPoint = new Point(3.0, 2.0);
-        File outputFile = new File("D:\test.txt");
-
-        task.analyze(centerPoint, 4, outputFile);
+    public Double comp(I2DPoint o, I2DPoint centre){
+        double A = Math.abs(o.getX()) - Math.abs(centre.getX());
+        double B = Math.abs(o.getY()) - Math.abs(centre.getY());
+        return Math.sqrt((A * A) + (B * B));
     }
-
-    @Override
-    public int compare(Double o1, Double o2) {
-        return o1.compareTo(o2);
-    }
-
     @Override
     public IFileWithPoints analyze(I2DPoint center, int radius, File output) {
-        TreeMap<I2DPoint, Double> result = new TreeMap<>();
+        SortedMap<I2DPoint, Double> result = new TreeMap<>(Comparator.comparing(o -> comp(o, center)));
         double x0 = center.getX();
         double y0 = center.getY();
         for (int i = (int) (x0 - (radius - 1)); i < (int) (x0 + radius); i++) {
