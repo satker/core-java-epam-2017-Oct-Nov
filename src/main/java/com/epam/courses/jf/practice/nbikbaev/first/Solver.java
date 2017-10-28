@@ -2,10 +2,41 @@ package com.epam.courses.jf.practice.nbikbaev.first;
 
 import com.epam.courses.jf.practice.common.first.ISolver;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 public class Solver implements ISolver {
+
     @Override
     public void task1() {
-
+        int n;
+        String maxString = null;
+        String minString = null;
+        int minLength = 0;
+        int maxLength = 0;
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in))) {
+            String strLine = in.readLine();
+            n = Integer.valueOf(strLine);
+            strLine = in.readLine();
+            maxString = strLine;
+            minString = strLine;
+            for (int i = 0; i < n - 1; i++) {
+                strLine = in.readLine();
+                if (strLine.length() >= maxString.length()) {
+                    maxString = strLine;
+                }
+                if (strLine.length() <= minString.length()) {
+                    minString = strLine;
+                }
+            }
+            minLength = minString.length();
+            maxLength = maxString.length();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.printf("MIN (%d): \"%s\"%n", minLength, minString);
+        System.out.printf("MAX (%d): \"%s\"%n", maxLength, maxString);
     }
 
     @Override
