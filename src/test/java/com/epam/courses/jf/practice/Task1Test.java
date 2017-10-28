@@ -46,7 +46,6 @@ public class Task1Test {
                 "Губительный изведал ты" + "\n" +
                 "Безумно возалкал паденья" + "\n" +
                 "И сам остановил винты?" + "\n";
-        InputStream stdin = System.in;
         System.setIn(new ByteArrayInputStream(data2.getBytes()));
         solver.task1();
         assertTrue(outContent.toString().equals("MIN (22): \"И сам остановил винты?\"" + "\r\n" +
@@ -56,7 +55,7 @@ public class Task1Test {
     @After
     public void cleanUpStreams() {
         System.setOut(null);
+        System.setIn(null);
     }
-
 
 }
