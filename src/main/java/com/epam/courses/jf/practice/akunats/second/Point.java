@@ -28,4 +28,5 @@ public class Point implements I2DPoint {
     public double getY() {
         return y;
     }
+
 }

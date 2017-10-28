@@ -5,11 +5,17 @@ import com.epam.courses.jf.practice.common.first.ISolver;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
 
 public class Solver implements ISolver {
+    public static void main(String[] args) {
+        Solver t = new Solver();
+        t.task9();
+    }
+
     @Override
     public void task1() {
         Scanner scanner = new Scanner(System.in);
@@ -46,6 +52,7 @@ public class Solver implements ISolver {
         for (int i = 0; i < inputStrings.length; i++) {
             inputStrings[i] = scanner.nextLine();
         }
+        Arrays.sort(inputStrings);
         List<String> resultStrings = Arrays.stream(inputStrings)
                 .sorted(Comparator.comparingInt(String::length))
                 .collect(toList());
@@ -90,11 +97,11 @@ public class Solver implements ISolver {
         for (String inputString : inputStrings) {
             HashMap<String, Integer> interMap = new HashMap<>();
             Arrays.stream(inputString.split("")).forEach(i -> {
-                    if (interMap.containsKey(i)) {
-                        interMap.put(i, interMap.get(i) + 1);
-                    } else {
-                        interMap.put(i, 1);
-                    }
+                if (interMap.containsKey(i)) {
+                    interMap.put(i, interMap.get(i) + 1);
+                } else {
+                    interMap.put(i, 0);
+                }
             });
             int numOfUniqueCharsInString = 0;
             for (Map.Entry<String, Integer> entry : interMap.entrySet()) {
@@ -104,13 +111,21 @@ public class Solver implements ISolver {
         }
         int minNumberUniqueChars = numOfUniqueChars.get(0);
         int indexWord = 0;
-        for (int i = 1; i < numOfUniqueChars.size(); i++) {
-            if (minNumberUniqueChars > numOfUniqueChars.get(i)) {
-                minNumberUniqueChars = numOfUniqueChars.get(i);
-                indexWord = i;
+        String resultString = "";
+        if (numOfUniqueChars.stream().allMatch(i -> i.equals(0))) {
+            resultString = Arrays.stream(inputStrings)
+                    .sorted(Comparator.comparing(String::length))
+                    .collect(Collectors.toList()).get(0);
+        } else {
+            for (int i = 1; i < numOfUniqueChars.size(); i++) {
+                if (minNumberUniqueChars < numOfUniqueChars.get(i)) {
+                    minNumberUniqueChars = numOfUniqueChars.get(i);
+                    indexWord = i;
+                    resultString = inputStrings[indexWord];
+                }
             }
         }
-        System.out.println(inputStrings[indexWord]);
+        System.out.println(resultString);
     }
 
     @Override
@@ -136,7 +151,7 @@ public class Solver implements ISolver {
                 }
             });
             if (interMap.get("vowel").equals(interMap.get("consonant")) &
-                    interMap.get("vowel").equals(0) & interMap.get("consonant").equals(0)) {
+                    !interMap.get("vowel").equals(0) & !interMap.get("consonant").equals(0)) {
                 numStringResult++;
             }
         }
@@ -173,13 +188,17 @@ public class Solver implements ISolver {
         if (resultList.size() == 0) {
             System.out.println("NOT FOUND");
         } else {
+            String result = "";
             for (String s : resultList) {
                 if (s.length() != 1) {
-                    System.out.println(s);
-                } else {
-                    System.out.println("NOT FOUND");
+                    result = s;
+                    break;
                 }
             }
+            if (result.equals("")) {
+                result = "NOT FOUND";
+            }
+            System.out.println(result);
         }
     }
 
@@ -193,7 +212,7 @@ public class Solver implements ISolver {
         if (numberOfStrings != inputStrings.length) {
             throw new IndexOutOfBoundsException("Ввели неверный массив");
         }
-        ArrayList<String> resultList = new ArrayList<>();
+        Set<String> resultList = new HashSet<>();
         for (String inputString : inputStrings) {
             Set<String> interSet = Arrays.stream(inputString.split(""))
                     .collect(toSet());
@@ -201,8 +220,22 @@ public class Solver implements ISolver {
                 resultList.add(inputString);
             }
         }
+        String result = "";
         for (String s : resultList) {
-            System.out.print(s + " ");
+            if (resultList.size() == 1) {
+                result = s;
+            } else {
+                if (result.equals("")) {
+                    result = s;
+                } else {
+                    result = result + " " + s;
+                }
+            }
+        }
+        if (result.equals("")) {
+            System.out.println("NOT_FOUND");
+        } else {
+            System.out.println(result);
         }
     }
 
@@ -228,7 +261,7 @@ public class Solver implements ISolver {
                 int countActions = 0;
                 int countTrue = 0;
                 for (int i = 0; i <= (interList.size() / 2) - 1; i++) {
-                    if (interList.get(0).equals(interList.get(interList.size() - (i + 1)))) {
+                    if (interList.get(i).equals(interList.get(interList.size() - (i + 1)))) {
                         countActions++;
                     }
                     countTrue++;
@@ -239,7 +272,13 @@ public class Solver implements ISolver {
                 }
             }
         }
-        System.out.println(resultList.get(resultList.size() - 1));
+        String result = "";
+        if (resultList.isEmpty()) {
+            result = "NOT_FOUND";
+        } else {
+            result = resultList.get(resultList.size() - 1);
+        }
+        System.out.println(result);
     }
 
     @Override
@@ -251,9 +290,9 @@ public class Solver implements ISolver {
         for (int i = 0; i < arrayDimension; i++) {
             for (int j = 0; j < arrayDimension; j++) {
                 inputMatrix[i][j] = index++;
-                System.out.print(inputMatrix[i][j] + "\t");
+                System.out.printf(inputMatrix[i][j] + "\t");
             }
-            System.out.print("\n");
+            System.out.println();
         }
     }
 

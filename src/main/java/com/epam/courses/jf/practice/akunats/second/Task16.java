@@ -3,21 +3,32 @@ package com.epam.courses.jf.practice.akunats.second;
 import com.epam.courses.jf.practice.common.second.I2DPoint;
 import com.epam.courses.jf.practice.common.second.ITestableTask16;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.stream.Collectors;
 
-public class Task16 implements ITestableTask16 {
+public class Task16 implements ITestableTask16, Comparator<Double> {
+    public static void main(String[] args) {
+        Task16 task = new Task16();
+
+        I2DPoint centerPoint = new Point(3.0, 2.0);
+        File outputFile = new File("D:\test.txt");
+
+        task.analyze(centerPoint, 4, outputFile);
+    }
+
+    @Override
+    public int compare(Double o1, Double o2) {
+        return o1.compareTo(o2);
+    }
+
     @Override
     public IFileWithPoints analyze(I2DPoint center, int radius, File output) {
-        SortedMap<I2DPoint, Double> result = new TreeMap<>();
+        TreeMap<I2DPoint, Double> result = new TreeMap<>();
         double x0 = center.getX();
         double y0 = center.getY();
         for (int i = (int) (x0 - (radius - 1)); i < (int) (x0 + radius); i++) {
@@ -42,10 +53,9 @@ public class Task16 implements ITestableTask16 {
         FileWithPoints(SortedMap<I2DPoint, Double> map, File file) {
             this.map = map;
             this.file = file;
-            try {
-                Files.write(Paths.get(file.getPath()),
-                        (Iterable<? extends CharSequence>) map,
-                        StandardCharsets.ISO_8859_1);
+            try (ObjectOutput output = new ObjectOutputStream(
+                    new BufferedOutputStream(new FileOutputStream(file)))) {
+                output.writeObject(map);
             } catch (IOException e) {
                 System.out.println("Error write file.");
             }
