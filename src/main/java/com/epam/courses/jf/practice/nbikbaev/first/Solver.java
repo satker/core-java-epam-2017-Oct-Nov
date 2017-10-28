@@ -154,6 +154,8 @@ public class Solver implements ISolver {
                 }
                 if (consonantCount == vowelCount) {
                     result.add(word);
+                    consonantCount = 0;
+                    vowelCount = 0;
                 }
             }
             System.out.println(result.size());
