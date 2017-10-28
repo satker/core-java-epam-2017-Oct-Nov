@@ -18,6 +18,10 @@ public class Task8 implements ITestableTask8 {
     @Override
     public boolean isNormalBrackets(String string) {
 
+        if (!string.matches(".*[\\[\\]].*")) {
+            return true;
+        }
+
         char[] brackets = string.toCharArray();
         Stack<Character> stack = new Stack<>();
 
