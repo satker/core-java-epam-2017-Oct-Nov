@@ -17,7 +17,7 @@ public class Task16 implements ITestableTask16 {
         Task16 task = new Task16();
 
         I2DPoint centerPoint = new TwoDPoint(3.0, 2.0);
-        File outputFile = new File("F:\\code\\javaDev\\EPAM\\FirstSecondTasks\\src\\main\\java\\com\\epam\\courses\\jf\\practice\\vkostin\\second\\task16.txt");
+        File outputFile = new File("outputFilePath");
 
         task.analyze(centerPoint, 4, outputFile);
     }
@@ -33,7 +33,7 @@ public class Task16 implements ITestableTask16 {
     public IFileWithPoints analyze(I2DPoint center, int radius, File output) {
 
         SortedMap<I2DPoint, Double> points = new TreeMap<>((o1, o2) ->
-                (checkDistance(o1, center) - checkDistance(o2, center) < 0) ? -1 : 1);
+                (checkDistance(o1, center) < checkDistance(o2, center)) ? -1 : 1);
 
         Double xCenter = center.getX();
         Double yCenter = center.getY();
