@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.io.PrintStream;
 
 import static org.junit.Assert.assertTrue;
@@ -33,8 +32,9 @@ public class Task1Test {
                 "В багрец и в золото одетые леса," + "\n";
         System.setIn(new ByteArrayInputStream(data1.getBytes()));
         solver.task1();
-        assertTrue(outContent.toString().equals("MIN (29): \"Унылая пора! Очей очарованье!\"" + "\r\n" +
-                "MAX (35): \"Приятна мне твоя прощальная краса —\"\r\n"));
+        assertTrue(outContent.toString().equals("" +
+                "MIN (29): \"Унылая пора! Очей очарованье!\"" + "\r\n" +
+                "MAX (35): \"Приятна мне твоя прощальная краса —\"" + "\r\n"));
 
     }
 
@@ -48,8 +48,9 @@ public class Task1Test {
                 "И сам остановил винты?" + "\n";
         System.setIn(new ByteArrayInputStream(data2.getBytes()));
         solver.task1();
-        assertTrue(outContent.toString().equals("MIN (22): \"И сам остановил винты?\"" + "\r\n" +
-                "MAX (24): \"Безумно возалкал паденья\"\r\n"));
+        assertTrue(outContent.toString().equals("" +
+                "MIN (22): \"И сам остановил винты?\"" + "\r\n" +
+                "MAX (24): \"Безумно возалкал паденья\"" + "\r\n"));
     }
 
     @After
