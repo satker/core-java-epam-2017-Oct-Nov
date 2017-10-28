@@ -8,83 +8,87 @@ import java.util.stream.Collectors;
 public class Task18 implements ITestableTask18 {
     @Override
     public IRectangularIntegerMatrix getMaxSubMatrix(IRectangularIntegerMatrix matrix) {
-        Stack<Integer> stack = new Stack<>();
-        for (int i = matrix.getHeight() - 1; i >= 0; i--) {
-            for (int j = matrix.getWidth() - 1; j >= 0; j--) {
-                stack.push(matrix.getValue(j, i));
-            }
-        }
-        int col = 0;
-        int str = 0;
-        int[] interMas = new int[matrix.getWidth()];
-        ArrayList<ArrayList> storageCol = new ArrayList<>();
-        ArrayList<ArrayList> storageStr = new ArrayList<>();
-        while (stack.size() > 0) {
-            int next = stack.pop();
-            if (str == 0) {
-                interMas[col] = next;
-                col++;
-            } else {
-                if (interMas[col] == next) {
-                    Integer[] secondStage1 = {str, col};
-                    Integer[] secondStage2 = {str - 1, col};
-                    ArrayList<Integer[]> firstStage = new ArrayList<>();
-                    firstStage.add(secondStage1);
-                    firstStage.add(secondStage2);
-                    storageCol.add(firstStage);
-                } else {
-                    interMas[col] = next;
+        if (matrix.getWidth() >1 && matrix.getHeight() > 1) {
+            Stack<Integer> stack = new Stack<>();
+            for (int i = matrix.getHeight() - 1; i >= 0; i--) {
+                for (int j = matrix.getWidth() - 1; j >= 0; j--) {
+                    stack.push(matrix.getValue(j, i));
                 }
-                col++;
             }
-            if (col > matrix.getWidth() - 1) {
-                for (int i = 0; i < matrix.getWidth(); i++) {
-                    if (i > 0 && interMas[i] == interMas[i - 1]) {
-                        Integer[] secondStage1 = {str, i};
-                        Integer[] secondStage2 = {str, i - 1};
+            int col = 0;
+            int str = 0;
+            int[] interMas = new int[matrix.getWidth()];
+            ArrayList<ArrayList> storageCol = new ArrayList<>();
+            ArrayList<ArrayList> storageStr = new ArrayList<>();
+            while (stack.size() > 0) {
+                int next = stack.pop();
+                if (str == 0) {
+                    interMas[col] = next;
+                    col++;
+                } else {
+                    if (interMas[col] == next) {
+                        Integer[] secondStage1 = {str, col};
+                        Integer[] secondStage2 = {str - 1, col};
                         ArrayList<Integer[]> firstStage = new ArrayList<>();
                         firstStage.add(secondStage1);
                         firstStage.add(secondStage2);
-                        storageStr.add(firstStage);
+                        storageCol.add(firstStage);
+                    } else {
+                        interMas[col] = next;
                     }
+                    col++;
                 }
-                col = 0;
-                str++;
+                if (col > matrix.getWidth() - 1) {
+                    for (int i = 0; i < matrix.getWidth(); i++) {
+                        if (i > 0 && interMas[i] == interMas[i - 1]) {
+                            Integer[] secondStage1 = {str, i};
+                            Integer[] secondStage2 = {str, i - 1};
+                            ArrayList<Integer[]> firstStage = new ArrayList<>();
+                            firstStage.add(secondStage1);
+                            firstStage.add(secondStage2);
+                            storageStr.add(firstStage);
+                        }
+                    }
+                    col = 0;
+                    str++;
+                }
             }
-        }
-        List<ArrayList> result = new ArrayList<>();
-        ArrayList<ArrayList> resStrList = createSubStrMatrix(storageStr, matrix);
-        if (!resStrList.isEmpty()) {
-            result.addAll(connector(resStrList).stream()
-                    .sorted(Comparator.comparing(ArrayList::size, Collections.reverseOrder()))
-                    .collect(Collectors.toList()));
-        } else {
-            if (storageStr.isEmpty()) {
-                result.add(storageCol.get(0));
+            List<ArrayList> result = new ArrayList<>();
+            ArrayList<ArrayList> resStrList = createSubStrMatrix(storageStr, matrix);
+            if (!resStrList.isEmpty()) {
+                result.addAll(connector(resStrList).stream()
+                        .sorted(Comparator.comparing(ArrayList::size, Collections.reverseOrder()))
+                        .collect(Collectors.toList()));
             } else {
-                result.add(storageStr.get(0));
+                if (storageStr.isEmpty()) {
+                    result.add(storageCol.get(0));
+                } else {
+                    result.add(storageStr.get(0));
+                }
             }
-        }
-        ArrayList res = result.get(0); // Выбираем первый элемент отсотированной коллекции так как он максимальный
-        // делим индексы строк и столбцов в разные листы
-        Set<Integer> numCol = new HashSet<>();
-        Set<Integer> numStr = new HashSet<>();
-        res.forEach(i -> {
-            Integer[] pointNext = (Integer[]) i;
-            numCol.add(pointNext[1]);
-            numStr.add(pointNext[0]);
-        });
-        ArrayList<Integer> numColList = new ArrayList<>(numCol.stream().sorted().collect(Collectors.toList()));
-        ArrayList<Integer> numStrList = new ArrayList<>(numStr.stream().sorted().collect(Collectors.toList()));
-        //
-        RectangularIntegerMatrix resultMatrix = new RectangularIntegerMatrix(numColList.size(), numStrList.size());
-        for (int i = 0; i < numStrList.size(); i++) {
-            for (int j = 0; j < numColList.size(); j++) {
-                resultMatrix.setMatrix(i, j,
-                        matrix.getValue(numColList.get(j), numStrList.get(i)));
+            ArrayList res = result.get(0); // Выбираем первый элемент отсотированной коллекции так как он максимальный
+            // делим индексы строк и столбцов в разные листы
+            Set<Integer> numCol = new HashSet<>();
+            Set<Integer> numStr = new HashSet<>();
+            res.forEach(i -> {
+                Integer[] pointNext = (Integer[]) i;
+                numCol.add(pointNext[1]);
+                numStr.add(pointNext[0]);
+            });
+            ArrayList<Integer> numColList = new ArrayList<>(numCol.stream().sorted().collect(Collectors.toList()));
+            ArrayList<Integer> numStrList = new ArrayList<>(numStr.stream().sorted().collect(Collectors.toList()));
+            //
+            RectangularIntegerMatrix resultMatrix = new RectangularIntegerMatrix(numColList.size(), numStrList.size());
+            for (int i = 0; i < numStrList.size(); i++) {
+                for (int j = 0; j < numColList.size(); j++) {
+                    resultMatrix.setMatrix(i, j,
+                            matrix.getValue(numColList.get(j), numStrList.get(i)));
+                }
             }
+            return resultMatrix;
+        } else {
+            return matrix;
         }
-        return resultMatrix;
     }
 
     //  Соединение соседних подматриц
