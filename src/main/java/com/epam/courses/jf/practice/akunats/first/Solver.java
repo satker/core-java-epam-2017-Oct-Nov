@@ -6,7 +6,8 @@ import java.math.BigDecimal;
 import java.util.*;
 import java.util.regex.Pattern;
 
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
 
 public class Solver implements ISolver {
     @Override
@@ -87,16 +88,16 @@ public class Solver implements ISolver {
         }
         ArrayList<Integer> numOfUniqueChars = new ArrayList<>();
         for (String inputString : inputStrings) {
-            HashMap<Character, Integer> interMap = new HashMap<>();
-            inputString.chars().mapToObj(i -> (char) i).collect(toList()).forEach(i -> {
-                if (interMap.containsKey(i)) {
-                    interMap.put(i, interMap.get(i) + 1);
-                } else {
-                    interMap.put(i, 1);
-                }
+            HashMap<String, Integer> interMap = new HashMap<>();
+            Arrays.stream(inputString.split("")).forEach(i -> {
+                    if (interMap.containsKey(i)) {
+                        interMap.put(i, interMap.get(i) + 1);
+                    } else {
+                        interMap.put(i, 1);
+                    }
             });
             int numOfUniqueCharsInString = 0;
-            for (Map.Entry<Character, Integer> entry : interMap.entrySet()) {
+            for (Map.Entry<String, Integer> entry : interMap.entrySet()) {
                 numOfUniqueCharsInString += entry.getValue();
             }
             numOfUniqueChars.add(numOfUniqueCharsInString);
@@ -127,10 +128,10 @@ public class Solver implements ISolver {
             HashMap<String, Integer> interMap = new HashMap<>();
             interMap.put("vowel", 0);
             interMap.put("consonant", 0);
-            inputString.chars().mapToObj(i -> (char) i).collect(toList()).forEach(i -> {
-                if (Pattern.compile("^(?i:[aeiouy]).*").matcher(i.toString()).matches()) {
+            Arrays.stream(inputString.split("")).forEach(i -> {
+                if (Pattern.compile("^(?i:[aeiouy]).*").matcher(i).matches()) {
                     interMap.put("vowel", interMap.get("vowel") + 1);
-                } else if (Pattern.compile("^(?i:[bcdfghjklmnpqrstvwxz]).*").matcher(i.toString()).matches()) {
+                } else if (Pattern.compile("^(?i:[bcdfghjklmnpqrstvwxz]).*").matcher(i).matches()) {
                     interMap.put("consonant", interMap.get("consonant") + 1);
                 }
             });
@@ -155,7 +156,8 @@ public class Solver implements ISolver {
         ArrayList<String> resultList = new ArrayList<>();
         for (String inputString : inputStrings) {
             ArrayList<Integer> interList = new ArrayList<>();
-            inputString.chars().forEach(interList::add);
+            char[] charMass = inputString.toCharArray();
+            for (char charMas : charMass) interList.add((int) charMas);
             int count = 0;
             for (int i = 1; i < interList.size(); i++) {
                 if (interList.get(i) > interList.get(i - 1)) {
@@ -193,8 +195,7 @@ public class Solver implements ISolver {
         }
         ArrayList<String> resultList = new ArrayList<>();
         for (String inputString : inputStrings) {
-            Set<Character> interSet = inputString.chars()
-                    .mapToObj(i -> (char) i)
+            Set<String> interSet = Arrays.stream(inputString.split(""))
                     .collect(toSet());
             if (interSet.size() == inputString.length()) {
                 resultList.add(inputString);
@@ -218,9 +219,9 @@ public class Solver implements ISolver {
         ArrayList<String> resultList = new ArrayList<>();
         for (String inputString : inputStrings) {
             ArrayList<String> interList = new ArrayList<>();
-            inputString.chars().mapToObj(i -> (char) i).collect(toList()).forEach(i -> {
-                if (Pattern.compile("^(?i:[0-9]).*").matcher(i.toString()).matches()) {
-                    interList.add(i.toString());
+            Arrays.stream(inputString.split("")).forEach(i -> {
+                if (Pattern.compile("^(?i:[0-9]).*").matcher(i).matches()) {
+                    interList.add(i);
                 }
             });
             if (interList.size() != 0) {
