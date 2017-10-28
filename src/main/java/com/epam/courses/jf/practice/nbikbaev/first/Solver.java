@@ -5,9 +5,7 @@ import com.epam.courses.jf.practice.common.first.ISolver;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class Solver implements ISolver {
 
@@ -96,7 +94,30 @@ public class Solver implements ISolver {
 
     @Override
     public void task4() {
+        int n;
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in))) {
+            String strLine = in.readLine();
+            n = Integer.valueOf(strLine);
+            int min = Integer.MAX_VALUE;
+            String minWord = null;
+            strLine = in.readLine();
+            String[] words = strLine.trim().split(" ");
+            Set<Character> uniqKeys = new TreeSet<>();
+            for (int i = 0; i < n; i++) {
+                for (int k = 0; k < words[i].length(); k++) {
+                    uniqKeys.add(words[i].charAt(k));
+                }
+                if (uniqKeys.size() < min) {
+                    min = uniqKeys.size();
+                    minWord = words[i];
+                }
+                uniqKeys.clear();
+            }
+            System.out.println(minWord);
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
