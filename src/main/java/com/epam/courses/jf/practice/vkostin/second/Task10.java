@@ -25,7 +25,7 @@ public class Task10 implements ITestableTask10 {
         try (Scanner scanner = new Scanner(input)) {
 
             while (scanner.hasNext()) {
-                currentWord = scanner.next().trim().toLowerCase();
+                currentWord = scanner.next().trim();
                 if (!dictionary.containsKey(currentWord)) {
                     dictionary.put(currentWord, 1);
                 } else {
