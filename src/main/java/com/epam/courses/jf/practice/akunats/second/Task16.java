@@ -32,7 +32,7 @@ public class Task16 implements ITestableTask16 {
                     int B = Math.abs(j) - Math.abs((int) y0);
                     double length = Math.sqrt((A * A) + (B * B));
                     if (length < radius) {
-                        result.put(new Point(i, j), length);
+                        result.put(new Point2D(i, j), length);
                     }
                 }
             }
