@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Solver implements ISolver {
@@ -68,7 +69,29 @@ public class Solver implements ISolver {
 
     @Override
     public void task3() {
-
+        int n;
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in))) {
+            String strLine = in.readLine();
+            n = Integer.valueOf(strLine);
+            List<String> strings = new ArrayList<>();
+            for (int i = 0; i < n; i++) {
+                strings.add(in.readLine());
+            }
+            strings.sort(Comparator.comparingInt(String::length));
+            int totalLength = 0;
+            for (String s : strings) {
+                totalLength += s.length();
+            }
+            int average = totalLength / n;
+            System.out.printf("AVERAGE (%d)%n", average);
+            for (String s : strings) {
+                if (s.length() < average) {
+                    System.out.printf("(%d): \"%s\"%n", s.length(), s);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
