@@ -25,27 +25,47 @@ public class Task17 implements ITestableTask17 {
     }
     */
 
-    private TwoDPoint findIntersection(Segment line1, Segment line2) {
+    private static TwoDPoint findIntersection(ISegment line1, ISegment line2) {
         /**
          * Search for the point of intersection of two straight lines.
          */
-        double[] coefsLine1 = getLineEquation(line1.first, line1.second);
-        double[] coefsLine2 = getLineEquation(line2.first, line2.second);
+        if ((line1.first().getX() == line2.first().getX())
+                && (line1.first().getY() == line2.first().getY())) {
+            return new TwoDPoint(line1.first().getX(), line1.first().getY());
+        }
+        if ((line1.first().getX() == line2.second().getX())
+                && (line1.first().getY() == line2.second().getY())) {
+            return new TwoDPoint(line1.first().getX(), line1.first().getY());
+        }
+        if ((line1.second().getX() == line2.first().getX())
+                && (line1.second().getY() == line2.first().getY())) {
+            return new TwoDPoint(line1.second().getX(), line1.second().getY());
+        }
+        if ((line1.second().getX() == line2.second().getX())
+                && (line1.second().getY() == line2.second().getY())) {
+            return new TwoDPoint(line1.second().getX(), line1.second().getY());
+        }
+
+        double[] coefsLine1 = getLineEquation(line1.first(), line1.second());
+        double[] coefsLine2 = getLineEquation(line2.first(), line2.second());
+
         double x = (coefsLine1[1] - coefsLine2[1])
                 / (coefsLine2[0] - coefsLine1[0]);
         double y = coefsLine1[0] * x + coefsLine1[1];
-
+//
         return new TwoDPoint(x, y);
     }
 
-    private double[] getLineEquation(I2DPoint pA, I2DPoint pB) {
+    private static double[] getLineEquation(I2DPoint pA, I2DPoint pB) {
         // y = [0]*x + [1];
         double[] coefficients = new double[2];
+
         coefficients[0] = (pB.getY() - pA.getY()) / (pB.getX() - pA.getX());
         coefficients[1] = pA.getY() - pA.getX() * coefficients[0];
 
         return coefficients;
     }
+
 
     @Override
     public Set<I2DPoint> analyze(Set<ISegment> segments) {
@@ -54,33 +74,33 @@ public class Task17 implements ITestableTask17 {
         // abscissas of all points of intersection
         Map<Double,ArrayList<TwoDPoint>> abscissas = new TreeMap<>();
 
-        for (ISegment segmExternal : segments) {
-            for (ISegment segmInternal : segments) {
-                if (!segmExternal.equals(segmInternal)) {
+        List<ISegment> segmArray = new ArrayList<>(segments);
+
+        for (int i = 0; i < segmArray.size(); ++i) {
+            for (int j = i + 1; j < segmArray.size(); ++j) {
+                if (!segmArray.get(i).equals(segmArray.get(j))) {
                     // current intersection point
-                    TwoDPoint curPoint = findIntersection(
-                            (Segment) segmExternal,
-                            (Segment) segmInternal);
+                    TwoDPoint curPoint = findIntersection(segmArray.get(i), segmArray.get(j));
 
-                    double limit1XExt = ((Segment) segmExternal).first.getX();
-                    double limit1YExt = ((Segment) segmExternal).first.getY();
-                    double limit2XExt = ((Segment) segmExternal).second.getX();
-                    double limit2YExt = ((Segment) segmExternal).second.getY();
+                    double limit1XExt = (segmArray.get(i)).first().getX();
+                    double limit1YExt = (segmArray.get(i)).first().getY();
+                    double limit2XExt = (segmArray.get(i)).second().getX();
+                    double limit2YExt = (segmArray.get(i)).second().getY();
 
-                    double limit1XInt = ((Segment) segmInternal).first.getX();
-                    double limit1YInt = ((Segment) segmInternal).first.getY();
-                    double limit2XInt = ((Segment) segmInternal).second.getX();
-                    double limit2YInt = ((Segment) segmInternal).second.getY();
+                    double limit1XInt = (segmArray.get(j)).first().getX();
+                    double limit1YInt = (segmArray.get(j)).first().getY();
+                    double limit2XInt = (segmArray.get(j)).second().getX();
+                    double limit2YInt = (segmArray.get(j)).second().getY();
 
                     if ((Math.min(limit1XExt, limit2XExt) <= curPoint.getX())
-                                && (curPoint.getX() <= Math.max(limit1XExt, limit2XExt))
+                            && (curPoint.getX() <= Math.max(limit1XExt, limit2XExt))
                             && ((Math.min(limit1YExt, limit2YExt) <= curPoint.getY())
-                                && (curPoint.getY() <= Math.max(limit1YExt, limit2YExt)))) {
+                            && (curPoint.getY() <= Math.max(limit1YExt, limit2YExt)))) {
 
                         if ((Math.min(limit1XInt, limit2XInt) <= curPoint.getX())
-                                    && (curPoint.getX() <= Math.max(limit1XInt, limit2XInt))
+                                && (curPoint.getX() <= Math.max(limit1XInt, limit2XInt))
                                 && ((Math.min(limit1YInt, limit2YInt) <= curPoint.getY())
-                                    && (curPoint.getY() <= Math.max(limit1YInt, limit2YInt)))) {
+                                && (curPoint.getY() <= Math.max(limit1YInt, limit2YInt)))) {
 
                             if (abscissas.containsKey(curPoint.getX())) {
                                 abscissas.get(curPoint.getX()).add(curPoint);
@@ -94,15 +114,11 @@ public class Task17 implements ITestableTask17 {
             }
         }
 
-
-        TwoDPoint prePoint = new TwoDPoint(999.999, 999.999);
         for (Double aDouble : abscissas.keySet()) {
             for (TwoDPoint point : abscissas.get(aDouble)) {
-                if ((point.getX() != prePoint.getX()) && (point.getY() != prePoint.getY())) {
+                System.out.println(point);
                     if (abscissas.get(aDouble).contains(point)) {
                         pointsWithMinAbscissa.add(point);
-                        prePoint = point;
-                    }
                 }
             }
             break;

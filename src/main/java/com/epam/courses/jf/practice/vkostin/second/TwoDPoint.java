@@ -13,6 +13,11 @@ public class TwoDPoint implements I2DPoint {
     }
 
     @Override
+    public String toString() {
+        return "" + x + "_" + y;
+    }
+
+    @Override
     public double getX() {
         return x;
     }
