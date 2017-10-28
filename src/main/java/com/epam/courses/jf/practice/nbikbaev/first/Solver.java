@@ -1,4 +1,6 @@
-package com.epam.courses.jf.practice.common.first;
+package com.epam.courses.jf.practice.nbikbaev.first;
+
+import com.epam.courses.jf.practice.common.first.ISolver;
 
 public class Solver implements ISolver {
     @Override
