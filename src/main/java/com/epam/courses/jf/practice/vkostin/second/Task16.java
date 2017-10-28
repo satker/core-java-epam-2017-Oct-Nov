@@ -39,8 +39,8 @@ public class Task16 implements ITestableTask16 {
         Double yCenter = center.getY();
         Double distance;
 
-        for (double x = xCenter - radius; x <= xCenter + radius; ++x) {
-            for (double y = yCenter + radius; y >= yCenter - radius; --y) {
+        for (double x = (int) (xCenter - radius); x <= xCenter + radius; ++x) {
+            for (double y = (int) (yCenter + radius); y >= yCenter - radius; --y) {
                 distance = Math.sqrt(((x - xCenter) * (x - xCenter))
                         + ((y - yCenter) * (y - yCenter)));
                 if (distance < radius) {
