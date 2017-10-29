@@ -1,4 +1,6 @@
-package com.epam.courses.jf.practice.common.first;
+package com.epam.courses.jf.practice.vplaksin.first;
+
+import com.epam.courses.jf.practice.common.first.ISolver;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
