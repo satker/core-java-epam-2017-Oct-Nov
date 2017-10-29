@@ -456,7 +456,7 @@ public class Solver implements ISolver {
             }
         }
 
-        printMatrix(matrixRotated, false);
+        printMatrix(matrixRotated, true);
     }
 
     /** A simple method allows recursively to calculate the determinant of the matrix.
