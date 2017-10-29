@@ -311,9 +311,9 @@ public class Solver implements ISolver {
     private void printMatrix(int matrix[][], boolean printDimension) {
         if (printDimension) {
             System.out.println(matrix.length);
-            if (matrix.length != matrix[0].length) {
+//            if (matrix.length != matrix[0].length) {
                 System.out.println(matrix[0].length);
-            }
+//            }
         }
 
         for (int[] aMatrix : matrix) {
@@ -582,6 +582,7 @@ public class Solver implements ISolver {
     @Override
     public void task18() {
         int matrix[][] = readMatrix(new Scanner(System.in));
+//        int matrix[][] = {{0,1},{2,0}};
         ArrayList<Integer> rowMaxValue = new ArrayList<Integer>();
         ArrayList<Integer> colMaxValue = new ArrayList<Integer>();
 
