@@ -243,7 +243,29 @@ public class Solver implements ISolver {
      */
     @Override
     public void task8() {
+        Scanner input = new Scanner(System.in);
 
+        final int N = input.nextInt();
+        String[] words = new String[N];
+        String wordPalindrome = null;
+
+        input.nextLine();
+
+        for (int i = 0; i < N; ++i) {
+            words[i] = input.next();
+
+            if (words[i].matches("[0-9]+")) {
+                if (words[i].equals(new StringBuilder(words[i]).reverse().toString())) {
+                    wordPalindrome = words[i];
+                }
+            }
+        }
+
+        if (null == wordPalindrome) {
+            System.out.println("NOT FOUND");
+        } else {
+            System.out.println(wordPalindrome);
+        }
     }
 
     /**
