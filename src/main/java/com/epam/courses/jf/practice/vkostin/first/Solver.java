@@ -169,7 +169,35 @@ public class Solver implements ISolver {
      */
     @Override
     public void task6() {
+        Scanner input = new Scanner(System.in);
 
+        final int N = input.nextInt();
+        String[] words = new String[N];
+        String goalWord = null;
+
+        input.nextLine();
+
+        for (int i = 0; i < N; ++i) {
+            words[i] = input.next();
+
+            if (1 != words[i].length()) {
+                for (int j = 1; j < words[i].length(); ++j) {
+                    if ((int) words[i].charAt(j - 1) < (int) words[i].charAt(j)) {
+                        if (j == words[i].length() - 1) {
+                            if (null == goalWord) {
+                                goalWord = words[i];
+                            }
+                        }
+                    } else break;
+                }
+            }
+        }
+
+        if (null == goalWord) {
+            System.out.println("NOT FOUND");
+        } else {
+            System.out.println(goalWord);
+        }
     }
 
     /**
