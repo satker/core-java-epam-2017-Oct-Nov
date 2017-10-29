@@ -663,21 +663,26 @@ public class Solver implements ISolver {
             }
         }
 
-        // swap all needed elems by columns
-        for (int i = 0; i < matrix.length; ++i) {
-            matrix[i][goalElemColIndex] ^= matrix[i][minValueColIndex];
-            matrix[i][minValueColIndex] ^= matrix[i][goalElemColIndex];
-            matrix[i][goalElemColIndex] ^= matrix[i][minValueColIndex];
+        if (minValueColIndex != goalElemColIndex) {
+            // swap all needed elems by columns
+            for (int i = 0; i < matrix.length; ++i) {
+                matrix[i][goalElemColIndex] ^= matrix[i][minValueColIndex];
+                matrix[i][minValueColIndex] ^= matrix[i][goalElemColIndex];
+                matrix[i][goalElemColIndex] ^= matrix[i][minValueColIndex];
+            }
         }
 
-        // swap all needed elems by rows
-        for (int j = 0; j < matrix[0].length; ++j) {
-            matrix[goalElemRowIndex][j] ^= matrix[minValueRowIndex][j];
-            matrix[minValueRowIndex][j] ^= matrix[goalElemRowIndex][j];
-            matrix[goalElemRowIndex][j] ^= matrix[minValueRowIndex][j];
+        if (minValueRowIndex != goalElemRowIndex) {
+            // swap all needed elems by rows
+            for (int j = 0; j < matrix[0].length; ++j) {
+                matrix[goalElemRowIndex][j] ^= matrix[minValueRowIndex][j];
+                matrix[minValueRowIndex][j] ^= matrix[goalElemRowIndex][j];
+                matrix[goalElemRowIndex][j] ^= matrix[minValueRowIndex][j];
+            }
         }
 
-        printMatrix(matrix, true);
+        System.out.println(matrix.length);
+        printMatrix(matrix, false);
     }
 
     /**
