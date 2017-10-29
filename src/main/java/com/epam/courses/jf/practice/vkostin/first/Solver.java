@@ -582,7 +582,6 @@ public class Solver implements ISolver {
     @Override
     public void task18() {
         int matrix[][] = readMatrix(new Scanner(System.in));
-//        int matrix[][] = {{0,1},{2,0}};
         ArrayList<Integer> rowMaxValue = new ArrayList<Integer>();
         ArrayList<Integer> colMaxValue = new ArrayList<Integer>();
 
@@ -637,7 +636,7 @@ public class Solver implements ISolver {
             }
         }
 
-        printMatrix(compactTheMatrix(matrix, rowContainsZero, colContainsZero), false);
+        printMatrix(compactTheMatrix(matrix, rowContainsZero, colContainsZero), true);
     }
 
     /**
