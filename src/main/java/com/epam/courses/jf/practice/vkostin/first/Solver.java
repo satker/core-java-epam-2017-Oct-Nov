@@ -466,7 +466,8 @@ public class Solver implements ISolver {
             }
         }
 
-        printMatrix(matrix, true);
+        System.out.println(matrix.length);
+        printMatrix(matrix, false);
     }
 
     /**
@@ -506,7 +507,8 @@ public class Solver implements ISolver {
             }
         }
 
-        printMatrix(matrix, true);
+        System.out.println(matrix.length);
+        printMatrix(matrix, false);
     }
 
     /**
@@ -581,7 +583,8 @@ public class Solver implements ISolver {
             }
         }
 
-        printMatrix(matrixRotated, true);
+        System.out.println(matrix.length);
+        printMatrix(matrixRotated, false);
     }
 
     /** A simple method allows recursively to calculate the determinant of the matrix.
