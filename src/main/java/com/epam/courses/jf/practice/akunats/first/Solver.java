@@ -11,10 +11,6 @@ import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
 
 public class Solver implements ISolver {
-    public static void main(String[] args) {
-        Solver t = new Solver();
-        t.task27();
-    }
 
     @Override
     public void task1() {
