@@ -55,7 +55,7 @@ public class Task17 implements ITestableTask17 {
                             && (pointIntersectionY >= minY1 && pointIntersectionY <= maxY1))
                             && ((pointIntersectionX >= minX2 && pointIntersectionX <= maxX2)
                             && (pointIntersectionY >= minY2 && pointIntersectionY <= maxY2))) {
-                        interSet.add(new Point2D(pointIntersectionX, pointIntersectionY));
+                        interSet.add(new Point(pointIntersectionX, pointIntersectionY));
                     }
                 }
             }
