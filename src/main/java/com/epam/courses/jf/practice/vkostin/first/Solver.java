@@ -861,48 +861,22 @@ public class Solver implements ISolver {
      */
     @Override
     public void task23() {
-//        int matrix[][] = readMatrix(new Scanner(System.in));
-        int matrix[][] = {
-                {2,3,5,2},
-                {2,4,6,2},
-                {-2,7,2,0},
-                {0,0,0,0}
-        };
+
+        int[][] matrix = readMatrix(new Scanner(System.in));
         int numberOfSaddlePoints = 0;
 
-        int minElemInRow;
-        int maxElemInCol;
-
-        ArrayList<Integer> minRowX = new ArrayList<Integer>();
-        ArrayList<Integer> maxRowY = new ArrayList<Integer>();
-
-        for (int i = 0; i < matrix.length; ++i) {
-            minElemInRow = matrix[i][0];
-            maxElemInCol = matrix[i][0];
-            minRowX.clear();
-            maxRowY.clear();
-            for (int j = 0; j < matrix[0].length; ++j) {
-                if (matrix[i][j] <= minElemInRow) {
-                    minElemInRow = matrix[i][j];
-                    minRowX.add(j);
+        for (int i = 0; i < matrix.length; ++i){
+            checkPoint:
+            for (int j = 0; j < matrix[0].length; ++j){
+                int point = matrix[i][j];
+                for (int k = 0; k < matrix.length; ++k){
+                    if (!(point <= matrix[i][k] && point >= matrix[k][j]))
+                        continue checkPoint;
                 }
-            }
-            for (int k = 0; k < matrix.length; ++k) {
-                if (matrix[k][minRowX.get(0)] >= maxElemInCol) {
-                    maxElemInCol = matrix[k][minRowX.get(0)];
-                    maxRowY.add(k);
-                }
-            }
-            if (maxRowY.contains(i)) {
-                numberOfSaddlePoints++;
+                ++numberOfSaddlePoints;
             }
         }
-/*
-2 3 5 2
-2 4 6 2
--2 7 2 0
-0 0 0 0
- */
+
         System.out.println(numberOfSaddlePoints);
 
     }
