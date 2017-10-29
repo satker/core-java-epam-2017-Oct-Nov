@@ -132,21 +132,35 @@ public class Solver implements ISolver {
      */
     @Override
     public void task5() {
-        /*
-        1<<10: 10000000000    mask
-        A - z: 1000001 -- 1111010
-        A - я: 10000010000 -- 10001001111
-         */
         Scanner input = new Scanner(System.in);
 
-        int numberOfWords = Integer.parseInt(input.nextLine());
         int wordsConsistingOfLatinChars = 0;
-        String string = input.nextLine();
-        String words[] = string.split(" ");
+        final int N = input.nextInt();
+        String[] words = new String[N];
+        int countVowelsInWord = 0;
 
-        for (String word : words) {
-            System.out.println(word);
+        input.nextLine();
+
+        for (int i = 0; i < N; ++i) {
+            words[i] = input.next();
+            countVowelsInWord = 0;
+            if (words[i].matches("\\w+")) {
+
+                for (int j = 0; j < words[i].length(); ++j) {
+                    char x = words[i].charAt(j);
+                    if(x == 'a' || x == 'e' || x == 'i'
+                            || x == 'o' || x == 'u'){
+                        countVowelsInWord++;
+                    }
+                }
+
+                if (countVowelsInWord * 2 == words[i].length()) {
+                    wordsConsistingOfLatinChars++;
+                }
+            }
         }
+
+        System.out.println(wordsConsistingOfLatinChars);
 
     }
 
