@@ -205,7 +205,37 @@ public class Solver implements ISolver {
      */
     @Override
     public void task7() {
+        Scanner input = new Scanner(System.in);
 
+        final int N = input.nextInt();
+        String[] words = new String[N];
+        String wordFromDifChars = null;
+        Set<Character> wordChars = new HashSet<>();
+
+        input.nextLine();
+
+        for (int i = 0; i < N; ++i) {
+            words[i] = input.next();
+            wordChars.clear();
+            for (Character symb : words[i].toCharArray()) {
+                if (wordChars.contains(symb)) {
+                    break;
+                } else {
+                    wordChars.add(symb);
+                }
+            }
+            if (wordChars.size() == words[i].length()) {
+                if (null == wordFromDifChars) {
+                    wordFromDifChars = words[i];
+                }
+            }
+        }
+
+        if (null == wordFromDifChars) {
+            System.out.println("NOT FOUND");
+        } else {
+            System.out.println(wordFromDifChars);
+        }
     }
 
     /**
