@@ -6,10 +6,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Scanner;
+import java.util.*;
 
 public class Solver implements ISolver {
     /**
@@ -100,7 +97,34 @@ public class Solver implements ISolver {
      */
     @Override
     public void task4() {
+        Scanner input = new Scanner(System.in);
+        final int N = input.nextInt();
+        String[] words = new String[N];
 
+        input.nextLine();
+
+        for (int i = 0; i < N; ++i) {
+            words[i] = input.next();
+        }
+
+        String wordWithMinSymbols = null;
+        Set<Character> symbols = new HashSet<>();
+        int minSymbols = 999;
+
+        for (String word : words) {
+            symbols.clear();
+            for (Character symb : word.toCharArray()) {
+                if (!symbols.contains(symb)) {
+                    symbols.add(symb);
+                }
+            }
+            if (symbols.size() < minSymbols) {
+                wordWithMinSymbols = word;
+                minSymbols = symbols.size();
+            }
+        }
+
+        System.out.println(wordWithMinSymbols);
     }
 
     /**
