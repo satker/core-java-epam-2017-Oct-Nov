@@ -693,16 +693,21 @@ public class Solver implements ISolver {
         int matrix[][] = readMatrix(new Scanner(System.in));
 
         for (int i = 0; i < matrix.length; ++i) {
-            for (int j = 0; j < matrix[0].length - 1; ++j) {
-                if (matrix[i][j] == 0) {
-                    matrix[i][j] ^= matrix[i][j+1];
-                    matrix[i][j+1] ^= matrix[i][j];
-                    matrix[i][j] ^= matrix[i][j+1];
+            for (int k = 0, j = 0; j < matrix[0].length; j++) {
+                if (matrix[i][j] != 0) {
+                    if (k < j) {
+                        matrix[i][k] ^= matrix[i][j];
+                        matrix[i][j] ^= matrix[i][k];
+                        matrix[i][k] ^= matrix[i][j];
+                    }
+                    k++;
                 }
             }
+
         }
 
-        printMatrix(matrix, true);
+        System.out.println(matrix.length);
+        printMatrix(matrix, false);
     }
 
     /**
