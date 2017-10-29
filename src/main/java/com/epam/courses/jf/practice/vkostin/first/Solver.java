@@ -2,6 +2,9 @@ package com.epam.courses.jf.practice.vkostin.first;
 
 import com.epam.courses.jf.practice.common.first.ISolver;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -197,9 +200,15 @@ public class Solver implements ISolver {
      */
     @Override
     public void task11() {
-        Scanner input = new Scanner(System.in);
 
-        byte month = input.nextByte();
+        int month = 0;
+        try(BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+            month = Integer.parseInt(reader.readLine());
+            if (month > 12 || month < 1)
+                throw new IOException();
+        } catch (Exception e){
+            System.out.println("INCORRECT INPUT DATA");
+        }
 
         switch (month) {
             case 1:
@@ -383,12 +392,12 @@ public class Solver implements ISolver {
         Scanner input = new Scanner(System.in);
 
         final short AMOUNT_OF_ELEMENTS = input.nextShort();
-        short rows[] = new short[AMOUNT_OF_ELEMENTS];
-        short elems = 1;
-        short maxSeriesOfIncreasingElems = 0;
+        int rows[] = new int[AMOUNT_OF_ELEMENTS];
+        int elems = 1;
+        int maxSeriesOfIncreasingElems = 0;
 
         for (short i = 0; i < AMOUNT_OF_ELEMENTS; ++i) {
-            rows[i] = input.nextShort();
+            rows[i] = input.nextInt();
             if (i != 0) {
                 if (rows[i-1] < rows[i]) {
                     elems++;
