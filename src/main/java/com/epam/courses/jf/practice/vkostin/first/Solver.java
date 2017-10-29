@@ -465,6 +465,10 @@ public class Solver implements ISolver {
      * @return determinant of the matrix
      */
     private int getDeterminant(int matrix[][]) {
+        if (matrix[0].length == 1) {
+            return matrix[0][0];
+        }
+
         if (matrix[0].length == 2) {
             return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
         }
