@@ -852,7 +852,8 @@ public class Solver implements ISolver {
             }
         }
 
-        printMatrix(matrixRound, true);
+        System.out.println(matrixRound.length);
+        printMatrix(matrixRound, false);
     }
 
     /**
@@ -943,7 +944,8 @@ public class Solver implements ISolver {
             }
         }
 
-        printMatrix(matrix, true);
+        System.out.println(matrix.length);
+        printMatrix(matrix, false);
     }
 
     /**
@@ -989,6 +991,7 @@ public class Solver implements ISolver {
             }
         }
 
-        printMatrix(matrix, true);
+        System.out.println(matrix.length);
+        printMatrix(matrix, false);
     }
 }
