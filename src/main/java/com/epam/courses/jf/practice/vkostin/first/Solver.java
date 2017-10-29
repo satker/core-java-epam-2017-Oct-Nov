@@ -953,7 +953,118 @@ public class Solver implements ISolver {
      */
     @Override
     public void task25() {
+        Scanner input = new Scanner(System.in);
 
+        int localMins = 0;
+        int[][] matrix = readMatrix(input);
+
+        if (matrix.length > 1) {
+            for (int i = 0; i < matrix.length; ++i) {
+                for (int j = 0; j < matrix.length; ++j) {
+                    int currentValue = matrix[i][j];
+                    if (i == 0) {
+                        if (j == 0) {
+                            if (currentValue < matrix[i][j + 1]
+                                    && currentValue < matrix[i + 1][j]
+                                    && currentValue < matrix[i + 1][j + 1]) {
+                                ++localMins;
+                            }
+                        } else if (j == matrix.length - 1) {
+                            if (currentValue < matrix[i][j - 1]
+                                    && currentValue < matrix[i + 1][j]
+                                    && currentValue < matrix[i + 1][j - 1]) {
+                                ++localMins;
+                            }
+                        } else {
+                            if (currentValue < matrix[i][j + 1]
+                                    && currentValue < matrix[i][j - 1]
+                                    && currentValue < matrix[i + 1][j]
+                                    && currentValue < matrix[i + 1][j + 1]
+                                    && currentValue < matrix[i + 1][j - 1]) {
+                                ++localMins;
+                            }
+                        }
+                    } else if (i == matrix.length - 1) {
+                        if (j == 0) {
+                            if (currentValue < matrix[i][j + 1]
+                                    && currentValue < matrix[i - 1][j]
+                                    && currentValue < matrix[i - 1][j + 1]) {
+                                ++localMins;
+                            }
+                        } else if (j == matrix.length - 1) {
+                            if (currentValue < matrix[i][j - 1]
+                                    && currentValue < matrix[i - 1][j]
+                                    && currentValue < matrix[i - 1][j - 1]) {
+                                ++localMins;
+                            }
+                        } else {
+                            if (currentValue < matrix[i][j + 1]
+                                    && currentValue < matrix[i][j - 1]
+                                    && currentValue < matrix[i - 1][j]
+                                    && currentValue < matrix[i - 1][j + 1]
+                                    && currentValue < matrix[i - 1][j - 1]) {
+                                ++localMins;
+                            }
+                        }
+                    } else if (j == 0) {
+                        if (currentValue < matrix[i - 1][j]
+                                && currentValue < matrix[i - 1][j + 1]
+                                && currentValue < matrix[i][j + 1]
+                                && currentValue < matrix[i + 1][j + 1]
+                                && currentValue < matrix[i + 1][j]) {
+                            localMins++;
+                        }
+                    } else if (j == matrix.length - 1) {
+                        if (currentValue < matrix[i - 1][j]
+                                && currentValue < matrix[i - 1][j - 1]
+                                && currentValue < matrix[i][j - 1]
+                                && currentValue < matrix[i + 1][j - 1]
+                                && currentValue < matrix[i + 1][j]) {
+                            localMins++;
+                        }
+                    } else {
+                        if (currentValue < matrix[i - 1][j]
+                                && currentValue < matrix[i - 1][j - 1]
+                                && currentValue < matrix[i][j - 1]
+                                && currentValue < matrix[i + 1][j - 1]
+                                && currentValue < matrix[i + 1][j]
+                                && currentValue < matrix[i - 1][j + 1]
+                                && currentValue < matrix[i][j + 1]
+                                && currentValue < matrix[i + 1][j + 1]) {
+                            localMins++;
+                        }
+                    }
+                }
+            }
+        } else {
+            localMins = 1;
+        }
+
+        System.out.println(localMins);
+    }
+
+
+    /**
+     * Checking whether this element is a local maximum of the matrix.
+     * @param matrix source matrix
+     * @param x index of cols
+     * @param y index of rows
+     * @return true if elem is local maximum, false else
+     */
+    private static boolean isLocMax(int[][] matrix, int x, int y) {
+
+        for (int i = y - 1; i <= y + 1; ++i) {
+            for (int j = x - 1; j <= x + 1; ++j) {
+                if ((i >= 0) && (j >= 0)
+                        && (i < matrix.length) && (j < matrix.length)
+                        && ((j != x) || (i != y))) {
+                    if (matrix[i][j] >= matrix[y][x]) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     /**
@@ -961,7 +1072,27 @@ public class Solver implements ISolver {
      */
     @Override
     public void task26() {
+        Scanner input = new Scanner(System.in);
 
+        int maxLocalMax;
+        int[][] matrix = readMatrix(input);
+        List<Integer> localMaxes = new ArrayList<>();
+
+        for (int i = 0; i < matrix.length; ++i) {
+            for (int j = 0; j < matrix.length; ++j) {
+                if (isLocMax(matrix, i, j)) {
+                    localMaxes.add(matrix[i][j]);
+                }
+            }
+        }
+
+        maxLocalMax = Collections.max(localMaxes);
+
+        if (0 == maxLocalMax) {
+            System.out.println("NOT FOUND");
+        } else {
+            System.out.println(maxLocalMax);
+        }
     }
 
     /**
