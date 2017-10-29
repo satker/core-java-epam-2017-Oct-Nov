@@ -3,10 +3,7 @@ package com.epam.courses.jf.practice.akunats.second;
 import com.epam.courses.jf.practice.common.second.I2DPoint;
 import com.epam.courses.jf.practice.common.second.ITestableTask17;
 
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 public class Task17 implements ITestableTask17 {
     @Override
@@ -55,13 +52,35 @@ public class Task17 implements ITestableTask17 {
                             && (pointIntersectionY >= minY1 && pointIntersectionY <= maxY1))
                             && ((pointIntersectionX >= minX2 && pointIntersectionX <= maxX2)
                             && (pointIntersectionY >= minY2 && pointIntersectionY <= maxY2))) {
-                        interSet.add(new Point(pointIntersectionX, pointIntersectionY));
+                        interSet.add(new Point(Math.round(pointIntersectionX),
+                                Math.round(pointIntersectionY)));
                     }
                 }
             }
             if (!interSet.isEmpty()) {
-                I2DPoint minXpoint = interSet.stream().min(Comparator.comparingDouble(I2DPoint::getX)).get();
-                result.add(minXpoint);
+                if(interSet.stream().anyMatch(i->{
+                    boolean r = false;
+                    for (I2DPoint point : result) {
+                        if (point.getX() < i.getX()){
+                            r = true;
+                        }
+                    }
+                    return r;
+                })){
+                    break;
+                }
+                if (interSet.size() == 1){
+                    result.add(new ArrayList<>(interSet).get(0));
+                } else {
+                    I2DPoint minXpoint = interSet.stream().min(Comparator.comparingDouble(I2DPoint::getX)).get();
+                    result.add(minXpoint);
+                    interSet.remove(minXpoint);
+                    for (int i = 0; i < interSet.size(); i++) {
+                        if (new ArrayList<>(interSet).get(i).getX() == minXpoint.getX()){
+                            result.add(new ArrayList<>(interSet).get(i));
+                        }
+                    }
+                }
             }
             iter.remove();
         }
