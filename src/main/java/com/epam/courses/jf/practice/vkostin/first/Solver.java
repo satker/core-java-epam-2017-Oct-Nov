@@ -33,10 +33,11 @@ public class Solver implements ISolver {
 
         for (int i = 1; i < numberOfStrings; i++) {
             stringsArray[i] = input.nextLine();
-            if (stringsArray[i].length() < minLength) {
+            if (stringsArray[i].length() <= minLength) {
                 minString = stringsArray[i];
                 minLength = (short) minString.length();
-            } else if (stringsArray[i].length() > maxLength) {
+            }
+            if (stringsArray[i].length() >= maxLength) {
                 maxString = stringsArray[i];
                 maxLength = (short) maxString.length();
             }
