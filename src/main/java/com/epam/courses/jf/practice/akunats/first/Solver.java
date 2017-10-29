@@ -13,7 +13,7 @@ import static java.util.stream.Collectors.toSet;
 public class Solver implements ISolver {
     public static void main(String[] args) {
         Solver t = new Solver();
-        t.task9();
+        t.task27();
     }
 
     @Override
@@ -303,9 +303,9 @@ public class Solver implements ISolver {
         int[] parametersEquationInt = Arrays.stream(parametersEquationString.split(" "))
                 .mapToInt(Integer::parseInt)
                 .toArray();
-        int A = parametersEquationInt[0];
-        int B = parametersEquationInt[1];
-        int C = parametersEquationInt[2];
+        double A = parametersEquationInt[0];
+        double B = parametersEquationInt[1];
+        double C = parametersEquationInt[2];
         double discriminant = (B * B) - (4 * A * C);
         if (discriminant > 0) {
             BigDecimal x1 = new BigDecimal((-B - Math.sqrt(discriminant)) / (2 * A));
@@ -314,11 +314,11 @@ public class Solver implements ISolver {
                     : x1.setScale(2, BigDecimal.ROUND_HALF_UP);
             BigDecimal x2 = new BigDecimal((-B + Math.sqrt(discriminant)) / (2 * A));
             x2 = x2.setScale(2, BigDecimal.ROUND_HALF_UP);
-            System.out.print("Two solutions: " + x1 + ", " + x2);
+            System.out.print("Two solutions: " + Double.parseDouble(x1.toString()) + ", " + Double.parseDouble(x2.toString()));
         } else if (discriminant == 0) {
             BigDecimal x = new BigDecimal((-B) / (2 * A));
             x = x.setScale(2, BigDecimal.ROUND_HALF_UP);
-            System.out.print("One solution: " + x);
+            System.out.print("One solution: " + Double.parseDouble(x.toString()));
         } else {
             System.out.println("No solution");
         }
@@ -327,46 +327,57 @@ public class Solver implements ISolver {
     @Override
     public void task11() {
         Scanner scanner = new Scanner(System.in);
-        int numberMonth = scanner.nextInt();
-        switch (numberMonth) {
-            case 1:
-                System.out.println("January");
-                break;
-            case 2:
-                System.out.println("February");
-                break;
-            case 3:
-                System.out.println("March");
-                break;
-            case 4:
-                System.out.println("April");
-                break;
-            case 5:
-                System.out.println("May");
-                break;
-            case 6:
-                System.out.println("June");
-                break;
-            case 7:
-                System.out.println("July");
-                break;
-            case 8:
-                System.out.println("August");
-                break;
-            case 9:
-                System.out.println("September");
-                break;
-            case 10:
-                System.out.println("October");
-                break;
-            case 11:
-                System.out.println("November");
-                break;
-            case 12:
-                System.out.println("December");
-                break;
-            default:
-                System.out.println("INCORRECT INPUT DATA");
+        int numberMonth = 0;
+        String result = "";
+        try {
+            numberMonth = scanner.nextInt();
+        } catch (InputMismatchException e) {
+            result = "INCORRECT INPUT DATA";
+
+        }
+        if (result.equals("")) {
+            switch (numberMonth) {
+                case 1:
+                    System.out.println("January");
+                    break;
+                case 2:
+                    System.out.println("February");
+                    break;
+                case 3:
+                    System.out.println("March");
+                    break;
+                case 4:
+                    System.out.println("April");
+                    break;
+                case 5:
+                    System.out.println("May");
+                    break;
+                case 6:
+                    System.out.println("June");
+                    break;
+                case 7:
+                    System.out.println("July");
+                    break;
+                case 8:
+                    System.out.println("August");
+                    break;
+                case 9:
+                    System.out.println("September");
+                    break;
+                case 10:
+                    System.out.println("October");
+                    break;
+                case 11:
+                    System.out.println("November");
+                    break;
+                case 12:
+                    System.out.println("December");
+                    break;
+                default:
+                    System.out.println("INCORRECT INPUT DATA");
+            }
+        } else {
+            System.out.println(result);
         }
     }
 
@@ -418,10 +429,10 @@ public class Solver implements ISolver {
         for (int i = 0; i < arrayDimension; i++) {
             int newIndex = i + numShift + arrayDimension;
             if (numShift < 0 || numShift > 0) {
-                if (newIndex >= 3) {
-                    shiftIndexes[i] = newIndex % 3;
+                if (newIndex >= arrayDimension) {
+                    shiftIndexes[i] = newIndex % arrayDimension;
                 } else if (newIndex < 0) {
-                    shiftIndexes[i] = Math.abs(newIndex % 3);
+                    shiftIndexes[i] = Math.abs(newIndex % arrayDimension);
                 } else {
                     shiftIndexes[i] = newIndex;
                 }
@@ -456,17 +467,25 @@ public class Solver implements ISolver {
                 .mapToInt(Integer::parseInt)
                 .toArray();
         ArrayList<Integer> numberSequences = new ArrayList<>();
-        int num = 0;
+        int num = 1;
         for (int i = 1; i < numElements; i++) {
             if (inputMassive[i] > inputMassive[i - 1]) {
                 num++;
             } else {
-                if (num != 0) {
+                if (num != 1) {
                     numberSequences.add(num);
+                    num = 1;
+                }
+            }
+            if (i == numElements - 1) {
+                if (num != 1) {
+                    numberSequences.add(num);
+                    num = 1;
                 }
             }
         }
-        System.out.println(Collections.max(numberSequences));
+        String result = numberSequences.isEmpty() ? "0" : Collections.max(numberSequences).toString();
+        System.out.println(result);
     }
 
     @Override
@@ -515,32 +534,36 @@ public class Solver implements ISolver {
             }
         }
         int[][] resultMatrix = new int[arrayDimension][arrayDimension];
-        for (int i = 0; i < arrayDimension / 2; i++) {
-            int j = (arrayDimension - 1) - i; // берем противоположные индексы для движениии
-            // строк и стоолбцов с разных сторон, алгоритм представлен далее
-            if (!(arrayDimension % 2 == 0)) {
-                resultMatrix[arrayDimension / 2][arrayDimension / 2]
-                        = inputMatrix[arrayDimension / 2][arrayDimension / 2];
+        if (arrayDimension != 1) {
+            for (int i = 0; i < arrayDimension / 2; i++) {
+                int j = (arrayDimension - 1) - i; // берем противоположные индексы для движениии
+                // строк и стоолбцов с разных сторон, алгоритм представлен далее
+                if (!(arrayDimension % 2 == 0)) {
+                    resultMatrix[arrayDimension / 2][arrayDimension / 2]
+                            = inputMatrix[arrayDimension / 2][arrayDimension / 2];
+                }
+                // Заметил зависимость при повороте столбцов и строк матрицы,
+                //  * * * * *   при движение квадратов матрицы, тоесть отдельно двигаются
+                //  * - - - *   сначало * потом - , по приведенному ниже правилу.
+                //  * - 0 - *
+                //  * - - - *
+                //  * * * * *
+                for (int k = 0; k < arrayDimension; k++) {
+                    resultMatrix[(arrayDimension - 1) - k][i] = inputMatrix[i][k]; // Движение стобцов одной стороны
+                    resultMatrix[(arrayDimension - 1) - k][j] = inputMatrix[j][k]; // Движение стобцов другой стороны
+                    resultMatrix[i][k] = inputMatrix[k][j]; // Движение строк одной стороны
+                    resultMatrix[j][k] = inputMatrix[k][i]; // Движение строк одной стороны
+                }
             }
-            // Заметил зависимость при повороте столбцов и строк матрицы,
-            //  * * * * *   при движение квадратов матрицы, тоесть отдельно двигаются
-            //  * - - - *   сначало * потом - , по приведенному ниже правилу.
-            //  * - 0 - *
-            //  * - - - *
-            //  * * * * *
-            for (int k = 0; k < arrayDimension; k++) {
-                resultMatrix[(arrayDimension - 1) - k][i] = inputMatrix[i][k]; // Движение стобцов одной стороны
-                resultMatrix[(arrayDimension - 1) - k][j] = inputMatrix[j][k]; // Движение стобцов другой стороны
-                resultMatrix[i][k] = inputMatrix[k][j]; // Движение строк одной стороны
-                resultMatrix[j][k] = inputMatrix[k][i]; // Движение строк одной стороны
+            System.out.println(arrayDimension);
+            for (int i = 0; i < arrayDimension; i++) {
+                for (int j = 0; j < arrayDimension; j++) {
+                    System.out.print(resultMatrix[i][j] + " ");
+                }
+                System.out.print("\n");
             }
-        }
-        System.out.println(arrayDimension);
-        for (int i = 0; i < arrayDimension; i++) {
-            for (int j = 0; j < arrayDimension; j++) {
-                System.out.print(resultMatrix[i][j] + " ");
-            }
-            System.out.print("\n");
+        } else {
+            System.out.println(1);
         }
     }
 
@@ -556,7 +579,7 @@ public class Solver implements ISolver {
                 inputMatrix[i][j] = Integer.parseInt(scannerString[j]);
             }
         }
-        System.out.println(determinant(arrayDimension, inputMatrix));
+        System.out.println(arrayDimension != 1 ? determinant(arrayDimension, inputMatrix) : 1);
     }
 
     private int determinant(int arrayDimension, int[][] inputMatrix) {
@@ -789,6 +812,7 @@ public class Solver implements ISolver {
                 inputMatrix[i][j] = Double.parseDouble(scannerString[j]);
             }
         }
+        if (arrayDimension != 1){
         long[][] resultMatrix = new long[arrayDimension][arrayDimension];
         for (int i = 0; i < arrayDimension; i++) {
             for (int j = 0; j < arrayDimension; j++) {
@@ -801,6 +825,9 @@ public class Solver implements ISolver {
                 System.out.print(resultMatrix[i][j] + " ");
             }
             System.out.print("\n");
+        }}
+        else {
+            System.out.println(1);
         }
     }
 
@@ -897,51 +924,55 @@ public class Solver implements ISolver {
                 inputMatrix[i][j] = Integer.parseInt(scannerString[j]);
             }
         }
-        int localMin = 0;
-        for (int i = 0; i < arrayDimension; i++) {
-            for (int j = 0; j < arrayDimension; j++) {
-                if (i > 0 && i < arrayDimension - 1) {
-                    if (j > 0 && j < arrayDimension - 1 && inputMatrix[i][j] < inputMatrix[i - 1][j - 1]
-                            && inputMatrix[i][j] < inputMatrix[i - 1][j] &&
-                            inputMatrix[i][j] < inputMatrix[i - 1][j + 1] && inputMatrix[i][j] < inputMatrix[i][j - 1] &&
-                            inputMatrix[i][j] < inputMatrix[i][j + 1] && inputMatrix[i][j] < inputMatrix[i + 1][j - 1] &&
-                            inputMatrix[i][j] < inputMatrix[i + 1][j] && inputMatrix[i][j] < inputMatrix[i + 1][j + 1]) {
-                        localMin++;
-                    } else if (j == 0 && inputMatrix[i][j] < inputMatrix[i - 1][j] &&
-                            inputMatrix[i][j] < inputMatrix[i - 1][j + 1] && inputMatrix[i][j] < inputMatrix[i][j + 1] &&
-                            inputMatrix[i][j] < inputMatrix[i + 1][j] && inputMatrix[i][j] < inputMatrix[i + 1][j + 1]) {
-                        localMin++;
-                    } else if (j == arrayDimension - 1 && inputMatrix[i][j] < inputMatrix[i - 1][j - 1]
-                            && inputMatrix[i][j] < inputMatrix[i - 1][j] && inputMatrix[i][j] < inputMatrix[i][j - 1] &&
-                            inputMatrix[i][j] < inputMatrix[i + 1][j - 1] && inputMatrix[i][j] < inputMatrix[i + 1][j]) {
-                        localMin++;
+        if (arrayDimension != 1) {
+            int localMin = 0;
+            for (int i = 0; i < arrayDimension; i++) {
+                for (int j = 0; j < arrayDimension; j++) {
+                    if (i > 0 && i < arrayDimension - 1) {
+                        if (j > 0 && j < arrayDimension - 1 && inputMatrix[i][j] < inputMatrix[i - 1][j - 1]
+                                && inputMatrix[i][j] < inputMatrix[i - 1][j] &&
+                                inputMatrix[i][j] < inputMatrix[i - 1][j + 1] && inputMatrix[i][j] < inputMatrix[i][j - 1] &&
+                                inputMatrix[i][j] < inputMatrix[i][j + 1] && inputMatrix[i][j] < inputMatrix[i + 1][j - 1] &&
+                                inputMatrix[i][j] < inputMatrix[i + 1][j] && inputMatrix[i][j] < inputMatrix[i + 1][j + 1]) {
+                            localMin++;
+                        } else if (j == 0 && inputMatrix[i][j] < inputMatrix[i - 1][j] &&
+                                inputMatrix[i][j] < inputMatrix[i - 1][j + 1] && inputMatrix[i][j] < inputMatrix[i][j + 1] &&
+                                inputMatrix[i][j] < inputMatrix[i + 1][j] && inputMatrix[i][j] < inputMatrix[i + 1][j + 1]) {
+                            localMin++;
+                        } else if (j == arrayDimension - 1 && inputMatrix[i][j] < inputMatrix[i - 1][j - 1]
+                                && inputMatrix[i][j] < inputMatrix[i - 1][j] && inputMatrix[i][j] < inputMatrix[i][j - 1] &&
+                                inputMatrix[i][j] < inputMatrix[i + 1][j - 1] && inputMatrix[i][j] < inputMatrix[i + 1][j]) {
+                            localMin++;
+                        }
                     }
-                }
-                if (i == 0) {
-                    if (j == 0 && inputMatrix[i][j] < inputMatrix[i][j + 1] && inputMatrix[i][j] < inputMatrix[i + 1][j]
-                            && inputMatrix[i][j] < inputMatrix[i + 1][j + 1]) {
-                        localMin++;
+                    if (i == 0) {
+                        if (j == 0 && inputMatrix[i][j] < inputMatrix[i][j + 1] && inputMatrix[i][j] < inputMatrix[i + 1][j]
+                                && inputMatrix[i][j] < inputMatrix[i + 1][j + 1]) {
+                            localMin++;
+                        }
+                        if (j == arrayDimension - 1 && inputMatrix[i][j] < inputMatrix[i][j - 1] && inputMatrix[i][j] < inputMatrix[i + 1][j - 1]
+                                && inputMatrix[i][j] < inputMatrix[i + 1][j]) {
+                            localMin++;
+                        }
                     }
-                    if (j == arrayDimension - 1 && inputMatrix[i][j] < inputMatrix[i][j - 1] && inputMatrix[i][j] < inputMatrix[i + 1][j - 1]
-                            && inputMatrix[i][j] < inputMatrix[i + 1][j]) {
-                        localMin++;
-                    }
-                }
-                if (i == arrayDimension - 1) {
-                    if (j == 0 && inputMatrix[i][j] < inputMatrix[i - 1][j]
-                            && inputMatrix[i][j] < inputMatrix[i - 1][j + 1]
-                            && inputMatrix[i][j] < inputMatrix[i][j + 1]) {
-                        localMin++;
-                    }
-                    if (j == arrayDimension - 1 && inputMatrix[i][j] < inputMatrix[i - 1][j]
-                            && inputMatrix[i][j] < inputMatrix[i - 1][j - 1]
-                            && inputMatrix[i][j] < inputMatrix[i][j - 1]) {
-                        localMin++;
+                    if (i == arrayDimension - 1) {
+                        if (j == 0 && inputMatrix[i][j] < inputMatrix[i - 1][j]
+                                && inputMatrix[i][j] < inputMatrix[i - 1][j + 1]
+                                && inputMatrix[i][j] < inputMatrix[i][j + 1]) {
+                            localMin++;
+                        }
+                        if (j == arrayDimension - 1 && inputMatrix[i][j] < inputMatrix[i - 1][j]
+                                && inputMatrix[i][j] < inputMatrix[i - 1][j - 1]
+                                && inputMatrix[i][j] < inputMatrix[i][j - 1]) {
+                            localMin++;
+                        }
                     }
                 }
             }
+            System.out.println(localMin);
+        } else {
+            System.out.println(1);
         }
-        System.out.println(localMin);
     }
 
     @Override
@@ -956,54 +987,58 @@ public class Solver implements ISolver {
                 inputMatrix[i][j] = Integer.parseInt(scannerString[j]);
             }
         }
-        ArrayList<Integer> resultList = new ArrayList<>();
-        for (int i = 0; i < arrayDimension; i++) {
-            for (int j = 0; j < arrayDimension; j++) {
-                if (i > 0 && i < arrayDimension - 1) {
-                    if (j > 0 && j < arrayDimension - 1 && inputMatrix[i][j] > inputMatrix[i - 1][j - 1]
-                            && inputMatrix[i][j] > inputMatrix[i - 1][j] &&
-                            inputMatrix[i][j] > inputMatrix[i - 1][j + 1] && inputMatrix[i][j] > inputMatrix[i][j - 1] &&
-                            inputMatrix[i][j] > inputMatrix[i][j + 1] && inputMatrix[i][j] > inputMatrix[i + 1][j - 1] &&
-                            inputMatrix[i][j] > inputMatrix[i + 1][j] && inputMatrix[i][j] > inputMatrix[i + 1][j + 1]) {
-                        resultList.add(inputMatrix[i][j]);
-                    } else if (j == 0 && inputMatrix[i][j] > inputMatrix[i - 1][j] &&
-                            inputMatrix[i][j] > inputMatrix[i - 1][j + 1] && inputMatrix[i][j] > inputMatrix[i][j + 1] &&
-                            inputMatrix[i][j] > inputMatrix[i + 1][j] && inputMatrix[i][j] > inputMatrix[i + 1][j + 1]) {
-                        resultList.add(inputMatrix[i][j]);
-                    } else if (j == arrayDimension - 1 && inputMatrix[i][j] > inputMatrix[i - 1][j - 1]
-                            && inputMatrix[i][j] > inputMatrix[i - 1][j] && inputMatrix[i][j] > inputMatrix[i][j - 1] &&
-                            inputMatrix[i][j] > inputMatrix[i + 1][j - 1] && inputMatrix[i][j] > inputMatrix[i + 1][j]) {
-                        resultList.add(inputMatrix[i][j]);
+        if (arrayDimension != 1) {
+            ArrayList<Integer> resultList = new ArrayList<>();
+            for (int i = 0; i < arrayDimension; i++) {
+                for (int j = 0; j < arrayDimension; j++) {
+                    if (i > 0 && i < arrayDimension - 1) {
+                        if (j > 0 && j < arrayDimension - 1 && inputMatrix[i][j] > inputMatrix[i - 1][j - 1]
+                                && inputMatrix[i][j] > inputMatrix[i - 1][j] &&
+                                inputMatrix[i][j] > inputMatrix[i - 1][j + 1] && inputMatrix[i][j] > inputMatrix[i][j - 1] &&
+                                inputMatrix[i][j] > inputMatrix[i][j + 1] && inputMatrix[i][j] > inputMatrix[i + 1][j - 1] &&
+                                inputMatrix[i][j] > inputMatrix[i + 1][j] && inputMatrix[i][j] > inputMatrix[i + 1][j + 1]) {
+                            resultList.add(inputMatrix[i][j]);
+                        } else if (j == 0 && inputMatrix[i][j] > inputMatrix[i - 1][j] &&
+                                inputMatrix[i][j] > inputMatrix[i - 1][j + 1] && inputMatrix[i][j] > inputMatrix[i][j + 1] &&
+                                inputMatrix[i][j] > inputMatrix[i + 1][j] && inputMatrix[i][j] > inputMatrix[i + 1][j + 1]) {
+                            resultList.add(inputMatrix[i][j]);
+                        } else if (j == arrayDimension - 1 && inputMatrix[i][j] > inputMatrix[i - 1][j - 1]
+                                && inputMatrix[i][j] > inputMatrix[i - 1][j] && inputMatrix[i][j] > inputMatrix[i][j - 1] &&
+                                inputMatrix[i][j] > inputMatrix[i + 1][j - 1] && inputMatrix[i][j] > inputMatrix[i + 1][j]) {
+                            resultList.add(inputMatrix[i][j]);
+                        }
                     }
-                }
-                if (i == 0) {
-                    if (j == 0 && inputMatrix[i][j] > inputMatrix[i][j + 1] && inputMatrix[i][j] > inputMatrix[i + 1][j]
-                            && inputMatrix[i][j] > inputMatrix[i + 1][j + 1]) {
-                        resultList.add(inputMatrix[i][j]);
+                    if (i == 0) {
+                        if (j == 0 && inputMatrix[i][j] > inputMatrix[i][j + 1] && inputMatrix[i][j] > inputMatrix[i + 1][j]
+                                && inputMatrix[i][j] > inputMatrix[i + 1][j + 1]) {
+                            resultList.add(inputMatrix[i][j]);
+                        }
+                        if (j == arrayDimension - 1 && inputMatrix[i][j] > inputMatrix[i][j - 1] && inputMatrix[i][j] > inputMatrix[i + 1][j - 1]
+                                && inputMatrix[i][j] > inputMatrix[i + 1][j]) {
+                            resultList.add(inputMatrix[i][j]);
+                        }
                     }
-                    if (j == arrayDimension - 1 && inputMatrix[i][j] > inputMatrix[i][j - 1] && inputMatrix[i][j] > inputMatrix[i + 1][j - 1]
-                            && inputMatrix[i][j] > inputMatrix[i + 1][j]) {
-                        resultList.add(inputMatrix[i][j]);
-                    }
-                }
-                if (i == arrayDimension - 1) {
-                    if (j == 0 && inputMatrix[i][j] > inputMatrix[i - 1][j]
-                            && inputMatrix[i][j] > inputMatrix[i - 1][j + 1]
-                            && inputMatrix[i][j] > inputMatrix[i][j + 1]) {
-                        resultList.add(inputMatrix[i][j]);
-                    }
-                    if (j == arrayDimension - 1 && inputMatrix[i][j] > inputMatrix[i - 1][j]
-                            && inputMatrix[i][j] > inputMatrix[i - 1][j - 1]
-                            && inputMatrix[i][j] > inputMatrix[i][j - 1]) {
-                        resultList.add(inputMatrix[i][j]);
+                    if (i == arrayDimension - 1) {
+                        if (j == 0 && inputMatrix[i][j] > inputMatrix[i - 1][j]
+                                && inputMatrix[i][j] > inputMatrix[i - 1][j + 1]
+                                && inputMatrix[i][j] > inputMatrix[i][j + 1]) {
+                            resultList.add(inputMatrix[i][j]);
+                        }
+                        if (j == arrayDimension - 1 && inputMatrix[i][j] > inputMatrix[i - 1][j]
+                                && inputMatrix[i][j] > inputMatrix[i - 1][j - 1]
+                                && inputMatrix[i][j] > inputMatrix[i][j - 1]) {
+                            resultList.add(inputMatrix[i][j]);
+                        }
                     }
                 }
             }
-        }
-        if (resultList.size() == 0) {
-            System.out.println("NOT FOUND");
+            if (resultList.size() == 0) {
+                System.out.println("NOT FOUND");
+            } else {
+                System.out.println(Collections.max(resultList));
+            }
         } else {
-            System.out.println(Collections.max(resultList));
+            System.out.println(1);
         }
     }
 
