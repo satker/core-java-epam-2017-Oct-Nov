@@ -157,10 +157,16 @@ public class Solver implements ISolver {
     public void task9() {
         Scanner input = new Scanner(System.in);
         int N = input.nextInt();
+        int[][] array = new int[N][N];
 
         for (int i = 0; i < N; ++i) {
             for (int j = 0; j < N; ++j) {
-                System.out.print((i * N + j + 1) + "\t");
+                array[i][j] = i * N + j + 1;
+                if (j == array.length - 1) {
+                    System.out.print(array[i][j]);
+                } else {
+                    System.out.print(array[i][j] + "\t");
+                }
             }
             System.out.println();
         }
