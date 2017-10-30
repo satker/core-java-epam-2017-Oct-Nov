@@ -320,12 +320,14 @@ public class SolverImpl implements ISolver {
         for (int i = 1; i < count; ++i) {
             prevValue = currentValue;
             currentValue = scanner.nextInt();
-            ++currentLength;
-            if (currentValue <= prevValue) {
+            if (currentValue > prevValue) {
+                currentLength = currentLength == 0 ? 2 : currentLength + 1;
+            } else {
                 maxLength = Math.max(maxLength, currentLength);
-                currentLength = 1;
+                currentLength = 0;
             }
         }
+        maxLength = Math.max(maxLength, currentLength);
 
         System.out.println(maxLength);
     }
