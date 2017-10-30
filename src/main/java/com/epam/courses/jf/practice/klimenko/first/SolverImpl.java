@@ -113,7 +113,7 @@ public class SolverImpl implements ISolver {
     @Override
     public void task6() {
         List<String> words = readWords(new Scanner(System.in));
-        String matchedWord = "";
+        String matchedWord = "NOT FOUND";
 
         for (String word : words) {
             boolean sorted = word.length() > 1;
