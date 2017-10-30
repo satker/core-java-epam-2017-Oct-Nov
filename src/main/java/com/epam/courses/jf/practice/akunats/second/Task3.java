@@ -10,14 +10,14 @@ import java.util.stream.Collectors;
 
 public class Task3 implements ITestableTask3 {
     public List<String> sortPoems(Set<IPoem> poems, String author) {
-        List<String> result = new ArrayList<>();
+        List<String> interList = new ArrayList<>();
         for (IPoem poem : poems) {
             if (poem.getAuthor().equals(author)) {
-                result = poem.getLines().stream()
-                        .sorted(Comparator.comparingInt(String::length))
-                        .collect(Collectors.toList());
+                interList.addAll(poem.getLines());
             }
         }
-        return result;
+        return interList.stream()
+                .sorted(Comparator.comparingInt(String::length))
+                .collect(Collectors.toList());
     }
 }

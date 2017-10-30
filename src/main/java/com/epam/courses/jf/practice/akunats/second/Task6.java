@@ -10,7 +10,7 @@ public class Task6 implements ITestableTask6 {
     public HashMap<Integer, Integer> addPolynomials(HashMap<Integer, Integer> first, HashMap<Integer, Integer> second) {
         HashMap<Integer, Integer> result = new HashMap<>();
         second.keySet().stream()
-                .filter(i -> first.containsKey(second.get(i)) && second.get(i) != null && first.get(i) != null)
+                .filter(i -> first.containsKey(i) && second.containsKey(i))
                 .forEach(i -> result.put(i, first.get(i) + second.get(i)));
         for (Integer key : result.keySet()) {
             first.remove(key);
