@@ -288,7 +288,7 @@ public class SolverImpl implements ISolver {
 
         Arrays.asList(matrix).sort(Comparator.comparing((Integer[] row) -> row[column]));
 
-        printMatrix(matrix);
+        printMatrix(matrix, true);
     }
 
     @Override
@@ -306,7 +306,7 @@ public class SolverImpl implements ISolver {
         }
         matrix = newMatrix;
 
-        printMatrix(matrix);
+        printMatrix(matrix, true);
     }
 
     @Override
@@ -372,7 +372,7 @@ public class SolverImpl implements ISolver {
         }
         matrix = newMatrix;
 
-        printMatrix(matrix);
+        printMatrix(matrix, true);
     }
 
     @Override
@@ -448,7 +448,7 @@ public class SolverImpl implements ISolver {
 
         matrix = filterMatrix(matrix, rowsToDelete, columnsToDelete);
 
-        printMatrix(matrix);
+        printMatrix(matrix, false);
     }
 
     @Override
@@ -480,7 +480,7 @@ public class SolverImpl implements ISolver {
 
         matrix = filterMatrix(matrix, rowsToDelete, columnsToDelete);
 
-        printMatrix(matrix);
+        printMatrix(matrix, false);
     }
 
     @Override
@@ -514,7 +514,7 @@ public class SolverImpl implements ISolver {
             matrix[i][jmin] = tmp;
         }
 
-        printMatrix(matrix);
+        printMatrix(matrix, true);
     }
 
     @Override
@@ -530,7 +530,7 @@ public class SolverImpl implements ISolver {
             });
         }
 
-        printMatrix(matrix);
+        printMatrix(matrix, true);
     }
 
     @Override
@@ -592,7 +592,7 @@ public class SolverImpl implements ISolver {
             return asum - bsum;
         });
 
-        printMatrix(matrix);
+        printMatrix(matrix, true);
     }
 
     @Override
@@ -686,7 +686,7 @@ public class SolverImpl implements ISolver {
             matrix[i] = newRow;
         }
 
-        printMatrix(matrix);
+        printMatrix(matrix, true);
     }
 
     private static final int[] xOffset8 = {1, 1, 0, -1, -1, -1, 0, 1};
@@ -728,11 +728,11 @@ public class SolverImpl implements ISolver {
         return mat;
     }
 
-    private static void printMatrix(Integer[][] matrix) {
+    private static void printMatrix(Integer[][] matrix, boolean square) {
         int height = matrix.length;
         int width = matrix[0].length;
         System.out.println(height);
-        if (width != height) {
+        if (!square) {
             System.out.println(width);
         }
         for (Integer[] row : matrix) {
