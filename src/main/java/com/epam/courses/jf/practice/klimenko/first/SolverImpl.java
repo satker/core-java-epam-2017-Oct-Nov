@@ -158,6 +158,10 @@ public class SolverImpl implements ISolver {
                 }
             }
         }
+
+        if (matchedWords.isEmpty()) {
+            System.out.println("NOT FOUND");
+        }
     }
 
     @Override
