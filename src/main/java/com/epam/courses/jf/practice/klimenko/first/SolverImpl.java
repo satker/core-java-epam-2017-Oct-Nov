@@ -2,8 +2,6 @@ package com.epam.courses.jf.practice.klimenko.first;
 
 import com.epam.courses.jf.practice.common.first.ISolver;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.*;
 
@@ -18,11 +16,11 @@ public class SolverImpl implements ISolver {
         scanner.nextLine();
         for (int i = 0; i < linesNumber; ++i) {
             String currentString = scanner.nextLine();
-            if (minLength == -1 || currentString.length() < minLength) {
+            if (minLength == -1 || currentString.length() <= minLength) {
                 minLength = currentString.length();
                 minString = currentString;
             }
-            if (maxLength == -1 || currentString.length() > maxLength) {
+            if (maxLength == -1 || currentString.length() >= maxLength) {
                 maxLength = currentString.length();
                 maxString = currentString;
             }
@@ -527,9 +525,7 @@ public class SolverImpl implements ISolver {
         for (int i = 0; i < matrixSize; ++i) {
             for (int j = 0; j < matrixSize; ++j) {
                 double val = scanner.nextDouble();
-                BigDecimal bd = new BigDecimal(val);
-                bd = bd.setScale(0, RoundingMode.HALF_UP);
-                val = bd.doubleValue();
+                val = Math.round(val);
                 System.out.print(format.format(val) + " ");
             }
             System.out.println();
