@@ -167,16 +167,24 @@ public class SolverImpl implements ISolver {
     @Override
     public void task8() {
         List<String> words = readWords(new Scanner(System.in));
-        int matchNumber = 0;
+        String firstMatch = null, secondMatch = null;
 
         for (String word : words) {
             if (word.matches("[0-9]+")
                     && new StringBuilder(word).reverse().toString().equals(word)) {
-                if (++matchNumber == 2) {
-                    System.out.println(word);
+                if (firstMatch == null) {
+                    firstMatch = word;
+                } else {
+                    secondMatch = word;
+                    break;
                 }
             }
         }
+
+        System.out.println(
+                secondMatch != null ? secondMatch :
+                        firstMatch != null ? firstMatch :
+                                "NOT FOUND");
     }
 
     @Override
