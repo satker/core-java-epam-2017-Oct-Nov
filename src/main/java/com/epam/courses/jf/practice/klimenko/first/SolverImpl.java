@@ -286,7 +286,7 @@ public class SolverImpl implements ISolver {
         int column = scanner.nextInt();
         Integer[][] matrix = readMatrix(scanner);
 
-        Arrays.asList(matrix).sort(Comparator.comparing((Integer[] row) -> row[column]));
+        Arrays.asList(matrix).sort(Comparator.comparing((Integer[] row) -> row[column]).reversed());
 
         printMatrix(matrix);
     }
