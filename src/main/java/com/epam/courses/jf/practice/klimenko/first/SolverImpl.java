@@ -420,7 +420,7 @@ public class SolverImpl implements ISolver {
             }
         }
 
-        System.out.println(determinant);
+        System.out.printf("%.0f%n", determinant);
     }
 
     @Override
