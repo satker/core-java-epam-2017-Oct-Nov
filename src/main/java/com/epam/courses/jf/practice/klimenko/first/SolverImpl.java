@@ -35,12 +35,12 @@ public class SolverImpl implements ISolver {
         List<String> list = readLines(new Scanner(System.in));
 
         list.sort(Comparator
-                .comparing((String str) -> str.length())
+                .comparing(String::length)
                 .thenComparing(str -> str)
         );
 
         for (String string : list) {
-            System.out.println(string);
+            System.out.printf("(%d): \"%s\"%n", string.length(), string);
         }
     }
 
