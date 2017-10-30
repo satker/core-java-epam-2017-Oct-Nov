@@ -15,7 +15,6 @@ public class Task9 implements ITestableTask9 {
         try {
             Files.lines(Paths.get(input.getPath()), Charset.forName("ISO-8859-1")).forEach(i -> {
                 for (String s : i.split(" ")) {
-                    s = s.toLowerCase();
                     if (result.contains(s)) {
                         result.remove(s);
                     } else {

@@ -25,8 +25,8 @@ public class Task14 implements ITestableTask14 {
                     break;
                 }
                 if (resultNumber.equals(0)
-                        || Math.abs(Double.parseDouble(value.toString()) - Double.parseDouble(t.toString()))
-                        < Math.abs(Double.parseDouble(value.toString()) - Double.parseDouble(resultNumber.toString()))) {
+                        || Math.abs(value.doubleValue() - t.doubleValue())
+                        < Math.abs(value.doubleValue() - resultNumber.doubleValue())) {
                     resultNumber = t;
                 }
             }
