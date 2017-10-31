@@ -13,7 +13,7 @@ import static java.util.stream.Collectors.toSet;
 public class Solver implements ISolver {
     public static void main(String[] args) {
         Solver r = new Solver();
-        r.task22();
+        r.task24();
     }
     @Override
     public void task1() {
@@ -109,7 +109,7 @@ public class Solver implements ISolver {
             numOfUniqueChars.add(numOfUniqueCharsInString);
         }
         int minNumberUniqueChars = numOfUniqueChars.get(0);
-        int indexWord = 0;
+        int indexWord;
         String resultString = "";
         if (numOfUniqueChars.stream().allMatch(i -> i.equals(0))) {
             resultString = Arrays.stream(inputStrings)
@@ -228,7 +228,7 @@ public class Solver implements ISolver {
                 if (result.equals("")) {
                     result = s;
                 } else {
-                    result = result + " " + s;
+                    result = result.concat(" " + s);
                 }
             }
         }
@@ -272,7 +272,7 @@ public class Solver implements ISolver {
                 }
             }
         }
-        String result = "";
+        String result;
         if (resultList.isEmpty()) {
             result = "NOT FOUND";
         } else {
@@ -903,13 +903,7 @@ public class Solver implements ISolver {
             count++;
         }
         System.out.println(arrayDimension);
-        for (int i = 0; i < arrayDimension; i++) {
-            System.out.print(resultMatrix[i][0]);
-            for (int j = 1; j < arrayDimension; j++) {
-                System.out.printf("\t" + resultMatrix[i][j]);
-            }
-            System.out.println();
-        }
+        printMatrix(resultMatrix, arrayDimension);
     }
 
     @Override
@@ -1087,11 +1081,16 @@ public class Solver implements ISolver {
             count++;
         }
         System.out.println(arrayDimension);
+        printMatrix(resultMatrix, arrayDimension);
+    }
+
+    private void printMatrix(Integer[][] matrix, int arrayDimension){
         for (int i = 0; i < arrayDimension; i++) {
-            for (int j = 0; j < arrayDimension; j++) {
-                System.out.print(resultMatrix[i][j] + " ");
+            System.out.print((int) matrix[i][0]);
+            for (int j = 1; j < arrayDimension; j++) {
+                System.out.printf("\t" + (int) matrix[i][j]);
             }
-            System.out.print("\n");
+            System.out.println();
         }
     }
 
