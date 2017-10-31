@@ -58,6 +58,17 @@ public class Task17 implements ITestableTask17 {
                 }
             }
             if (!interSet.isEmpty()) {
+                if (interSet.stream().anyMatch(i -> {
+                    boolean r = false;
+                    for (I2DPoint point : result) {
+                        if (point.getX() < i.getX()) {
+                            r = true;
+                        }
+                    }
+                    return r;
+                })) {
+                    break;
+                }
                 if (interSet.size() == 1) {
                     result.addAll(interSet);
                 } else {
