@@ -808,13 +808,18 @@ public class Solver implements ISolver {
     @Override
     public void task22() {
         Scanner scanner = new Scanner(System.in);
-        int arrayDimension = scanner.useLocale(Locale.FRANCE).nextInt();
+        int arrayDimension = scanner.nextInt();
         scanner.nextLine();
         double[][] inputMatrix = new double[arrayDimension][arrayDimension];
         for (int i = 0; i < arrayDimension; i++) {
             String[] scannerString = scanner.nextLine().split(" ");
             for (int j = 0; j < arrayDimension; j++) {
-                inputMatrix[i][j] = (int) Math.round(Double.parseDouble(scannerString[j]));
+                inputMatrix[i][j] = (int) Math.round
+                        (Double.parseDouble(
+                                scannerString[j].replaceAll(
+                                        "[,]", ".")
+                        )
+                        );
             }
         }
         if (arrayDimension != 1) {
