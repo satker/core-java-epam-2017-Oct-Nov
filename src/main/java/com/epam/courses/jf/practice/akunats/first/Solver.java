@@ -13,7 +13,7 @@ import static java.util.stream.Collectors.toSet;
 public class Solver implements ISolver {
     public static void main(String[] args) {
         Solver r = new Solver();
-        r.task10();
+        r.task22();
     }
     @Override
     public void task1() {
@@ -812,10 +812,8 @@ public class Solver implements ISolver {
         scanner.nextLine();
         double[][] inputMatrix = new double[arrayDimension][arrayDimension];
         for (int i = 0; i < arrayDimension; i++) {
-            String[] scannerString = scanner.nextLine().split(" ");
             for (int j = 0; j < arrayDimension; j++) {
-                inputMatrix[i][j] = (int) Math.round
-                        (Double.parseDouble(scannerString[j]));
+                inputMatrix[i][j] = scanner.nextDouble();
             }
         }
         if (arrayDimension != 1) {
