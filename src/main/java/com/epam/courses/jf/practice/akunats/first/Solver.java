@@ -13,7 +13,7 @@ import static java.util.stream.Collectors.toSet;
 public class Solver implements ISolver {
     public static void main(String[] args) {
         Solver r = new Solver();
-        r.task6();
+        r.task10();
     }
     @Override
     public void task1() {
@@ -233,7 +233,7 @@ public class Solver implements ISolver {
             }
         }
         if (result.equals("")) {
-            System.out.println("NOT_FOUND");
+            System.out.println("NOT FOUND");
         } else {
             System.out.println(result);
         }
@@ -274,7 +274,7 @@ public class Solver implements ISolver {
         }
         String result = "";
         if (resultList.isEmpty()) {
-            result = "NOT_FOUND";
+            result = "NOT FOUND";
         } else {
             result = resultList.get(resultList.size() - 1);
         }
@@ -322,7 +322,8 @@ public class Solver implements ISolver {
         } else if (discriminant == 0) {
             BigDecimal x = new BigDecimal((-B) / (2 * A));
             x = x.setScale(2, BigDecimal.ROUND_HALF_UP);
-            System.out.print("One solution: " + Double.parseDouble(x.toString()));
+            Double xOut = Double.parseDouble(x.toString());
+            System.out.println("One solution: " + xOut);
         } else {
             System.out.println("No solution");
         }
@@ -560,14 +561,14 @@ public class Solver implements ISolver {
                 }
             }
             System.out.println(arrayDimension);
-            for (int i = 0; i < arrayDimension; i++) {
-                for (int j = 0; j < arrayDimension; j++) {
-                    System.out.print(resultMatrix[i][j] + " ");
-                }
-                System.out.print("\n");
-            }
         } else {
-            System.out.println(1);
+            resultMatrix[0][0] = 1;
+        }
+        for (int i = 0; i < arrayDimension; i++) {
+            for (int j = 0; j < arrayDimension; j++) {
+                System.out.print(resultMatrix[i][j] + " ");
+            }
+            System.out.print("\n");
         }
     }
 
@@ -807,7 +808,7 @@ public class Solver implements ISolver {
     @Override
     public void task22() {
         Scanner scanner = new Scanner(System.in);
-        int arrayDimension = scanner.nextInt();
+        int arrayDimension = scanner.useLocale(Locale.FRANCE).nextInt();
         scanner.nextLine();
         double[][] inputMatrix = new double[arrayDimension][arrayDimension];
         for (int i = 0; i < arrayDimension; i++) {
