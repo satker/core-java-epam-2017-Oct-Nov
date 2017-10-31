@@ -209,6 +209,7 @@ public class SolverImpl implements ISolver {
     @Override
     public void task10() {
         Scanner scanner = new Scanner(System.in);
+        Locale loc = Locale.US;
         int coefA = scanner.nextInt();
         int coefB = scanner.nextInt();
         int coefC = scanner.nextInt();
@@ -223,14 +224,13 @@ public class SolverImpl implements ISolver {
 
         if (det == 0) {
             double solution = (sqrtDet - coefB) / (2 * coefA);
-            System.out.printf("One solution: %.2f\n", solution);
+            System.out.printf(loc, "One solution: %.2f\n", solution);
             return;
         }
 
         double solutionA = (-coefB - sqrtDet) / (2 * coefA);
         double solutionB = (-coefB + sqrtDet) / (2 * coefA);
-        // TODO: Get rid of trailing zeroes
-        System.out.printf("Two solutions: %.2f, %.2f\n", solutionA, solutionB);
+        System.out.printf(loc, "Two solutions: %.2f, %.2f\n", solutionA, solutionB);
     }
 
     @Override
