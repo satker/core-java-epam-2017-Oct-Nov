@@ -13,7 +13,7 @@ import static java.util.stream.Collectors.toSet;
 public class Solver implements ISolver {
     public static void main(String[] args) {
         Solver r = new Solver();
-        r.task22();
+        r.task6();
     }
     @Override
     public void task1() {
@@ -185,7 +185,7 @@ public class Solver implements ISolver {
             }
         }
         if (resultList.size() == 0) {
-            System.out.println("NOT_FOUND");
+            System.out.println("NOT FOUND");
         } else {
             String result = "";
             for (String s : resultList) {
@@ -195,9 +195,10 @@ public class Solver implements ISolver {
                 }
             }
             if (result.equals("")) {
-                result = "NOT_FOUND";
+                System.out.println("NOT FOUND");
+            } else {
+                System.out.println(result);
             }
-            System.out.println(result);
         }
     }
 
