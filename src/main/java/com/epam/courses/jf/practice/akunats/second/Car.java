@@ -6,7 +6,7 @@ public class Car implements ITestableTask19.ICar {
     private int startPosition;
     private int speed;
 
-    public Car(int startPosition, int speed) {
+    Car(int startPosition, int speed) {
         this.speed = speed;
         this.startPosition = startPosition;
     }

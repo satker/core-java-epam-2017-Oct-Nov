@@ -8,8 +8,7 @@ import java.util.Stack;
 public class Task8 implements ITestableTask8 {
     //  1 не подходит, требуется следующая итерация
     // 0 подходит
-    // -1 не подходит полностью
-    public int control(String a, String b) {
+    private int control(String a, String b) {
         int result = 1;
         for (int i = 0; i < a.length(); i++) {
             char previousElement = a.toCharArray()[i];
@@ -18,9 +17,6 @@ public class Task8 implements ITestableTask8 {
                     (nowStr == '[' && previousElement == ']') ||
                     (nowStr == '{' && previousElement == '}')) {
                 result = 0;
-            } else if (previousElement == '(' || previousElement == '{'
-                    || previousElement == '[') {
-                result = -1;
             }
         }
         return result;
@@ -33,39 +29,27 @@ public class Task8 implements ITestableTask8 {
                 .forEach(stackSymbols::push);
         String previousElement = "";
         String nowStr = "";
-        boolean result = true;
+        //boolean result = true;
         int i = 0;
         while (stackSymbols.size() > 0) {
             if (i == 0) {
-                String pop1 = stackSymbols.pop();
-                previousElement = previousElement.concat(pop1);
+                String popPrevious = stackSymbols.pop();
+                previousElement = previousElement.concat(popPrevious);
                 i++;
             } else if (i == 1) {
-                String pop2 = stackSymbols.pop();
-                nowStr = nowStr.concat(pop2);
-                if (pop2.equals("(") || pop2.equals("{") || pop2.equals("[")){
+                String popNext = stackSymbols.pop();
+                nowStr = nowStr.concat(popNext);
+                if (popNext.equals("(") || popNext.equals("{") || popNext.equals("[")){
                     if (control(previousElement, nowStr) == 0){
                             previousElement = "";
                             nowStr = "";
                             i = 0;
                     } else {
-                        nowStr = nowStr.replaceAll("[(\\]\\[)|(\\)\\()|(\\}\\{)]", "");
-                    }
-                } else {
-                    if (control(previousElement, nowStr) == (-1)) {
-                        result = false;
-                        break;
-                    } else if (control(previousElement, nowStr) == 0) {
-                        previousElement = "";
-                        nowStr = "";
-                        i = 0;
+                        nowStr = nowStr.replaceAll("([)][(])|([}][{])|([\\]][\\[])", "");
                     }
                 }
             }
         }
-        if (nowStr.length() != 0 || previousElement.length() != 0){
-            result = false;
-        }
-        return result;
+        return nowStr.length() == 0 && previousElement.length() == 0;
     }
 }

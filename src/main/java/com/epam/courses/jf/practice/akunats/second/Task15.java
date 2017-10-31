@@ -3,9 +3,10 @@ package com.epam.courses.jf.practice.akunats.second;
 import com.epam.courses.jf.practice.common.second.I2DPoint;
 import com.epam.courses.jf.practice.common.second.ITestableTask15;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
@@ -65,7 +66,7 @@ public class Task15 implements ITestableTask15 {
                     interList.add(pointForSearchEquation);// Исключаем элемент из проверки
                 }
                 if (!interSet.isEmpty()) {
-                    lines.add(new ILineImpl(interSet)); // добавляем элементы в коллекцию результата
+                    lines.add(new Line(interSet)); // добавляем элементы в коллекцию результата
                 }
             }
             previousStep.add(point);// Исключаем элемент из проверки
@@ -76,14 +77,18 @@ public class Task15 implements ITestableTask15 {
 
     private class IFileWithLinesImpl implements IFileWithLines {
         private File file;
-        private Set<ILine> lines;
+        Set<ILine> lines;
 
         IFileWithLinesImpl(Set<ILine> points, File file) {
             this.file = file;
             this.lines = points;
-            try(ObjectOutput output = new ObjectOutputStream(
-                    new BufferedOutputStream(new FileOutputStream(file)))) {
-                output.writeObject(lines);
+            try (PrintWriter writer = new PrintWriter(file)) {
+                for (ILine line : points) {
+                    for (I2DPoint point : line.getPoints()) {
+                        writer.write(point.getX() + " " + point.getY() + "\t");
+                    }
+                    writer.write("\n");
+                }
             } catch (IOException e) {
                 System.out.println("Error write file.");
             }
@@ -96,23 +101,32 @@ public class Task15 implements ITestableTask15 {
 
         @Override
         public Set<ILine> getLines() {
-            try (ObjectInput input = new ObjectInputStream(
-                    new BufferedInputStream(new FileInputStream(file)))) {
-                return (Set<ILine>) input.readObject();
-            } catch (IOException e) {
+            Set<ILine> result = new HashSet<>();
+            try {
+                List<String> interList = Files
+                        .lines(Paths.get(file.getPath()), Charset.forName("ISO-8859-1"))
+                        .collect(Collectors.toList());
+                for (String s : interList) {
+                    Set<I2DPoint> interSet = new HashSet<>();
+                    String[] interMas = s.split("\t");
+                    for (String inter : interMas) {
+                        String[] nextMas = inter.split(" ");
+                        interSet.add(new Point(Double.parseDouble(nextMas[0]), Double.parseDouble(nextMas[1])));
+                    }
+                    result.add(new Line(interSet));
+                }
+            } catch (Exception e) {
                 System.out.println("Error read file");
                 return null;
-            } catch (ClassNotFoundException e) {
-                System.out.println("Class Not Found");
-                return null;
             }
+            return result;
         }
     }
 
-    private class ILineImpl implements ILine {
+    private class Line implements ILine {
         Set<I2DPoint> set = new HashSet<>();
 
-        ILineImpl(Set<I2DPoint> set) {
+        Line(Set<I2DPoint> set) {
             this.set = set;
         }
 

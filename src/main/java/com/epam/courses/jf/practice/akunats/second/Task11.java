@@ -3,8 +3,6 @@ package com.epam.courses.jf.practice.akunats.second;
 import com.epam.courses.jf.practice.common.second.ITestableTask11;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Task11 implements ITestableTask11 {

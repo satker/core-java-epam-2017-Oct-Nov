@@ -36,7 +36,7 @@ public class Task14 implements ITestableTask14 {
         @Override
         public int size() {
             int size = 0;
-            for (T t : repository) {
+            for (T ignored : repository) {
                 size++;
             }
             return size;

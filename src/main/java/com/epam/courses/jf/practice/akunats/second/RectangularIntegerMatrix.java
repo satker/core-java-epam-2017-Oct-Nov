@@ -7,18 +7,18 @@ public class RectangularIntegerMatrix implements ITestableTask18.IRectangularInt
     private int height;
     private int[][] matrix;
 
-    public RectangularIntegerMatrix(int width, int height) {
+    RectangularIntegerMatrix(int width, int height) {
         this.width = width;
         this.height = height;
         this.matrix = new int[height][width];
     }
-    public RectangularIntegerMatrix(int[][] matrix) {
+    RectangularIntegerMatrix(int[][] matrix) {
         this.matrix = matrix;
         this.height = matrix.length;
         this.width = matrix[0].length;
     }
 
-    public void setMatrix(int str, int column, int value) {
+    void setMatrix(int str, int column, int value) {
         this.matrix[str][column] = value;
     }
 

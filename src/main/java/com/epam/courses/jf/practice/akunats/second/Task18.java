@@ -6,6 +6,12 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Task18 implements ITestableTask18 {
+    private ArrayList<Integer[]> addToList(Integer[] secondStage1, Integer[] secondStage2){
+        ArrayList<Integer[]> firstStage = new ArrayList<>();
+        firstStage.add(secondStage1);
+        firstStage.add(secondStage2);
+        return firstStage;
+    }
     @Override
     public IRectangularIntegerMatrix getMaxSubMatrix(IRectangularIntegerMatrix matrix) {
         if (matrix.getWidth() >1 && matrix.getHeight() > 1) {
@@ -29,10 +35,7 @@ public class Task18 implements ITestableTask18 {
                     if (interMas[col] == next) {
                         Integer[] secondStage1 = {str, col};
                         Integer[] secondStage2 = {str - 1, col};
-                        ArrayList<Integer[]> firstStage = new ArrayList<>();
-                        firstStage.add(secondStage1);
-                        firstStage.add(secondStage2);
-                        storageCol.add(firstStage);
+                        storageCol.add(addToList(secondStage1, secondStage2));
                     } else {
                         interMas[col] = next;
                     }
@@ -43,10 +46,7 @@ public class Task18 implements ITestableTask18 {
                         if (i > 0 && interMas[i] == interMas[i - 1]) {
                             Integer[] secondStage1 = {str, i};
                             Integer[] secondStage2 = {str, i - 1};
-                            ArrayList<Integer[]> firstStage = new ArrayList<>();
-                            firstStage.add(secondStage1);
-                            firstStage.add(secondStage2);
-                            storageStr.add(firstStage);
+                            storageStr.add(addToList(secondStage1, secondStage2));
                         }
                     }
                     col = 0;

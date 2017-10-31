@@ -2,9 +2,7 @@ package com.epam.courses.jf.practice.akunats.second;
 
 import com.epam.courses.jf.practice.common.second.ITestableTask6;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class Task6 implements ITestableTask6 {
     public HashMap<Integer, Integer> addPolynomials(HashMap<Integer, Integer> first, HashMap<Integer, Integer> second) {
