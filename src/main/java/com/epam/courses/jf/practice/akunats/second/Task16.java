@@ -3,55 +3,58 @@ package com.epam.courses.jf.practice.akunats.second;
 import com.epam.courses.jf.practice.common.second.I2DPoint;
 import com.epam.courses.jf.practice.common.second.ITestableTask16;
 
-import java.io.*;
+import java.io.File;
+import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 public class Task16 implements ITestableTask16 {
 
-    public Double comp(I2DPoint o, I2DPoint centre){
+    private Double length(I2DPoint o, I2DPoint centre){
         double A = Math.abs(o.getX()) - Math.abs(centre.getX());
         double B = Math.abs(o.getY()) - Math.abs(centre.getY());
         return Math.sqrt((A * A) + (B * B));
     }
     @Override
     public IFileWithPoints analyze(I2DPoint center, int radius, File output) {
-        SortedMap<I2DPoint, Double> result = new TreeMap<>(Comparator.comparing(o -> comp(o, center)));
+        SortedMap<I2DPoint, Double> result = new TreeMap<>((o1, o2)
+                -> Double.compare(length(o1, center), length(o2, center)) == 0 ? 1 : -1);
         double x0 = center.getX();
         double y0 = center.getY();
-        for (int i = (int) (x0 - (radius - 1)); i < (int) (x0 + radius); i++) {
-            for (int j = (int) (y0 - (radius - 1)); j < (int) (y0 + radius); j++) {
-                if (i != (int) x0 && j != (int) y0) {
-                    int A = Math.abs(i) - Math.abs((int) x0);
-                    int B = Math.abs(j) - Math.abs((int) y0);
+        for (int i = (int) (x0 - (radius-1)); i < (int) Math.round(x0 + radius); i++) {
+            for (int j = (int) (y0 - (radius-1)); j < (int) Math.round(y0 + radius); j++) {
+                    double A = Math.abs(i) - Math.abs(x0);
+                    double B = Math.abs(j) - Math.abs(y0);
                     double length = Math.sqrt((A * A) + (B * B));
                     if (length < radius) {
-                        result.put(new Point(i, j), length);
+                            result.put(new Point(i, j), length);
                     }
-                }
             }
         }
-        return new FileWithPoints(result, output);
+        return new FileWithPoints(result, output, center);
     }
 
     class FileWithPoints implements IFileWithPoints {
         private File file;
-        SortedMap<I2DPoint, Double> map;
+       SortedMap<I2DPoint, Double> map;
+        private I2DPoint center;
 
-        FileWithPoints(SortedMap<I2DPoint, Double> map, File file) {
+        FileWithPoints(SortedMap<I2DPoint, Double> map, File file, I2DPoint center) {
+            this.center = center;
             this.map = map;
             this.file = file;
-            try (ObjectOutput output = new ObjectOutputStream(
-                    new BufferedOutputStream(new FileOutputStream(file)))) {
-                output.writeObject(map);
-            } catch (IOException e) {
-                System.out.println("Error write file.");
+            try ( PrintWriter writer = new PrintWriter(file) ) {
+                for ( Map.Entry<I2DPoint, Double> entry : map.entrySet() ) {
+                    writer.write(entry.getKey().getX() + " " + entry.getKey().getY() +" " +  entry.getValue() + "\n");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
 
@@ -62,14 +65,21 @@ public class Task16 implements ITestableTask16 {
 
         @Override
         public SortedMap<I2DPoint, Double> getPoints() {
+            SortedMap<I2DPoint, Double> newMap = new TreeMap<>((o1, o2)
+                    -> Double.compare(length(o1, center), length(o2, center)) == 0 ? -1 : 1);
             try {
-                List<String> returnMap = Files.lines(Paths.get(file.getPath()), Charset.forName("ISO-8859-1"))
+                List<String> interList = Files.lines(Paths.get(file.getPath()), Charset.forName("ISO-8859-1"))
                         .collect(Collectors.toList());
-                return (SortedMap<I2DPoint, Double>) returnMap;
-            } catch (IOException e) {
+                for (String s : interList) {
+                    String[] interMass = s.split(" ");
+                    newMap.put(new Point(Double.parseDouble(interMass[0]), Double.parseDouble(interMass[1]))
+                            , Double.parseDouble(interMass[2]));
+                }
+            } catch (Exception e) {
                 System.out.println("Error read file");
-                return null;
             }
+            return newMap;
         }
+
     }
 }
