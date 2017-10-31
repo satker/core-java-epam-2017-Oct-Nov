@@ -8,7 +8,7 @@ import java.util.*;
 public class Task17 implements ITestableTask17 {
     @Override
     public Set<I2DPoint> analyze(Set<ISegment> segments) {
-        if (segments.size() < 2 || segments.size() >20) {
+        if (segments.size() < 2 || segments.size() > 20) {
             throw new IllegalArgumentException("You enter wrong data.");
         }
         Set<I2DPoint> result = new HashSet<>();
@@ -20,15 +20,15 @@ public class Task17 implements ITestableTask17 {
                 if (!nextLine.equals(line)) {
                     // Считаем коэффициенты уравнение прямой Ax + By + C = 0
                     double A1 = line.second().getY() - line.first().getY();
-                    double B1 = line.second().getX() - line.first().getX();
-                    double C1 = line.first().getY() * B1 - line.first().getX() * A1;
+                    double B1 = line.first().getX() - line.second().getX();
+                    double C1 = line.second().getY() * line.first().getX() - line.second().getX() * line.first().getY();
 
                     double A2 = nextLine.second().getY() - nextLine.first().getY();
-                    double B2 = nextLine.second().getX() - nextLine.first().getX();
-                    double C2 = nextLine.first().getY() * B2 - nextLine.first().getX() * A2;
+                    double B2 = nextLine.first().getX() - nextLine.second().getX();
+                    double C2 = nextLine.second().getY() * nextLine.first().getX() - nextLine.second().getX() * nextLine.first().getY();
                     // точка пересечения прямых
-                    double pointIntersectionY = (C1 * A2 - C2 * A1) / (B1 * A2 - B2 * A1);
-                    double pointIntersectionX = (B1 * pointIntersectionY - C1) / A1;
+                    double pointIntersectionX = (C2 * B1 - B2 * C1) / (B1 * A2 - A1 * B2);
+                    double pointIntersectionY = (C1 - A1 * pointIntersectionX) / B1;
 
                     double minX1 = line.second().getX() < line.first().getX()
                             ? line.second().getX() : line.first().getX();
@@ -58,25 +58,25 @@ public class Task17 implements ITestableTask17 {
                 }
             }
             if (!interSet.isEmpty()) {
-                if(interSet.stream().anyMatch(i->{
+                if (interSet.stream().anyMatch(i -> {
                     boolean r = false;
                     for (I2DPoint point : result) {
-                        if (point.getX() < i.getX()){
+                        if (point.getX() < i.getX()) {
                             r = true;
                         }
                     }
                     return r;
-                })){
+                })) {
                     break;
                 }
-                if (interSet.size() == 1){
-                    result.add(new ArrayList<>(interSet).get(0));
+                if (interSet.size() == 1) {
+                    result.addAll(interSet);
                 } else {
                     I2DPoint minXpoint = interSet.stream().min(Comparator.comparingDouble(I2DPoint::getX)).get();
                     result.add(minXpoint);
                     interSet.remove(minXpoint);
                     for (int i = 0; i < interSet.size(); i++) {
-                        if (new ArrayList<>(interSet).get(i).getX() == minXpoint.getX()){
+                        if (new ArrayList<>(interSet).get(i).getX() == minXpoint.getX()) {
                             result.add(new ArrayList<>(interSet).get(i));
                         }
                     }
