@@ -118,7 +118,7 @@ public class Solver implements ISolver {
             numOfUniqueChars.add(numOfUniqueCharsInString);
         }
         int minNumberUniqueChars = numOfUniqueChars.get(0);
-        int indexWord = 0;
+        int indexWord;
         String resultString = "";
         if (numOfUniqueChars.stream().allMatch(i -> i.equals(0))) {
             resultString = Arrays.stream(inputStrings)
@@ -236,7 +236,7 @@ public class Solver implements ISolver {
                 if (result.equals("")) {
                     result = s;
                 } else {
-                    result = result + " " + s;
+                    result = result.concat(" " + s);
                 }
             }
         }
@@ -280,7 +280,7 @@ public class Solver implements ISolver {
                 }
             }
         }
-        String result = "";
+        String result;
         if (resultList.isEmpty()) {
             result = "NOT_FOUND";
         } else {
