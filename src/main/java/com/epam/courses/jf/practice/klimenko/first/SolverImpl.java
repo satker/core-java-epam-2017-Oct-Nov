@@ -216,14 +216,14 @@ public class SolverImpl implements ISolver {
 
         if (det == 0) {
             double solution = (sqrtDet - coefB) / (2 * coefA);
-            System.out.printf("One solution: %f\n", solution);
+            System.out.printf("One solution: %.2f\n", solution);
             return;
         }
 
         double solutionA = (-coefB - sqrtDet) / (2 * coefA);
         double solutionB = (-coefB + sqrtDet) / (2 * coefA);
         // TODO: Get rid of trailing zeroes
-        System.out.printf("Two solutions: %f, %f\n", solutionA, solutionB);
+        System.out.printf("Two solutions: %.2f, %.2f\n", solutionA, solutionB);
     }
 
     @Override
