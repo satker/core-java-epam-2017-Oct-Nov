@@ -153,7 +153,10 @@ public class SolverImpl implements ISolver {
 
             if (matched) {
                 if (!matchedWords.contains(word)) {
-                    System.out.printf("%s ", word);
+                    if(!matchedWords.isEmpty()) {
+                        System.out.print(" ");
+                    }
+                    System.out.printf("%s", word);
                     matchedWords.add(word);
                 }
             }
@@ -194,7 +197,10 @@ public class SolverImpl implements ISolver {
         for (int row = 0; row < size; ++row) {
             for (int col = 0; col < size; ++col) {
                 int element = row * size + col + 1;
-                System.out.printf("%d ", element);
+                System.out.printf("%d", element);
+                if( col < size - 1 ) {
+                    System.out.print("\t");
+                }
             }
             System.out.println();
         }
