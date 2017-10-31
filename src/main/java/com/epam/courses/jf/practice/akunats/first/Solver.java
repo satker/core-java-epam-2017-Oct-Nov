@@ -15,15 +15,6 @@ public class Solver implements ISolver {
         Solver r = new Solver();
         r.task22();
     }
-    private void printMatrix(Number[][] matrix, int dimension){
-        for (int i = 0; i < dimension; i++) {
-            System.out.print(matrix[i][0]);
-            for (int j = 1; j < dimension; j++) {
-                System.out.printf("\t" + matrix[i][j]);
-            }
-            System.out.println();
-        }
-    }
     @Override
     public void task1() {
         Scanner scanner = new Scanner(System.in);
@@ -118,7 +109,7 @@ public class Solver implements ISolver {
             numOfUniqueChars.add(numOfUniqueCharsInString);
         }
         int minNumberUniqueChars = numOfUniqueChars.get(0);
-        int indexWord;
+        int indexWord = 0;
         String resultString = "";
         if (numOfUniqueChars.stream().allMatch(i -> i.equals(0))) {
             resultString = Arrays.stream(inputStrings)
@@ -236,7 +227,7 @@ public class Solver implements ISolver {
                 if (result.equals("")) {
                     result = s;
                 } else {
-                    result = result.concat(" " + s);
+                    result = result + " " + s;
                 }
             }
         }
@@ -280,7 +271,7 @@ public class Solver implements ISolver {
                 }
             }
         }
-        String result;
+        String result = "";
         if (resultList.isEmpty()) {
             result = "NOT_FOUND";
         } else {
@@ -430,7 +421,7 @@ public class Solver implements ISolver {
         scanner.nextLine();
         int arrayDimension = scanner.nextInt();
         scanner.nextLine();
-        Integer[][] inputMatrix = new Integer[arrayDimension][arrayDimension];
+        int[][] inputMatrix = new int[arrayDimension][arrayDimension];
         for (int i = 0; i < arrayDimension; i++) {
             String[] scannerString = scanner.nextLine().split(" ");
             for (int j = 0; j < arrayDimension; j++) {
@@ -452,7 +443,7 @@ public class Solver implements ISolver {
                 shiftIndexes[i] = i;
             }
         }
-        Integer[][] resultMatrix = new Integer[arrayDimension][arrayDimension];
+        int[][] resultMatrix = new int[arrayDimension][arrayDimension];
         for (int i = 0; i < arrayDimension; i++) {
             int index = 0;
             for (int j = 0; j < arrayDimension; j++) {
@@ -462,7 +453,12 @@ public class Solver implements ISolver {
             resultMatrix[i] = inputMatrix[index];
         }
         System.out.println(arrayDimension);
-        printMatrix(resultMatrix, arrayDimension);
+        for (int i = 0; i < arrayDimension; i++) {
+            for (int j = 0; j < arrayDimension; j++) {
+                System.out.print(resultMatrix[i][j] + " ");
+            }
+            System.out.print("\n");
+        }
     }
 
     @Override
@@ -540,7 +536,7 @@ public class Solver implements ISolver {
                 inputMatrix[i][j] = Integer.parseInt(scannerString[j]);
             }
         }
-        Integer[][] resultMatrix = new Integer[arrayDimension][arrayDimension];
+        int[][] resultMatrix = new int[arrayDimension][arrayDimension];
         if (arrayDimension > 1) {
             for (int i = 0; i < arrayDimension / 2; i++) {
                 int j = (arrayDimension - 1) - i; // берем противоположные индексы для движениии
@@ -563,7 +559,12 @@ public class Solver implements ISolver {
                 }
             }
             System.out.println(arrayDimension);
-            printMatrix(resultMatrix, arrayDimension);
+            for (int i = 0; i < arrayDimension; i++) {
+                for (int j = 0; j < arrayDimension; j++) {
+                    System.out.print(resultMatrix[i][j] + " ");
+                }
+                System.out.print("\n");
+            }
         } else {
             System.out.println(1);
         }
@@ -641,16 +642,21 @@ public class Solver implements ISolver {
                 }
             }
         }
-        Integer[][] resultMatrix = resultMatrix(arrayDimension, inputMatrix, columnsList, stringsList);
+        int[][] resultMatrix = resultMatrix(arrayDimension, inputMatrix, columnsList, stringsList);
         int numStringsResult = arrayDimension - stringsList.size();
         int numColumnsResult = arrayDimension - columnsList.size();
         System.out.println(numStringsResult);
         System.out.println(numColumnsResult);
-        printMatrix(resultMatrix, arrayDimension);
+        for (int i = 0; i < numStringsResult; i++) {
+            for (int j = 0; j < numColumnsResult; j++) {
+                System.out.print(resultMatrix[i][j] + " ");
+            }
+            System.out.print("\n");
+        }
     }
 
-    private Integer[][] resultMatrix(int arrayDimension, int[][] inputMatrix, HashSet<Integer> columnsList, HashSet<Integer> stringsList) {
-        Integer[][] resultMatrix = new Integer[arrayDimension - stringsList.size()][arrayDimension - columnsList.size()];
+    private int[][] resultMatrix(int arrayDimension, int[][] inputMatrix, HashSet<Integer> columnsList, HashSet<Integer> stringsList) {
+        int[][] resultMatrix = new int[arrayDimension - stringsList.size()][arrayDimension - columnsList.size()];
         int str = 0;
         int col = 0;
         for (int i = 0; i < arrayDimension; i++) {
@@ -708,12 +714,17 @@ public class Solver implements ISolver {
                 stringsList.add(indexString);
             }
         }
-        Integer[][] resultMatrix = resultMatrix(arrayDimension, inputMatrix, columnsList, stringsList);
+        int[][] resultMatrix = resultMatrix(arrayDimension, inputMatrix, columnsList, stringsList);
         int numStringsResult = arrayDimension - stringsList.size();
         int numColumnsResult = arrayDimension - columnsList.size();
         System.out.println(numStringsResult);
         System.out.println(numColumnsResult);
-        printMatrix(resultMatrix, arrayDimension);
+        for (int i = 0; i < numStringsResult; i++) {
+            for (int j = 0; j < numColumnsResult; j++) {
+                System.out.print(resultMatrix[i][j] + " ");
+            }
+            System.out.print("\n");
+        }
     }
 
     @Override
@@ -745,7 +756,7 @@ public class Solver implements ISolver {
                 }
             }
         }
-        Integer[][] resultMatrix = new Integer[arrayDimension][arrayDimension];
+        int[][] resultMatrix = new int[arrayDimension][arrayDimension];
         for (int i = 0; i < arrayDimension; i++) {
             for (int j = 0; j < arrayDimension; j++) {
                 resultMatrix[i][j] = inputMatrix[i == strInput ? strMin : (i == strMin ? strInput : i)]
@@ -753,7 +764,12 @@ public class Solver implements ISolver {
             }
         }
         System.out.println(arrayDimension);
-        printMatrix(resultMatrix, arrayDimension);
+        for (int i = 0; i < arrayDimension; i++) {
+            for (int j = 0; j < arrayDimension; j++) {
+                System.out.print(resultMatrix[i][j] + " ");
+            }
+            System.out.print("\n");
+        }
     }
 
     @Override
@@ -768,7 +784,7 @@ public class Solver implements ISolver {
                 inputMatrix[i][j] = Integer.parseInt(scannerString[j]);
             }
         }
-        Integer resultMatrix[][] = new Integer[arrayDimension][arrayDimension];
+        int resultMatrix[][] = new int[arrayDimension][arrayDimension];
         for (int i = 0; i < arrayDimension; i++) {
             int col = 0;
             for (int j = 0; j < arrayDimension; j++) {
@@ -779,7 +795,12 @@ public class Solver implements ISolver {
             }
         }
         System.out.println(arrayDimension);
-        printMatrix(resultMatrix, arrayDimension);
+        for (int i = 0; i < arrayDimension; i++) {
+            for (int j = 0; j < arrayDimension; j++) {
+                System.out.print(resultMatrix[i][j] + " ");
+            }
+            System.out.print("\n");
+        }
     }
 
     @Override
@@ -787,7 +808,7 @@ public class Solver implements ISolver {
         Scanner scanner = new Scanner(System.in);
         int arrayDimension = scanner.nextInt();
         scanner.nextLine();
-        Integer[][] inputMatrix = new Integer[arrayDimension][arrayDimension];
+        double[][] inputMatrix = new double[arrayDimension][arrayDimension];
         for (int i = 0; i < arrayDimension; i++) {
             String[] scannerString = scanner.nextLine().split(" ");
             for (int j = 0; j < arrayDimension; j++) {
@@ -795,7 +816,13 @@ public class Solver implements ISolver {
             }
         }
         if (arrayDimension != 1) {
-            printMatrix(inputMatrix, arrayDimension);
+            System.out.println(arrayDimension);
+            for (int i = 0; i < arrayDimension; i++) {
+                for (int j = 0; j < arrayDimension; j++) {
+                    System.out.print(inputMatrix[i][j] + " ");
+                }
+                System.out.print("\n");
+            }
         } else {
             System.out.println(1);
         }
@@ -874,7 +901,13 @@ public class Solver implements ISolver {
             count++;
         }
         System.out.println(arrayDimension);
-        printMatrix(resultMatrix, arrayDimension);
+        for (int i = 0; i < arrayDimension; i++) {
+            System.out.print(resultMatrix[i][0]);
+            for (int j = 1; j < arrayDimension; j++) {
+                System.out.printf("\t" + resultMatrix[i][j]);
+            }
+            System.out.println();
+        }
     }
 
     @Override
@@ -1052,7 +1085,12 @@ public class Solver implements ISolver {
             count++;
         }
         System.out.println(arrayDimension);
-        printMatrix(resultMatrix, arrayDimension);
+        for (int i = 0; i < arrayDimension; i++) {
+            for (int j = 0; j < arrayDimension; j++) {
+                System.out.print(resultMatrix[i][j] + " ");
+            }
+            System.out.print("\n");
+        }
     }
 
 }
