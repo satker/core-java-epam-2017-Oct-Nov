@@ -560,10 +560,10 @@ public class Solver implements ISolver {
                     resultMatrix[j][k] = inputMatrix[k][i]; // Движение строк одной стороны
                 }
             }
-            System.out.println(arrayDimension);
         } else {
             resultMatrix[0][0] = 1;
         }
+        System.out.println(arrayDimension);
         for (int i = 0; i < arrayDimension; i++) {
             for (int j = 0; j < arrayDimension; j++) {
                 System.out.print(resultMatrix[i][j] + " ");
@@ -815,11 +815,7 @@ public class Solver implements ISolver {
             String[] scannerString = scanner.nextLine().split(" ");
             for (int j = 0; j < arrayDimension; j++) {
                 inputMatrix[i][j] = (int) Math.round
-                        (Double.parseDouble(
-                                scannerString[j].replaceAll(
-                                        "[,]", ".")
-                        )
-                        );
+                        (Double.parseDouble(scannerString[j]));
             }
         }
         if (arrayDimension != 1) {
@@ -831,6 +827,7 @@ public class Solver implements ISolver {
                 System.out.print("\n");
             }
         } else {
+            System.out.println(arrayDimension);
             System.out.println(1);
         }
     }
