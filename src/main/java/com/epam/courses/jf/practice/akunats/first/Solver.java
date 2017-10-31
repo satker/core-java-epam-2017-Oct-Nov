@@ -810,7 +810,7 @@ public class Solver implements ISolver {
         Scanner scanner = new Scanner(System.in);
         int arrayDimension = scanner.nextInt();
         scanner.nextLine();
-        double[][] inputMatrix = new double[arrayDimension][arrayDimension];
+        int[][] inputMatrix = new int[arrayDimension][arrayDimension];
         for (int i = 0; i < arrayDimension; i++) {
             for (int j = 0; j < arrayDimension; j++) {
                 inputMatrix[i][j] = (int) Math.round(scanner.nextDouble());
