@@ -131,15 +131,11 @@ public class Solver implements ISolver {
     }
 
     public void task7() {
-        //String line = scanner.nextLine();
-        //String[] words = line.split(" ");
         Scanner scanner = new Scanner(System.in);
-        //  System.out.println("Enter numbers of lines: ");
         int number = Integer.valueOf(scanner.nextLine());
-        String result = " ", word = " ";
+        String result = "", word = "";
         int countUniqueElements = 0;
-        LinkedHashSet<String> necessaryWords = new LinkedHashSet<String>();
-        //  System.out.println("Enter words: ");
+        Set<String> necessaryWords = new HashSet<String>();
         for (int i = 0; i < number; ++i) {
             word = scanner.next();
             countUniqueElements = (int) word.chars().distinct().count();
@@ -148,7 +144,7 @@ public class Solver implements ISolver {
             }
         }
         for (String str : necessaryWords) {
-            System.out.printf("%s ", str);
+            System.out.printf("%s", str);
         }
     }
 
