@@ -120,7 +120,7 @@ public class Solver implements ISolver {
         for (int i = 0; i < number; ++i) {
             char[] word = scanner.next().toCharArray();
             for (int j = 0; j < word.length - 1; ++j) {
-                if (word[j] > word[j + 1]) break;
+                if (word[j] >= word[j + 1]) break;
                 if (word.length - 2 == j) {
                     System.out.printf("%s%n", new String(word));
                     return;
