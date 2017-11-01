@@ -30,20 +30,14 @@ public class Task17 implements ITestableTask17 {
                 }
             }
             if (!interSet.isEmpty()) {
-                if (interSet.stream().anyMatch(i -> {
-                    boolean control = false;
-                    for (I2DPoint point : result) {
-                        if (point.getX() < i.getX() || garbage.contains(point)) {
-                            control = true;
-                        }
-                    }
-                    return control;
-                })) {
+                if (interSet.stream().anyMatch(i -> garbage.contains(i))){
                     continue;
                 }
-                if (interSet.size() == 1) {
-                    result.addAll(interSet);
-                } else {
+                intetMap.put(line, interSet);
+                //if (interSet.size() == 1) {
+                    //result.addAll(interSet);
+                    
+                /*} else {
                     I2DPoint minXpoint = interSet.stream().min(Comparator.comparingDouble(I2DPoint::getX)).get();
                     result.add(minXpoint);
                     interSet.remove(minXpoint);
@@ -52,10 +46,19 @@ public class Task17 implements ITestableTask17 {
                             result.add(new ArrayList<>(interSet).get(i));
                         }
                     }
-                }
-
+                }*/
             }
         }
+        for ( Map.Entry<ISegment, SortedSet<I2DPoint>> entry : map.entrySet() ) {
+                    I2DPoint minXpoint = entry.getValue().stream().min(Comparator.comparingDouble(I2DPoint::getX)).get();
+                    result.add(minXpoint);
+                    entry.getValue().remove(minXpoint);
+                    for (int i = 0; i < entry.getValue().size(); i++) {
+                        if (new ArrayList<>(entry.getValue()).get(i).getX() == minXpoint.getX()) {
+                            result.add(new ArrayList<>(interSet).get(i));
+                        }
+                    }
+                }
         return result;
     }
 
