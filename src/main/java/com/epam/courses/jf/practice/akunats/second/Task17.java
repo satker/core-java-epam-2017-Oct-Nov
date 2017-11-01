@@ -12,7 +12,7 @@ public class Task17 implements ITestableTask17 {
             throw new IllegalArgumentException("You enter wrong data.");
         }
         SortedMap<ISegment, Set<I2DPoint>> interMap = new TreeMap<>((o1, o2)
-                -> Integer.compare(o1.first().getX(), o2.first().getX()));
+                -> Double.compare(o1.first().getX(), o2.first().getX()));
 
         Iterator<ISegment> iter = segments.iterator();
         Set<I2DPoint> result = new HashSet<>();
