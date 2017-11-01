@@ -887,7 +887,7 @@ public class Solver implements ISolver {
             sumStrings[i][1] = sumString;
         }
         ArrayList<Integer> interList = new ArrayList<>();
-        Arrays.stream(sumStrings).sorted((a, b)-> !a[1].equals(b[1]) ? a[1].compareTo(b[1]) : -1).forEach(o->{
+        Arrays.stream(sumStrings).sorted((a, b)-> !a[1].equals(b[1]) ? a[1].compareTo(b[1]) : 1).forEach(o->{
             interList.add(o[0]);
         });
         Integer[][] resultMatrix = new Integer[arrayDimension][arrayDimension];
