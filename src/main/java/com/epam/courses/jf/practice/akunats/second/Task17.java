@@ -33,20 +33,8 @@ public class Task17 implements ITestableTask17 {
                 if (interSet.stream().anyMatch(i -> garbage.contains(i))){
                     continue;
                 }
-                intetMap.put(line, interSet);
-                //if (interSet.size() == 1) {
-                    //result.addAll(interSet);
-                    
-                /*} else {
-                    I2DPoint minXpoint = interSet.stream().min(Comparator.comparingDouble(I2DPoint::getX)).get();
-                    result.add(minXpoint);
-                    interSet.remove(minXpoint);
-                    for (int i = 0; i < interSet.size(); i++) {
-                        if (new ArrayList<>(interSet).get(i).getX() == minXpoint.getX()) {
-                            result.add(new ArrayList<>(interSet).get(i));
-                        }
-                    }
-                }*/
+                interMap.put(line, interSet);
+              
             }
         }
         for ( Map.Entry<ISegment, SortedSet<I2DPoint>> entry : map.entrySet() ) {
