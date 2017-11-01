@@ -247,10 +247,6 @@ public class Solver implements ISolver {
             row1[i] = row2[i];
             row2[i] = temp;
         }
-       /* int[] temp;
-        temp = row1;
-        row1 = row2;
-        row2 = temp;*/
     }
 
     private void printMatrix(int[][] matrix){
