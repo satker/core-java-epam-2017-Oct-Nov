@@ -13,7 +13,7 @@ import static java.util.stream.Collectors.toSet;
 public class Solver implements ISolver {
     public static void main(String[] args) {
         Solver r = new Solver();
-        r.task24();
+        r.task27();
     }
     @Override
     public void task1() {
@@ -877,30 +877,24 @@ public class Solver implements ISolver {
                 inputMatrix[i][j] = Integer.parseInt(scannerString[j]);
             }
         }
-        Integer[] sumStrings = new Integer[arrayDimension];
+        Integer[][] sumStrings = new Integer[arrayDimension][2];
         for (int i = 0; i < arrayDimension; i++) {
             int sumString = 0;
             for (int j = 0; j < arrayDimension; j++) {
                 sumString += inputMatrix[i][j];
             }
-            sumStrings[i] = sumString;
+            sumStrings[i][0] = i;
+            sumStrings[i][1] = sumString;
         }
-        // Создаем мапу где ключи это строка матрицы, а значения сумма этих элементов
-        HashMap<Integer[], Integer> interMap = new HashMap<>();
-        for (int i = 0; i < arrayDimension; i++) {
-            interMap.put(inputMatrix[i], sumStrings[i]);
-        }
-
-        Map<Integer[], Integer> resultMap = new LinkedHashMap<>();
-        //Делаем сортировку этой мапы
-        interMap.entrySet().stream().sorted(Comparator.comparing(Map.Entry::getValue))
-                .forEach(e -> resultMap.put(e.getKey(), e.getValue()));
+        ArrayList<Integer> interList = new ArrayList<>();
+        Arrays.stream(sumStrings).sorted((a, b)-> !a[1].equals(b[1]) ? a[1].compareTo(b[1]) : -1).forEach(o->{
+            interList.add(o[0]);
+        });
         Integer[][] resultMatrix = new Integer[arrayDimension][arrayDimension];
-        int count = 0;
-        // Заполняем матрицу результатом сортировки мапы
-        for (Map.Entry<Integer[], Integer> entry : resultMap.entrySet()) {
-            resultMatrix[count] = entry.getKey();
-            count++;
+        for (int i = 0; i < arrayDimension; i++) {
+            for (int j = 0; j < arrayDimension; j++) {
+                resultMatrix[i][j] = inputMatrix[interList.get(i)][j];
+            }
         }
         System.out.println(arrayDimension);
         printMatrix(resultMatrix, arrayDimension);
@@ -1048,37 +1042,24 @@ public class Solver implements ISolver {
                 inputMatrix[i][j] = Integer.parseInt(scannerString[j]);
             }
         }
-        Integer[] sumStrings = new Integer[arrayDimension];
+        Integer[][] sumStrings = new Integer[arrayDimension][2];
         for (int i = 0; i < arrayDimension; i++) {
             int sumString = 0;
             for (int j = 0; j < arrayDimension; j++) {
                 sumString += Math.abs(inputMatrix[j][i]);
             }
-            sumStrings[i] = sumString;
+            sumStrings[i][0] = i;
+            sumStrings[i][1] = sumString;
         }
-        // Создаем мапу где ключи это столбец матрицы, а значения сумма этих элементов
-        HashMap<Integer[], Integer> interMap = new HashMap<>();
-        for (int i = 0; i < arrayDimension; i++) {
-            Integer[] columnMatrix = new Integer[arrayDimension];
-            for (int j = 0; j < arrayDimension; j++) {
-                columnMatrix[j] = inputMatrix[j][i];
-            }
-            interMap.put(columnMatrix, sumStrings[i]);
-        }
-
-        Map<Integer[], Integer> resultMap = new LinkedHashMap<>();
-        //Делаем сортировку в обратную сторону этой мапы
-        interMap.entrySet().stream()
-                .sorted(Comparator.comparing(Map.Entry::getValue, Collections.reverseOrder()))
-                .forEach(e -> resultMap.put(e.getKey(), e.getValue()));
+        ArrayList<Integer> interList = new ArrayList<>();
+        Arrays.stream(sumStrings).sorted((a, b)-> !a[1].equals(b[1]) ? a[1].compareTo(b[1]) : -1).forEach(o->{
+            interList.add(o[0]);
+        });
         Integer[][] resultMatrix = new Integer[arrayDimension][arrayDimension];
-        int count = 0;
-        // Заполняем матрицу resultMatrix результатом сортировки мапы
-        for (Map.Entry<Integer[], Integer> entry : resultMap.entrySet()) {
-            for (int i = 0; i < arrayDimension; i++) {
-                resultMatrix[i][count] = entry.getKey()[i];
+        for (int i = 0; i < arrayDimension; i++) {
+            for (int j = 0; j < arrayDimension; j++) {
+                resultMatrix[j][i] = inputMatrix[j][interList.get((arrayDimension-1) - i)];
             }
-            count++;
         }
         System.out.println(arrayDimension);
         printMatrix(resultMatrix, arrayDimension);
