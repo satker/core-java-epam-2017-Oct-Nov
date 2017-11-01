@@ -25,7 +25,7 @@ public class Task17 implements ITestableTask17 {
                     I2DPoint point = getPoints(line, nextLine);
                     if (point != null) {
                         interSet.add(point);
-                        garbage.add(point);
+                       
                     }
                 }
             }
@@ -34,7 +34,9 @@ public class Task17 implements ITestableTask17 {
                     continue;
                 }
                 interMap.put(line, interSet);
-              
+                for (I2DPoint point : interSet) {
+                    garbage.add(point);
+                }
             }
         }
         for ( Map.Entry<ISegment, Set<I2DPoint>> entry : interMap.entrySet() ) {
