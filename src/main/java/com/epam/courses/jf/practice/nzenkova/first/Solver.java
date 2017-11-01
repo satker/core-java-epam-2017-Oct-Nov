@@ -177,15 +177,15 @@ public class Solver implements ISolver {
 
     public void task9(){
         Scanner scanner = new Scanner(System.in);
-        // System.out.println("Enter N: ");
-        int N = Integer.valueOf(scanner.nextLine());
+        int dimension = Integer.valueOf(scanner.nextLine());
         int counter = 0;
-        for(int i = 0; i < N; ++i){
-            for(int j = 0; j < N; ++j){
-                System.out.printf("%s\t", ++counter);
+        int[][] matrix = new int[dimension][dimension];
+        for(int i = 0; i < dimension; ++i){
+            for(int j = 0; j < dimension; ++j){
+                matrix[i][j] = ++counter;
             }
-            System.out.printf("%n");
         }
+        printMatrix(matrix);
     }
 
     public void task10(){
@@ -255,12 +255,12 @@ public class Solver implements ISolver {
     }
 
     private void printMatrix(int[][] matrix){
-        // int dimension = matrix.length;
         int numberRows = matrix.length;
         int numberColumns = matrix[0].length;
         for(int i = 0; i < numberRows; ++i){
             for(int j = 0; j < numberColumns; ++j){
-                System.out.printf("% d\t", matrix[i][j]);
+                if(j == numberColumns - 1) System.out.printf("%d", matrix[i][j]);
+                else System.out.printf("%d\t", matrix[i][j]);
             }
             System.out.printf("%n");
         }
