@@ -11,6 +11,10 @@ import java.util.stream.Collectors;
  * Created by natal on 01.11.2017.
  */
 public class Solver implements ISolver {
+    /**
+     * Searching the smallest and the biggest row. Output the rows found and their length.
+     * If the rows fully satisfying the conditions are more than one, output the last row
+     */
     public void task1() {
         Scanner scanner = new Scanner(System.in);
         int number = Integer.valueOf(scanner.nextLine());/* number of lines */
@@ -38,7 +42,6 @@ public class Solver implements ISolver {
 
     public void task2() {
         Scanner in = new Scanner(System.in);
-        System.out.println("Enter numbers of lines: ");
         int number = Integer.valueOf(in.nextLine());
         String[] strings = new String[number];
         for (int i = 0; i < number; ++i) {
@@ -52,7 +55,6 @@ public class Solver implements ISolver {
 
     public void task3() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter numbers of lines: ");
         int number = Integer.parseInt(scanner.nextLine());
         String[] strings = new String[number];
         int sumLength = 0;
@@ -72,11 +74,9 @@ public class Solver implements ISolver {
 
     public void task4() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter numbers of lines: ");
         int number = Integer.valueOf(scanner.nextLine());
         String result = " ";
         int minUniqueElements = 0;
-        System.out.println("Enter words: ");
         String word = scanner.next();
         int countUniqueElements = (int) word.chars().distinct().count();
         minUniqueElements = countUniqueElements;
@@ -94,9 +94,9 @@ public class Solver implements ISolver {
 
     public void task5() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter numbers of lines: ");
+        //  System.out.println("Enter numbers of lines: ");
         int number = Integer.valueOf(scanner.nextLine());
-        System.out.println("Enter words: ");
+        //   System.out.println("Enter words: ");
         int counter = 0;
         for (int i = 0; i < number; ++i) {
             String word = scanner.next();
@@ -113,9 +113,9 @@ public class Solver implements ISolver {
 
     public void task6() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter numbers of lines: ");
+        //    System.out.println("Enter numbers of lines: ");
         int number = Integer.valueOf(scanner.nextLine());
-        System.out.println("Enter words: ");
+        //   System.out.println("Enter words: ");
         for (int i = 0; i < number; ++i) {
             char[] word = scanner.next().toCharArray();
             for (int j = 0; j < word.length - 1; ++j) {
@@ -133,12 +133,12 @@ public class Solver implements ISolver {
         //String line = scanner.nextLine();
         //String[] words = line.split(" ");
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter numbers of lines: ");
+        //  System.out.println("Enter numbers of lines: ");
         int number = Integer.valueOf(scanner.nextLine());
         String result = " ", word = " ";
         int countUniqueElements = 0;
         LinkedHashSet<String> necessaryWords = new LinkedHashSet<String>();
-        System.out.println("Enter words: ");
+        //  System.out.println("Enter words: ");
         for (int i = 0; i < number; ++i) {
             word = scanner.next();
             countUniqueElements = (int) word.chars().distinct().count();
@@ -153,12 +153,12 @@ public class Solver implements ISolver {
 
     public void task8() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter numbers of words: ");
+        //    System.out.println("Enter numbers of words: ");
         int number = Integer.valueOf(scanner.nextLine());
         String numbers = "[0-9]+";
         int counter = 0;
         String palindrome = "";
-        System.out.println("Enter words: ");
+        //    System.out.println("Enter words: ");
         for (int i = 0; i < number; ++i) {
             String word = scanner.next();
             if (word.matches(numbers)) {
@@ -180,7 +180,7 @@ public class Solver implements ISolver {
 
     public void task9(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter N: ");
+        // System.out.println("Enter N: ");
         int N = Integer.valueOf(scanner.nextLine());
         int counter = 0;
         for(int i = 0; i < N; ++i){
@@ -193,7 +193,7 @@ public class Solver implements ISolver {
 
     public void task10(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter A, B, C: ");
+        //     System.out.println("Enter A, B, C: ");
         double A = scanner.nextDouble();
         double B = scanner.nextDouble();
         double C = scanner.nextDouble();
@@ -212,7 +212,7 @@ public class Solver implements ISolver {
 
     public void task11(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter a number of months: ");
+        //   System.out.println("Enter a number of months: ");
         int numberNMonth = scanner.nextInt();
         switch (numberNMonth){
             case 1: System.out.println(Month.of(numberNMonth)); break;
@@ -271,9 +271,9 @@ public class Solver implements ISolver {
 
     public void task12(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter a column number:");
+        //    System.out.println("Enter a column number:");
         int ncol = scanner.nextInt();
-        System.out.println("Enter a matrix dimension:");
+        //  System.out.println("Enter a matrix dimension:");
         int[][] matrix = readMatrix(scanner);
         int dimension = matrix.length;
         Arrays.sort(matrix, (o1, o2) -> o1[ncol] > o2[ncol] ? 1 : o1[ncol] < o2[ncol] ? -1 : Integer.compare(o1[ncol], o2[ncol]));
@@ -307,7 +307,7 @@ public class Solver implements ISolver {
 
     public void task14(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter numbers of elements: ");
+        //   System.out.println("Enter numbers of elements: ");
         int number = Integer.parseInt(scanner.nextLine());
         int numberMax = 0, counter = 1;
         int number1 = 0, number2 = 0;
@@ -512,4 +512,5 @@ public class Solver implements ISolver {
         System.out.println(resultColumns);
         printMatrix(resultMatrix);
     }
+
 }
