@@ -37,13 +37,13 @@ public class Task17 implements ITestableTask17 {
               
             }
         }
-        for ( Map.Entry<ISegment, SortedSet<I2DPoint>> entry : map.entrySet() ) {
+        for ( Map.Entry<ISegment, SortedSet<I2DPoint>> entry : interMap.entrySet() ) {
                     I2DPoint minXpoint = entry.getValue().stream().min(Comparator.comparingDouble(I2DPoint::getX)).get();
                     result.add(minXpoint);
                     entry.getValue().remove(minXpoint);
                     for (int i = 0; i < entry.getValue().size(); i++) {
                         if (new ArrayList<>(entry.getValue()).get(i).getX() == minXpoint.getX()) {
-                            result.add(new ArrayList<>(interSet).get(i));
+                            result.add(new ArrayList<>(entry.getValue()).get(i));
                         }
                     }
                 }
