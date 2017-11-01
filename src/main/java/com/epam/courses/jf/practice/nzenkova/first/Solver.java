@@ -190,19 +190,18 @@ public class Solver implements ISolver {
 
     public void task10(){
         Scanner scanner = new Scanner(System.in);
-        //     System.out.println("Enter A, B, C: ");
         double A = scanner.nextDouble();
         double B = scanner.nextDouble();
         double C = scanner.nextDouble();
         double D = Math.pow(B, 2) - 4 * A * C;
         if(D < 0) System.out.println("No solution");
         else if(D == 0){
-            BigDecimal x = (new BigDecimal(-B/(2 * A))).setScale(2,BigDecimal.ROUND_UP);
+            BigDecimal x = (new BigDecimal(-B/(2 * A))).setScale(2,BigDecimal.ROUND_HALF_UP);
             System.out.println("One solution: " + x);
         }
         else{
-            BigDecimal x1 = (new BigDecimal((- B - Math.sqrt(D))/(2 * A))).setScale(2,BigDecimal.ROUND_UP);
-            BigDecimal x2 = (new BigDecimal((- B + Math.sqrt(D))/(2 * A))).setScale(2,BigDecimal.ROUND_UP);
+            BigDecimal x1 = (new BigDecimal((- B - Math.sqrt(D))/(2 * A))).setScale(2,BigDecimal.ROUND_HALF_UP);
+            BigDecimal x2 = (new BigDecimal((- B + Math.sqrt(D))/(2 * A))).setScale(2,BigDecimal.ROUND_HALF_UP);
             System.out.println("Two solutions: " + x1 + ", " + x2);
         }
     }
