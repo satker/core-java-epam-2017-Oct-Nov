@@ -40,5 +40,26 @@ public class Solver implements ISolver {
 
 
     }
+    @Override
+    public void task2() {
+        Scanner sc = new Scanner(System.in);
+        String arrStr [] = getStrings(sc);
+        Arrays.sort(arrStr,Collections.reverseOrder());
+
+        for(String str: arrStr){
+            System.out.printf("(%d): \"%s\"%n", str.length(), str);
+
+        }
+
+    }
+    private String[] getStrings(Scanner scanner) {
+        int n = Integer.parseInt(scanner.nextLine());
+
+        String[] strings = new String[n];
+        for (int i = 0; i < n; i++) {
+            strings[i] = scanner.nextLine();
+        }
+        return strings;
+    }
 
 }
