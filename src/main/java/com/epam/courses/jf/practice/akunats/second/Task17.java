@@ -11,7 +11,7 @@ public class Task17 implements ITestableTask17 {
         if (segments.size() < 2 || segments.size() > 20) {
             throw new IllegalArgumentException("You enter wrong data.");
         }
-        SortedMap<ISegment, SortedSet<I2DPoint>> interMap = new TreeMap<>();
+        SortedMap<ISegment, Set<I2DPoint>> interMap = new TreeMap<>();
 
         Iterator<ISegment> iter = segments.iterator();
         Set<I2DPoint> result = new HashSet<>();
