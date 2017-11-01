@@ -75,7 +75,7 @@ public class Solver implements ISolver {
     public void task4() {
         Scanner scanner = new Scanner(System.in);
         int number = Integer.valueOf(scanner.nextLine());
-        String result = " ";
+        String result = "";
         int minUniqueElements = 0;
         String word = scanner.next();
         int countUniqueElements = (int) word.chars().distinct().count();
@@ -83,7 +83,7 @@ public class Solver implements ISolver {
         for (int i = 0; i < number - 1; ++i) {
             word = scanner.next();
             countUniqueElements = (int) word.chars().distinct().count();
-            System.out.println(word.chars().distinct().count());
+            //System.out.println(word.chars().distinct().count());
             if (countUniqueElements < minUniqueElements) {
                 minUniqueElements = countUniqueElements;
                 result = word;
