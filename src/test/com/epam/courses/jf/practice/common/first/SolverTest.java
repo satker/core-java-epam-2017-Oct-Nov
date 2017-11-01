@@ -163,4 +163,18 @@ public class SolverTest {
             System.setIn(oldSystemStream);
         }
     }
+
+    @Test
+    public void task12() throws Exception{
+        String inputData = "2\n5\n0 2 3 4 5\n1 3 0 2 -1\n-1 -1 -5 5 0\n5 4 -4 -2 2\n1 3 -3 -4 3\n";
+        InputStream inputDataStream = new ByteArrayInputStream(inputData.getBytes("UTF-8"));
+        InputStream oldSystemStream = System.in;
+        try {
+            System.setIn(inputDataStream);
+            Solver solver = new Solver();
+            solver.task12();
+        } finally {
+            System.setIn(oldSystemStream);
+        }
+    }
 }

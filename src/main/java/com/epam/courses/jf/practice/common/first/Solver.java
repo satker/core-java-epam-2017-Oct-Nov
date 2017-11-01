@@ -7,6 +7,8 @@ import java.util.regex.Pattern;
 
 public class Solver implements ISolver {
 
+    static int index;
+
     private static boolean isSorted(char[] characters){
 
         for(int i = 1; i < characters.length; i++) {
@@ -391,6 +393,43 @@ public class Solver implements ISolver {
 
     @Override
     public void task12() {
+        Scanner inputData = new Scanner(System.in);
 
+        int size = 0;
+
+        if(inputData.hasNextInt()){
+            index = Integer.parseInt(inputData.nextLine());
+        }
+
+        if (inputData.hasNextInt()) {
+            size = Integer.parseInt(inputData.nextLine());
+        }
+
+        ArrayList<int[]> matrixRowList = new ArrayList<>();
+
+        for(int i = 0; i < size; i++){
+            String[] inputStrings = inputData.nextLine().split(" ");
+            int[] row = new int[size];
+            for(int j = 0; j < size; j++){
+                row[j] = Integer.valueOf(inputStrings[j]);
+            }
+            matrixRowList.add(row);
+        }
+
+        matrixRowList.sort(Comparator.comparingInt(e -> e[index]));
+
+        System.out.println(size);
+
+        for (int[] elementOfList : matrixRowList) {
+            for(int i = 0; i < size; i++){
+                System.out.printf("%d ", elementOfList[i]);
+            }
+            System.out.println();
+        }
+    }
+
+    @Override
+    public void task13() {
+        
     }
 }
