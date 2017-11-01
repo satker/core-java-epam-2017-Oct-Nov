@@ -11,10 +11,14 @@ public class Task17 implements ITestableTask17 {
         if (segments.size() < 2 || segments.size() > 20) {
             throw new IllegalArgumentException("You enter wrong data.");
         }
-        Set<I2DPoint> result = new HashSet<>();
+        SortedMap<ISegment, SortedSet<I2DPoint>> interMap = new TreeMap<>();
+
         Iterator<ISegment> iter = segments.iterator();
+        Set<I2DPoint> result = new HashSet<>();
         while (iter.hasNext()) { // первый шаг
             Set<I2DPoint> interSet = new HashSet<>();
+//            SortedSet<I2DPoint> interSet = new TreeSet<>((o1, o2)
+//                   -> Double.compare(o1.getX(), o2.getX()) == 0 ? -1 : 1);
             ISegment line = iter.next();
             for (ISegment nextLine : segments) { // первый шаг
                 if (!nextLine.equals(line)) {
@@ -27,8 +31,15 @@ public class Task17 implements ITestableTask17 {
                     double B2 = nextLine.first().getX() - nextLine.second().getX();
                     double C2 = nextLine.second().getY() * nextLine.first().getX() - nextLine.second().getX() * nextLine.first().getY();
                     // точка пересечения прямых
-                    double pointIntersectionX = (C2 * B1 - B2 * C1) / (B1 * A2 - A1 * B2);
-                    double pointIntersectionY = (C1 - A1 * pointIntersectionX) / B1;
+                    double pointIntersectionX;
+                    double pointIntersectionY;
+                    if (B1 != 0) {
+                        pointIntersectionX = (C2 * B1 - B2 * C1) / (B1 * A2 - A1 * B2);
+                        pointIntersectionY = (C1 - A1 * pointIntersectionX) / B1;
+                    } else {
+                        pointIntersectionY = (C2 * A1 - A2 * C1) / (B2 * A1 - B1 * A2);
+                        pointIntersectionX = (C1 - B1 * pointIntersectionY) / A1;
+                    }
 
                     double minX1 = line.second().getX() < line.first().getX()
                             ? line.second().getX() : line.first().getX();
@@ -54,20 +65,22 @@ public class Task17 implements ITestableTask17 {
                             && (pointIntersectionY >= minY2 && pointIntersectionY <= maxY2))) {
                         interSet.add(new Point(Math.round(pointIntersectionX),
                                 Math.round(pointIntersectionY)));
+                        //interMap.put(nextLine, interSet);
                     }
                 }
             }
             if (!interSet.isEmpty()) {
+                //interMap.put(line, interSet);
                 if (interSet.stream().anyMatch(i -> {
-                    boolean r = false;
+                    boolean control = false;
                     for (I2DPoint point : result) {
                         if (point.getX() < i.getX()) {
-                            r = true;
+                            control = true;
                         }
                     }
-                    return r;
+                    return control;
                 })) {
-                    break;
+                    continue;
                 }
                 if (interSet.size() == 1) {
                     result.addAll(interSet);
@@ -81,7 +94,12 @@ public class Task17 implements ITestableTask17 {
                         }
                     }
                 }
+
             }
+        /*Set<I2DPoint> result = new HashSet<>();
+        for (Integer segment : interMap.keySet()) {
+            result.add(new ArrayList<>(interMap.get(segment)).get(0));
+        }*/
             iter.remove();
         }
         return result;
