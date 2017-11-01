@@ -15,6 +15,7 @@ public class Task17 implements ITestableTask17 {
 
         Iterator<ISegment> iter = segments.iterator();
         Set<I2DPoint> result = new HashSet<>();
+        Set<I2DPoint> garbage = new HashSet<>();
         while (iter.hasNext()) { // первый шаг
             Set<I2DPoint> interSet = new HashSet<>();
 
@@ -24,6 +25,7 @@ public class Task17 implements ITestableTask17 {
                     I2DPoint point = getPoints(line, nextLine);
                     if (point != null) {
                         interSet.add(point);
+                        garbage.add(point);
                     }
                 }
             }
@@ -31,7 +33,7 @@ public class Task17 implements ITestableTask17 {
                 if (interSet.stream().anyMatch(i -> {
                     boolean control = false;
                     for (I2DPoint point : result) {
-                        if (point.getX() < i.getX()) {
+                        if (point.getX() < i.getX() || garbage.contains(point)) {
                             control = true;
                         }
                     }
@@ -53,7 +55,6 @@ public class Task17 implements ITestableTask17 {
                 }
 
             }
-            iter.remove();
         }
         return result;
     }
