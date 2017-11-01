@@ -80,6 +80,7 @@ public class Solver implements ISolver {
         String word = scanner.next();
         int countUniqueElements = (int) word.chars().distinct().count();
         minUniqueElements = countUniqueElements;
+        result = word;
         for (int i = 0; i < number - 1; ++i) {
             word = scanner.next();
             countUniqueElements = (int) word.chars().distinct().count();
