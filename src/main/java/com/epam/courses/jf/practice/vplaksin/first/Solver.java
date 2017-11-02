@@ -483,7 +483,7 @@ public class Solver implements ISolver {
 
         int result = 0;
         for (int[] row : matrix) {
-            int sumBetweenPositivs = 0;
+            int sumBetweenPositives = 0;
             boolean wasPositive = false;
 
             for (int element : row) {
@@ -493,10 +493,10 @@ public class Solver implements ISolver {
                     }
                 } else {
                     if (element > 0) {
-                        result += sumBetweenPositivs;
+                        result += sumBetweenPositives;
                         break;
                     } else {
-                        sumBetweenPositivs += element;
+                        sumBetweenPositives += element;
                     }
                 }
             }
@@ -565,7 +565,7 @@ public class Solver implements ISolver {
             result *= matrix[i][i];
         }
 
-        System.out.println((int) result);
+        System.out.println(Math.round(result));
 
     }
 
@@ -574,15 +574,7 @@ public class Solver implements ISolver {
         System.out.println(input.length);
         System.out.println(input[0].length);
 
-        for (int[] row : input) {
-            for (int i = 0; i < row.length; i++) {
-                if (i != row.length - 1) {
-                    System.out.print(row[i] + "\t");
-                } else {
-                    System.out.println(row[i]);
-                }
-            }
-        }
+        printMatrixWithoutSize(input);
 
     }
 
