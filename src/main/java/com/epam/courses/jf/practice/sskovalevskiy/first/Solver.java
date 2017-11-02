@@ -217,7 +217,7 @@ public class Solver implements ISolver {
         Scanner reader = new Scanner(System.in);
         int N = reader.nextInt();
 
-        ArrayList<String> words = new ArrayList<>();
+        Set<String> words = new HashSet<>();
 
         for (int i = 0; i < N; i++) {
             String s = reader.next();
@@ -232,8 +232,12 @@ public class Solver implements ISolver {
             }
         }
 
-        for (int i = 0; i < words.size(); i++) {
-            System.out.print(words.get(i) + ((i == words.size() - 1) ? "" : " "));
+        if (words.isEmpty()) {
+            System.out.println("NOT FOUND");
+        } else {
+            for (String word : words) {
+                System.out.println(word + (words.iterator().hasNext() ? " " : ""));
+            }
         }
     }
 
@@ -973,6 +977,6 @@ public class Solver implements ISolver {
 
     public static void main(String[] args) {
 
-        new Solver().task10();
+        new Solver().task7();
     }
 }
