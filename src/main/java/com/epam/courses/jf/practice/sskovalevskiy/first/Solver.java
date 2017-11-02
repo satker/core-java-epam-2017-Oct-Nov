@@ -716,8 +716,18 @@ public class Solver implements ISolver {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N - 1; j++) {
                 if (A[i][j] == 0) {
-                    A[i][j] = A[i][j + 1];
-                    A[i][j + 1] = 0;
+                    if (A[i][j+1] == 0) {
+                        int k = j + 2;
+                        for (; k < N; k++) {
+                            if (A[i][k] != 0){
+                                A[i][j] = A[i][k];
+                                A[i][k] = 0;
+                            }
+                        }
+                    } else {
+                        A[i][j] = A[i][j + 1];
+                        A[i][j + 1] = 0;
+                    }
                 }
             }
         }
@@ -977,6 +987,6 @@ public class Solver implements ISolver {
 
     public static void main(String[] args) {
 
-        new Solver().task14();
+        new Solver().task21();
     }
 }
