@@ -326,7 +326,8 @@ public class Solver implements ISolver {
                     System.out.println("Infinite count of solutions");
                 }
             } else {
-                System.out.println("One solution: " + (double) C / B);
+                BigDecimal result = new BigDecimal((double) -C / B);
+                System.out.println("One solution: " + result.setScale(2, RoundingMode.HALF_UP));
             }
             return;
         }
@@ -340,7 +341,7 @@ public class Solver implements ISolver {
         } else {
             BigDecimal result1 = new BigDecimal((-B - sqrt(D)) / (2 * A));
             BigDecimal result2 = new BigDecimal((-B + sqrt(D)) / (2 * A));
-            if (result1.compareTo(result2) == 1) {
+            if (result1.compareTo(result2) > 0) {
                 BigDecimal swap = result1;
                 result1 = result2;
                 result2 = swap;
