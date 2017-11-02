@@ -535,13 +535,11 @@ public class Solver implements ISolver {
             tmp = matrix[numberRow][i];
             matrix[numberRow][i] = matrix[rowMin][i];
             matrix[rowMin][i] = tmp;
-            // swap(matrix[rowMin][i], matrix[numberRow][i]);
         }
         for(int i = 0; i < dimension; ++i){
             tmp = matrix[i][numberColumn];
             matrix[i][numberColumn] = matrix[i][columnMin];
             matrix[i][columnMin] = tmp;
-            // swap(matrix[i][columnMin], matrix[i][numberColumn]);
         }
         printMatrix(matrix);
     }
