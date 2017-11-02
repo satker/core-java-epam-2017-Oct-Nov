@@ -269,11 +269,8 @@ public class Solver implements ISolver {
 
     public void task12(){
         Scanner scanner = new Scanner(System.in);
-        //    System.out.println("Enter a column number:");
         int ncol = scanner.nextInt();
-        //  System.out.println("Enter a matrix dimension:");
         int[][] matrix = readMatrix(scanner);
-        int dimension = matrix.length;
         Arrays.sort(matrix, (o1, o2) -> o1[ncol] > o2[ncol] ? 1 : o1[ncol] < o2[ncol] ? -1 : Integer.compare(o1[ncol], o2[ncol]));
         printMatrix(matrix);
     }
