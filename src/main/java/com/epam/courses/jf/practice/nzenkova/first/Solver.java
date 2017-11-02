@@ -589,5 +589,24 @@ public class Solver implements ISolver {
         printMatrix(resultMatrix);
     }
 
+    public void task24(){
+        Scanner scanner = new Scanner(System.in);
+        int[][] matrix = readMatrix(scanner);
+        int dimension = matrix.length;
+        Arrays.sort(matrix, new Comparator<int[]>(){
+            public int compare(int[] o1, int[] o2){
+                int sum1 = 0, sum2 = 0;
+                for(int i = 0; i < dimension; ++i){
+                    sum1 += o1[i];
+                    sum2 += o2[i];
+                }
+                return (sum1 > sum2 ? 1 : sum1 < sum2 ? -1 : 0);
+            }
+        });
+
+        System.out.println(dimension);
+        printMatrix(matrix);
+    }
+
 
 }
