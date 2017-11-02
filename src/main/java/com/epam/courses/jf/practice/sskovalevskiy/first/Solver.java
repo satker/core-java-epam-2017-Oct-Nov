@@ -307,21 +307,21 @@ public class Solver implements ISolver {
         int C = reader.nextInt();
 
         int D = B * B - 4 * A * C;
-        double resultOne;
-        double resultTwo;
+        BigDecimal resultOne;
+        BigDecimal resultTwo;
         if (D < 0) {
             System.out.println("No solution");
         } else if (D == 0) {
-            resultOne = -(double) B / (2 * A);
+            resultOne = new BigDecimal(-(double) B / (2 * A));
 
             System.out.printf("One solution: %s",
-                    new BigDecimal(resultOne).setScale(2, BigDecimal.ROUND_HALF_UP).toString());
+                    resultOne.setScale(2, BigDecimal.ROUND_HALF_UP));
         } else {
-            resultOne = (-B - Math.sqrt((double) D)) / (2 * A);
-            resultTwo = (-B + Math.sqrt((double) D)) / (2 * A);
+            resultOne = new BigDecimal((-B - Math.sqrt((double) D)) / (2 * A));
+            resultTwo = new BigDecimal((-B + Math.sqrt((double) D)) / (2 * A));
             System.out.printf("Two solutions: %s, %s",
-                    new BigDecimal(resultOne).setScale(2, BigDecimal.ROUND_HALF_UP).toString(),
-                    new BigDecimal(resultTwo).setScale(2, BigDecimal.ROUND_HALF_UP).toString());
+                    resultOne.setScale(2, BigDecimal.ROUND_HALF_UP).toString(),
+                    resultTwo.setScale(2, BigDecimal.ROUND_HALF_UP).toString());
         }
     }
 
@@ -569,8 +569,6 @@ public class Solver implements ISolver {
 
     @Override
 //    TODO: #18 Done!
-//    Вводимая матрица будет квадратная, как в примерах задания(вводится одно число - размер матрицы и сама матрица),
-//    или как в условии N*M? И что значат одиночные числа в выходных данных в примерах?
     public void task18() {
 
         Scanner scanner = new Scanner(System.in);
@@ -987,6 +985,6 @@ public class Solver implements ISolver {
 
     public static void main(String[] args) {
 
-        new Solver().task7();
+        new Solver().task10();
     }
 }
