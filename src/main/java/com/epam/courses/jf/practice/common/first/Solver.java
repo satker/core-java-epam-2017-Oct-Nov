@@ -430,6 +430,39 @@ public class Solver implements ISolver {
 
     @Override
     public void task13() {
-        
+
+    }
+
+    @Override
+    public void task14() {
+        Scanner inputData = new Scanner(System.in);
+
+        int size = 0;
+
+        if (inputData.hasNextInt()) {
+            size = Integer.parseInt(inputData.nextLine());
+        }
+
+        int[] inputArray = new int[size];
+
+        String[] inputLine = inputData.nextLine().split(" ");
+        for(int i = 0; i < size; i++){
+            inputArray[i] = Integer.valueOf(inputLine[i]);
+        }
+
+
+        ArrayList<Integer> sequenceCountsList = new ArrayList<>();
+
+        Integer count = 0;
+        for (int i = 0; i < (size - 1); i++) {
+            if(inputArray[i] < inputArray[i + 1]){
+                count++;
+            }else {
+                sequenceCountsList.add(count);
+                count = 1;
+            }
+        }
+
+        System.out.println(sequenceCountsList.stream().max(Comparator.comparingInt(e -> e)).get());
     }
 }
