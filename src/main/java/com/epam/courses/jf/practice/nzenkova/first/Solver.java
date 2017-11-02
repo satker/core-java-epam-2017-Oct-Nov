@@ -556,6 +556,7 @@ public class Solver implements ISolver {
                 }
             }
         }
+        System.out.println(dimension);
         printMatrix(matrix);
     }
 
