@@ -132,7 +132,7 @@ public class Solver implements ISolver {
         try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in))) {
             String strLine = in.readLine();
             strLine = in.readLine();
-            Pattern vowelPattern = Pattern.compile("[AEIOUaeiouz]");
+            Pattern vowelPattern = Pattern.compile("[AEIOUaeiou]");
             int k = 0;
             for (String word : strLine.trim().split(" ")) {
                 if (word.matches("\\w+")) {
