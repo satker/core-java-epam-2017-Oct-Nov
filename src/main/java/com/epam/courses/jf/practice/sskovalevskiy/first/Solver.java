@@ -463,7 +463,7 @@ public class Solver implements ISolver {
         final int N = scanner.nextInt();
 
         int maxLength = 1;
-        int currentLength = 1;
+        int currentLength = 0;
         for (int i = 0; i < N; i++) {
             int currentNumber = scanner.nextInt();
             numbers.add(currentNumber);
@@ -475,7 +475,7 @@ public class Solver implements ISolver {
             if (maxLength < currentLength) maxLength = currentLength;
         }
 
-        System.out.println(maxLength);
+        System.out.println((maxLength > 1) ? maxLength : 0);
 
     }
 
@@ -977,6 +977,6 @@ public class Solver implements ISolver {
 
     public static void main(String[] args) {
 
-        new Solver().task5();
+        new Solver().task14();
     }
 }
