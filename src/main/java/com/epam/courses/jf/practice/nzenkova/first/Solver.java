@@ -304,8 +304,9 @@ public class Solver implements ISolver {
 
     public void task14(){
         Scanner scanner = new Scanner(System.in);
-        int number = Integer.parseInt(scanner.nextLine());
-        int numberMax = 0, counter = 0;
+       // int number = Integer.parseInt(scanner.nextLine());
+        int number = Integer.valueOf(scanner.nextLine());
+        int numberMax = 0, counter = 1;
         int number1 = 0, number2 = 0;
         number1 = scanner.nextInt();
         for(int i = 0; i < number - 1; ++i){
@@ -314,12 +315,13 @@ public class Solver implements ISolver {
                 ++counter; number1 = number2;
             }
             else{
-                numberMax = counter;
-                counter = 0;
+                if(numberMax < counter) numberMax = counter;
+                counter = 1;
                 number1 = number2;
             }
         }
         if(numberMax < counter) numberMax = counter;
+        if(numberMax <= 1) numberMax = 0;
         System.out.println(numberMax);
     }
 
