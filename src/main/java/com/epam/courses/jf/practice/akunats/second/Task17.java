@@ -11,49 +11,30 @@ public class Task17 implements ITestableTask17 {
         if (segments.size() < 2 || segments.size() > 20) {
             throw new IllegalArgumentException("You enter wrong data.");
         }
-        SortedMap<ISegment, Set<I2DPoint>> interMap = new TreeMap<>((o1, o2)
-                -> Double.compare(o1.first().getX(), o2.first().getX()));
-
-        Iterator<ISegment> iter = segments.iterator();
+        SortedMap<Double, Set<Double>> interMap = new TreeMap<>();
         Set<I2DPoint> result = new HashSet<>();
-        Set<I2DPoint> garbage = new HashSet<>();
-        while (iter.hasNext()) { // первый шаг
-            Set<I2DPoint> interSet = new HashSet<>();
-
-            ISegment line = iter.next();
-            for (ISegment nextLine : segments) { // первый шаг
-                if (!nextLine.equals(line)) {
+        segments.forEach(line -> segments.stream()
+                .filter(nextLine -> !nextLine.equals(line))
+                .forEach(nextLine -> {
                     I2DPoint point = getPoints(line, nextLine);
                     if (point != null) {
-                        interSet.add(point);
-                       
-                    }
-                }
-            }
-            if (!interSet.isEmpty()) {
-                if (interSet.stream().anyMatch(i -> garbage.contains(i))){
-                    continue;
-                }
-                interMap.put(line, interSet);
-                for (I2DPoint point : interSet) {
-                    garbage.add(point);
-                }
-            }
-        }
-        for ( Map.Entry<ISegment, Set<I2DPoint>> entry : interMap.entrySet() ) {
-                    I2DPoint minXpoint = entry.getValue().stream().min(Comparator.comparingDouble(I2DPoint::getX)).get();
-                    result.add(minXpoint);
-                    entry.getValue().remove(minXpoint);
-                    for (int i = 0; i < entry.getValue().size(); i++) {
-                        if (new ArrayList<>(entry.getValue()).get(i).getX() == minXpoint.getX()) {
-                            result.add(new ArrayList<>(entry.getValue()).get(i));
+                        if (interMap.containsKey(point.getX())) {
+                            interMap.get(point.getX()).add(point.getY());
+                        } else {
+                            interMap.put(point.getX(), new HashSet<>());
+                            interMap.get(point.getX()).add(point.getY());
                         }
                     }
-                }
+                }));
+        Map.Entry<Double, Set<Double>> minXpoint = interMap.entrySet()
+                .stream()
+                .min(Comparator.comparingDouble(Map.Entry::getKey)).get();
+        minXpoint.getValue().forEach(Y -> result.add(new Point(minXpoint.getKey(), Y)));
+
         return result;
     }
 
-    private I2DPoint getPoints(ISegment line, ISegment nextLine){
+    private I2DPoint getPoints(ISegment line, ISegment nextLine) {
         I2DPoint result = null;
         // Считаем коэффициенты уравнение прямой Ax + By + C = 0
         double A1 = line.second().getY() - line.first().getY();

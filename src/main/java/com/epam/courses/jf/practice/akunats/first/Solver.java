@@ -11,10 +11,6 @@ import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
 
 public class Solver implements ISolver {
-    public static void main(String[] args) {
-        Solver r = new Solver();
-        r.task27();
-    }
     @Override
     public void task1() {
         Scanner scanner = new Scanner(System.in);
@@ -887,14 +883,13 @@ public class Solver implements ISolver {
             sumStrings[i][1] = sumString;
         }
         ArrayList<Integer> interList = new ArrayList<>();
-        Arrays.stream(sumStrings).sorted((a, b)-> !a[1].equals(b[1]) ? a[1].compareTo(b[1]) : 1).forEach(o->{
-            interList.add(o[0]);
-        });
+        Arrays.stream(sumStrings).sorted((a, b) -> !a[1].equals(b[1])
+                ? a[1].compareTo(b[1]) : 1)
+                .forEach(o -> interList.add(o[0]));
         Integer[][] resultMatrix = new Integer[arrayDimension][arrayDimension];
         for (int i = 0; i < arrayDimension; i++) {
-            for (int j = 0; j < arrayDimension; j++) {
-                resultMatrix[i][j] = inputMatrix[interList.get(i)][j];
-            }
+            System.arraycopy(inputMatrix[interList.get(i)], 0,
+                    resultMatrix[i], 0, arrayDimension);
         }
         System.out.println(arrayDimension);
         printMatrix(resultMatrix, arrayDimension);
@@ -1052,20 +1047,20 @@ public class Solver implements ISolver {
             sumStrings[i][1] = sumString;
         }
         ArrayList<Integer> interList = new ArrayList<>();
-        Arrays.stream(sumStrings).sorted((a, b)-> !a[1].equals(b[1]) ? a[1].compareTo(b[1]) : -1).forEach(o->{
-            interList.add(o[0]);
-        });
+        Arrays.stream(sumStrings)
+                .sorted((a, b) -> !a[1].equals(b[1]) ? a[1].compareTo(b[1]) : -1)
+                .forEach(o -> interList.add(o[0]));
         Integer[][] resultMatrix = new Integer[arrayDimension][arrayDimension];
         for (int i = 0; i < arrayDimension; i++) {
             for (int j = 0; j < arrayDimension; j++) {
-                resultMatrix[j][i] = inputMatrix[j][interList.get((arrayDimension-1) - i)];
+                resultMatrix[j][i] = inputMatrix[j][interList.get((arrayDimension - 1) - i)];
             }
         }
         System.out.println(arrayDimension);
         printMatrix(resultMatrix, arrayDimension);
     }
 
-    private void printMatrix(Integer[][] matrix, int arrayDimension){
+    private void printMatrix(Integer[][] matrix, int arrayDimension) {
         for (int i = 0; i < arrayDimension; i++) {
             System.out.print((int) matrix[i][0]);
             for (int j = 1; j < arrayDimension; j++) {
