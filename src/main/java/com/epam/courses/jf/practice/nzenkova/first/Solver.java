@@ -346,15 +346,16 @@ public class Solver implements ISolver {
         int[][] matrix = readMatrix(scanner);
         int dimension = matrix.length;
         for(int i  = 0; i < dimension/2; ++i){
-            for(int j = 0; j < dimension - 1 - i; ++j){
+            for(int j = 0; j < dimension - 1 - i; ++j) {
                 int temp = matrix[i][j];
                 matrix[i][j] = matrix[j][dimension - 1 - i];
-                matrix[j][dimension - 1 - i] = matrix[dimension - 1 -i][dimension - 1 - j];
-                matrix[dimension - 1 -i][dimension - 1 - j] = matrix[dimension - 1 - j][i];
+                matrix[j][dimension - 1 - i] = matrix[dimension - 1 - i][dimension - 1 - j];
+                matrix[dimension - 1 - i][dimension - 1 - j] = matrix[dimension - 1 - j][i];
                 matrix[dimension - 1 - j][i] = temp;
             }
-            printMatrix(matrix);
         }
+        System.out.println(matrix.length);
+        printMatrix(matrix);
 
     }
 
