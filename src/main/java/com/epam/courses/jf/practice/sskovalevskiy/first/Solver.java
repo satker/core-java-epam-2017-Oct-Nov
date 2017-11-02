@@ -244,13 +244,13 @@ public class Solver implements ISolver {
             int N = Integer.parseInt(reader.readLine());
 
             ArrayList<String> words = new ArrayList<>(Arrays.asList(reader.readLine().split(" ")));
-            int palindrom = -1;
+            long palindrom = -1;
             int amountOfNumberPalindroms = 0;
             for (String s : words) {
                 if (s.matches("\\d+") &&
                         ((s.length() == 1) || (new StringBuilder(s).reverse().toString().equals(s)))) {
 
-                    palindrom = Integer.parseInt(s);
+                    palindrom = Long.parseLong(s);
                     amountOfNumberPalindroms++;
 
                 } else continue;
