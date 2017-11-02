@@ -134,9 +134,9 @@ public class Solver implements ISolver {
             strLine = in.readLine();
             Pattern vowelPattern = Pattern.compile("[AEIOUaeiouz]");
             int k = 0;
-            int vowelCount = 0;
             for (String word : strLine.trim().split(" ")) {
                 if (word.matches("\\w+")) {
+                    int vowelCount = 0;
                     Matcher vowelMatcher = vowelPattern.matcher(word);
                     while (vowelMatcher.find()) {
                         vowelCount++;
