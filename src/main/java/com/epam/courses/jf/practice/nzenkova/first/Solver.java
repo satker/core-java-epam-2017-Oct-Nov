@@ -540,6 +540,7 @@ public class Solver implements ISolver {
             matrix[i][numberColumn] = matrix[i][columnMin];
             matrix[i][columnMin] = tmp;
         }
+        System.out.println(dimension);
         printMatrix(matrix);
     }
 
