@@ -112,8 +112,8 @@ public class Solver implements ISolver {
         int minDifference = 2 * 26 + 1; //Number of different symbols in english alphabet + 1
         String result = "";
 
-        for (String s : words) {
-            char[] chars = s.toCharArray();
+        for (String word : words) {
+            char[] chars = word.toCharArray();
             HashSet<Character> set = new HashSet<>();
 
             for (Character c : chars) {
@@ -121,7 +121,7 @@ public class Solver implements ISolver {
             }
 
             if (set.size() < minDifference) {
-                result = s;
+                result = word;
                 minDifference = set.size();
             }
         }
@@ -139,12 +139,12 @@ public class Solver implements ISolver {
         final List<Character> vowels = Arrays.asList(temp);
         int result = 0;
 
-        for (String s : words) {
-            if (!Pattern.matches("[a-zA-Z]+", s)) {
+        for (String word : words) {
+            if (!Pattern.matches("[a-zA-Z]+", word)) {
                 continue;
             }
 
-            char[] chars = s.toLowerCase().toCharArray();
+            char[] chars = word.toLowerCase().toCharArray();
             int vowelCount = 0;
             int consonantCount = 0;
 
@@ -171,8 +171,8 @@ public class Solver implements ISolver {
         String[] words = readWords(new Scanner(System.in));
 
         loop:
-        for (String s : words) {
-            char[] chars = s.toCharArray();
+        for (String word : words) {
+            char[] chars = word.toCharArray();
 
             if (chars.length == 1) {
                 continue;
@@ -184,7 +184,7 @@ public class Solver implements ISolver {
                 }
             }
 
-            System.out.println(s);
+            System.out.println(word);
             return;
         }
 
@@ -200,8 +200,8 @@ public class Solver implements ISolver {
         StringBuilder builder = new StringBuilder();
 
         loop:
-        for (String s : words) {
-            char[] chars = s.toCharArray();
+        for (String word : words) {
+            char[] chars = word.toCharArray();
             HashSet<Character> charSet = new HashSet<>();
 
             for (char c : chars) {
@@ -210,12 +210,12 @@ public class Solver implements ISolver {
                 }
             }
 
-            if (wordSet.add(s)) {
+            if (wordSet.add(word)) {
                 if (builder.length() == 0) {
-                    builder.append(s);
+                    builder.append(word);
                 } else {
                     builder.append(" ");
-                    builder.append(s);
+                    builder.append(word);
                 }
             }
 
@@ -235,17 +235,14 @@ public class Solver implements ISolver {
         String[] words = readWords(new Scanner(System.in));
         List<BigInteger> polyndroms = new ArrayList<>();
 
-        loop:
-        for (String s : words) {
-            char[] chars = s.toCharArray();
-            for (char c : chars) {
-                if (!(c <= '9' && c >= '0')) {
-                    continue loop;
-                }
+        for (String word : words) {
+            if (!Pattern.matches("\\d+", word)) {
+                continue;
             }
-            BigInteger number = new BigInteger(s);
 
-            if (s.equals(new StringBuilder(s).reverse().toString())) {
+            BigInteger number = new BigInteger(word);
+
+            if (word.equals(new StringBuilder(word).reverse().toString())) {
                 polyndroms.add(number);
             }
         }
@@ -275,18 +272,24 @@ public class Solver implements ISolver {
 
     }
 
-    private static void printMatrix(int[][] input) {
+    private static void printMatrixWithoutSize(int[][] input) {
 
-        System.out.println(input.length);
         for (int[] row : input) {
             for (int i = 0; i < row.length; i++) {
                 if (i != row.length - 1) {
                     System.out.print(row[i] + "\t");
                 } else {
-                    System.out.println(row[i]);
+                    System.out.print(row[i] + "\n");
                 }
             }
         }
+
+    }
+
+    private static void printMatrix(int[][] input) {
+
+        System.out.println(input.length);
+        printMatrixWithoutSize(input);
 
     }
 
@@ -303,7 +306,7 @@ public class Solver implements ISolver {
             }
         }
 
-        printMatrix(result);
+        printMatrixWithoutSize(result);
 
     }
 
@@ -969,6 +972,10 @@ public class Solver implements ISolver {
         printMatrix(result);
 
 
+    }
+
+    public static void main(String[] args) {
+        new Solver().task9();
     }
 
 }
