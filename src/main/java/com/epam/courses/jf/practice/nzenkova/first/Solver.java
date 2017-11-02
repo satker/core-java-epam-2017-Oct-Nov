@@ -564,4 +564,30 @@ public class Solver implements ISolver {
         printMatrix(matrix);
     }
 
+    private Double[][] readDoubleMatrix(Scanner scanner) {
+        final int DIMENSION = scanner.nextInt();
+        Double[][] matrix = new Double[DIMENSION][DIMENSION];
+        for (int row = 0; row < DIMENSION; ++row) {
+            for (int col = 0; col < DIMENSION; ++col) {
+                matrix[row][col] = scanner.nextDouble();
+            }
+        }
+        return matrix;
+    }
+
+    public void task22(){
+        Scanner scanner = new Scanner(System.in);
+        Double[][] matrix = readDoubleMatrix(scanner);
+        int dimension = matrix.length;
+        int[][] resultMatrix = new int[dimension][dimension];
+        for(int i = 0; i < dimension; ++i){
+            for(int j = 0; j < dimension; ++j){
+                resultMatrix[i][j] = (int)(Math.round(matrix[i][j]));
+            }
+        }
+        System.out.println(dimension);
+        printMatrix(resultMatrix);
+    }
+
+
 }
