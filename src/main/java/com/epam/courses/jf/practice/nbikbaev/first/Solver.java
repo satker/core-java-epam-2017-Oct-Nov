@@ -6,15 +6,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Solver implements ISolver {
 
     private boolean isVowel(char c) {
         return "AEIOUaeiou".indexOf(c) != -1;
-    }
-
-    private boolean isLatinAlphabet(int letter) {
-        return letter >= 97 && letter <= 122 || letter >= 65 && letter <= 90;
     }
 
     @Override
@@ -130,36 +128,27 @@ public class Solver implements ISolver {
 
     @Override
     public void task5() {
-        int n;
+        int n = 0;
         try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in))) {
             String strLine = in.readLine();
-            //n = Integer.valueOf(strLine);
+            n = Integer.valueOf(strLine);
             strLine = in.readLine();
-            String[] words = strLine.trim().split(" ");
-            List<String> result = new ArrayList<>();
-            int vowelCount = 0;
-            int consonantCount = 0;
-            br1:
-            for (String word : words) {
-                for (char letter : word.toCharArray()) {
-                    if (!isLatinAlphabet(letter)) {
-                        continue br1;
-                    } else {
-                        if (isVowel(letter)) {
-                            vowelCount++;
-                        } else {
-                            consonantCount++;
-                        }
-                    }
+            Pattern pattern = Pattern.compile("([A-z])+");
+            Pattern pattern2 = Pattern.compile("[AEIOUaeiouz]");
+            Matcher matcher = pattern.matcher(strLine);
+            int k = 0;
+            while (matcher.find()) {
+                int v = 0;
+                String x = matcher.group();
+                Matcher matcher2 = pattern2.matcher(x);
+                while (matcher2.find()) {
+                    v++;
                 }
-                if (consonantCount == vowelCount) {
-                    result.add(word);
-                    consonantCount = 0;
-                    vowelCount = 0;
+                if (x.length() / 2 == v) {
+                    k++;
                 }
             }
-            System.out.println(result.size());
-
+            System.out.println(k);
         } catch (IOException e) {
             e.printStackTrace();
         }
