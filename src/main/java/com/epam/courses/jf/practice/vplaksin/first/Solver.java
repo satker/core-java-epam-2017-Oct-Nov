@@ -15,6 +15,7 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 import static java.lang.Math.min;
 import static java.lang.Math.max;
@@ -100,7 +101,7 @@ public class Solver implements ISolver {
     private static String[] readWords(Scanner scanner) {
 
         int n = Integer.parseInt(scanner.nextLine());
-        return scanner.nextLine().split(" ");
+        return scanner.nextLine().split("\\s+");
 
     }
 
@@ -139,25 +140,23 @@ public class Solver implements ISolver {
         int result = 0;
 
         for (String s : words) {
+            if (!Pattern.matches("[a-zA-Z]+", s)) {
+                continue;
+            }
+
             char[] chars = s.toLowerCase().toCharArray();
             int vowelCount = 0;
             int consonantCount = 0;
-            boolean isLatin = true;
 
             for (Character c : chars) {
-                if (c <= 'z' && c >= 'a') {
-                    if (vowels.contains(c)) {
-                        vowelCount++;
-                    } else {
-                        consonantCount++;
-                    }
+                if (vowels.contains(c)) {
+                    vowelCount++;
                 } else {
-                    isLatin = false;
-                    break;
+                    consonantCount++;
                 }
             }
 
-            if (isLatin && consonantCount == vowelCount) {
+            if (consonantCount == vowelCount) {
                 result++;
             }
         }
@@ -970,10 +969,6 @@ public class Solver implements ISolver {
         printMatrix(result);
 
 
-    }
-
-    public static void main(String[] args) {
-        new Solver().task27();
     }
 
 }
