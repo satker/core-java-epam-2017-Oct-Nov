@@ -16,6 +16,7 @@ public class ITestableTask2Impl implements ITestableTask2 {
 
         for (File file : directory.listFiles()){
             if (file.isDirectory()){
+                files.add(file);
                 files.addAll(getFiles(file));
             } else {
                 files.add(file);
