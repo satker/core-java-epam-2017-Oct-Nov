@@ -133,20 +133,20 @@ public class Solver implements ISolver {
             String strLine = in.readLine();
             n = Integer.valueOf(strLine);
             strLine = in.readLine();
-            Pattern pattern = Pattern.compile("([A-z])+");
             Pattern pattern2 = Pattern.compile("[AEIOUaeiouz]");
-            Matcher matcher = pattern.matcher(strLine);
             int k = 0;
-            while (matcher.find()) {
+            for (String word : strLine.trim().split(" ")) {
                 int v = 0;
-                String x = matcher.group();
-                Matcher matcher2 = pattern2.matcher(x);
-                while (matcher2.find()) {
-                    v++;
+                if (word.matches("^[a-zA-Z]+$")) {
+                    Matcher matcher2 = pattern2.matcher(word);
+                    while (matcher2.find()) {
+                        v++;
+                    }
+                    if (word.length() / 2 == v) {
+                        k++;
+                    }
                 }
-                if (x.length() / 2 == v) {
-                    k++;
-                }
+
             }
             System.out.println(k);
         } catch (IOException e) {
