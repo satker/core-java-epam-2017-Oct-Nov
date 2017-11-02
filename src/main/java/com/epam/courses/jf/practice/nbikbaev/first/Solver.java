@@ -11,10 +11,6 @@ import java.util.regex.Pattern;
 
 public class Solver implements ISolver {
 
-    private boolean isVowel(char c) {
-        return "AEIOUaeiou".indexOf(c) != -1;
-    }
-
     @Override
     public void task1() {
         int n;
@@ -152,7 +148,34 @@ public class Solver implements ISolver {
 
     @Override
     public void task6() {
-
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in))) {
+            int k = 0;
+            String result = null;
+            int n = Integer.valueOf(in.readLine());
+            String sentence = in.readLine();
+            for (String word : sentence.trim().split(" ")) {
+                if (word.length() == 1) {
+                    continue;
+                }
+                char[] letters = word.toCharArray();
+                Arrays.sort(letters);
+                String sortedWord = new String(letters);
+                if (sortedWord.equals(word)) {
+                    k++;
+                    result = word;
+                    if (k == 1) {
+                        break;
+                    }
+                }
+            }
+            if (result != null) {
+                System.out.println(result);
+            }else {
+                System.out.println("NOT FOUND");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
