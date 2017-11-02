@@ -191,7 +191,7 @@ public class Solver implements ISolver {
                 for (int i = 1; i < word.length(); i++) {
 
                     int length = word.length();
-                    if ((word.charAt(i - 1) > word.charAt(i))) {
+                    if ((word.charAt(i - 1) >= word.charAt(i))) {
                         isWordCorrect = false;
                         break;
                     }
@@ -977,6 +977,6 @@ public class Solver implements ISolver {
 
     public static void main(String[] args) {
 
-        new Solver().task7();
+        new Solver().task6();
     }
 }
