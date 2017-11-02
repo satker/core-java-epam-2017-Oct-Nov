@@ -272,6 +272,7 @@ public class Solver implements ISolver {
         int ncol = scanner.nextInt();
         int[][] matrix = readMatrix(scanner);
         Arrays.sort(matrix, (o1, o2) -> o1[ncol] > o2[ncol] ? 1 : o1[ncol] < o2[ncol] ? -1 : Integer.compare(o1[ncol], o2[ncol]));
+        System.out.println(matrix.length);
         printMatrix(matrix);
     }
 
