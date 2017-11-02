@@ -358,13 +358,10 @@ public class Solver implements ISolver {
 
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
-        char[] chars = input.toCharArray();
 
-        for (char c : chars) {
-            if (c > '9' || c < '0') {
-                System.out.println("INCORRECT INPUT DATA");
-                return;
-            }
+        if (!Pattern.matches("\\d\\d?", input)) {
+            System.out.println("INCORRECT INPUT DATA");
+            return;
         }
 
         int monthNumber = Integer.parseInt(input);
