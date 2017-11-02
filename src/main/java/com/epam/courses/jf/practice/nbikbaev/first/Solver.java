@@ -128,13 +128,11 @@ public class Solver implements ISolver {
 
     @Override
     public void task5() {
-        int n = 0;
         try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in))) {
-            String strLine = in.readLine();
-            strLine = in.readLine();
+            String sentence = in.readLine();
             Pattern vowelPattern = Pattern.compile("[AEIOUaeiou]");
             int k = 0;
-            for (String word : strLine.trim().split(" ")) {
+            for (String word : sentence.trim().split(" ")) {
                 if (word.matches("\\w+")) {
                     int vowelCount = 0;
                     Matcher vowelMatcher = vowelPattern.matcher(word);
