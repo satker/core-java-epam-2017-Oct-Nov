@@ -24,24 +24,6 @@ public class Task5Test {
     @Test
     public void case1() {
         String data1 = "5" + "\n" +
-                "Язык программирования Java is widespread" + "\n";
-        System.setIn(new ByteArrayInputStream(data1.getBytes()));
-        solver.task5();
-        assertTrue("Test5 Failed!", outContent.toString().equals("2\r\n"));
-    }
-
-    @Test
-    public void case2() {
-        String data1 = "5" + "\n" +
-                "Язык программиro2вания Java is widespread" + "\n";
-        System.setIn(new ByteArrayInputStream(data1.getBytes()));
-        solver.task5();
-        assertTrue("Test5 Failed!", outContent.toString().equals("2\r\n"));
-    }
-
-    @Test
-    public void case3() {
-        String data1 = "5" + "\n" +
                 "Компилятор javac" + "\n";
         System.setIn(new ByteArrayInputStream(data1.getBytes()));
         solver.task5();
