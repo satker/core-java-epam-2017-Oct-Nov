@@ -37,7 +37,7 @@ public class ITestableTask15Impl implements ITestableTask15 {
 
                 Set<I2DPoint> i2DPoints = entry.getValue();
                 for (I2DPoint i2DPoint : i2DPoints) {
-                    writer.write(String.format("(%d;%d) ", i2DPoint.getX(), i2DPoint.getY()));
+                    writer.write(String.format("(%f;%f) ", i2DPoint.getX(), i2DPoint.getY()));
                 }
                 writer.write(System.getProperty("line.separator"));
             }
