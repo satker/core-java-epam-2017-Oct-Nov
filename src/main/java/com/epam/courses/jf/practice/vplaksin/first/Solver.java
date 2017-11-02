@@ -416,7 +416,7 @@ public class Solver implements ISolver {
         int k = Integer.parseInt(scanner.nextLine());
         int[][] matrix = readMatrix(scanner);
 
-        Arrays.sort(matrix, Comparator.comparingInt(arr -> arr[k]));
+        Arrays.sort(matrix, Comparator.comparingInt(row -> row[k]));
 
         printMatrix(matrix);
 
@@ -466,6 +466,7 @@ public class Solver implements ISolver {
                 tempRow = 1;
             }
         }
+        maxRow = max(maxRow, tempRow);
 
         System.out.println(maxRow);
 
