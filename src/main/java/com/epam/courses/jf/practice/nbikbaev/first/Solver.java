@@ -157,6 +157,9 @@ public class Solver implements ISolver {
                 if (word.length() == 1) {
                     continue;
                 }
+                if (Pattern.compile("(.)\\1+").matcher(word).find()) {
+                    continue;
+                }
                 char[] letters = word.toCharArray();
                 Arrays.sort(letters);
                 String sortedWord = new String(letters);
@@ -170,7 +173,7 @@ public class Solver implements ISolver {
             }
             if (result != null) {
                 System.out.println(result);
-            }else {
+            } else {
                 System.out.println("NOT FOUND");
             }
         } catch (IOException e) {
