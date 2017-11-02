@@ -217,7 +217,7 @@ public class Solver implements ISolver {
         Scanner reader = new Scanner(System.in);
         int N = reader.nextInt();
 
-        Set<String> words = new HashSet<>();
+        Set<String> words = new LinkedHashSet<>();
 
         for (int i = 0; i < N; i++) {
             String s = reader.next();
@@ -987,6 +987,6 @@ public class Solver implements ISolver {
 
     public static void main(String[] args) {
 
-        new Solver().task21();
+        new Solver().task7();
     }
 }
