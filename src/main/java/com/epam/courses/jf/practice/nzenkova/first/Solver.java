@@ -544,4 +544,19 @@ public class Solver implements ISolver {
         printMatrix(matrix);
     }
 
+    public void  task21(){
+        Scanner scanner = new Scanner(System.in);
+        int[][] matrix = readMatrix(scanner);
+        int dimension = matrix.length;
+        for(int i = 0; i < dimension; ++i){
+            for(int j = 0; j < dimension - 1; ++j){
+                if(matrix[i][j] == 0){
+                    matrix[i][j] = matrix[i][j + 1];
+                    matrix[i][j + 1] = 0;
+                }
+            }
+        }
+        printMatrix(matrix);
+    }
+
 }
