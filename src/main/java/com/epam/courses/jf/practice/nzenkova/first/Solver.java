@@ -135,7 +135,7 @@ public class Solver implements ISolver {
         int number = Integer.valueOf(scanner.nextLine());
         String result = "", word = "";
         int countUniqueElements = 0;
-        Set<String> necessaryWords = new HashSet<String>();
+        LinkedHashSet<String> necessaryWords = new LinkedHashSet<String>();
         for (int i = 0; i < number; ++i) {
             word = scanner.next();
             countUniqueElements = (int) word.chars().distinct().count();
@@ -143,8 +143,12 @@ public class Solver implements ISolver {
                 necessaryWords.add(word);
             }
         }
-        for (String str : necessaryWords) {
-            System.out.printf("%s", str);
+        if(necessaryWords.isEmpty()) System.out.printf("%s%n", "NOT FOUND");
+        else{
+            for (String str : necessaryWords) {
+                //System.out.printf("%s ", str);
+                System.out.println(str);
+            }
         }
     }
 
