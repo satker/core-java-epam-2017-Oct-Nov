@@ -21,17 +21,11 @@ public class ITestableTask17Impl implements ITestableTask17 {
 //        пересекаются в точке
 //        x = (B1C2 - B2C1)/(A1B2 - A2B1) , y = (C1A2 - C2A1)/(A1B2 - A2B1)
 
-//        Map<I2DPoint, Double> map = new TreeMap<>(new Comparator<I2DPoint>() {
-//            @Override
-//            public int compare(I2DPoint o1, I2DPoint o2) {
-//                return (int)(o1.getX() - o2.getX());
-//            }
-//        });
-
         Set<I2DPoint> resultSet = new HashSet<>();
 
-
         ArrayList<ISegment> iSegments = new ArrayList<>(segments);
+
+        double minAbscissa = Double.MAX_VALUE;
 
         for (int i = 0; i < iSegments.size() - 1; i++) {
             I2DPoint firstPoint = iSegments.get(i).first();
@@ -40,11 +34,10 @@ public class ITestableTask17Impl implements ITestableTask17 {
             double B1 = secondPoint.getX() - firstPoint.getX();
             double C1 = firstPoint.getX() * secondPoint.getY() - secondPoint.getX() * firstPoint.getY();
 
-            double minAbscissa = Double.MAX_VALUE;
 
             for (int j = i + 1; j < iSegments.size(); j++) {
-                I2DPoint thirdPoint = iSegments.get(i).first();
-                I2DPoint forthPoint = iSegments.get(i).second();
+                I2DPoint thirdPoint = iSegments.get(j).first();
+                I2DPoint forthPoint = iSegments.get(j).second();
                 double A2 = thirdPoint.getY() - forthPoint.getY();
                 double B2 = forthPoint.getX() - thirdPoint.getX();
                 double C2 = thirdPoint.getX() * forthPoint.getY() - forthPoint.getX() * thirdPoint.getY();
@@ -52,15 +45,21 @@ public class ITestableTask17Impl implements ITestableTask17 {
                 double x = (B1 * C2 - B2 * C1) / (A1 * B2 - A2 * B1);
                 double y = (C1 * A2 - C2 * A1) / (A1 * B2 - A2 * B1);
 
-                if (firstPoint.getX() <= x && x <= secondPoint.getX() && firstPoint.getY() <= y && y <= secondPoint.getY() &&
-                        thirdPoint.getX() <= x && x <= forthPoint.getX() && thirdPoint.getY() <= y && y <= forthPoint.getY()) {
-//                    map.put(new I2DPointImpl(x, y), x);
+                if (x >= Math.min(firstPoint.getX(), secondPoint.getX()) &&
+                        x <= Math.max(firstPoint.getX(), secondPoint.getX()) &&
+                        y >= Math.min(firstPoint.getY(), secondPoint.getY()) &&
+                        y <= Math.max(firstPoint.getY(), secondPoint.getY()) &&
+                        x >= Math.min(thirdPoint.getX(), forthPoint.getX()) &&
+                        x <= Math.max(thirdPoint.getX(), forthPoint.getX()) &&
+                        y >= Math.min(thirdPoint.getY(), forthPoint.getY()) &&
+                        y <= Math.max(thirdPoint.getY(), forthPoint.getY())) {
+
                     if (x < minAbscissa) {
                         minAbscissa = x;
                         resultSet.clear();
-                        resultSet.add(new I2DPointImpl(x, y));
+                        resultSet.add(new Point2D(x, y));
                     } else if (x == minAbscissa) {
-                        resultSet.add(new I2DPointImpl(x, y));
+                        resultSet.add(new Point2D(x, y));
                     }
                 }
             }
@@ -69,45 +68,23 @@ public class ITestableTask17Impl implements ITestableTask17 {
         return resultSet;
     }
 
-    class I2DPointImpl implements I2DPoint {
-        double x;
-        double y;
+    static class Segment implements ISegment {
+        I2DPoint first;
+        I2DPoint second;
 
-        public I2DPointImpl(double x, double y) {
-            this.x = x;
-            this.y = y;
+        public Segment(I2DPoint first, I2DPoint second) {
+            this.first = first;
+            this.second = second;
         }
 
         @Override
-        public double getX() {
-            return x;
+        public I2DPoint first() {
+            return first;
         }
 
         @Override
-        public double getY() {
-            return y;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-
-            I2DPointImpl i2DPoint = (I2DPointImpl) o;
-
-            if (Double.compare(i2DPoint.x, x) != 0) return false;
-            return Double.compare(i2DPoint.y, y) == 0;
-        }
-
-        @Override
-        public int hashCode() {
-            int result;
-            long temp;
-            temp = Double.doubleToLongBits(x);
-            result = (int) (temp ^ (temp >>> 32));
-            temp = Double.doubleToLongBits(y);
-            result = 31 * result + (int) (temp ^ (temp >>> 32));
-            return result;
+        public I2DPoint second() {
+            return second;
         }
     }
 }
