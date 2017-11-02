@@ -318,6 +318,19 @@ public class Solver implements ISolver {
         final int B = scanner.nextInt();
         final int C = scanner.nextInt();
 
+        if (A == 0) {
+            if (B == 0) {
+                if (C == 0) {
+                    System.out.println("No solution");
+                } else {
+                    System.out.println("Infinite count of solutions");
+                }
+            } else {
+                System.out.println("One solution: " + (double) C / B);
+            }
+            return;
+        }
+
         final double D = B * B - 4 * A * C;
         if (D < 0) {
             System.out.println("No solution");
@@ -330,6 +343,11 @@ public class Solver implements ISolver {
             BigDecimal result2 = new BigDecimal((-B + sqrt(D)) / (2 * A));
             result1 = result1.round(new MathContext(2, RoundingMode.HALF_UP));
             result2 = result2.round(new MathContext(2, RoundingMode.HALF_UP));
+            if (result1.compareTo(result2) > 0) {
+                BigDecimal swap = result1;
+                result1 = result2;
+                result2 = swap;
+            }
             System.out.println("Two solutions: " + result1 + ", " + result2);
         }
 
@@ -972,10 +990,6 @@ public class Solver implements ISolver {
         printMatrix(result);
 
 
-    }
-
-    public static void main(String[] args) {
-        new Solver().task9();
     }
 
 }
