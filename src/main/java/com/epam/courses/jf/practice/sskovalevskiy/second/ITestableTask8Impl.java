@@ -17,14 +17,16 @@ public class ITestableTask8Impl implements ITestableTask8 {
             if (character.equals('[') || character.equals('{') || character.equals('(')) {
                 deque.push(character);
                 continue;
-            } else if (character.equals(')') && deque.peek() != '(') {
+            } else if (character.equals(')') && (deque.isEmpty() || deque.peek() != '(')) {
                 return false;
-            } else if (character.equals('}') && deque.peek() != '{') {
+            } else if (character.equals('}') && (deque.isEmpty() || deque.peek() != '{')) {
                 return false;
-            } else if (character.equals(']') && deque.peek() != '[') {
+            } else if (character.equals(']') && (deque.isEmpty() || deque.peek() != '[')) {
                 return false;
             }
-            deque.poll();
+            if (character.equals(')') || character.equals('}') || character.equals(']')) {
+                deque.poll();
+            }
         }
 
         if (deque.size() == 0) {
