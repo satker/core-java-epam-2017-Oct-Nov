@@ -454,7 +454,7 @@ public class Solver implements ISolver {
         int maxRow = 1;
         int tempRow = 1;
         if (n == 1) {
-            System.out.println(n);
+            System.out.println(0);
             return;
         }
 
@@ -468,8 +468,11 @@ public class Solver implements ISolver {
         }
         maxRow = max(maxRow, tempRow);
 
-        System.out.println(maxRow);
-
+        if (maxRow == 1) {
+            System.out.println(0);
+        } else {
+            System.out.println(maxRow);
+        }
     }
 
     @Override
