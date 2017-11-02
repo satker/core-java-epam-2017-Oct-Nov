@@ -131,22 +131,27 @@ public class Solver implements ISolver {
         int n = 0;
         try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in))) {
             String strLine = in.readLine();
-            n = Integer.valueOf(strLine);
+            //n = Integer.valueOf(strLine);
             strLine = in.readLine();
-            Pattern pattern2 = Pattern.compile("[AEIOUaeiouz]");
+            Pattern vowelPattern = Pattern.compile("[AEIOUaeiouz]");
+            Pattern consonantPattern = Pattern.compile("[BCDFGHJKLMNPQRSTVWXYZbcdfghjklmnpqrstvwxyz]");
             int k = 0;
+            int consonantCount = 0;
+            int vowelCount = 0;
             for (String word : strLine.trim().split(" ")) {
-                int v = 0;
                 if (word.matches("^[a-zA-Z]+$")) {
-                    Matcher matcher2 = pattern2.matcher(word);
-                    while (matcher2.find()) {
-                        v++;
+                    Matcher vowelMatcher = vowelPattern.matcher(word);
+                    Matcher consonantMatcher = consonantPattern.matcher(word);
+                    while (vowelMatcher.find()) {
+                        vowelCount++;
                     }
-                    if (word.length() / 2 == v) {
+                    while (consonantMatcher.find()) {
+                        consonantCount++;
+                    }
+                    if (consonantCount == vowelCount) {
                         k++;
                     }
                 }
-
             }
             System.out.println(k);
         } catch (IOException e) {
