@@ -529,7 +529,6 @@ public class Solver implements ISolver {
                 }
             }
         }
-
         int tmp = 0;
         for(int i = 0; i < dimension; ++i){
             tmp = matrix[numberRow][i];
