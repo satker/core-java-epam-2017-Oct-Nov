@@ -164,7 +164,7 @@ public class Solver implements ISolver {
                     vocalCounter++;
                 }
 
-                if (vocalCounter == word.length() / 2) englishWords.add(word);
+                if (vocalCounter == word.length() / 2.0) englishWords.add(word);
             }
         }
 
@@ -977,6 +977,6 @@ public class Solver implements ISolver {
 
     public static void main(String[] args) {
 
-        new Solver().task6();
+        new Solver().task5();
     }
 }
