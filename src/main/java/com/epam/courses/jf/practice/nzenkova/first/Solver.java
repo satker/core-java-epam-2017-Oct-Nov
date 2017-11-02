@@ -298,6 +298,7 @@ public class Solver implements ISolver {
                 }
             }
         }
+        System.out.println(matrix.length);
         printMatrix(matrix);
     }
 
