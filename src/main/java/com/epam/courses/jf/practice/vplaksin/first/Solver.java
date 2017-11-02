@@ -336,19 +336,17 @@ public class Solver implements ISolver {
             System.out.println("No solution");
         } else if (D == 0) {
             BigDecimal result = new BigDecimal((double) -B / (2 * A));
-            result = result.round(new MathContext(2, RoundingMode.HALF_UP));
-            System.out.println("One solution: " + result);
+            System.out.println("One solution: " + result.setScale(2, RoundingMode.HALF_UP));
         } else {
             BigDecimal result1 = new BigDecimal((-B - sqrt(D)) / (2 * A));
             BigDecimal result2 = new BigDecimal((-B + sqrt(D)) / (2 * A));
-            result1 = result1.round(new MathContext(2, RoundingMode.HALF_UP));
-            result2 = result2.round(new MathContext(2, RoundingMode.HALF_UP));
-            if (result1.compareTo(result2) > 0) {
+            if (result1.compareTo(result2) == 1) {
                 BigDecimal swap = result1;
                 result1 = result2;
                 result2 = swap;
             }
-            System.out.println("Two solutions: " + result1 + ", " + result2);
+            System.out.println("Two solutions: " + result1.setScale(2, RoundingMode.HALF_UP)
+                    + ", " + result2.setScale(2, RoundingMode.HALF_UP));
         }
 
     }
