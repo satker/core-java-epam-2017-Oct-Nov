@@ -345,17 +345,14 @@ public class Solver implements ISolver {
         Scanner scanner = new Scanner(System.in);
         int[][] matrix = readMatrix(scanner);
         int dimension = matrix.length;
-        for(int i  = 0; i < dimension/2; ++i){
-            for(int j = 0; j < dimension - 1 - i; ++j) {
-                int temp = matrix[i][j];
-                matrix[i][j] = matrix[j][dimension - 1 - i];
-                matrix[j][dimension - 1 - i] = matrix[dimension - 1 - i][dimension - 1 - j];
-                matrix[dimension - 1 - i][dimension - 1 - j] = matrix[dimension - 1 - j][i];
-                matrix[dimension - 1 - j][i] = temp;
+        int[][] resultMatrix = new int[dimension][dimension];
+        for(int i  = 0; i < dimension; ++i){
+            for(int j = 0; j < dimension; ++j) {
+                resultMatrix[i][j] = matrix[j][dimension - 1 - i];
             }
         }
-        System.out.println(matrix.length);
-        printMatrix(matrix);
+        System.out.println(resultMatrix.length);
+        printMatrix(resultMatrix);
 
     }
 
@@ -549,11 +546,18 @@ public class Solver implements ISolver {
         int[][] matrix = readMatrix(scanner);
         int dimension = matrix.length;
         for(int i = 0; i < dimension; ++i){
-            for(int j = 0; j < dimension - 1; ++j){
+            int flag = 0, j = 0;
+            while(j < dimension - flag){
                 if(matrix[i][j] == 0){
-                    matrix[i][j] = matrix[i][j + 1];
-                    matrix[i][j + 1] = 0;
+                    for(int  k = j  + 1; k < dimension; ++k){
+                        int tmp = matrix[i][k];
+                        matrix[i][k] = matrix[i][k - 1];
+                        matrix[i][k - 1] = tmp;
+                    }
+                    ++flag;
+                    --j;
                 }
+                ++j;
             }
         }
         System.out.println(dimension);
