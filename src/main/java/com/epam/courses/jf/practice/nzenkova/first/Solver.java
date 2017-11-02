@@ -512,4 +512,38 @@ public class Solver implements ISolver {
         printMatrix(resultMatrix);
     }
 
+    public void task20(){
+        Scanner scanner = new Scanner(System.in);
+        int numberRow = scanner.nextInt();
+        int numberColumn = scanner.nextInt();
+        int[][] matrix = readMatrix(scanner);
+        int dimension = matrix.length;
+        int rowMin = 0, columnMin = 0;
+        int min = 0;
+        for(int i = 0; i < dimension; ++i){
+            for(int j = 0; j < dimension; ++j){
+                if(matrix[i][j] < min){
+                    min = matrix[i][j];
+                    rowMin = i;
+                    columnMin = j;
+                }
+            }
+        }
+
+        int tmp = 0;
+        for(int i = 0; i < dimension; ++i){
+            tmp = matrix[numberRow][i];
+            matrix[numberRow][i] = matrix[rowMin][i];
+            matrix[rowMin][i] = tmp;
+            // swap(matrix[rowMin][i], matrix[numberRow][i]);
+        }
+        for(int i = 0; i < dimension; ++i){
+            tmp = matrix[i][numberColumn];
+            matrix[i][numberColumn] = matrix[i][columnMin];
+            matrix[i][columnMin] = tmp;
+            // swap(matrix[i][columnMin], matrix[i][numberColumn]);
+        }
+        printMatrix(matrix);
+    }
+
 }
