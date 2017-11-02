@@ -5,6 +5,7 @@ import com.epam.courses.jf.practice.common.first.ISolver;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -308,11 +309,15 @@ public class Solver implements ISolver {
             System.out.println("No solution");
         } else if (D == 0) {
             resultOne = -(double) B / (2 * A);
-            System.out.printf("One solution: %.2f", resultOne);
+
+            System.out.printf("One solution: %s",
+                    new BigDecimal(resultOne).setScale(2, BigDecimal.ROUND_HALF_UP).toString());
         } else {
             resultOne = (-B - Math.sqrt((double) D)) / (2 * A);
             resultTwo = (-B + Math.sqrt((double) D)) / (2 * A);
-            System.out.printf("Two solutions: %.2f, %.2f", resultOne, resultTwo);
+            System.out.printf("Two solutions: %s, %s",
+                    new BigDecimal(resultOne).setScale(2, BigDecimal.ROUND_HALF_UP).toString(),
+                    new BigDecimal(resultTwo).setScale(2, BigDecimal.ROUND_HALF_UP).toString());
         }
     }
 
@@ -968,5 +973,6 @@ public class Solver implements ISolver {
 
     public static void main(String[] args) {
 
+        new Solver().task10();
     }
 }
