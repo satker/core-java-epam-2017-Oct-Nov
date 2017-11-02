@@ -212,26 +212,27 @@ public class Solver implements ISolver {
 
     public void task11(){
         Scanner scanner = new Scanner(System.in);
-
-        int numberMonth = Integer.valueOf(scanner.nextLine());
-
-        switch (numberMonth){
-            case 1: System.out.println(Month.of(numberMonth)); break;
-            case 2: System.out.println(Month.of(numberMonth)); break;
-            case 3: System.out.println(Month.of(numberMonth)); break;
-            case 4: System.out.println(Month.of(numberMonth)); break;
-            case 5: System.out.println(Month.of(numberMonth)); break;
-            case 6: System.out.println(Month.of(numberMonth)); break;
-            case 7: System.out.println(Month.of(numberMonth)); break;
-            case 8: System.out.println(Month.of(numberMonth)); break;
-            case 9: System.out.println(Month.of(numberMonth)); break;
-            case 10: System.out.println(Month.of(numberMonth)); break;
-            case 11: System.out.println(Month.of(numberMonth)); break;
-            case 12: System.out.println(Month.of(numberMonth)); break;
-            default: System.out.println("INCORRECT INPUT DATA"); break;
+        try{
+            int numberMonth = Integer.valueOf(scanner.nextLine());
+            switch (numberMonth){
+                case 1: System.out.println(Month.of(numberMonth)); break;
+                case 2: System.out.println(Month.of(numberMonth)); break;
+                case 3: System.out.println(Month.of(numberMonth)); break;
+                case 4: System.out.println(Month.of(numberMonth)); break;
+                case 5: System.out.println(Month.of(numberMonth)); break;
+                case 6: System.out.println(Month.of(numberMonth)); break;
+                case 7: System.out.println(Month.of(numberMonth)); break;
+                case 8: System.out.println(Month.of(numberMonth)); break;
+                case 9: System.out.println(Month.of(numberMonth)); break;
+                case 10: System.out.println(Month.of(numberMonth)); break;
+                case 11: System.out.println(Month.of(numberMonth)); break;
+                case 12: System.out.println(Month.of(numberMonth)); break;
+                default: System.out.println("INCORRECT INPUT DATA"); break;
+            }
+        } catch (NumberFormatException ex) {
+            System.out.println("INCORRECT INPUT DATA");
         }
     }
-
 
     private int[][] readMatrix(Scanner scanner) {
         final int DIMENSION = scanner.nextInt();
