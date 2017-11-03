@@ -608,13 +608,12 @@ public class Solver implements ISolver {
             }
             int max = matrix[0][jmin];
             for(int[] aMatrix1 : matrix){
-                if(aMatrix[jmin] > max){
-                    if(aMatrix[jmin] > max){
-                        max = aMatrix1[jmin];
-                    }
+                if(aMatrix1[jmin] > max){
+                    max = aMatrix1[jmin];
                 }
-                if(min == max) ++result;
+
             }
+            if(min == max) ++result;
         }
         System.out.println(result);
     }
