@@ -220,9 +220,6 @@ public class Solver implements ISolver {
         if(flag){
             System.out.println("NOT FOUND");
         }
-
-        Throwable
-
     }
 
     @Override
