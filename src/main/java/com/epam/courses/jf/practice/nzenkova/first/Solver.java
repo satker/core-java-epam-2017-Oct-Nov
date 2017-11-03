@@ -589,6 +589,36 @@ public class Solver implements ISolver {
         printMatrix(resultMatrix);
     }
 
+    public void task23(){
+        Scanner scanner = new Scanner(System.in);
+        int[][] matrix = readMatrix(scanner);
+        int dimension = matrix.length;
+        int result = 0;
+        //Set<Integer> inRows = new HashSet<Integer>();
+        //Set<Integer> inColumns = new HashSet<Integer>();
+
+        for(int[] aMatrix : matrix){
+            int min = aMatrix[0];
+            int jmin = 0;
+            for(int j = 0; j < dimension; ++j){
+                if(aMatrix[j] < min){
+                    min = aMatrix[j];
+                    jmin = j;
+                }
+            }
+            int max = matrix[0][jmin];
+            for(int[] aMatrix1 : matrix){
+                if(aMatrix[jmin] > max){
+                    if(aMatrix[jmin] > max){
+                        max = aMatrix1[jmin];
+                    }
+                }
+                if(min == max) ++result;
+            }
+        }
+        System.out.println(result);
+    }
+
     public void task24(){
         Scanner scanner = new Scanner(System.in);
         int[][] matrix = readMatrix(scanner);
