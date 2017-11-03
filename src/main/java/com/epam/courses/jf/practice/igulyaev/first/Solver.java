@@ -120,4 +120,26 @@ public class Solver implements ISolver {
             stringList.forEach(s -> System.out.printf("%s ", s));
         }
     }
+
+    @Override
+    public void task8(){
+        int n = Integer.parseInt(reader.readLine());
+        System.out.println(Arrays.stream(reader.readLine().split(" ", n))
+                .filter(s -> s.matches("^\\d+$"))
+                .filter(s ->{
+                    char[] chars = s.toCharArray();
+                    Stack<Character> stack = new Stack<>();
+                    for(int i = 0; i < chars.length / 2; ++i){
+                        stack.push(chars[i]);
+                    }
+                    for(int i = chars.length / 2 + chars.length % 2; i < chars.length; ++i){
+                        char с = stack.pop();
+                        if(с != chars[i]){
+                            stack.push(с);
+                        }
+                    }
+                    return stack.empty();
+                }).limit(2).reduce((first, second) -> second).orElse("NOT FOUND")
+        );
+    }
 }
