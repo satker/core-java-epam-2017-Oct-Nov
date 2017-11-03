@@ -3,6 +3,8 @@ package com.epam.courses.jf.practice.igulyaev.first;
 import com.epam.courses.jf.practice.common.first.ISolver;
 import com.epam.courses.jf.practice.common.first.Reader;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -47,5 +49,22 @@ public class Solver implements ISolver {
         }
 
         stringSet.forEach(s -> System.out.printf("(%d): \"%s\"%n", s.length(), s));
+    }
+
+    @Override
+    public void task3(){
+        List<String> stringList = new LinkedList<>();
+        int n = Integer.parseInt(reader.readLine());
+        long sizeSum = 0;
+        for(int i = 0; i < n; ++i){
+            String str = reader.readLine();
+            sizeSum += str.length();
+            stringList.add(str);
+        }
+        final long averageLength = sizeSum / n;
+        System.out.printf("AVERAGE (%d)%n", averageLength);
+        stringList.stream()
+                .filter(s -> s.length() < averageLength)
+                .forEach(s -> System.out.printf("(%d): \"%s\"%n", s.length(), s));
     }
 }
