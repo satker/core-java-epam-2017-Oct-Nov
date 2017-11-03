@@ -797,29 +797,47 @@ public class Solver implements ISolver {
     @Override
     public void task24() {
 
+        class Structure {
+            private int[] row;
+            private int sumInRow;
+            private int rowIndex;
+
+            private Structure(int[] row, int sumInRow, int rowIndex) {
+                this.row = row;
+                this.sumInRow = sumInRow;
+                this.rowIndex = rowIndex;
+            }
+
+            private int getSumInRow() {
+                return sumInRow;
+            }
+
+            private int[] getRow() {
+                return row.clone();
+            }
+
+            private int getRowIndex() {
+                return rowIndex;
+            }
+        }
+
         int[][] matrix = readMatrix(new Scanner(System.in));
 
-        ArrayList<Object[]> tempStructure = new ArrayList<>();
+        ArrayList<Structure> structures = new ArrayList<>();
 
         for (int i = 0; i < matrix.length; i++) {
             int sum = 0;
             for (int element : matrix[i]) {
                 sum += element;
             }
-            tempStructure.add(new Object[]{matrix[i], sum, i});
+            structures.add(new Structure(matrix[i], sum, i));
         }
 
-        tempStructure.sort((o1, o2) -> {
-            if ((int) o1[1] == (int) o2[1]) {
-                return (int) o1[2] - (int) o2[2];
-            } else {
-                return (int) o1[1] - (int) o2[1];
-            }
-        });
+        structures.sort(Comparator.comparingInt(Structure::getSumInRow).thenComparing(Structure::getRowIndex));
 
         int[][] result = new int[matrix.length][];
         for (int i = 0; i < result.length; i++) {
-            result[i] = (int[]) tempStructure.get(i)[0];
+            result[i] = structures.get(i).getRow();
         }
 
         printMatrix(result);
