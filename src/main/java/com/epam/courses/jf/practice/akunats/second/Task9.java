@@ -13,15 +13,16 @@ public class Task9 implements ITestableTask9 {
     public HashSet<String> getUniqueWords(File input) {
         HashSet<String> result = new HashSet<>();
         try {
-            Files.lines(Paths.get(input.getPath()), Charset.forName("ISO-8859-1")).forEach(i -> {
-                for (String s : i.split(" ")) {
-                    if (result.contains(s)) {
-                        result.remove(s);
-                    } else {
-                        result.add(s);
-                    }
-                }
-            });
+            Files.lines(Paths.get(input.getPath()), Charset.forName("ISO-8859-1"))
+                    .forEach(i -> {
+                        for (String s : i.split(" ")) {
+                            if (result.contains(s)) {
+                                result.remove(s);
+                            } else {
+                                result.add(s);
+                            }
+                        }
+                    });
         } catch (IOException e) {
             System.out.println();
         }

@@ -13,15 +13,16 @@ public class Task10 implements ITestableTask10 {
     public HashMap<String, Integer> countNumberWords(File input) {
         HashMap<String, Integer> result = new HashMap<>();
         try {
-            Files.lines(Paths.get(input.getPath()), Charset.forName("ISO-8859-1")).forEach(i -> {
-                for (String s : i.split(" ")) {
-                    if (result.containsKey(s)) {
-                        result.put(s, result.get(s) + 1);
-                    } else {
-                        result.put(s, 1);
-                    }
-                }
-            });
+            Files.lines(Paths.get(input.getPath()), Charset.forName("ISO-8859-1"))
+                    .forEach(i -> {
+                        for (String s : i.split(" ")) {
+                            if (result.containsKey(s)) {
+                                result.put(s, result.get(s) + 1);
+                            } else {
+                                result.put(s, 1);
+                            }
+                        }
+                    });
         } catch (IOException e) {
             System.out.println();
         }

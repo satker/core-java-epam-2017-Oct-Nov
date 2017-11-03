@@ -31,14 +31,14 @@ public class Task11 implements ITestableTask11 {
         int i = 0;
         while (peoples.size() > 1) {
             Iterator<String> iterator = peoples.iterator();
-                while (iterator.hasNext()) {
+            while (iterator.hasNext()) {
+                iterator.next();
+                if (i == 0) iterator.remove();
+                if (iterator.hasNext()) {
                     iterator.next();
-                    if (i == 0) iterator.remove();
-                    if (iterator.hasNext()) {
-                        iterator.next();
-                        if (i == 1) iterator.remove();
-                    } else i = (i == 0 ? 1 : 0);
-                }
+                    if (i == 1) iterator.remove();
+                } else i = (i == 0 ? 1 : 0);
+            }
         }
         return peoples.get(0);
     }

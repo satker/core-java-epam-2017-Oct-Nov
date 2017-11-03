@@ -653,7 +653,8 @@ public class Solver implements ISolver {
         }
     }
 
-    private int[][] resultMatrix(int arrayDimension, int[][] inputMatrix, HashSet<Integer> columnsList, HashSet<Integer> stringsList) {
+    private int[][] resultMatrix(int arrayDimension, int[][] inputMatrix,
+                                 HashSet<Integer> columnsList, HashSet<Integer> stringsList) {
         int[][] resultMatrix = new int[arrayDimension - stringsList.size()][arrayDimension - columnsList.size()];
         int str = 0;
         int col = 0;
@@ -844,11 +845,11 @@ public class Solver implements ISolver {
                 int str = 0;
                 int col = 0;
                 for (int m = 0; m < arrayDimension; m++) {
-                    // Если элемент в строке равен или больше числа то увеличиваем счетчик
+                    // Если элемент в строке равен или больше числа то увеличиваем счетчик строк
                     if (inputMatrix[i][j] <= inputMatrix[i][m]) {
                         str++;
                     }
-                    // Если элемент в столбце равен или больше числа то увеличиваем счетчик
+                    // Если элемент в столбце равен или больше числа то увеличиваем счетчик столбцов
                     if (inputMatrix[i][j] >= inputMatrix[m][j]) {
                         col++;
                     }

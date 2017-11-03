@@ -35,7 +35,7 @@ public class Task19 implements ITestableTask19 {
                                 if (firthOvertaking > lengthLap * numberLaps) {
                                     firthO++;
                                 }
-                                // если расстояние от старта одинаковое то принимаем его за единицу
+                                // если расстояние от старта одинаковое
                             } else if ((i.getStartPosition() - car.getStartPosition()) == 0) {
                                 // первый обгон если более медленный впереди быстрого
                                 firthOvertaking = (double) (car.getSpeed())

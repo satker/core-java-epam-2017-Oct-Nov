@@ -29,7 +29,6 @@ public class Task8 implements ITestableTask8 {
                 .forEach(stackSymbols::push);
         String previousElement = "";
         String nowStr = "";
-        //boolean result = true;
         int i = 0;
         while (stackSymbols.size() > 0) {
             if (i == 0) {
