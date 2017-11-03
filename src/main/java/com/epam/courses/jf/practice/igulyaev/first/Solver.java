@@ -68,11 +68,10 @@ public class Solver implements ISolver {
     @Override
     public void task4(){
         int n = Integer.parseInt(reader.readLine());
-        System.out.println(Arrays.stream(reader.readLine().split(" ", n))
+        Arrays.stream(reader.readLine().split(" ", n))
                 .filter(s -> s.matches("^\\p{Alpha}+$"))
                 .reduce((first, second) ->
                         first.chars().distinct().count() <= second.chars().distinct().count() ? first : second)
-                .get()
-        );
+                .ifPresent(System.out::println);
     }
 }
