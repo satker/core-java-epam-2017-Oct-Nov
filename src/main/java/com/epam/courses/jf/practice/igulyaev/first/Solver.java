@@ -4,6 +4,7 @@ import com.epam.courses.jf.practice.common.first.ISolver;
 import com.epam.courses.jf.practice.common.first.Reader;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Solver implements ISolver {
     private Reader reader;
@@ -104,5 +105,19 @@ public class Solver implements ISolver {
                             return true;
                         }).findFirst().orElse("NOT FOUND")
         );
+    }
+
+    @Override
+    public void task7(){
+        int n = Integer.parseInt(reader.readLine());
+        List<String> stringList = Arrays.stream(reader.readLine().split(" ", n))
+                .distinct()
+                .filter(s -> s.chars().distinct().count() == s.length())
+                .collect(Collectors.toList());
+        if(stringList.isEmpty()){
+            System.out.println("NOT FOUND");
+        } else {
+            stringList.forEach(s -> System.out.printf("%s ", s));
+        }
     }
 }
