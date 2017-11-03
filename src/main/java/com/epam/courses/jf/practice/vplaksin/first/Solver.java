@@ -734,17 +734,13 @@ public class Solver implements ISolver {
 
     private double[][] readDoubleMatrix(Scanner scanner) {
 
-        NumberFormat format = NumberFormat.getInstance(Locale.FRANCE);
-        final int DIMENSION = scanner.nextInt();
+        Scanner newScanner = scanner.useLocale(Locale.FRANCE);
+        final int DIMENSION = newScanner.nextInt();
         double[][] matrix = new double[DIMENSION][DIMENSION];
 
         for (int row = 0; row < DIMENSION; row++) {
             for (int col = 0; col < DIMENSION; col++) {
-                try {
-                    matrix[row][col] = format.parse(scanner.next()).doubleValue();
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                matrix[row][col] = newScanner.nextDouble();
             }
         }
 
