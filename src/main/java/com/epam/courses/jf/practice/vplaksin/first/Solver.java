@@ -692,40 +692,17 @@ public class Solver implements ISolver {
             }
         }
 
-        //Rotate rows
+        //Swap rows
         int[] swap = matrix[minX];
-        if (x < minX) {
-            System.arraycopy(matrix, x, matrix, x + 1, minX - x);
-            matrix[x] = swap;
-        } else if (x > minX) {
-            System.arraycopy(matrix, minX + 1, matrix, minX, x - minX);
-            matrix[x] = swap;
-        }
+        matrix[minX] = matrix[x];
+        matrix[x] = swap;
 
-        //Rotate columns
+        //Swap columns
         swap = new int[matrix.length];
         for (int j = 0; j < matrix.length; j++) {
             swap[j] = matrix[j][minY];
-        }
-
-        if (y < minY) {
-            for (int j = minY; j > y; j--) {
-                for (int i = 0; i < matrix.length; i++) {
-                    matrix[i][j] = matrix[i][j - 1];
-                }
-            }
-            for (int i = 0; i < matrix.length; i++) {
-                matrix[i][y] = swap[i];
-            }
-        } else if (y > minY) {
-            for (int j = minY; j < y; j++) {
-                for (int i = 0; i < matrix.length; i++) {
-                    matrix[i][j] = matrix[i][j + 1];
-                }
-            }
-            for (int i = 0; i < matrix.length; i++) {
-                matrix[i][y] = swap[i];
-            }
+            matrix[j][minY] = matrix[j][y];
+            matrix[j][y] = swap[j];
         }
 
         printMatrix(matrix);
