@@ -142,4 +142,15 @@ public class Solver implements ISolver {
                 }).limit(2).reduce((first, second) -> second).orElse("NOT FOUND")
         );
     }
+
+    @Override
+    public void task9(){
+        int n = Integer.parseInt(reader.readLine());
+        StringBuilder stringBuilder = new StringBuilder();
+        for(int i = 1; i <= n*n; ++i){
+            stringBuilder.append(i);
+            stringBuilder.append(i % n == 0 ? "\n" :"\t");
+        }
+        System.out.print(stringBuilder);
+    }
 }
