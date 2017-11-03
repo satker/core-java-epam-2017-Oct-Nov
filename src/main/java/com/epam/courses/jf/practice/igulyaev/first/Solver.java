@@ -3,10 +3,7 @@ package com.epam.courses.jf.practice.igulyaev.first;
 import com.epam.courses.jf.practice.common.first.ISolver;
 import com.epam.courses.jf.practice.common.first.Reader;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class Solver implements ISolver {
     private Reader reader;
@@ -66,5 +63,16 @@ public class Solver implements ISolver {
         stringList.stream()
                 .filter(s -> s.length() < averageLength)
                 .forEach(s -> System.out.printf("(%d): \"%s\"%n", s.length(), s));
+    }
+
+    @Override
+    public void task4(){
+        int n = Integer.parseInt(reader.readLine());
+        System.out.println(Arrays.stream(reader.readLine().split(" ", n))
+                .filter(s -> s.matches("^\\p{Alpha}+$"))
+                .reduce((first, second) ->
+                        first.chars().distinct().count() <= second.chars().distinct().count() ? first : second)
+                .get()
+        );
     }
 }
