@@ -86,4 +86,23 @@ public class Solver implements ISolver {
                         ).count()
         );
     }
+
+    @Override
+    public void task6(){
+        int n = Integer.parseInt(reader.readLine());
+        System.out.println(
+                Arrays.stream(reader.readLine().split(" ", n))
+                        .filter(s -> s.length() > 1)
+                        .filter(s -> {
+                            char buffer = 0;
+                            for (char c : s.toCharArray() ) {
+                                if(c <= buffer){
+                                    return false;
+                                }
+                                buffer = c;
+                            }
+                            return true;
+                        }).findFirst().orElse("NOT FOUND")
+        );
+    }
 }
