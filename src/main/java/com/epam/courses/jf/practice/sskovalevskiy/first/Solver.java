@@ -313,15 +313,16 @@ public class Solver implements ISolver {
             System.out.println("No solution");
         } else if (D == 0) {
             resultOne = new BigDecimal(-(double) B / (2 * A));
-
-            System.out.printf("One solution: %s",
-                    resultOne.setScale(2, BigDecimal.ROUND_HALF_UP));
+            resultOne.setScale(2, BigDecimal.ROUND_HALF_UP);
+            String s = resultOne.toString();
+            System.out.printf("One solution: %s", s);
         } else {
             resultOne = new BigDecimal((-B - Math.sqrt((double) D)) / (2 * A));
             resultTwo = new BigDecimal((-B + Math.sqrt((double) D)) / (2 * A));
+            resultOne.setScale(2, BigDecimal.ROUND_HALF_UP);
+            resultTwo.setScale(2, BigDecimal.ROUND_HALF_UP);
             System.out.printf("Two solutions: %s, %s",
-                    resultOne.setScale(2, BigDecimal.ROUND_HALF_UP).toString(),
-                    resultTwo.setScale(2, BigDecimal.ROUND_HALF_UP).toString());
+                    resultOne.toString(), resultTwo.toString());
         }
     }
 
@@ -714,10 +715,10 @@ public class Solver implements ISolver {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N - 1; j++) {
                 if (A[i][j] == 0) {
-                    if (A[i][j+1] == 0) {
+                    if (A[i][j + 1] == 0) {
                         int k = j + 2;
                         for (; k < N; k++) {
-                            if (A[i][k] != 0){
+                            if (A[i][k] != 0) {
                                 A[i][j] = A[i][k];
                                 A[i][k] = 0;
                             }
