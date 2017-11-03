@@ -1,4 +1,7 @@
-package com.epam.courses.jf.practice.common.first;
+package com.epam.courses.jf.practice.igulyaev.first;
+
+import com.epam.courses.jf.practice.common.first.ISolver;
+import com.epam.courses.jf.practice.common.first.Reader;
 
 import java.util.Set;
 import java.util.TreeSet;
