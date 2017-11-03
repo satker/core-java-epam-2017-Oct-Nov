@@ -1,6 +1,8 @@
 package com.epam.courses.jf.practice.hkryzhik.first;
 
 
+import com.epam.courses.jf.practice.common.first.ISolver;
+
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
