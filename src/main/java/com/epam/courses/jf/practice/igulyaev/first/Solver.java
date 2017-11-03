@@ -74,4 +74,16 @@ public class Solver implements ISolver {
                         first.chars().distinct().count() <= second.chars().distinct().count() ? first : second)
                 .ifPresent(System.out::println);
     }
+
+    @Override
+    public void task5(){
+        int n = Integer.parseInt(reader.readLine());
+        System.out.println(
+                Arrays.stream(reader.readLine().split(" ", n))
+                        .filter(s -> s.matches("^\\p{Alpha}+$"))
+                        .filter(s ->
+                                ((s.split("[aeiouy]", -1).length - 1) * 2) == s.length()
+                        ).count()
+        );
+    }
 }
