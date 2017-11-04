@@ -849,7 +849,7 @@ public class Solver implements ISolver {
         int result = 0;
 
         if (matrix.length == 1) {
-            System.out.println(matrix[0][0]);
+            System.out.println(1);
             return;
         }
 
