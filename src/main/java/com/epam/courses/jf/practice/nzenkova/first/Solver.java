@@ -637,5 +637,81 @@ public class Solver implements ISolver {
         printMatrix(matrix);
     }
 
+    private boolean testLocalMin(int[][] matrix, int i, int j){
+        if(i == 0){
+            if(j == 0){
+                if((matrix[i][j] < matrix[i][j + 1]) && (matrix[i][j] < matrix[i + 1][j])
+                        && (matrix[i][j] < matrix[i + 1][j + 1]))
+                    return true;
+                else return false;
+            }
+            else if(j == matrix.length - 1){
+                if((matrix[i][j] < matrix[i][j - 1]) && (matrix[i][j] < matrix[i + 1][j])
+                        && (matrix[i][j] < matrix[i + 1][j - 1]))
+                    return true;
+                else return false;
+            }
+            else if((matrix[i][j] < matrix[i][j - 1]) && (matrix[i][j] < matrix[i + 1][j])
+                    && (matrix[i][j] < matrix[i + 1][j - 1]) && (matrix[i][j] < matrix[i][j + 1])
+                    && (matrix[i][j] < matrix[i + 1][j + 1]))
+                return true;
+            else return false;
+        }
+        else if(i == matrix.length - 1){
+            if(j == 0){
+                if((matrix[i][j] < matrix[i - 1][j]) && (matrix[i][j] < matrix[i - 1][j  + 1])
+                        && (matrix[i][j] < matrix[i][j + 1]))
+                    return true;
+                else return false;
+            }
+            else if(j == matrix.length - 1){
+                if((matrix[i][j] < matrix[i - 1][j]) && (matrix[i][j] < matrix[i - 1][j  - 1])
+                        && (matrix[i][j] < matrix[i][j - 1]))
+                    return true;
+                else return false;
+            }
+            else if((matrix[i][j] < matrix[i][j - 1]) && (matrix[i][j] < matrix[i - 1][j])
+                    && (matrix[i][j] < matrix[i - 1][j - 1]) && (matrix[i][j] < matrix[i][j + 1])
+                    && (matrix[i][j] < matrix[i - 1][j + 1]))
+                return true;
+            else return false;
+        }
+        else if(j == 0){
+            if((matrix[i][j] < matrix[i - 1][j]) && (matrix[i][j] < matrix[i - 1][j + 1])
+                    && (matrix[i][j] < matrix[i][j + 1]) && (matrix[i][j] < matrix[i + 1][j + 1])
+                    && (matrix[i][j] < matrix[i + 1][j]))
+                return true;
+            else return false;
+        }
+        else if(j == matrix.length){
+            if((matrix[i][j] < matrix[i - 1][j]) && (matrix[i][j] < matrix[i - 1][j - 1])
+                    && (matrix[i][j] < matrix[i][j - 1]) && (matrix[i][j] < matrix[i + 1][j - 1])
+                    && (matrix[i][j] < matrix[i + 1][j]))
+                return true;
+            else return false;
+        }
+        else if((matrix[i][j] < matrix[i][j - 1]) && (matrix[i][j] < matrix[i - 1][j - 1])
+                && (matrix[i][j] < matrix[i - 1][j]) && (matrix[i][j] < matrix[i - 1][j + 1])
+                && (matrix[i][j] < matrix[i][j + 1]) && (matrix[i][j] < matrix[i + 1][j + 1])
+                && (matrix[i][j] < matrix[i + 1][j]) && (matrix[i][j] < matrix[i + 1][j - 1]))
+            return true;
+        else return false;
+    }
+
+    public void task25(){
+        Scanner scanner = new Scanner(System.in);
+        int[][] matrix = readMatrix(scanner);
+        int dimension = matrix.length;
+        int result = 0;
+
+        for(int  i = 0; i < dimension; ++i){
+            for(int j = 0; j < dimension; ++j){
+                if(testLocalMin(matrix, i , j))
+                    ++result;
+            }
+        }
+        System.out.println(result);
+    }
+
 
 }
