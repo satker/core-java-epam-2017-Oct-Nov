@@ -704,7 +704,7 @@ public class Solver implements ISolver {
         int dimension = matrix.length;
         int result = 0;
 
-        if(dimension < 1) result = 1;
+        if(dimension <= 1) result = 1;
         else{
             for(int  i = 0; i < dimension; ++i){
                 for(int j = 0; j < dimension; ++j){
