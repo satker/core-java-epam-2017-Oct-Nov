@@ -4,10 +4,7 @@ import com.epam.courses.jf.practice.common.first.ISolver;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.math.MathContext;
 import java.math.RoundingMode;
-import java.text.NumberFormat;
-import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -833,7 +830,8 @@ public class Solver implements ISolver {
             structures.add(new Structure(matrix[i], sum, i));
         }
 
-        structures.sort(Comparator.comparingInt(Structure::getSumInRow).thenComparing(Structure::getRowIndex));
+        structures.sort(Comparator.comparingInt(Structure::getSumInRow)
+                .thenComparing(Structure::getRowIndex));
 
         int[][] result = new int[matrix.length][];
         for (int i = 0; i < result.length; i++) {
@@ -849,6 +847,11 @@ public class Solver implements ISolver {
 
         int[][] matrix = readMatrix(new Scanner(System.in));
         int result = 0;
+
+        if (matrix.length == 1) {
+            System.out.println(matrix[0][0]);
+            return;
+        }
 
         int[][] tempMatrix = new int[matrix.length + 2][matrix.length + 2];
         int max = matrix[0][0];
@@ -893,12 +896,17 @@ public class Solver implements ISolver {
         boolean isLocalMaxExist = false;
         int result = 0;
 
+        if (matrix.length == 1) {
+            System.out.println(matrix[0][0]);
+            return;
+        }
+
         int[][] tempMatrix = new int[matrix.length + 2][matrix.length + 2];
         int min = matrix[0][0];
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix.length; j++) {
                 tempMatrix[i + 1][j + 1] = matrix[i][j];
-                min = max(min, matrix[i][j]);
+                min = min(min, matrix[i][j]);
             }
         }
 
@@ -940,9 +948,33 @@ public class Solver implements ISolver {
     @Override
     public void task27() {
 
+        class Structure {
+            private int[] column;
+            private int sumInColumn;
+            private int columnIndex;
+
+            private Structure(int[] column, int sumInColumn, int columnIndex) {
+                this.column = column;
+                this.sumInColumn = sumInColumn;
+                this.columnIndex = columnIndex;
+            }
+
+            private int getSumInColumn() {
+                return sumInColumn;
+            }
+
+            private int[] getColumn() {
+                return column.clone();
+            }
+
+            private int getColumnIndex() {
+                return columnIndex;
+            }
+        }
+
         int[][] matrix = readMatrix(new Scanner(System.in));
 
-        ArrayList<Object[]> tempStructure = new ArrayList<>();
+        ArrayList<Structure> structures = new ArrayList<>();
 
         for (int j = 0; j < matrix[0].length; j++) {
             int sum = 0;
@@ -951,27 +983,21 @@ public class Solver implements ISolver {
                 column[i] = matrix[i][j];
                 sum += abs(matrix[i][j]);
             }
-            tempStructure.add(new Object[]{column, sum, j});
+            structures.add(new Structure(column, sum, j));
         }
 
-        tempStructure.sort((o1, o2) -> {
-            if ((int) o1[1] == (int) o2[1]) {
-                return (int) o1[2] - (int) o2[2];
-            } else {
-                return (int) o2[1] - (int) o1[1];
-            }
-        });
+        structures.sort(Comparator.comparingInt(Structure::getSumInColumn).reversed()
+                .thenComparing(Structure::getColumnIndex));
 
         int[][] result = new int[matrix.length][matrix[0].length];
         for (int j = 0; j < result[0].length; j++) {
-            int[] column = (int[]) tempStructure.get(j)[0];
+            int[] column = structures.get(j).getColumn();
             for (int i = 0; i < result.length; i++) {
                 result[i][j] = column[i];
             }
         }
 
         printMatrix(result);
-
 
     }
 
