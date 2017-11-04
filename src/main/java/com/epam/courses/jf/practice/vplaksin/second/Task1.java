@@ -2,7 +2,12 @@ package com.epam.courses.jf.practice.vplaksin.second;
 
 import com.epam.courses.jf.practice.common.second.ITestableTask1;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +16,7 @@ public class Task1 implements ITestableTask1 {
     @Override
     public List<String> reverseFile(File input, File output) {
 
-        ArrayList<String> result = new ArrayList<>();
+        List<String> result = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(input))) {
             String s;
@@ -34,4 +39,5 @@ public class Task1 implements ITestableTask1 {
         return result;
 
     }
+
 }
