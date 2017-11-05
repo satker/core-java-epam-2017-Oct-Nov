@@ -19,7 +19,7 @@ public class Task14 implements ITestableTask14 {
 
     private class NumberCollection<T extends Number> implements INumberCollection<T> {
 
-        ArrayList<T> list = new ArrayList<>();
+        private ArrayList<T> list = new ArrayList<>();
 
         @Override
         public T nearest(T value) {
