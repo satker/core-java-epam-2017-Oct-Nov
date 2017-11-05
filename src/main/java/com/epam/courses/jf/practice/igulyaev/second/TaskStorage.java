@@ -1,15 +1,22 @@
 package com.epam.courses.jf.practice.igulyaev.second;
 
 import com.epam.courses.jf.practice.common.second.ITaskStorage;
+import com.epam.courses.jf.practice.common.second.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class TaskStorage implements ITaskStorage {
+    private Map<Class, Object> hashMap;
+
+    public TaskStorage() {
+        hashMap = new HashMap<>();
+        hashMap.put(ITestableTask2.class, new TestableTask2());
+    }
+
+
     @Override
     public <T extends ITestableTask> T getSolver(Class<T> taskInterface) {
-        try {
-            return taskInterface.newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return (T) hashMap.get(taskInterface);
     }
 }
