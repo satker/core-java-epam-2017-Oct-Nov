@@ -8,7 +8,19 @@ public class Task6 implements ITestableTask6 {
 
     @Override
     public HashMap<Integer, Integer> addPolynomials(HashMap<Integer, Integer> first, HashMap<Integer, Integer> second) {
-        return null;
+
+        HashMap<Integer, Integer> result = new HashMap<>(first);
+
+        for (Integer key : second.keySet()) {
+            if (result.containsKey(key)) {
+                result.put(key, result.get(key) + second.get(key));
+            } else {
+                result.put(key, second.get(key));
+            }
+        }
+
+        return result;
+
     }
 
 }
