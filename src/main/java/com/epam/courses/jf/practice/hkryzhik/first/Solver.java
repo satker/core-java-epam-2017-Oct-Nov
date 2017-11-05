@@ -768,9 +768,15 @@ public class Solver implements ISolver {
         }
 
     }
-    
+
+    //TODO: Shit to be done
     @Override
-    public void task20() {
+    public void task20(){
+
+    }
+
+    @Override
+    public void task21() {
         Scanner inputData = new Scanner(System.in);
 
         int size = 0;
