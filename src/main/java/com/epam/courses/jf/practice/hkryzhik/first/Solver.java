@@ -853,11 +853,61 @@ public class Solver implements ISolver {
         }
 
     }
-
-    //TODO: Shit to be done
+    
     @Override
     public void task23() {
+        Scanner inputData = new Scanner(System.in);
 
+        int size = 0;
+
+        if (inputData.hasNextInt()) {
+            size = Integer.parseInt(inputData.nextLine());
+        }
+
+        ArrayList<ArrayList<Integer>> rowsList = new ArrayList<>();
+
+        ArrayList<ArrayList<Integer>> collsList = new ArrayList<>();
+
+
+        for (int i = 0; i < size; i++) {
+
+            String[] inputLine = inputData.nextLine().split(" ");
+
+            ArrayList<Integer> rowBuffer = new ArrayList<>();
+
+            for (int j = 0; j < size; j++) {
+                rowBuffer.add(Integer.valueOf(inputLine[j]));
+            }
+            rowsList.add(rowBuffer);
+        }
+
+        for (int i = 0; i < size; i++) {
+
+            ArrayList<Integer> colBuffer = new ArrayList<>();
+
+            for (int j = 0; j < size; j++) {
+                colBuffer.add(rowsList.get(j).get(i));
+            }
+
+            collsList.add(colBuffer);
+        }
+
+        int result = 0;
+
+        for (int i = 0; i < size; i++) {
+
+            int minItemInRow = rowsList.get(i).stream().min((e1, e2) -> e1 - e2).get();
+
+            for(int j = 0; j < size; j++) {
+
+                int maxItemInColl = collsList.get(j).stream().max((e1, e2) -> e1 - e2).get();
+
+                if (minItemInRow == maxItemInColl) {
+                    result += 1;
+                }
+            }
+        }
+        System.out.println(result);
     }
 
     @Override
