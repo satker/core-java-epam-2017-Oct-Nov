@@ -819,4 +819,38 @@ public class Solver implements ISolver {
 
     }
 
+    @Override
+    public void task22() {
+        Scanner inputData = new Scanner(System.in);
+
+        int size = 0;
+
+        if (inputData.hasNextInt()) {
+            size = Integer.parseInt(inputData.nextLine());
+        }
+
+        Double[][] inputArray = new Double[size][size];
+
+
+        for(int i = 0; i < size; i++) {
+
+            String[] inputLine = inputData.nextLine().replace(',', '.').split(" ");
+
+            for (int j = 0; j < size; j++) {
+
+                inputArray[i][j] = Double.valueOf(inputLine[j]);
+            }
+        }
+
+        System.out.println(size);
+
+        for(int i = 0; i < size; i++) {
+
+            for (int j = 0; j < size; j++) {
+                System.out.printf("%d ", Math.round(inputArray[i][j]));
+            }
+            System.out.println();
+        }
+
+    }
 }
