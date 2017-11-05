@@ -14,7 +14,8 @@ public class TestableTask2 implements ITestableTask2 {
     public Set<File> getFiles(File directory) {
         Set<File> files = new HashSet<>();
         try {
-            Files.walk(directory.toPath(), Integer.MAX_VALUE).forEach(p -> files.add(p.toFile()));
+            Files.walk(directory.toPath(), Integer.MAX_VALUE).filter(p -> !p.toFile().isDirectory())
+                    .forEach(p -> files.add(p.toFile()));
         } catch (IOException e) {
             e.printStackTrace();
         }
