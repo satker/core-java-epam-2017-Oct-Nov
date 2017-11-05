@@ -601,7 +601,6 @@ public class Solver implements ISolver {
 
     }
 
-    //TODO: Shit to be done
     @Override
     public void task18() {
         Scanner inputData = new Scanner(System.in);
@@ -626,30 +625,68 @@ public class Solver implements ISolver {
         }
 
         int maxValue = 0;
-        int maxI = 0;
-        int maxJ = 0;
 
+        //finding max value
         for(int i = 0; i < size; i++){
             for(int j = 0; j < size; j++){
                 if(inputArray[i][j] > maxValue){
                     maxValue = inputArray[i][j];
-                    maxI = i;
-                    maxJ = j;
                 }
             }
         }
 
-//        int[][] resultMatrix = new int[][];
+        ArrayList<Integer> rowsIndex = new ArrayList<>();
+        ArrayList<Integer> columsIndex = new ArrayList<>();
 
-        for(int i = 0; i < size - 1; i++){
-            for(int j = 0; j < size - 1; j++){
+        for(int i = 0; i < size; i++) {
+
+            boolean flag = false;
+
+            for (int j = 0; j < size; j++) {
                 if(inputArray[i][j] == maxValue){
-                    continue;
+                    flag = true;
+                    break;
                 }else {
-                    System.out.printf("%d ", inputArray[i][j]);
+                    flag = false;
                 }
             }
-            System.out.println();
+            if(flag){
+                rowsIndex.add(i);
+            }
+        }
+
+        for(int j = 0; j < size; j++) {
+            boolean flag = false;
+
+            for (int i = 0; i < size; i++) {
+                if(inputArray[i][j] == maxValue){
+                    flag = true;
+                    break;
+                }else {
+                    flag = false;
+                }
+            }
+            if(flag){
+                columsIndex.add(j);
+            }
+        }
+
+        System.out.println(size - rowsIndex.size());
+        System.out.println(size - columsIndex.size());
+
+        for(int i = 0; i < size; i++){
+            if(rowsIndex.contains(i)){
+                continue;
+            }else{
+                for(int j = 0; j < size; j++){
+                    if(columsIndex.contains(j)){
+                        continue;
+                    }else {
+                        System.out.printf("%d ", inputArray[i][j]);
+                    }
+                }
+                System.out.println();
+            }
         }
     }
 
@@ -712,8 +749,8 @@ public class Solver implements ISolver {
             }
         }
 
-        System.out.println(4 - rowsIndex.size());
-        System.out.println(4 - columsIndex.size());
+        System.out.println(size - rowsIndex.size());
+        System.out.println(size - columsIndex.size());
 
         for(int i = 0; i < size; i++){
             if(rowsIndex.contains(i)){
