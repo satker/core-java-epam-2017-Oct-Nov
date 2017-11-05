@@ -7,16 +7,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TaskStorage implements ITaskStorage {
-    private Map<String, Object> hashMap;
+    private static Map<String, Object> taskMap;
 
-    public TaskStorage() {
-        hashMap = new HashMap<>();
-        hashMap.put(ITestableTask2.class.getSimpleName(), new TestableTask2());
+    static {
+        taskMap = new HashMap<>();
+        taskMap.put(ITestableTask2.class.getSimpleName(), new TestableTask2());
     }
 
 
     @Override
     public <T extends ITestableTask> T getSolver(Class<T> taskInterface) {
-        return (T) hashMap.get(taskInterface.getSimpleName());
+        return (T) taskMap.get(taskInterface.getSimpleName());
     }
 }
