@@ -7,17 +7,13 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Solver implements ISolver {
-    private Reader reader;
-    public Solver(){
-        reader = new Reader(System.in);
-    }
+    //private Reader reader;
+    /*public Solver(){
 
-    public static void main(String[] args) {
-        Solver solver = new Solver();
-        solver.task2();
-    }
+    }*/
     @Override
     public void task1() {
+        final Reader reader = new Reader(System.in);
         int n = Integer.parseInt(reader.readLine());
         String maxString = reader.readLine();
         String minString = maxString;
@@ -36,6 +32,7 @@ public class Solver implements ISolver {
 
     @Override
     public void task2(){
+        final Reader reader = new Reader(System.in);
         Set<String> stringSet = new TreeSet<>((s1,s2) ->
                 s1.length() < s2.length() ? -1 : (s1.length() > s2.length() ? 1 : s1.compareTo(s2))
         );
@@ -51,6 +48,7 @@ public class Solver implements ISolver {
 
     @Override
     public void task3(){
+        final Reader reader = new Reader(System.in);
         List<String> stringList = new LinkedList<>();
         int n = Integer.parseInt(reader.readLine());
         long sizeSum = 0;
@@ -68,6 +66,7 @@ public class Solver implements ISolver {
 
     @Override
     public void task4(){
+        final Reader reader = new Reader(System.in);
         int n = Integer.parseInt(reader.readLine());
         Arrays.stream(reader.readLine().split(" ", n))
                 .filter(s -> s.matches("^\\p{Alpha}+$"))
@@ -78,6 +77,7 @@ public class Solver implements ISolver {
 
     @Override
     public void task5(){
+        final Reader reader = new Reader(System.in);
         int n = Integer.parseInt(reader.readLine());
         System.out.println(
                 Arrays.stream(reader.readLine().split(" ", n))
@@ -90,6 +90,7 @@ public class Solver implements ISolver {
 
     @Override
     public void task6(){
+        final Reader reader = new Reader(System.in);
         int n = Integer.parseInt(reader.readLine());
         System.out.println(
                 Arrays.stream(reader.readLine().split(" ", n))
@@ -109,6 +110,7 @@ public class Solver implements ISolver {
 
     @Override
     public void task7(){
+        final Reader reader = new Reader(System.in);
         int n = Integer.parseInt(reader.readLine());
         List<String> stringList = Arrays.stream(reader.readLine().split(" ", n))
                 .distinct()
@@ -123,6 +125,7 @@ public class Solver implements ISolver {
 
     @Override
     public void task8(){
+        final Reader reader = new Reader(System.in);
         int n = Integer.parseInt(reader.readLine());
         System.out.println(Arrays.stream(reader.readLine().split(" ", n))
                 .filter(s -> s.matches("^\\d+$"))
@@ -145,6 +148,7 @@ public class Solver implements ISolver {
 
     @Override
     public void task9(){
+        final Reader reader = new Reader(System.in);
         int n = Integer.parseInt(reader.readLine());
         StringBuilder stringBuilder = new StringBuilder();
         for(int i = 1; i <= n*n; ++i){
