@@ -716,6 +716,89 @@ public class Solver implements ISolver {
         System.out.println(result);
     }
 
+    private boolean testLocalMax(int[][] matrix, int i , int j){
+        if(i == 0){
+            if(j == 0){
+                if((matrix[i][j] > matrix[i][j + 1]) && (matrix[i][j] > matrix[i + 1][j])
+                        && (matrix[i][j] > matrix[i + 1][j + 1]))
+                    return true;
+                else return false;
+            }
+            else if(j == matrix.length - 1){
+                if((matrix[i][j] > matrix[i][j - 1]) && (matrix[i][j] > matrix[i + 1][j])
+                        && (matrix[i][j] > matrix[i + 1][j - 1]))
+                    return true;
+                else return false;
+            }
+            else if((matrix[i][j] > matrix[i][j - 1]) && (matrix[i][j] > matrix[i + 1][j])
+                    && (matrix[i][j] > matrix[i + 1][j - 1]) && (matrix[i][j] > matrix[i][j + 1])
+                    && (matrix[i][j] > matrix[i + 1][j + 1]))
+                return true;
+            else return false;
+        }
+        else if(i == matrix.length - 1){
+            if(j == 0){
+                if((matrix[i][j] > matrix[i - 1][j]) && (matrix[i][j] > matrix[i - 1][j  + 1])
+                        && (matrix[i][j] > matrix[i][j + 1]))
+                    return true;
+                else return false;
+            }
+            else if(j == matrix.length - 1){
+                if((matrix[i][j] > matrix[i - 1][j]) && (matrix[i][j] > matrix[i - 1][j  - 1])
+                        && (matrix[i][j] > matrix[i][j - 1]))
+                    return true;
+                else return false;
+            }
+            else if((matrix[i][j] > matrix[i][j - 1]) && (matrix[i][j] > matrix[i - 1][j])
+                    && (matrix[i][j] > matrix[i - 1][j - 1]) && (matrix[i][j] > matrix[i][j + 1])
+                    && (matrix[i][j] > matrix[i - 1][j + 1]))
+                return true;
+            else return false;
+        }
+        else if(j == 0){
+            if((matrix[i][j] > matrix[i - 1][j]) && (matrix[i][j] > matrix[i - 1][j + 1])
+                    && (matrix[i][j] > matrix[i][j + 1]) && (matrix[i][j] > matrix[i + 1][j + 1])
+                    && (matrix[i][j] > matrix[i + 1][j]))
+                return true;
+            else return false;
+        }
+        else if(j == matrix.length){
+            if((matrix[i][j] > matrix[i - 1][j]) && (matrix[i][j] > matrix[i - 1][j - 1])
+                    && (matrix[i][j] > matrix[i][j - 1]) && (matrix[i][j] > matrix[i + 1][j - 1])
+                    && (matrix[i][j] > matrix[i + 1][j]))
+                return true;
+            else return false;
+        }
+        else if((matrix[i][j] > matrix[i][j - 1]) && (matrix[i][j] > matrix[i - 1][j - 1])
+                && (matrix[i][j] > matrix[i - 1][j]) && (matrix[i][j] > matrix[i - 1][j + 1])
+                && (matrix[i][j] > matrix[i][j + 1]) && (matrix[i][j] > matrix[i + 1][j + 1])
+                && (matrix[i][j] > matrix[i + 1][j]) && (matrix[i][j] > matrix[i + 1][j - 1]))
+            return true;
+        else return false;
+    }
+    public void task26(){
+        Scanner scanner = new Scanner(System.in);
+        int[][] matrix = readMatrix(scanner);
+        int dimension = matrix.length;
+        Set<Integer> localMax = new HashSet<>();
 
+        if(dimension <= 1) System.out.println(matrix[0][0]);
+        else {
+            for (int i = 0; i < dimension; ++i) {
+                for (int j = 0; j < dimension; ++j) {
+                    if (testLocalMax(matrix, i, j)) {
+                        if (localMax.contains(matrix[i][j]))
+                            localMax.remove(matrix[i][j]);
+                        else localMax.add(matrix[i][j]);
+                    }
+
+
+                }
+            }
+
+            if (localMax.isEmpty() || (Collections.max(localMax) == 0)) System.out.println("NOT FOUND");
+            else System.out.println(Collections.max(localMax));
+        }
+    }
 
 }
