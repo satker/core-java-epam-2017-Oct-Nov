@@ -853,4 +853,57 @@ public class Solver implements ISolver {
         }
 
     }
+
+    //TODO: Shit to be done
+    @Override
+    public void task23() {
+
+    }
+
+    @Override
+    public void task24() {
+        Scanner inputData = new Scanner(System.in);
+
+        if (inputData.hasNextInt()) {
+            index = Integer.parseInt(inputData.nextLine());
+        }
+
+        ArrayList<int[]> inputArray = new ArrayList<>();
+
+
+        for(int i = 0; i < index; i++) {
+
+            String[] inputLine = inputData.nextLine().split(" ");
+
+            int[] bufferArray = new int[index];
+
+            for (int j = 0; j < index; j++) {
+                bufferArray[j] = Integer.valueOf(inputLine[j]);
+            }
+            inputArray.add(bufferArray);
+        }
+
+        inputArray.sort((e1, e2) -> {
+
+            int e1Count = 0;
+            int e2Count = 0;
+
+            for(int i = 0; i < index; i++){
+                e1Count += e1[i];
+                e2Count += e2[i];
+            }
+
+            return e1Count - e2Count;
+        });
+
+        System.out.println(index);
+
+        for(int i = 0; i < index; i++){
+            for(int j = 0; j < index; j++){
+                System.out.printf("%d ", inputArray.get(i)[j]);
+            }
+            System.out.println();
+        }
+
+    }
 }
