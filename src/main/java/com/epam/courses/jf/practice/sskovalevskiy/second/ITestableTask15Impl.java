@@ -115,7 +115,7 @@ public class ITestableTask15Impl implements ITestableTask15 {
                         double y = Double.parseDouble(coordinates[i + 1]);
                         points.add(new Point2D(x, y));
                     }
-                    iLines.add(new ILineImpl(points));
+                    iLines.add(new Line(points));
                 }
 
             } catch (FileNotFoundException e) {
@@ -127,17 +127,32 @@ public class ITestableTask15Impl implements ITestableTask15 {
         }
     }
 
-    class ILineImpl implements ILine {
+    class Line implements ILine {
 
-        Set<I2DPoint> points;
+        private final Set<I2DPoint> POINTS;
 
-        public ILineImpl(Set<I2DPoint> points) {
-            this.points = points;
+        public Line(Set<I2DPoint> points) {
+            this.POINTS = points;
         }
 
         @Override
         public Set<I2DPoint> getPoints() {
-            return points;
+            return POINTS;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            Line line = (Line) o;
+
+            return POINTS != null ? POINTS.equals(line.POINTS) : line.POINTS == null;
+        }
+
+        @Override
+        public int hashCode() {
+            return POINTS != null ? POINTS.hashCode() : 0;
         }
     }
 }
