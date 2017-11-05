@@ -9,14 +9,26 @@ public class Task12 implements ITestableTask12 {
     @Override
     public List<Integer> transform(List<Integer> integers, int value) {
 
+        loop:
         for (int i = 0; i < integers.size(); i++) {
-            if (integers.get(i) > value) {
+            if (integers.get(i) >= value) {
                 for (int j = integers.size() - 1; j > i; j--) {
-                    if (integers.get(j) <= value) {
+                    if (integers.get(j) < value) {
                         integers.set(i, integers.get(i) ^ integers.get(j));
                         integers.set(j, integers.get(i) ^ integers.get(j));
                         integers.set(i, integers.get(i) ^ integers.get(j));
-                        break;
+                        continue loop;
+                    }
+                }
+
+                if (integers.get(i) > value) {
+                    for (int j = integers.size() - 1; j > i; j--) {
+                        if (integers.get(j) == value) {
+                            integers.set(i, integers.get(i) ^ integers.get(j));
+                            integers.set(j, integers.get(i) ^ integers.get(j));
+                            integers.set(i, integers.get(i) ^ integers.get(j));
+                            continue loop;
+                        }
                     }
                 }
             }
