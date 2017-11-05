@@ -768,4 +768,49 @@ public class Solver implements ISolver {
         }
 
     }
+    
+    @Override
+    public void task20() {
+        Scanner inputData = new Scanner(System.in);
+
+        int size = 0;
+
+        if (inputData.hasNextInt()) {
+            size = Integer.parseInt(inputData.nextLine());
+        }
+
+        ArrayList<ArrayList<Integer>> inputArray = new ArrayList<>();
+
+
+        for(int i = 0; i < size; i++) {
+
+            String[] inputLine = inputData.nextLine().split(" ");
+
+            ArrayList<Integer> bufferList = new ArrayList<>();
+
+            for (int j = 0; j < size; j++) {
+                if(Integer.valueOf(inputLine[j]) != 0) {
+                    bufferList.add(Integer.valueOf(inputLine[j]));
+                }
+            }
+            if(bufferList.size() < size){
+                for(int k = 0; k <= size - bufferList.size(); k++){
+                    bufferList.add(0);
+                }
+            }
+            inputArray.add(bufferList);
+        }
+
+        System.out.println(size);
+
+        for(int i = 0; i < size; i++){
+            for(int j = 0; j < size; j++){
+                System.out.printf("%d ", inputArray.get(i).get(j));
+            }
+            System.out.println();
+        }
+
+
+    }
+
 }
