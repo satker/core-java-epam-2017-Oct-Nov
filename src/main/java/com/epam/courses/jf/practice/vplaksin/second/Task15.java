@@ -3,14 +3,13 @@ package com.epam.courses.jf.practice.vplaksin.second;
 import com.epam.courses.jf.practice.common.second.I2DPoint;
 import com.epam.courses.jf.practice.common.second.ITestableTask15;
 
+import java.io.BufferedWriter;
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.FileWriter;
+import java.io.FileReader;
 import java.util.HashSet;
+import java.io.IOException;
 import java.util.Set;
 
 public class Task15 implements ITestableTask15 {
@@ -56,20 +55,31 @@ public class Task15 implements ITestableTask15 {
 
         private File file;
 
-        FileWithLines(File file) {
+        public FileWithLines(File file) {
             this.file = file;
         }
 
-        FileWithLines(File file, Set<ILine> lines) {
+        public FileWithLines(File file, Set<ILine> lines) {
             this(file);
             writeLinesToFile(lines);
         }
 
         public void writeLinesToFile(Set<ILine> lines) {
 
-            try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(file))) {
-                outputStream.writeObject(lines);
-                outputStream.flush();
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+
+                for (ILine line : lines) {
+                    writer.write("line:[");
+                    for (I2DPoint point : line.getPoints()) {
+                        writer.write("point:{ ");
+                        writer.write(String.valueOf(point.getX()));
+                        writer.write(" ");
+                        writer.write(String.valueOf(point.getY()));
+                        writer.write(" }");
+                    }
+                    writer.write("]\n");
+                }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -83,19 +93,32 @@ public class Task15 implements ITestableTask15 {
 
         @Override
         public Set<ILine> getLines() {
+
             Set<ILine> result = new HashSet<>();
 
-            try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(file))) {
-                result = (Set<ILine>) inputStream.readObject();
-            } catch (ClassNotFoundException | IOException e) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                String s;
+                while ((s = reader.readLine()) != null) {
+                    Set<I2DPoint> points = new HashSet<>();
+                    String[] splited = s.split("\\s");
+                    for (int i = 1; i < splited.length; i += 3) {
+                        Double x = Double.parseDouble(splited[i]);
+                        Double y = Double.parseDouble(splited[i + 1]);
+                        points.add(new Point2D(x, y));
+                    }
+                    result.add(new Line(points));
+                }
+
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 
             return result;
+
         }
     }
 
-    private class Line implements ILine, Serializable {
+    private class Line implements ILine {
 
         private Set<I2DPoint> set = new HashSet<>();
 
@@ -106,6 +129,27 @@ public class Task15 implements ITestableTask15 {
         @Override
         public Set<I2DPoint> getPoints() {
             return set;
+        }
+    }
+
+    private class Point2D implements I2DPoint {
+
+        private double x;
+        private double y;
+
+        public Point2D(double x, double y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        @Override
+        public double getX() {
+            return x;
+        }
+
+        @Override
+        public double getY() {
+            return y;
         }
     }
 
