@@ -787,9 +787,10 @@ public class Solver implements ISolver {
             for (int i = 0; i < dimension; ++i) {
                 for (int j = 0; j < dimension; ++j) {
                     if (testLocalMax(matrix, i, j)) {
-                        if (localMax.contains(matrix[i][j]))
-                            localMax.remove(matrix[i][j]);
-                        else localMax.add(matrix[i][j]);
+                      //  if (localMax.contains(matrix[i][j]))
+                          //  localMax.remove(matrix[i][j]);
+                       // else localMax.add(matrix[i][j]);
+                        localMax.add(matrix[i][j]);
                     }
 
 
