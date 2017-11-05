@@ -29,14 +29,14 @@ public class Task15 implements ITestableTask15 {
             for (I2DPoint secondPoint : points) {
                 double x2 = secondPoint.getX();
                 double y2 = secondPoint.getY();
-                if (x1 != x2 && y1 != y2) {
+                if (x1 != x2 || y1 != y2) {
                     set.add(secondPoint);
 
                     for (I2DPoint thirdPoint : points) {
                         double x3 = thirdPoint.getX();
                         double y3 = thirdPoint.getY();
-                        if (x1 != x3 && x2 != x3 && y1 != y1 && y2 != y3
-                                && (x3 - x1) / (x2 - x1) == (y3 - y1) / (y2 - y1)) {
+                        if ((x1 != x3 || y1 != y3) && (x2 != x3 || y2 != y3) &&
+                                ((x3 - x1) * (y2 - y1) == (x2 - x1) * (y3 - y1))) {
                             set.add(thirdPoint);
                         }
                     }
@@ -48,7 +48,7 @@ public class Task15 implements ITestableTask15 {
             }
         }
 
-        return new FileWithLines(output,lines);
+        return new FileWithLines(output, lines);
 
     }
 
@@ -60,7 +60,7 @@ public class Task15 implements ITestableTask15 {
             this.file = file;
         }
 
-        FileWithLines(File file, Set<ILine> lines){
+        FileWithLines(File file, Set<ILine> lines) {
             this(file);
             writeLinesToFile(lines);
         }
