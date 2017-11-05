@@ -20,6 +20,6 @@ public class TaskStorage implements ITaskStorage {
 
     @Override
     public <T extends ITestableTask> T getSolver(Class<T> taskInterface) {
-        return (T) taskMap.get(taskInterface);
+        return (T) taskMap.get(taskInterface.getSimpleName());
     }
 }
