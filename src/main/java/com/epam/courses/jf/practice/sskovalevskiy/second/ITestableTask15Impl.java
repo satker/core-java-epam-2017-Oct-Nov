@@ -48,8 +48,6 @@ public class ITestableTask15Impl implements ITestableTask15 {
         IFileWithLines resultFile = new IFileWithLinesImpl(output);
 
         return resultFile;
-
-
     }
 
     class ABCMultipliers {
@@ -91,6 +89,7 @@ public class ITestableTask15Impl implements ITestableTask15 {
 
     class IFileWithLinesImpl implements IFileWithLines {
         File file;
+        Set<ILine> iLines;
 
         public IFileWithLinesImpl(File file) {
             this.file = file;
@@ -104,15 +103,20 @@ public class ITestableTask15Impl implements ITestableTask15 {
         @Override
         public Set<ILine> getLines() {
 
-            Set<ILine> iLines = new HashSet<>();
+            iLines = new HashSet<>();
 
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
 
-                String[] points = reader.readLine().split(" ");
-                for (int i = 0; i < points.length; i++) {
-
+                while (reader.ready()) {
+                    String[] coordinates = reader.readLine().split(" \\(\\);");
+                    Set<I2DPoint> points = new HashSet<>();
+                    for (int i = 0; i < coordinates.length; i += 2) {
+                        double x = Double.parseDouble(coordinates[i]);
+                        double y = Double.parseDouble(coordinates[i + 1]);
+                        points.add(new Point2D(x, y));
+                    }
+                    iLines.add(new ILineImpl(points));
                 }
-
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -120,6 +124,20 @@ public class ITestableTask15Impl implements ITestableTask15 {
                 e.printStackTrace();
             }
             return iLines;
+        }
+    }
+
+    class ILineImpl implements ILine {
+
+        Set<I2DPoint> points;
+
+        public ILineImpl(Set<I2DPoint> points) {
+            this.points = points;
+        }
+
+        @Override
+        public Set<I2DPoint> getPoints() {
+            return points;
         }
     }
 }
