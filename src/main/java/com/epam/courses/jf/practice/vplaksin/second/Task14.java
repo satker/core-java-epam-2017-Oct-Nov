@@ -32,8 +32,8 @@ public class Task14 implements ITestableTask14 {
             double minDifference = abs(nearest.doubleValue());
 
             for (T t : list) {
-                if (abs(doubleValue - t.doubleValue()) < minDifference){
-                    minDifference = abs(doubleValue=t.doubleValue());
+                if (abs(doubleValue - t.doubleValue()) < minDifference) {
+                    minDifference = abs(doubleValue - t.doubleValue());
                     nearest = t;
                 }
             }
