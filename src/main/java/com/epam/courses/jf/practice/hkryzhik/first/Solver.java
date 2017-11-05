@@ -652,4 +652,83 @@ public class Solver implements ISolver {
             System.out.println();
         }
     }
+
+    @Override
+    public void task19() {
+        Scanner inputData = new Scanner(System.in);
+
+        int size = 0;
+
+        if (inputData.hasNextInt()) {
+            size = Integer.parseInt(inputData.nextLine());
+        }
+
+        int[][] inputArray = new int[size][size];
+
+
+        for(int i = 0; i < size; i++) {
+
+            String[] inputLine = inputData.nextLine().split(" ");
+
+            for (int j = 0; j < size; j++) {
+
+                inputArray[i][j] = Integer.valueOf(inputLine[j]);
+            }
+        }
+
+        ArrayList<Integer> rowsIndex = new ArrayList<>();
+        ArrayList<Integer> columsIndex = new ArrayList<>();
+
+        for(int i = 0; i < size; i++) {
+
+            boolean flag = false;
+
+            for (int j = 0; j < size; j++) {
+                if(inputArray[i][j] == 0){
+                    flag = true;
+                }else {
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag){
+                rowsIndex.add(i);
+            }
+        }
+
+        for(int j = 0; j < size; j++) {
+            boolean flag = false;
+
+            for (int i = 0; i < size; i++) {
+                if(inputArray[i][j] == 0){
+                    flag = true;
+                }else {
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag){
+                columsIndex.add(j);
+            }
+        }
+
+        System.out.println(4 - rowsIndex.size());
+        System.out.println(4 - columsIndex.size());
+
+        for(int i = 0; i < size; i++){
+            if(rowsIndex.contains(i)){
+                continue;
+            }else{
+                for(int j = 0; j < size; j++){
+                    if(columsIndex.contains(j)){
+                        continue;
+                    }else {
+                        System.out.printf("%d ", inputArray[i][j]);
+                    }
+                }
+                System.out.println();
+            }
+        }
+
+    }
 }
