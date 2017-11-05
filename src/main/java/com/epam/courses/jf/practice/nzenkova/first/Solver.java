@@ -802,4 +802,37 @@ public class Solver implements ISolver {
         }
     }
 
+    private int[][] transposedMatrix(int[][] matrix){
+        int dimension = matrix.length;
+        int[][] transposedMatrix = new int[dimension][dimension];
+        for(int i = 0; i < dimension; ++i){
+            for(int j = 0; j < dimension; ++j){
+                transposedMatrix[i][j] = matrix[j][i];
+            }
+        }
+        return transposedMatrix;
+    }
+
+    public void task27(){
+        Scanner scanner = new Scanner(System.in);
+        int[][] matrix = readMatrix(scanner);
+        int dimension = matrix.length;
+        int[][] tempMatrix = transposedMatrix(matrix);
+
+        Arrays.sort(tempMatrix, new Comparator<int[]>(){
+            public int compare(int[] o1, int[] o2){
+                int sum1 = 0, sum2 = 0;
+                for(int i = 0; i < dimension; ++i){
+                    sum1 += Math.abs(o1[i]);
+                    sum2 += Math.abs(o2[i]);
+                }
+                return (sum1 > sum2 ? -1 : sum1 < sum2 ? 1 : 0);
+            }
+        });
+
+        matrix = transposedMatrix(tempMatrix);
+
+        System.out.println(dimension);
+        printMatrix(matrix);
+    }
 }
