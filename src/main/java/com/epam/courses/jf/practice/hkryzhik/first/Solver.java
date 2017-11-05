@@ -1,3 +1,6 @@
+/*Warning: Some kind of crappy code. Eyebleeding is possible. You've been warn.
+*/
+
 package com.epam.courses.jf.practice.hkryzhik.first;
 
 
@@ -7,9 +10,11 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static java.lang.Math.abs;
+
 public class Solver implements ISolver {
 
-    static int index;
+    private static int index;
 
     private static boolean isSorted(char[] characters){
 
@@ -431,7 +436,51 @@ public class Solver implements ISolver {
 
     @Override
     public void task13() {
+        Scanner inputData = new Scanner(System.in);
 
+        int size = 0;
+
+        int shiftCount = 0;
+
+        if (inputData.hasNextInt()) {
+            shiftCount = Integer.parseInt(inputData.nextLine());
+        }
+
+        if (inputData.hasNextInt()) {
+            size = Integer.parseInt(inputData.nextLine());
+        }
+
+        int[][] inputArray = new int[size][size];
+
+        for (int i = 0; i < size; i++) {
+
+            String[] inputLine = inputData.nextLine().split(" ");
+            for (int j = 0; j < size; j++) {
+
+                inputArray[i][j] = Integer.valueOf(inputLine[j]);
+
+            }
+        }
+
+        int[][] resultMatrix = new int[size][size];
+
+        System.out.println(size);
+
+        for (int i = 0; i < size; i++) {
+            for(int j = 0; j < size; j++) {
+                resultMatrix[((size * abs(shiftCount)) + i + shiftCount) % size][j] = inputArray[i][j];
+            }
+        }
+
+        for (int i = 0; i < size; i++) {
+
+            for (int j = 0; j < size; j++) {
+
+                System.out.printf("%d ", resultMatrix[i][j]);
+
+            }
+            System.out.println();
+        }
     }
 
     @Override
@@ -465,5 +514,142 @@ public class Solver implements ISolver {
         }
 
         System.out.println(sequenceCountsList.stream().max(Comparator.comparingInt(e -> e)).get());
+    }
+
+    @Override
+    public void task15() {
+        Scanner inputData = new Scanner(System.in);
+
+        int size = 0;
+
+        if (inputData.hasNextInt()) {
+            size = Integer.parseInt(inputData.nextLine());
+        }
+
+        int[][] inputArray = new int[size][size];
+
+
+        for(int i = 0; i < size; i++) {
+
+            String[] inputLine = inputData.nextLine().split(" ");
+
+            for (int j = 0; j < size; j++) {
+
+                inputArray[i][j] = Integer.valueOf(inputLine[j]);
+            }
+        }
+
+        int result = 0;
+
+        for(int i = 0; i < size; i++){
+            boolean flag = false;
+
+            for(int j = 0; j < size; j++){
+                if(!flag && inputArray[i][j] > 0){
+                    flag = true;
+                    continue;
+                }
+                if(flag && inputArray[i][j] < 0){
+                    result += inputArray[i][j];
+                    /*result += inputArray[i][j];
+                    if (inputArray[i][j + 1] < 0 && j != size - 1) {
+                        break;
+                    }*/
+                } else if (inputArray[i][j] > 0) {
+                    break;
+                }
+                flag = false;
+            }
+        }
+
+        System.out.println(result);
+    }
+
+    @Override
+    public void task16() {
+        Scanner inputData = new Scanner(System.in);
+
+        int size = 0;
+
+        if (inputData.hasNextInt()) {
+            size = Integer.parseInt(inputData.nextLine());
+        }
+
+        int[][] inputArray = new int[size][size];
+
+        for(int i = 0; i < size; i++) {
+            String[] inputLine = inputData.nextLine().split(" ");
+            for (int j = 0; j < size; j++) {
+                inputArray[j][i] = Integer.valueOf(inputLine[j]);
+            }
+        }
+
+        System.out.println(size);
+
+        for(int i = size - 1; i != -1; i--){
+            for(int j = 0; j < size; j++){
+                System.out.printf("%d ", inputArray[i][j]);
+            }
+            System.out.println();
+        }
+
+    }
+
+    //TODO: Shit to be done
+    @Override
+    public void task17() {
+
+    }
+
+    //TODO: Shit to be done
+    @Override
+    public void task18() {
+        Scanner inputData = new Scanner(System.in);
+
+        int size = 0;
+
+        if (inputData.hasNextInt()) {
+            size = Integer.parseInt(inputData.nextLine());
+        }
+
+        int[][] inputArray = new int[size][size];
+
+
+        for(int i = 0; i < size; i++) {
+
+            String[] inputLine = inputData.nextLine().split(" ");
+
+            for (int j = 0; j < size; j++) {
+
+                inputArray[i][j] = Integer.valueOf(inputLine[j]);
+            }
+        }
+
+        int maxValue = 0;
+        int maxI = 0;
+        int maxJ = 0;
+
+        for(int i = 0; i < size; i++){
+            for(int j = 0; j < size; j++){
+                if(inputArray[i][j] > maxValue){
+                    maxValue = inputArray[i][j];
+                    maxI = i;
+                    maxJ = j;
+                }
+            }
+        }
+
+//        int[][] resultMatrix = new int[][];
+
+        for(int i = 0; i < size - 1; i++){
+            for(int j = 0; j < size - 1; j++){
+                if(inputArray[i][j] == maxValue){
+                    continue;
+                }else {
+                    System.out.printf("%d ", inputArray[i][j]);
+                }
+            }
+            System.out.println();
+        }
     }
 }
