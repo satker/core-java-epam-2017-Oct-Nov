@@ -331,18 +331,23 @@ public class Solver implements ISolver {
             String s = resultOne.toString();
             System.out.printf("One solution: %s%n", s);
         } else {
-            resultOne = new BigDecimal((-B - Math.sqrt((double) D)) / (2 * A));
-            resultTwo = new BigDecimal((-B + Math.sqrt((double) D)) / (2 * A));
-            resultOne.setScale(2, BigDecimal.ROUND_HALF_UP);
-            resultTwo.setScale(2, BigDecimal.ROUND_HALF_UP);
-            System.out.printf("Two solutions: %s, %s%n",
-                    NumberFormat.getInstance(Locale.ENGLISH).format(resultOne),
-                    NumberFormat.getInstance(Locale.ENGLISH).format(resultTwo));
+//            resultOne = new BigDecimal(String.valueOf((-B - Math.sqrt((double) D)) / (2 * A)));
+//            resultTwo = new BigDecimal(String.valueOf((-B + Math.sqrt((double) D)) / (2 * A)));
+//            resultOne.setScale(2, BigDecimal.ROUND_HALF_UP);
+//            resultTwo.setScale(2, BigDecimal.ROUND_HALF_UP);
+//            System.out.printf("Two solutions: %s, %s%n",
+//                    NumberFormat.getInstance(Locale.ENGLISH).format(resultOne),
+//                    NumberFormat.getInstance(Locale.ENGLISH).format(resultTwo));
 //            double x1 = (-B - Math.sqrt((double) D)) / (2 * A);
 //            double x2 = (-B + Math.sqrt((double) D)) / (2 * A);
 //            System.out.printf("Two solutions: %.2f, %.2f%n",
 //                    NumberFormat.getInstance(Locale.ENGLISH).format(x1),
 //                    NumberFormat.getInstance(Locale.ENGLISH).format(x2));
+            BigDecimal x1 = new BigDecimal(
+                    ((-B) - Math.sqrt((double) D)) / (2 * A)).setScale(2,BigDecimal.ROUND_HALF_UP);
+            BigDecimal x2 = new BigDecimal(
+                    ((-B) + Math.sqrt((double) D)) / (2 * A)).setScale(2,BigDecimal.ROUND_HALF_UP);
+            System.out.println("Two solutions: " + x1 + ", " + x2);
         }
     }
 
