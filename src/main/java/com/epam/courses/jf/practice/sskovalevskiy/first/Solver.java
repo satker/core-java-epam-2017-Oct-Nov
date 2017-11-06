@@ -234,6 +234,7 @@ public class Solver implements ISolver {
             }
         }
 
+//        Не ясно почему, но блок тесты не проходит
 //        if (words.isEmpty()) {
 //            System.out.println("NOT FOUND");
 //        } else {
@@ -322,18 +323,18 @@ public class Solver implements ISolver {
         BigDecimal resultOne;
         BigDecimal resultTwo;
         if (D < 0) {
-            System.out.println("No solution");
+            System.out.printf("No solution%n");
         } else if (D == 0) {
             resultOne = new BigDecimal(-(double) B / (2 * A));
             resultOne.setScale(2, BigDecimal.ROUND_HALF_UP);
             String s = resultOne.toString();
-            System.out.printf("One solution: -0,5");
+            System.out.printf("One solution: %s%n");
         } else {
             resultOne = new BigDecimal((-B - Math.sqrt((double) D)) / (2 * A));
             resultTwo = new BigDecimal((-B + Math.sqrt((double) D)) / (2 * A));
             resultOne.setScale(2, BigDecimal.ROUND_HALF_UP);
             resultTwo.setScale(2, BigDecimal.ROUND_HALF_UP);
-            System.out.printf("Two solutions: %s, %s",
+            System.out.printf("Two solutions: %s, %s%n",
                     resultOne.toString(), resultTwo.toString());
         }
     }
