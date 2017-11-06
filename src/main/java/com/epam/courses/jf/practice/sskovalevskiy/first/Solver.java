@@ -214,20 +214,22 @@ public class Solver implements ISolver {
 //    The Java programming language is a general-purpose, concurrent, class-based, object-oriented language
     public void task7() {
 
-        Scanner reader = new Scanner(System.in);
-        int N = reader.nextInt();
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
 
         Set<String> words = new LinkedHashSet<>();
 
         for (int i = 0; i < N; i++) {
-            String s = reader.next();
-
-            HashSet<Character> characters = new HashSet();
-            for (int j = 0; j < s.length(); j++) {
-                characters.add(s.charAt(j));
-            }
-
-            if (characters.size() == s.length()) {
+            String s = scanner.next();
+//            HashSet<Character> characters = new HashSet();
+//            for (int j = 0; j < s.length(); j++) {
+//                characters.add(s.charAt(j));
+//            }
+//            if (characters.size() == s.length()) {
+//                words.add(s);
+//            }
+            int charsCount = (int) s.chars().distinct().count();
+            if (charsCount == s.length()) {
                 words.add(s);
             }
         }
@@ -315,7 +317,7 @@ public class Solver implements ISolver {
             resultOne = new BigDecimal(-(double) B / (2 * A));
             resultOne.setScale(2, BigDecimal.ROUND_HALF_UP);
             String s = resultOne.toString();
-            System.out.printf("One solution: -0.5");
+            System.out.printf("One solution: -0,5");
         } else {
             resultOne = new BigDecimal((-B - Math.sqrt((double) D)) / (2 * A));
             resultTwo = new BigDecimal((-B + Math.sqrt((double) D)) / (2 * A));
