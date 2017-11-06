@@ -339,9 +339,9 @@ public class Solver implements ISolver {
 //                    resultOne.toString(), resultTwo.toString());
             double x1 = (-B - Math.sqrt((double) D)) / (2 * A);
             double x2 = (-B + Math.sqrt((double) D)) / (2 * A);
-            System.out.println(
-                    "Two solutions: " + NumberFormat.getInstance(Locale.ENGLISH).format(x1) + ", "
-                            + NumberFormat.getInstance(Locale.ENGLISH).format(x2));
+            System.out.printf("Two solutions: %.2f, %.2f%n",
+                    NumberFormat.getInstance(Locale.ENGLISH).format(x1),
+                    NumberFormat.getInstance(Locale.ENGLISH).format(x2));
         }
     }
 
