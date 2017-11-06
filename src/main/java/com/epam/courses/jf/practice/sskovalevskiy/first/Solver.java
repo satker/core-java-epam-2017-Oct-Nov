@@ -328,7 +328,7 @@ public class Solver implements ISolver {
             resultOne = new BigDecimal(-(double) B / (2 * A));
             resultOne.setScale(2, BigDecimal.ROUND_HALF_UP);
             String s = resultOne.toString();
-            System.out.printf("One solution: %s%n");
+            System.out.printf("One solution: %s%n", s);
         } else {
             resultOne = new BigDecimal((-B - Math.sqrt((double) D)) / (2 * A));
             resultTwo = new BigDecimal((-B + Math.sqrt((double) D)) / (2 * A));
