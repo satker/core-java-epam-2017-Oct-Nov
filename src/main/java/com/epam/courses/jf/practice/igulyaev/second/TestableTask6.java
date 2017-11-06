@@ -12,7 +12,7 @@ public class TestableTask6 implements ITestableTask6 {
         int n  = Math.max(first.keySet().stream().max(Integer::compareTo).orElse(0),
                 second.keySet().stream().max(Integer::compareTo).orElse(0));
         Map<Integer, Integer> map = new HashMap<>();
-        for(int i = 0; i < n; ++i){
+        for(int i = 0; i <= n; ++i){
             Integer firstInt = first.get(i);
             Integer secondInt = second.get(i);
             if(!(firstInt == null && secondInt == null)){
