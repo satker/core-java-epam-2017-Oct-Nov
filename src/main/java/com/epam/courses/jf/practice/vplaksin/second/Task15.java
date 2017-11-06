@@ -123,26 +123,4 @@ public class Task15 implements ITestableTask15 {
         }
     }
 
-    private class Point2D implements I2DPoint {
-
-        private double x;
-        private double y;
-
-        public Point2D(double x, double y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        @Override
-        public double getX() {
-            return x;
-        }
-
-        @Override
-        public double getY() {
-            return y;
-        }
-    }
-
-
 }

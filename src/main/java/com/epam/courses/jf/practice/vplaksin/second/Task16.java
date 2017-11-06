@@ -9,27 +9,49 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.File;
 import java.io.IOException;
-import java.util.Comparator;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.*;
 
 import static java.lang.Math.round;
 import static java.lang.Math.sqrt;
 
 public class Task16 implements ITestableTask16 {
 
+    private static double distance(I2DPoint center, I2DPoint point) {
+        double x = center.getX() - point.getX();
+        double y = center.getY() - point.getY();
+        return sqrt(x * x + y * y);
+    }
+
+    private static int compare(I2DPoint point1, I2DPoint point2, I2DPoint center) {
+        double distance1 = distance(center, point1);
+        double distance2 = distance(center, point2);
+        double x1 = point1.getX();
+        double y1 = point1.getY();
+        double x2 = point2.getX();
+        double y2 = point2.getY();
+
+        if (distance1 == distance2) {
+            if (x1 == x2) {
+                return Double.compare(y1, y2);
+            } else {
+                return Double.compare(x1, x2);
+            }
+        } else {
+            return Double.compare(distance1, distance2);
+        }
+    }
+
     @Override
     public IFileWithPoints analyze(I2DPoint center, int radius, File output) {
         double xCenter = center.getX();
         double yCenter = center.getY();
         FileWithPoints result = new FileWithPoints(output);
-        SortedMap<I2DPoint, Double> map = new TreeMap<>(
-                Comparator.comparingDouble(point -> result.distance(center, point)));
+        SortedMap<I2DPoint, Double> map = new TreeMap<>((point1, point2) -> compare(point1, point2, center));
 
         for (int x = (int) round(xCenter - radius); x < (int) round(xCenter + radius); x++) {
             for (int y = (int) round(yCenter - radius); y < (int) round(yCenter + radius); y++) {
                 I2DPoint point = new Point2D(x, y);
-                double distance = result.distance(center, point);
+                Double distance = distance(center, point);
                 if (distance < radius) {
                     map.put(point, distance);
                 }
@@ -71,12 +93,6 @@ public class Task16 implements ITestableTask16 {
             return file;
         }
 
-        private double distance(I2DPoint center, I2DPoint point) {
-            double x = center.getX() - point.getX();
-            double y = center.getY() - point.getY();
-            return sqrt(x * x + y * y);
-        }
-
         @Override
         public SortedMap<I2DPoint, Double> getPoints() {
             SortedMap<I2DPoint, Double> result = new TreeMap<>();
@@ -85,7 +101,7 @@ public class Task16 implements ITestableTask16 {
                 String s = reader.readLine();
                 String[] splited = s.split("\\s");
                 final I2DPoint center = new Point2D(Double.parseDouble(splited[0]), Double.parseDouble(splited[1]));
-                result = new TreeMap<>(Comparator.comparingDouble(point -> distance(center, point)));
+                result = new TreeMap<>((point1,point2)->compare(point1,point2,center));
 
                 while ((s = reader.readLine()) != null) {
                     splited = s.split("\\s");
@@ -98,27 +114,6 @@ public class Task16 implements ITestableTask16 {
             }
 
             return result;
-        }
-    }
-
-    private class Point2D implements I2DPoint {
-
-        private double x;
-        private double y;
-
-        public Point2D(double x, double y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        @Override
-        public double getX() {
-            return x;
-        }
-
-        @Override
-        public double getY() {
-            return y;
         }
     }
 }
