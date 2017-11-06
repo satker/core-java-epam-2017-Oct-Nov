@@ -330,13 +330,15 @@ public class Solver implements ISolver {
             String s = resultOne.toString();
             System.out.printf("One solution: %s%n", s);
         } else {
-            resultOne = new BigDecimal((-B - Math.sqrt((double) D)) / (2 * A));
-            resultTwo = new BigDecimal((-B + Math.sqrt((double) D)) / (2 * A));
-            resultOne.setScale(2, BigDecimal.ROUND_HALF_UP);
-            resultTwo.setScale(2, BigDecimal.ROUND_HALF_UP);
-            String s1 = resultOne.toString();
-            String s2 = resultTwo.toString();
-            System.out.printf("Two solutions: %s, %s%n", s1, s2);
+//            resultOne = new BigDecimal((-B - Math.sqrt((double) D)) / (2 * A));
+//            resultTwo = new BigDecimal((-B + Math.sqrt((double) D)) / (2 * A));
+//            resultOne.setScale(2, BigDecimal.ROUND_HALF_UP);
+//            resultTwo.setScale(2, BigDecimal.ROUND_HALF_UP);
+//            System.out.printf("Two solutions: %s, %s%n",
+//                    resultOne.toString(), resultTwo.toString());
+            double f1 = (-B - Math.sqrt((double) D)) / (2 * A);
+            double f2 = (-B + Math.sqrt((double) D)) / (2 * A);
+            System.out.printf("Two solutions: %.2f, %.2f%n", f1, f2);
         }
     }
 
