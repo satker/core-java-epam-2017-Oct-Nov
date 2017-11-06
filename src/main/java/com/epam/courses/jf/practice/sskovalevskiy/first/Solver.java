@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -336,9 +337,11 @@ public class Solver implements ISolver {
 //            resultTwo.setScale(2, BigDecimal.ROUND_HALF_UP);
 //            System.out.printf("Two solutions: %s, %s%n",
 //                    resultOne.toString(), resultTwo.toString());
-            double f1 = (-B - Math.sqrt((double) D)) / (2 * A);
-            double f2 = (-B + Math.sqrt((double) D)) / (2 * A);
-            System.out.printf("Two solutions: %.2f, %.2f%n", f1, f2);
+            double x1 = (-B - Math.sqrt((double) D)) / (2 * A);
+            double x2 = (-B + Math.sqrt((double) D)) / (2 * A);
+            System.out.println(
+                    "Two solutions: " + NumberFormat.getInstance(Locale.ENGLISH).format(x1) + ", "
+                            + NumberFormat.getInstance(Locale.ENGLISH).format(x2));
         }
     }
 
