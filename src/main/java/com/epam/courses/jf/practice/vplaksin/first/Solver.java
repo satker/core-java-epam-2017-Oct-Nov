@@ -37,7 +37,6 @@ public class Solver implements ISolver {
 
     @Override
     public void task1() {
-
         String[] strings = readStrings(new Scanner(System.in));
 
         String minString = strings[0];
@@ -59,12 +58,10 @@ public class Solver implements ISolver {
 
         System.out.printf("MIN (%d): \"%s\"%n", minLength, minString);
         System.out.printf("MAX (%d): \"%s\"%n", maxLength, maxString);
-
     }
 
     @Override
     public void task2() {
-
         String[] strings = readStrings(new Scanner(System.in));
 
         Arrays.sort(strings, Comparator.comparingInt(String::length).thenComparing(String::compareTo));
@@ -72,12 +69,10 @@ public class Solver implements ISolver {
         for (String s : strings) {
             System.out.printf("(%d): \"%s\"%n", s.length(), s);
         }
-
     }
 
     @Override
     public void task3() {
-
         String[] strings = readStrings(new Scanner(System.in));
 
         long averageLength = 0L;
@@ -92,19 +87,15 @@ public class Solver implements ISolver {
                 System.out.printf("(%d): \"%s\"%n", s.length(), s);
             }
         }
-
     }
 
     private static String[] readWords(Scanner scanner) {
-
         int n = Integer.parseInt(scanner.nextLine());
         return scanner.nextLine().split("\\s+");
-
     }
 
     @Override
     public void task4() {
-
         String[] words = readWords(new Scanner(System.in));
         int minDifference = 2 * 26 + 1; //Number of different symbols in english alphabet + 1
         String result = "";
@@ -124,12 +115,10 @@ public class Solver implements ISolver {
         }
 
         System.out.println(result);
-
     }
 
     @Override
     public void task5() {
-
         String[] words = readWords(new Scanner(System.in));
 
         final Character[] temp = {'a', 'e', 'i', 'o', 'u', 'y'};
@@ -159,12 +148,10 @@ public class Solver implements ISolver {
         }
 
         System.out.println(result);
-
     }
 
     @Override
     public void task6() {
-
         String[] words = readWords(new Scanner(System.in));
 
         loop:
@@ -186,12 +173,10 @@ public class Solver implements ISolver {
         }
 
         System.out.println("NOT FOUND");
-
     }
 
     @Override
     public void task7() {
-
         String[] words = readWords(new Scanner(System.in));
         HashSet<String> wordSet = new HashSet<>();
         StringBuilder builder = new StringBuilder();
@@ -223,12 +208,10 @@ public class Solver implements ISolver {
         } else {
             System.out.println("NOT FOUND");
         }
-
     }
 
     @Override
     public void task8() {
-
         String[] words = readWords(new Scanner(System.in));
         List<BigInteger> polyndroms = new ArrayList<>();
 
@@ -251,11 +234,9 @@ public class Solver implements ISolver {
         } else {
             System.out.println("NOT FOUND");
         }
-
     }
 
     private static int[][] readMatrix(Scanner scanner) {
-
         final int DIMENSION = scanner.nextInt();
         int[][] matrix = new int[DIMENSION][DIMENSION];
 
@@ -266,11 +247,9 @@ public class Solver implements ISolver {
         }
 
         return matrix;
-
     }
 
     private static void printMatrixWithoutSize(int[][] input) {
-
         for (int[] row : input) {
             for (int i = 0; i < row.length; i++) {
                 if (i != row.length - 1) {
@@ -280,19 +259,15 @@ public class Solver implements ISolver {
                 }
             }
         }
-
     }
 
     private static void printMatrix(int[][] input) {
-
         System.out.println(input.length);
         printMatrixWithoutSize(input);
-
     }
 
     @Override
     public void task9() {
-
         Scanner scanner = new Scanner(System.in);
         final int n = Integer.parseInt(scanner.nextLine());
 
@@ -304,12 +279,10 @@ public class Solver implements ISolver {
         }
 
         printMatrixWithoutSize(result);
-
     }
 
     @Override
     public void task10() {
-
         Scanner scanner = new Scanner(System.in);
         final int A = scanner.nextInt();
         final int B = scanner.nextInt();
@@ -346,12 +319,10 @@ public class Solver implements ISolver {
             System.out.println("Two solutions: " + result1.setScale(2, RoundingMode.HALF_UP)
                     + ", " + result2.setScale(2, RoundingMode.HALF_UP));
         }
-
     }
 
     @Override
     public void task11() {
-
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
 
@@ -403,12 +374,10 @@ public class Solver implements ISolver {
                 System.out.println("INCORRECT INPUT DATA");
                 break;
         }
-
     }
 
     @Override
     public void task12() {
-
         Scanner scanner = new Scanner(System.in);
         int k = Integer.parseInt(scanner.nextLine());
         int[][] matrix = readMatrix(scanner);
@@ -416,12 +385,10 @@ public class Solver implements ISolver {
         Arrays.sort(matrix, Comparator.comparingInt(row -> row[k]));
 
         printMatrix(matrix);
-
     }
 
     @Override
     public void task13() {
-
         Scanner scanner = new Scanner(System.in);
         int k = Integer.parseInt(scanner.nextLine());
         int[][] matrix = readMatrix(scanner);
@@ -435,12 +402,10 @@ public class Solver implements ISolver {
         }
 
         printMatrix(result);
-
     }
 
     @Override
     public void task14() {
-
         Scanner scanner = new Scanner(System.in);
         int n = Integer.parseInt(scanner.nextLine());
         int[] numbers = new int[n];
@@ -474,7 +439,6 @@ public class Solver implements ISolver {
 
     @Override
     public void task15() {
-
         Scanner scanner = new Scanner(System.in);
         int[][] matrix = readMatrix(scanner);
 
@@ -500,12 +464,10 @@ public class Solver implements ISolver {
         }
 
         System.out.println(result);
-
     }
 
     @Override
     public void task16() {
-
         int[][] matrix = readMatrix(new Scanner(System.in));
         int[][] result = new int[matrix.length][matrix[0].length];
 
@@ -516,12 +478,10 @@ public class Solver implements ISolver {
         }
 
         printMatrix(result);
-
     }
 
     @Override
     public void task17() {
-
         int[][] temp = readMatrix(new Scanner(System.in));
         double[][] matrix = new double[temp.length][temp.length];
         for (int i = 0; i < matrix.length; i++) {
@@ -563,21 +523,17 @@ public class Solver implements ISolver {
         }
 
         System.out.println(Math.round(result));
-
     }
 
     private void printNonSquareMatrix(int[][] input) {
-
         System.out.println(input.length);
         System.out.println(input[0].length);
 
         printMatrixWithoutSize(input);
-
     }
 
     @Override
     public void task18() {
-
         int[][] matrix = readMatrix(new Scanner(System.in));
 
         int maxElement = matrix[0][0];
@@ -617,12 +573,10 @@ public class Solver implements ISolver {
         }
 
         printNonSquareMatrix(result);
-
     }
 
     @Override
     public void task19() {
-
         int[][] matrix = readMatrix(new Scanner(System.in));
 
         ArrayList<Integer> rowsToDelete = new ArrayList<>();
@@ -665,12 +619,10 @@ public class Solver implements ISolver {
         }
 
         printNonSquareMatrix(result);
-
     }
 
     @Override
     public void task20() {
-
         Scanner scanner = new Scanner(System.in);
         int x = Integer.parseInt(scanner.nextLine());
         int y = Integer.parseInt(scanner.nextLine());
@@ -703,12 +655,10 @@ public class Solver implements ISolver {
         }
 
         printMatrix(matrix);
-
     }
 
     @Override
     public void task21() {
-
         int[][] matrix = readMatrix(new Scanner(System.in));
         int[][] result = new int[matrix.length][matrix[0].length];
 
@@ -726,11 +676,9 @@ public class Solver implements ISolver {
         }
 
         printMatrix(result);
-
     }
 
     private double[][] readDoubleMatrix(Scanner scanner) {
-
         Scanner newScanner = scanner.useLocale(Locale.FRANCE);
         final int DIMENSION = newScanner.nextInt();
         double[][] matrix = new double[DIMENSION][DIMENSION];
@@ -742,12 +690,10 @@ public class Solver implements ISolver {
         }
 
         return matrix;
-
     }
 
     @Override
     public void task22() {
-
         double[][] matrix = readDoubleMatrix(new Scanner(System.in));
         int[][] result = new int[matrix.length][matrix[0].length];
 
@@ -758,12 +704,10 @@ public class Solver implements ISolver {
         }
 
         printMatrix(result);
-
     }
 
     @Override
     public void task23() {
-
         int[][] matrix = readMatrix(new Scanner(System.in));
 
         int result = 0;
@@ -788,12 +732,10 @@ public class Solver implements ISolver {
         }
 
         System.out.println(result);
-
     }
 
     @Override
     public void task24() {
-
         class Structure {
             private int[] row;
             private int sumInRow;
@@ -839,12 +781,10 @@ public class Solver implements ISolver {
         }
 
         printMatrix(result);
-
     }
 
     @Override
     public void task25() {
-
         int[][] matrix = readMatrix(new Scanner(System.in));
         int result = 0;
 
@@ -886,12 +826,10 @@ public class Solver implements ISolver {
         }
 
         System.out.println(result);
-
     }
 
     @Override
     public void task26() {
-
         int[][] matrix = readMatrix(new Scanner(System.in));
         boolean isLocalMaxExist = false;
         int result = 0;
@@ -942,12 +880,10 @@ public class Solver implements ISolver {
         } else {
             System.out.println("NOT FOUND");
         }
-
     }
 
     @Override
     public void task27() {
-
         class Structure {
             private int[] column;
             private int sumInColumn;
@@ -998,7 +934,6 @@ public class Solver implements ISolver {
         }
 
         printMatrix(result);
-
     }
 
 }
