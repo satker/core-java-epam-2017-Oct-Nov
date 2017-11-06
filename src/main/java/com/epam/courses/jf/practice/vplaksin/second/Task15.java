@@ -16,7 +16,6 @@ public class Task15 implements ITestableTask15 {
 
     @Override
     public IFileWithLines analyze(Set<I2DPoint> points, File output) {
-
         Set<ILine> lines = new HashSet<>();
 
         for (I2DPoint firstPoint : points) {
@@ -48,7 +47,6 @@ public class Task15 implements ITestableTask15 {
         }
 
         return new FileWithLines(output, lines);
-
     }
 
     private class FileWithLines implements IFileWithLines {
@@ -65,9 +63,7 @@ public class Task15 implements ITestableTask15 {
         }
 
         public void writeLinesToFile(Set<ILine> lines) {
-
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-
                 for (ILine line : lines) {
                     writer.write("line:[");
                     for (I2DPoint point : line.getPoints()) {
@@ -79,11 +75,9 @@ public class Task15 implements ITestableTask15 {
                     }
                     writer.write("]\n");
                 }
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
 
         @Override
@@ -93,7 +87,6 @@ public class Task15 implements ITestableTask15 {
 
         @Override
         public Set<ILine> getLines() {
-
             Set<ILine> result = new HashSet<>();
 
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -108,13 +101,11 @@ public class Task15 implements ITestableTask15 {
                     }
                     result.add(new Line(points));
                 }
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
             return result;
-
         }
     }
 
