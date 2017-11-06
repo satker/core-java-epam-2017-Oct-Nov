@@ -234,13 +234,19 @@ public class Solver implements ISolver {
             }
         }
 
-        if (words.isEmpty()) {
-            System.out.println("NOT FOUND");
-        } else {
-            for (String word : words) {
-                System.out.print(word + (words.iterator().hasNext() ? " " : "\n"));
-            }
+//        if (words.isEmpty()) {
+//            System.out.println("NOT FOUND");
+//        } else {
+//            for (String word : words) {
+//                System.out.print(word + (words.iterator().hasNext() ? " " : "\n"));
+//            }
+//        }
+
+        StringJoiner probel = new StringJoiner(" ");
+        for (String s : words) {
+            probel.add(s);
         }
+        System.out.printf("%s%n", probel.toString());
     }
 
     @Override
