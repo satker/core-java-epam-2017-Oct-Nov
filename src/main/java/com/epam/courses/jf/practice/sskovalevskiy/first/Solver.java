@@ -238,7 +238,7 @@ public class Solver implements ISolver {
             System.out.println("NOT FOUND");
         } else {
             for (String word : words) {
-                System.out.print(word + (words.iterator().hasNext() ? " " : ""));
+                System.out.print(word + (words.iterator().hasNext() ? " " : "\n"));
             }
         }
     }
