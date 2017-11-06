@@ -12,9 +12,7 @@ public class Task14 implements ITestableTask14 {
 
     @Override
     public <T extends Number> INumberCollection<T> createCollection(Class<T> required) {
-
         return new NumberCollection<>();
-
     }
 
     private class NumberCollection<T extends Number> implements INumberCollection<T> {

@@ -13,7 +13,6 @@ public class Task2 implements ITestableTask2 {
 
     @Override
     public Set<File> getFiles(File directory) {
-
         Set<File> result = new HashSet<>();
         Queue<File> queue = new LinkedList<>();
         Collections.addAll(queue, directory.listFiles());
@@ -27,7 +26,6 @@ public class Task2 implements ITestableTask2 {
         }
 
         return result;
-
     }
 
 }

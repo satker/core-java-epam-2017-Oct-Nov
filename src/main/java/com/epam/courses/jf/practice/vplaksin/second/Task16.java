@@ -9,7 +9,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.SortedMap;
+import java.util.TreeMap;
+
 
 import static java.lang.Math.round;
 import static java.lang.Math.sqrt;
@@ -66,11 +68,11 @@ public class Task16 implements ITestableTask16 {
 
         private File file;
 
-        public FileWithPoints(File file) {
+        private FileWithPoints(File file) {
             this.file = file;
         }
 
-        public void writePointsToFile(I2DPoint center, SortedMap<I2DPoint, Double> map) {
+        private void writePointsToFile(I2DPoint center, SortedMap<I2DPoint, Double> map) {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                 writer.write(String.valueOf(center.getX()) + " ");
                 writer.write(String.valueOf(center.getY()) + "\n");

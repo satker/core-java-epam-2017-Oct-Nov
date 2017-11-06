@@ -9,16 +9,14 @@ public class Task13 implements ITestableTask13 {
 
     @Override
     public AbstractGraph createGraph(int numberNodes) {
-
         return new Graph(numberNodes);
-
     }
 
     private class Graph extends AbstractGraph {
 
         private HashMap<Integer, HashSet<Integer>> edges = new HashMap<>();
 
-        public Graph(int numberNodes) {
+        private Graph(int numberNodes) {
             super(numberNodes);
             for (int i = 0; i < numberNodes; i++) {
                 edges.put(i, new HashSet<>());

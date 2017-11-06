@@ -53,16 +53,16 @@ public class Task15 implements ITestableTask15 {
 
         private File file;
 
-        public FileWithLines(File file) {
+        private FileWithLines(File file) {
             this.file = file;
         }
 
-        public FileWithLines(File file, Set<ILine> lines) {
+        private FileWithLines(File file, Set<ILine> lines) {
             this(file);
             writeLinesToFile(lines);
         }
 
-        public void writeLinesToFile(Set<ILine> lines) {
+        private void writeLinesToFile(Set<ILine> lines) {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                 for (ILine line : lines) {
                     writer.write("line:[");
@@ -113,7 +113,7 @@ public class Task15 implements ITestableTask15 {
 
         private Set<I2DPoint> set = new HashSet<>();
 
-        Line(Set<I2DPoint> set) {
+        private Line(Set<I2DPoint> set) {
             this.set = set;
         }
 

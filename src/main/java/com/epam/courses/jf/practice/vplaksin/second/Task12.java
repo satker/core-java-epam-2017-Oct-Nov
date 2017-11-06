@@ -8,7 +8,6 @@ public class Task12 implements ITestableTask12 {
 
     @Override
     public List<Integer> transform(List<Integer> integers, int value) {
-
         loop:
         for (int i = 0; i < integers.size(); i++) {
             if (integers.get(i) >= value) {
@@ -35,7 +34,6 @@ public class Task12 implements ITestableTask12 {
         }
 
         return integers;
-
     }
 
 }

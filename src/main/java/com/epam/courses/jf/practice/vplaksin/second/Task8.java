@@ -8,7 +8,6 @@ public class Task8 implements ITestableTask8 {
 
     @Override
     public boolean isNormalBrackets(String string) {
-
         char[] chars = string.toCharArray();
         Stack<Character> stack = new Stack<>();
         for (char c : chars) {
@@ -29,7 +28,6 @@ public class Task8 implements ITestableTask8 {
         }
 
         return stack.empty();
-
     }
 
 }

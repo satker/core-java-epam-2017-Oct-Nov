@@ -15,7 +15,6 @@ public class Task1 implements ITestableTask1 {
 
     @Override
     public List<String> reverseFile(File input, File output) {
-
         List<String> result = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(input))) {
@@ -37,7 +36,6 @@ public class Task1 implements ITestableTask1 {
         }
 
         return result;
-
     }
 
 }

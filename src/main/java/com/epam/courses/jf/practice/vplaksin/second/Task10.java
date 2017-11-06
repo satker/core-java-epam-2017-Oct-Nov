@@ -11,11 +11,9 @@ public class Task10 implements ITestableTask10 {
 
     @Override
     public HashMap<String, Integer> countNumberWords(File input) {
-
         HashMap<String, Integer> result = new HashMap<>();
 
         try (Scanner scanner = new Scanner(input)) {
-
             while (scanner.hasNext()) {
                 String s = scanner.next();
                 if (result.containsKey(s)) {
@@ -24,13 +22,11 @@ public class Task10 implements ITestableTask10 {
                     result.put(s, 1);
                 }
             }
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
         return result;
-
     }
 
 }

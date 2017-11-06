@@ -10,7 +10,6 @@ public class Task5 implements ITestableTask5 {
 
     @Override
     public double calcResistance(List<IMeasurement> measurements) {
-
         BigDecimal sumUI = BigDecimal.ZERO;
         BigDecimal sumII = BigDecimal.ZERO;
 
@@ -26,7 +25,6 @@ public class Task5 implements ITestableTask5 {
         }
 
         return sumUI.divide(sumII, 6, RoundingMode.HALF_UP).doubleValue();
-
     }
 
 }

@@ -11,7 +11,6 @@ public class Task3 implements ITestableTask3 {
 
     @Override
     public List<String> sortPoems(Set<IPoem> poems, String author) {
-
         List<String> result = new ArrayList<>();
 
         for (IPoem poem : poems) {
@@ -22,7 +21,6 @@ public class Task3 implements ITestableTask3 {
         result.sort(Comparator.comparingInt(String::length));
 
         return result;
-
     }
 
 }

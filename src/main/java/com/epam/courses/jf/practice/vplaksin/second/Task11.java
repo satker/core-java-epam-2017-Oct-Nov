@@ -29,7 +29,6 @@ public class Task11 implements ITestableTask11 {
 
     @Override
     public String emulate(LinkedList<String> peoples) {
-
         if (peoples == null || peoples.isEmpty()) {
             throw new IllegalArgumentException();
         }
@@ -47,7 +46,6 @@ public class Task11 implements ITestableTask11 {
         }
 
         return peoples.getFirst();
-
     }
 
 }

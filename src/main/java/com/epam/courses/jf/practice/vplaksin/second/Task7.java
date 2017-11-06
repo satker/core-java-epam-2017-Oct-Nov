@@ -9,7 +9,6 @@ public class Task7 implements ITestableTask7 {
 
     @Override
     public List<Integer> multiplyPolynomials(List<Integer> first, List<Integer> second) {
-
         List<Integer> result = new ArrayList<>(first.size() + second.size() - 1);
 
         if (first.size() == 1 && first.get(0) == 0
@@ -29,7 +28,6 @@ public class Task7 implements ITestableTask7 {
         }
 
         return result;
-
     }
 
 }
