@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class TestableTask4Impl implements ITestableTask4 {
     @Override
     public Set<Integer> intersection(Set<Integer> first, Set<Integer> second) {
-        return first.stream().filter(i -> second.contains(i)).collect(Collectors.toSet());
+        return first.stream().filter(second::contains).collect(Collectors.toSet());
     }
 
     @Override
