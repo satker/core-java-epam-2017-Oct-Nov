@@ -331,18 +331,6 @@ public class Solver implements ISolver {
             String s = resultOne.toString();
             System.out.printf("One solution: %s%n", s);
         } else {
-//            resultOne = new BigDecimal(String.valueOf((-B - Math.sqrt((double) D)) / (2 * A)));
-//            resultTwo = new BigDecimal(String.valueOf((-B + Math.sqrt((double) D)) / (2 * A)));
-//            resultOne.setScale(2, BigDecimal.ROUND_HALF_UP);
-//            resultTwo.setScale(2, BigDecimal.ROUND_HALF_UP);
-//            System.out.printf("Two solutions: %s, %s%n",
-//                    NumberFormat.getInstance(Locale.ENGLISH).format(resultOne),
-//                    NumberFormat.getInstance(Locale.ENGLISH).format(resultTwo));
-//            double x1 = (-B - Math.sqrt((double) D)) / (2 * A);
-//            double x2 = (-B + Math.sqrt((double) D)) / (2 * A);
-//            System.out.printf("Two solutions: %.2f, %.2f%n",
-//                    NumberFormat.getInstance(Locale.ENGLISH).format(x1),
-//                    NumberFormat.getInstance(Locale.ENGLISH).format(x2));
             BigDecimal x1 = new BigDecimal(
                     ((-B) - Math.sqrt((double) D)) / (2 * A)).setScale(2,BigDecimal.ROUND_HALF_UP);
             BigDecimal x2 = new BigDecimal(
@@ -570,27 +558,49 @@ public class Solver implements ISolver {
 
     @Override
 //    TODO: #17
-//    Вычисляем только определитель для матрицы 3×3 или любого размера?
     public void task17() {
 
-        Scanner scanner = new Scanner(System.in);
-        int N = scanner.nextInt();
-
-        int[][] A = new int[N][N];
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                A[i][j] = scanner.nextInt();
+        Scanner sc = new Scanner(System.in);
+        int dimension = sc.nextInt();
+        int[][] matrix = new int[dimension][dimension];
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < dimension; j++) {
+                matrix[i][j] = sc.nextInt();
             }
         }
-//        ∆ = a11·a22·a33 + a12·a23·a31 + a13·a21·a32 - a13·a22·a31 - a11·a23·a32 - a12·a21·a33
-        int detA = A[0][0] * A[1][1] * A[2][2]
-                + A[0][1] * A[1][2] * A[2][0]
-                + A[0][2] * A[1][0] * A[2][1]
-                - A[0][2] * A[1][1] * A[2][0]
-                - A[0][0] * A[1][2] * A[2][1]
-                - A[0][1] * A[1][0] * A[2][2];
+        if (dimension == 1)
+            System.out.println(matrix[0][0]);
+        int result = determinant(dimension, matrix);
+        System.out.println(result);
+    }
 
-        System.out.println(detA);
+    private static int determinant(int dimension, int[][] matrix) {
+        int sum = 0;
+        if (dimension == 2)
+            return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
+        else {
+            for (int i = 0; i < dimension; i++) {
+                sum += (int) Math.pow(-1, i) * matrix[0][i] * determinant(dimension - 1, getMinor(matrix, i));
+            }
+        }
+        return sum;
+    }
+
+    private static int[][] getMinor(int[][] matrix, int column) {
+        int minorLength = matrix.length - 1;
+        int[][] minor = new int[minorLength][minorLength];
+        int dJ = 0;
+        for (int i = 1; i <= minorLength; i++) {
+            dJ = 0;
+            for (int j = 0; j <= minorLength; j++) {
+                if (j == column) {
+                    dJ = 1;
+                } else {
+                    minor[i - 1][j - dJ] = matrix[i][j];
+                }
+            }
+        }
+        return minor;
     }
 
     @Override
