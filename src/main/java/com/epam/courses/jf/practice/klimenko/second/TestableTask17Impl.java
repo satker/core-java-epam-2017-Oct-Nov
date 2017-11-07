@@ -39,7 +39,7 @@ public class TestableTask17Impl implements ITestableTask17 {
     @Override
     public Set<I2DPoint> analyze(Set<ISegment> segments) {
         SortedMap<Double, List<I2DPoint>> points = new TreeMap<>();
-        ISegment[] arraySegments = (ISegment[]) segments.toArray();
+        ISegment[] arraySegments = segments.toArray(new ISegment[segments.size()]);
 
         for (int i = 0; i < arraySegments.length; ++i) {
             for (int j = i + 1; j < arraySegments.length; ++j) {
