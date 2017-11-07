@@ -19,7 +19,9 @@ public class TestableTask12Impl implements ITestableTask12 {
         for (int i = 0; i < integers.size(); ++i) {
             if (integers.get(i) < value) {
                 swap(integers, less, equals);
-                swap(integers, less, i);
+                if( equals != i ) {
+                    swap(integers, less, i);
+                }
                 ++equals;
                 ++less;
             } else if(integers.get(i) == value) {
