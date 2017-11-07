@@ -1,11 +1,9 @@
 package com.epam.courses.jf.practice.klimenko.second;
 
 import com.epam.courses.jf.practice.common.second.ITestableTask14;
+import sun.tools.tree.CastExpression;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
+import java.util.*;
 
 public class TestableTask14Impl implements ITestableTask14 {
     @Override
@@ -15,11 +13,10 @@ public class TestableTask14Impl implements ITestableTask14 {
 
     private class NumberCollection<T extends Number> implements INumberCollection<T> {
         ArrayList<T> collection;
-        ArrayList<Double> values;
+
 
         NumberCollection() {
             collection = new ArrayList<>();
-            values = new ArrayList<>();
         }
 
         @Override
@@ -27,7 +24,7 @@ public class TestableTask14Impl implements ITestableTask14 {
             if (isEmpty()) {
                 return null;
             }
-            int index = Collections.binarySearch(values, value.doubleValue());
+            int index = Collections.binarySearch(collection, value, Comparator.comparing(T::doubleValue) );
             if (index >= 0) {
                 return collection.get(index);
             }
@@ -75,10 +72,9 @@ public class TestableTask14Impl implements ITestableTask14 {
 
         @Override
         public boolean add(T t) {
-            int index = Collections.binarySearch(values, t.doubleValue());
+            int index = Collections.binarySearch(collection, t, Comparator.comparing(T::doubleValue));
             if (index < 0) {
                 collection.add(-index - 1, t);
-                values.add(-index - 1, t.doubleValue());
                 return true;
             }
             return false;
@@ -86,13 +82,16 @@ public class TestableTask14Impl implements ITestableTask14 {
 
         @Override
         public boolean remove(Object o) {
-            int index = Collections.binarySearch(values, ((T) o).doubleValue());
-            if (index >= 0) {
-                collection.remove(index);
-                values.remove(index);
-                return true;
+            try {
+                int index = Collections.binarySearch(collection, (T) o, Comparator.comparing(T::doubleValue));
+                if (index >= 0) {
+                    collection.remove(index);
+                    return true;
+                }
+                return false;
+            } catch (ClassCastException e) {
+                return collection.remove(o);
             }
-            return false;
         }
 
         @Override
@@ -118,7 +117,7 @@ public class TestableTask14Impl implements ITestableTask14 {
         public boolean removeAll(Collection<?> collection2) {
             boolean ret = false;
             for (Object o : collection2) {
-                ret = ret || remove(o);
+                ret |= remove(o);
             }
             return ret;
         }
