@@ -5,30 +5,33 @@ import com.epam.courses.jf.practice.common.second.ITestableTask11;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 public class TestableTask11Impl implements ITestableTask11 {
     @Override
     public String emulate(ArrayList<String> peoples) {
+        int first = 0;
         while (peoples.size() > 1) {
-            for (int i = 0; i < peoples.size(); ++i) {
+            int next = ( peoples.size() - first ) % 2;
+            for (int i = first; i < peoples.size(); ++i) {
                 peoples.remove(i);
             }
+            first = next;
         }
         return peoples.get(0);
     }
 
     @Override
     public String emulate(LinkedList<String> peoples) {
-        LinkedList<String> toErase = new LinkedList<>();
+        boolean doRemove = true;
         while (peoples.size() > 1) {
-            toErase.clear();
-            for (Iterator<String> it = peoples.iterator(); it.hasNext();) {
-                toErase.add(it.next());
-                if(it.hasNext()) {
-                    it.next();
+            for (ListIterator<String> it = peoples.listIterator(); it.hasNext(); ) {
+                it.next();
+                if( doRemove ) {
+                    it.remove();
                 }
+                doRemove = !doRemove;
             }
-            peoples.removeAll(toErase);
         }
         return peoples.get(0);
     }
