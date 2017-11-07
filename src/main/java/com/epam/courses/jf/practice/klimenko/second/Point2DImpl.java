@@ -9,18 +9,18 @@ public class Point2DImpl implements I2DPoint {
         x = y = 0;
     }
 
-    Point2DImpl(double x, double y) {
+    public Point2DImpl(double x, double y) {
         this.x = x;
         this.y = y;
     }
 
     @Override
     public double getX() {
-        return 0;
+        return x;
     }
 
     @Override
     public double getY() {
-        return 0;
+        return y;
     }
 }
