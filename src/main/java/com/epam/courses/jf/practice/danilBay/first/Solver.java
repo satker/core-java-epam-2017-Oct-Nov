@@ -9,10 +9,10 @@ import static java.lang.Math.sqrt;
 
 public class Solver implements ISolver {
 
-//    public static void main(String[] args) {
-//        Solver a=new Solver();
-//        a.task19();
-//    }
+    public static void main(String[] args) {
+        Solver a=new Solver();
+        a.task19();
+    }
 
     public void task1() {
         Scanner in = new Scanner(System.in);
