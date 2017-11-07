@@ -32,7 +32,9 @@ public class TestableTask18Impl implements ITestableTask18 {
             /* Update left bound */
             stack.clear();
             for (int j = 0; j < matrix.getWidth(); ++j) {
-                while (!stack.empty() && upperBound[stack.peek()] <= upperBound[j]) {
+                while (!stack.empty()
+                        && upperBound[stack.peek()] <= upperBound[j]
+                        && matrix.getValue(stack.peek(), lastRow) == matrix.getValue(j, lastRow)) {
                     stack.pop();
                 }
                 leftBound[j] = stack.isEmpty() ? 0 : stack.peek();
@@ -41,7 +43,9 @@ public class TestableTask18Impl implements ITestableTask18 {
             /* Update right bound */
             stack.clear();
             for (int j = matrix.getWidth() - 1; j >= 0; --j) {
-                while (!stack.empty() && upperBound[stack.peek()] <= upperBound[j]) {
+                while (!stack.empty()
+                        && upperBound[stack.peek()] <= upperBound[j]
+                        && matrix.getValue(stack.peek(), lastRow) == matrix.getValue(j, lastRow)) {
                     stack.pop();
                 }
                 rightBound[j] = stack.isEmpty() ? matrix.getWidth() - 1 : stack.peek();
@@ -53,7 +57,7 @@ public class TestableTask18Impl implements ITestableTask18 {
                 int h = lastRow - upperBound[j] + 1;
                 int area = w * h;
 
-                if( area > best.area ) {
+                if (area > best.area) {
                     best.area = area;
                     best.value = matrix.getValue(j, lastRow);
                     best.w = w;
@@ -62,7 +66,7 @@ public class TestableTask18Impl implements ITestableTask18 {
             }
         }
 
-        return new RectMatrix( best.w, best.h, best.value );
+        return new RectMatrix(best.w, best.h, best.value);
     }
 
     private class RectMatrix implements IRectangularIntegerMatrix {
@@ -73,8 +77,8 @@ public class TestableTask18Impl implements ITestableTask18 {
             this.w = w;
             this.h = h;
             this.data = new Integer[h][w];
-            for( int i = 0; i < h; ++i ) {
-                for(int j = 0; j < w; ++j ) {
+            for (int i = 0; i < h; ++i) {
+                for (int j = 0; j < w; ++j) {
                     data[i][j] = value;
                 }
             }
