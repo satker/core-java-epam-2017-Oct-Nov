@@ -29,19 +29,20 @@ public class TestableTask15Impl implements ITestableTask15 {
 
     @Override
     public IFileWithLines analyze(Set<I2DPoint> points, File output) {
-        I2DPoint[] pointsArray = (I2DPoint[]) points.toArray();
         FileImpl ret = new FileImpl(output);
 
-        for (int first = 0; first < pointsArray.length; ++first) {
-            for (int second = first + 1; second < pointsArray.length; ++second) {
-                Set<I2DPoint> set = new HashSet<>();
-                for (I2DPoint aPointsArray : pointsArray) {
-                    if (isOnLine(pointsArray[first], pointsArray[second], aPointsArray)) {
-                        set.add(aPointsArray);
+        for (I2DPoint first : points) {
+            for (I2DPoint second : points) {
+                if(first != second) {
+                    Set<I2DPoint> set = new HashSet<>();
+                    for (I2DPoint third : points) {
+                        if (isOnLine(first, second, third)) {
+                            set.add(third);
+                        }
                     }
-                }
-                if (set.size() > 2) {
-                    ret.addLine(new LineImpl(set));
+                    if (set.size() > 2) {
+                        ret.addLine(new LineImpl(set));
+                    }
                 }
             }
         }
