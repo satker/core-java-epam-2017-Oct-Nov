@@ -2,6 +2,7 @@ package com.epam.courses.jf.practice.klimenko.second;
 
 import com.epam.courses.jf.practice.common.second.ITestableTask18;
 
+import java.util.Arrays;
 import java.util.Stack;
 
 public class TestableTask18Impl implements ITestableTask18 {
@@ -19,13 +20,17 @@ public class TestableTask18Impl implements ITestableTask18 {
         Stack<Integer> stack = new Stack<>();
         SolutionInfo best = new SolutionInfo();
 
+        Arrays.fill(upperBound, -1);
+
         /* For each row select best possible answer */
         for (int lastRow = 0; lastRow < matrix.getHeight(); ++lastRow) {
 
             /* Update upper bound */
-            for (int j = 0; j < matrix.getWidth(); ++j) {
-                if (matrix.getValue(j, lastRow) != matrix.getValue(j, upperBound[j])) {
-                    upperBound[j] = lastRow;
+            if(lastRow < matrix.getHeight() - 1) {
+                for (int j = 0; j < matrix.getWidth(); ++j) {
+                    if (matrix.getValue(j, lastRow) != matrix.getValue(j, lastRow + 1)) {
+                        upperBound[j] = lastRow;
+                    }
                 }
             }
 
@@ -37,7 +42,8 @@ public class TestableTask18Impl implements ITestableTask18 {
                         && matrix.getValue(stack.peek(), lastRow) == matrix.getValue(j, lastRow)) {
                     stack.pop();
                 }
-                leftBound[j] = stack.isEmpty() ? 0 : stack.peek();
+                leftBound[j] = stack.isEmpty() ? -1 : stack.peek();
+                stack.push(j);
             }
 
             /* Update right bound */
@@ -48,13 +54,14 @@ public class TestableTask18Impl implements ITestableTask18 {
                         && matrix.getValue(stack.peek(), lastRow) == matrix.getValue(j, lastRow)) {
                     stack.pop();
                 }
-                rightBound[j] = stack.isEmpty() ? matrix.getWidth() - 1 : stack.peek();
+                rightBound[j] = stack.isEmpty() ? matrix.getWidth() : stack.peek();
+                stack.push(j);
             }
 
             /* Update answer */
             for (int j = 0; j < matrix.getWidth(); ++j) {
-                int w = rightBound[j] - leftBound[j] + 1;
-                int h = lastRow - upperBound[j] + 1;
+                int w = rightBound[j] - leftBound[j] - 1;
+                int h = lastRow - upperBound[j];
                 int area = w * h;
 
                 if (area > best.area) {
