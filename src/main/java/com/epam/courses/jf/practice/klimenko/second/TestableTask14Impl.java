@@ -34,6 +34,9 @@ public class TestableTask14Impl implements ITestableTask14 {
             if (index == size()) {
                 return collection.get(index - 1);
             }
+            if (index == 0) {
+                return collection.get(0);
+            }
             T a = collection.get(index);
             T b = collection.get(index - 1);
             return a.doubleValue() - value.doubleValue() < value.doubleValue() - b.doubleValue() ? a : b;
