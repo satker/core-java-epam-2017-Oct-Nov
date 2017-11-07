@@ -14,6 +14,11 @@ public class TestableTask13Impl implements ITestableTask13 {
         GraphImpl(int numberNodes) {
             super(numberNodes);
             edges = new Boolean[numberNodes][numberNodes];
+            for (int i = 0; i < numberNodes; ++i) {
+                for (int j = 0; j < numberNodes; ++j) {
+                    edges[i][j] = false;
+                }
+            }
         }
 
         @Override
