@@ -70,12 +70,12 @@ public class TestableTask16Impl implements ITestableTask16 {
 
         @Override
         public File getFile() {
-            return null;
+            return file;
         }
 
         @Override
         public SortedMap<I2DPoint, Double> getPoints() {
-            return null;
+            return points;
         }
     }
 }
