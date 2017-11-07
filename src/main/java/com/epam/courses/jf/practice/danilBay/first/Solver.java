@@ -1,22 +1,20 @@
-package com.epam.courses.jf.practice.common.first;
+package com.epam.courses.jf.practice.danilBay.first;
 
-import java.lang.reflect.Array;
+import com.epam.courses.jf.practice.common.first.ISolver;
+
 import java.util.*;
 import java.util.regex.Pattern;
 
-import static java.lang.Math.max;
 import static java.lang.Math.sqrt;
 
-/**
- * Интерфейс первого задания.
- * {@see <a href="https://bitbucket.org/elefus/spring-java-school-epam-c-2017/wiki/Задание%20№1">Описание задания</a>}
- */
-public interface ISolver {
+public class Solver implements ISolver {
 
-    /**
-     * {@see <a href="https://bitbucket.org/elefus/spring-java-school-epam-c-2017/wiki/Task%201.1">Задание №1</a>}
-     */
-    default void task1() {
+    public static void main(String[] args) {
+        Solver a=new Solver();
+        a.task19();
+    }
+
+    public void task1() {
         Scanner in = new Scanner(System.in);
         int numOfStrings=in.nextInt()-1;
         in.nextLine();
@@ -38,7 +36,7 @@ public interface ISolver {
     /**
      * {@see <a href="https://bitbucket.org/elefus/spring-java-school-epam-c-2017/wiki/Task%201.2">Задание №2</a>}
      */
-    default void task2() {
+    public void task2() {
         Comparator<String> comparator = (String o1, String o2) -> {
             if(o1.length()<o2.length()) return -1;
             else if (o1.length()>o2.length()) return 1;
@@ -61,10 +59,8 @@ public interface ISolver {
 
     }
 
-    /**
-     * {@see <a href="https://bitbucket.org/elefus/spring-java-school-epam-c-2017/wiki/Task%201.3">Задание №3</a>}
-     */
-    default void task3() {
+
+    public void task3() {
         Scanner in = new Scanner(System.in);
         int numOfStrings=in.nextInt();
 
@@ -73,23 +69,23 @@ public interface ISolver {
         int avg=0,tmp=numOfStrings;
         String buff;
 
-            while((tmp--)!=0){
+        while((tmp--)!=0){
             buff=in.nextLine();
             avg+=buff.length();
             s.add(buff);
         }
         avg/=numOfStrings;
         System.out.println(avg+"\n");
-            for(String t : s){
-                if(t.length()<avg)
-                         System.out.println(t);
-            }
+        for(String t : s){
+            if(t.length()<avg)
+                System.out.println(t);
+        }
     }
 
     /**
      * {@see <a href="https://bitbucket.org/elefus/spring-java-school-epam-c-2017/wiki/Task%201.4">Задание №4</a>}
      */
-    default void task4() {
+    public void task4() {
 
         Scanner in = new Scanner(System.in);
         int numOfWords=in.nextInt()-1;
@@ -134,7 +130,7 @@ public interface ISolver {
     /**
      * {@see <a href="https://bitbucket.org/elefus/spring-java-school-epam-c-2017/wiki/Task%201.5">Задание №5</a>}
      */
-    default void task5() {
+    public void task5() {
 
         ArrayList<Integer> gl=new ArrayList<>();
         gl.add(65);
@@ -156,20 +152,20 @@ public interface ISolver {
         in.useDelimiter(p);
         while (numOfWords!=0){
 
-        buf=in.next();
-        if(buf.matches("[a-zA-Z]+")){
-            int glasniye=0;
-            int soglasniye=0;
+            buf=in.next();
+            if(buf.matches("[a-zA-Z]+")){
+                int glasniye=0;
+                int soglasniye=0;
 
-            for(char i : buf.toCharArray()){
-                int tmp=i;
-                if(gl.contains(tmp))
-                    glasniye++;
-                else soglasniye++;
-            }
+                for(char i : buf.toCharArray()){
+                    int tmp=i;
+                    if(gl.contains(tmp))
+                        glasniye++;
+                    else soglasniye++;
+                }
 
-            if(glasniye==soglasniye)
-                result++;
+                if(glasniye==soglasniye)
+                    result++;
             }
             numOfWords--;
 
@@ -181,7 +177,7 @@ public interface ISolver {
     /**
      * {@see <a href="https://bitbucket.org/elefus/spring-java-school-epam-c-2017/wiki/Task%201.6">Задание №6</a>}
      */
-    default void task6() {
+    public void task6() {
         int result=0;
         int delta=32;
         Pattern p = Pattern.compile("[\n ]");
@@ -213,7 +209,7 @@ public interface ISolver {
     /**
      * {@see <a href="https://bitbucket.org/elefus/spring-java-school-epam-c-2017/wiki/Task%201.7">Задание №7</a>}
      */
-    default void task7() {
+    public void task7() {
 
         ArrayList<Integer> gl=new ArrayList<>();
 
@@ -232,17 +228,17 @@ public interface ISolver {
             buf=in.next();
 
 
-                boolean flag=true;
-                for(char i : buf.toCharArray()){
+            boolean flag=true;
+            for(char i : buf.toCharArray()){
 
-                    if(!charSet.add(i)){
-                        flag=false;
-                        break;
-                    }
-
+                if(!charSet.add(i)){
+                    flag=false;
+                    break;
                 }
-                if(flag && !resultat.contains(buf))
-                    resultat.add(buf);
+
+            }
+            if(flag && !resultat.contains(buf))
+                resultat.add(buf);
 
             numOfWords--;
 
@@ -257,7 +253,7 @@ public interface ISolver {
     /**
      * {@see <a href="https://bitbucket.org/elefus/spring-java-school-epam-c-2017/wiki/Task%201.8">Задание №8</a>}
      */
-    default void task8() {
+    public void task8() {
 
         ArrayList<Integer> gl=new ArrayList<>();
         Pattern p = Pattern.compile("[\n ]");
@@ -310,7 +306,7 @@ public interface ISolver {
     /**
      * {@see <a href="https://bitbucket.org/elefus/spring-java-school-epam-c-2017/wiki/Task%201.9">Задание №9</a>}
      */
-    default void task9() {
+    public void task9() {
         Scanner in = new Scanner(System.in);
         int a=in.nextInt();
         int i=1;
@@ -327,7 +323,7 @@ public interface ISolver {
     /**
      * {@see <a href="https://bitbucket.org/elefus/spring-java-school-epam-c-2017/wiki/Task%201.10">Задание №10</a>}
      */
-    default void task10() {
+    public void task10() {
         Scanner in = new Scanner(System.in);
         double a = in.nextDouble();
         double b = in.nextDouble();
@@ -353,7 +349,7 @@ public interface ISolver {
     /**
      * {@see <a href="https://bitbucket.org/elefus/spring-java-school-epam-c-2017/wiki/Task%201.11">Задание №11</a>}
      */
-    default void task11() {
+    public void task11() {
         Scanner in = new Scanner(System.in);
         int a = in.nextInt();
         switch (a){
@@ -402,7 +398,7 @@ public interface ISolver {
     /**
      * {@see <a href="https://bitbucket.org/elefus/spring-java-school-epam-c-2017/wiki/Task%201.12">Задание №12</a>}
      */
-    default void task12() {
+    public void task12() {
         Scanner in = new Scanner(System.in);
         int a = in.nextInt();
         int b=in.nextInt();
@@ -436,14 +432,14 @@ public interface ISolver {
 
             System.out.print("\n");
 
-    }
+        }
 
     }//hueta
 
     /**
      * {@see <a href="https://bitbucket.org/elefus/spring-java-school-epam-c-2017/wiki/Task%201.13">Задание №13</a>}
      */
-    default void task13() {
+    public void task13() {
         int velocity;
         Scanner in = new Scanner(System.in);
         int a = in.nextInt();
@@ -473,7 +469,7 @@ public interface ISolver {
     /**
      * {@see <a href="https://bitbucket.org/elefus/spring-java-school-epam-c-2017/wiki/Task%201.14">Задание №14</a>}
      */
-    default void task14() {
+    public void task14() {
         int velocity;
         Scanner in = new Scanner(System.in);
         int a = in.nextInt()-1;
@@ -500,10 +496,10 @@ public interface ISolver {
     /**
      * {@see <a href="https://bitbucket.org/elefus/spring-java-school-epam-c-2017/wiki/Task%201.15">Задание №15</a>}
      */
-    default void task15() {
+    public void task15() {
         int velocity;
         Scanner in = new Scanner(System.in);
-       // int a = in.nextInt();
+        // int a = in.nextInt();
         int b = in.nextInt();
         int[][] res = new int[b][b];
         for (int i = 0; i < b; i++) {
@@ -526,7 +522,7 @@ public interface ISolver {
     /**
      * {@see <a href="https://bitbucket.org/elefus/spring-java-school-epam-c-2017/wiki/Task%201.16">Задание №16</a>}
      */
-    default void task16() {
+    public void task16() {
         int velocity;
         Scanner in = new Scanner(System.in);
         // int a = in.nextInt();
@@ -551,7 +547,7 @@ public interface ISolver {
     /**
      * {@see <a href="https://bitbucket.org/elefus/spring-java-school-epam-c-2017/wiki/Task%201.17">Задание №17</a>}
      */
-    default void task17() {
+    public void task17() {
         class Determ{
             public  double matrixDeterminant (double[][] matrix) {
                 double temporary[][];
@@ -594,7 +590,7 @@ public interface ISolver {
             for (int j = 0; j < b; j++)
                 res[i][j] = in.nextDouble();
 
-            System.out.println(determ.matrixDeterminant(res));
+        System.out.println(determ.matrixDeterminant(res));
 
 
     }
@@ -602,7 +598,7 @@ public interface ISolver {
     /**
      * {@see <a href="https://bitbucket.org/elefus/spring-java-school-epam-c-2017/wiki/Task%201.18">Задание №18</a>}
      */
-    default void task18() {
+    public void task18() {
         Scanner in = new Scanner(System.in);
         int b = in.nextInt();
         int[][] res = new int[b][b];
@@ -640,7 +636,7 @@ public interface ISolver {
     /**
      * {@see <a href="https://bitbucket.org/elefus/spring-java-school-epam-c-2017/wiki/Task%201.19">Задание №19</a>}
      */
-    default void task19() {
+    public void task19() {
         Scanner in = new Scanner(System.in);
         int b = in.nextInt();
         int[][] res = new int[b][b];
@@ -656,13 +652,13 @@ public interface ISolver {
                     flag = false;
                     break;
                 }
-                if(flag) {
-                    rows.add(i);
+            if(flag) {
+                rows.add(i);
 
-                }
-                else
-                    flag=true;
             }
+            else
+                flag=true;
+        }
 
         for (int j = 0;j < b; j++){
             for (int i = 0; i < b; i++)
@@ -672,11 +668,11 @@ public interface ISolver {
                 }
                 else
                     flag=true;
-                if(flag) {
-                    columns.add(j);
+            if(flag) {
+                columns.add(j);
 
-                }
             }
+        }
 
         for (int i = 0; i < b; i++) {
             if(rows.contains(i))
@@ -692,43 +688,5 @@ public interface ISolver {
 
     }
 
-    /**
-     * {@see <a href="https://bitbucket.org/elefus/spring-java-school-epam-c-2017/wiki/Task%201.20">Задание №20</a>}
-     */
-    default void task20() { throw new UnsupportedOperationException("Task 20 not implemented yet."); }
 
-    /**
-     * {@see <a href="https://bitbucket.org/elefus/spring-java-school-epam-c-2017/wiki/Task%201.21">Задание №21</a>}
-     */
-    default void task21() { throw new UnsupportedOperationException("Task 21 not implemented yet."); }
-
-    /**
-     * {@see <a href="https://bitbucket.org/elefus/spring-java-school-epam-c-2017/wiki/Task%201.22">Задание №22</a>}
-     */
-    default void task22() { throw new UnsupportedOperationException("Task 22 not implemented yet."); }
-
-    /**
-     * {@see <a href="https://bitbucket.org/elefus/spring-java-school-epam-c-2017/wiki/Task%201.23">Задание №23</a>}
-     */
-    default void task23() { throw new UnsupportedOperationException("Task 23 not implemented yet."); }
-
-    /**
-     * {@see <a href="https://bitbucket.org/elefus/spring-java-school-epam-c-2017/wiki/Task%201.24">Задание №24</a>}
-     */
-    default void task24() { throw new UnsupportedOperationException("Task 24 not implemented yet."); }
-
-    /**
-     * {@see <a href="https://bitbucket.org/elefus/spring-java-school-epam-c-2017/wiki/Task%201.25">Задание №25</a>}
-     */
-    default void task25() { throw new UnsupportedOperationException("Task 25 not implemented yet."); }
-
-    /**
-     * {@see <a href="https://bitbucket.org/elefus/spring-java-school-epam-c-2017/wiki/Task%201.26">Задание №26</a>}
-     */
-    default void task26() { throw new UnsupportedOperationException("Task 26 not implemented yet."); }
-
-    /**
-     * {@see <a href="https://bitbucket.org/elefus/spring-java-school-epam-c-2017/wiki/Task%201.27">Задание №27</a>}
-     */
-    default void task27() { throw new UnsupportedOperationException("Task 27 not implemented yet."); }
 }
