@@ -7,7 +7,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -26,7 +25,16 @@ public class TestableTask16Impl implements ITestableTask16 {
         int top = (int) Math.ceil(center.getY() + radius);
         double radius2 = radius * radius;
         SortedMap<I2DPoint, Double> points = new TreeMap<>(
-                Comparator.comparingDouble(a -> distance2(a, center))
+                (a, b) -> {
+                    int cmp = Double.compare(distance2(a, center), distance2(b, center));
+                    if (cmp == 0) {
+                        cmp = Double.compare(a.getX(), b.getX());
+                    }
+                    if (cmp == 0) {
+                        cmp = Double.compare(a.getY(), b.getY());
+                    }
+                    return cmp;
+                }
         );
 
         for (int ix = left; ix <= right; ++ix) {
@@ -34,7 +42,7 @@ public class TestableTask16Impl implements ITestableTask16 {
                 I2DPoint point = new Point2DImpl(ix, iy);
                 double dist2 = distance2(point, center);
                 if (dist2 < radius2) {
-                    points.put(point, dist2);
+                    points.put(point, Math.sqrt(dist2));
                 }
             }
         }
