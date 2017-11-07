@@ -7,9 +7,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.Comparator;
-import java.util.PriorityQueue;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -24,16 +22,18 @@ public class TestableTask16Impl implements ITestableTask16 {
     public IFileWithPoints analyze(I2DPoint center, int radius, File output) {
         int left = (int) Math.floor(center.getX() - radius);
         int right = (int) Math.ceil(center.getX() + radius);
-        int bottom = (int)Math.floor(center.getY() - radius);
-        int top = (int)Math.ceil(center.getY() + radius);
+        int bottom = (int) Math.floor(center.getY() - radius);
+        int top = (int) Math.ceil(center.getY() + radius);
         double radius2 = radius * radius;
-        SortedMap<I2DPoint, Double> points = new TreeMap<>();
+        SortedMap<I2DPoint, Double> points = new TreeMap<>(
+                Comparator.comparingDouble(a -> distance2(a, center))
+        );
 
-        for( int ix = left; ix <= right; ++ix) {
-            for( int iy = bottom; iy <= top; ++iy ) {
-                I2DPoint point = new Point2DImpl( ix, iy );
+        for (int ix = left; ix <= right; ++ix) {
+            for (int iy = bottom; iy <= top; ++iy) {
+                I2DPoint point = new Point2DImpl(ix, iy);
                 double dist2 = distance2(point, center);
-                if(dist2 < radius2) {
+                if (dist2 < radius2) {
                     points.put(point, dist2);
                 }
             }
@@ -42,7 +42,7 @@ public class TestableTask16Impl implements ITestableTask16 {
         FileImpl file = new FileImpl(output, points);
         try {
             file.writeOut();
-        } catch (IOException e ) {
+        } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
@@ -60,8 +60,8 @@ public class TestableTask16Impl implements ITestableTask16 {
         }
 
         void writeOut() throws IOException {
-            try( BufferedWriter writer = new BufferedWriter( new FileWriter(file)) ) {
-                for(I2DPoint point : points.keySet()) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                for (I2DPoint point : points.keySet()) {
                     writer.write(point.getX() + " " + point.getY());
                     writer.newLine();
                 }
