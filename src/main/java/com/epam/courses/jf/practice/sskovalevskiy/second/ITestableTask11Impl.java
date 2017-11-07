@@ -5,6 +5,7 @@ import com.epam.courses.jf.practice.common.second.ITestableTask11;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by asus on 01.11.2017.
@@ -12,34 +13,28 @@ import java.util.LinkedList;
 public class ITestableTask11Impl implements ITestableTask11 {
     @Override
     public String emulate(ArrayList<String> peoples) {
-        ArrayList<String> persons = new ArrayList<>(peoples);
-        int i = 0;
-        while (persons.size() > 1) {
-            Iterator iterator = persons.iterator();
-
-            for (;iterator.hasNext(); i++, iterator.next()) {
-                if (i % 2 == 1) {
-                    if (iterator.hasNext()) i = 0;
-                    iterator.remove();
-                }
-            }
-        }
-        return persons.get(0);
+        return removeEvery2ndElement(peoples);
     }
 
     @Override
     public String emulate(LinkedList<String> peoples) {
-        LinkedList<String> persons = new LinkedList<>(peoples);
-        int i = 0;
-        while (persons.size() > 1) {
-            Iterator iterator = persons.iterator();
-            for (; iterator.hasNext(); i++, iterator.next()) {
-                if (i % 2 == 1) {
-                    if (iterator.hasNext()) i = 0;
+        return removeEvery2ndElement(peoples);
+    }
+
+    private String removeEvery2ndElement(List<String> peoples){
+        boolean previousElementWasRemoved = false;
+        while (peoples.size() > 1){
+            Iterator iterator = peoples.iterator();
+            while (iterator.hasNext()){
+                iterator.next();
+                if (!previousElementWasRemoved){
                     iterator.remove();
+                    previousElementWasRemoved = true;
+                } else {
+                    previousElementWasRemoved = false;
                 }
             }
         }
-        return persons.get(0);
+        return peoples.get(0);
     }
 }
