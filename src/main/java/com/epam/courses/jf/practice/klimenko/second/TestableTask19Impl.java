@@ -24,14 +24,14 @@ public class TestableTask19Impl implements ITestableTask19 {
             }
             for (CarExt car : listCars) {
                 for (CarExt other : listCars) {
-                    if (car.overtakes(other, nextEvent)) {
+                    if (car != other && car.overtakes(other, nextEvent)) {
                         ++ret;
                     }
                 }
             }
             for (CarExt car : listCars) {
                 car.move(nextEvent);
-                if(car.lapsPassed == numberLaps) {
+                if (car.lapsPassed == numberLaps) {
                     break OUTER;
                 }
             }
@@ -65,7 +65,7 @@ public class TestableTask19Impl implements ITestableTask19 {
         }
 
         boolean overtakes(CarExt other, double t) {
-            return other.futurePos(t) < futurePos(t);
+            return other.pos > pos && other.futurePos(t) < futurePos(t);
         }
 
         double timeToFinish() {
