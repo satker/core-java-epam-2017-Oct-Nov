@@ -11,7 +11,7 @@ public class TestableTask17Impl implements ITestableTask17 {
     }
 
     private boolean between(double val, double low, double high) {
-        return val > Math.min(low, high) && val < Math.max(low, high);
+        return val >= Math.min(low, high) && val <= Math.max(low, high);
     }
 
     private I2DPoint intersection(ISegment a, ISegment b) {
