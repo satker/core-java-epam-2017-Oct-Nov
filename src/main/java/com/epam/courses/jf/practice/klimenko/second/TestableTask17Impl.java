@@ -29,7 +29,7 @@ public class TestableTask17Impl implements ITestableTask17 {
         double y = -product(A1, C1, A2, C2) / det;
         if (between(x, a.first().getX(), a.second().getX())
                 && between(y, a.first().getY(), a.second().getY())
-                && between(x, b.first().getY(), b.second().getX())
+                && between(x, b.first().getX(), b.second().getX())
                 && between(y, b.first().getY(), b.second().getY())) {
             return new Point2DImpl(x, y);
         }

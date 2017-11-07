@@ -1,7 +1,6 @@
 package com.epam.courses.jf.practice.klimenko.second;
 
 import com.epam.courses.jf.practice.common.second.ITestableTask14;
-import sun.tools.tree.CastExpression;
 
 import java.util.*;
 
@@ -13,7 +12,6 @@ public class TestableTask14Impl implements ITestableTask14 {
 
     private class NumberCollection<T extends Number> implements INumberCollection<T> {
         ArrayList<T> collection;
-
 
         NumberCollection() {
             collection = new ArrayList<>();
