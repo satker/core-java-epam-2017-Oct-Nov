@@ -30,7 +30,7 @@ public class TaskStorageImpl implements ITaskStorage {
             return (T) new TestableTask8Impl();
         }
         if( taskInterface == ITestableTask9.class) {
-            return (T) new TestableTask19Impl();
+            return (T) new TestableTask9Impl();
         }
         if( taskInterface == ITestableTask10.class) {
             return (T) new TestableTask10Impl();
