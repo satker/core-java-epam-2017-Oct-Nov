@@ -381,8 +381,33 @@ public class Solver implements ISolver {
 
     }
 
-    //@Override
-    //public void task14() TODO
+    @Override
+    public void task14() {
+        Scanner scanner = new Scanner(System.in);
+        final int N = scanner.nextInt();
+        int maxLength = 1;
+        scanner.nextLine();
+        int array[] = new int[N];
+        for (int i = 0; i < N; i++) {
+            array[i] = scanner.nextInt();
+        }
+
+        for (int i = 0; i < N - 1; i++) {
+            int j = i;
+            int currentLength = 1;
+            while (array[j+1] > array[j]) {
+                currentLength++;
+                j++;
+            }
+            if (maxLength < currentLength) {
+                maxLength = currentLength;
+            }
+        }
+
+        System.out.println(maxLength);
+
+
+    }
 
     //@Override
     //public void task15() TODO
