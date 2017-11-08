@@ -273,9 +273,9 @@ public class Solver implements ISolver {
             float root = -b / 2 / a;
             BigDecimal rootBd = new BigDecimal(root)
                     .setScale(2, BigDecimal.ROUND_HALF_UP);
-            System.out.print("One solution: " + rootBd);
+            System.out.println("One solution: " + rootBd);
         } else if (discriminant < 0) {
-            System.out.print("No solution");
+            System.out.println("No solution");
         } else {
             double discriminantRoot = Math.sqrt(discriminant);
             double firstRoot = (-b + discriminantRoot) / 2 / a;
@@ -286,7 +286,7 @@ public class Solver implements ISolver {
             BigDecimal secondRootBd = new BigDecimal(secondRoot)
                     .setScale(2, BigDecimal.ROUND_HALF_UP);
 
-            System.out.print("Two solutions: " + secondRootBd + "," + firstRootBd);
+            System.out.println("Two solutions: " + secondRootBd + "," + firstRootBd);
         }
 
     }
