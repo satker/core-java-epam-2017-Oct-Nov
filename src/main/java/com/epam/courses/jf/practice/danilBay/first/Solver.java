@@ -54,7 +54,7 @@ public class Solver implements ISolver {
         }
         Collections.sort(s,comparator);
         for(String x:s)
-            System.out.println(x);
+            System.out.printf("(%d): \"%s\"%n", x.length(), x);
 
     }
 
@@ -74,10 +74,11 @@ public class Solver implements ISolver {
             s.add(buff);
         }
         avg/=numOfStrings;
-        System.out.println(avg+"\n");
+        System.out.printf("AVERAGE (%d)%n", avg);
         for(String t : s){
             if(t.length()<avg)
-                System.out.println(t);
+                System.out.printf("(%d): \"%s\"%n", t.length(), t);
+
         }
     }
 
@@ -94,14 +95,15 @@ public class Solver implements ISolver {
         StringBuffer minStr=new StringBuffer();
         int iter=0;
         int minimum=0;
-        for(char tmp=str.charAt(iter);; iter++){
-            if(tmp==' '){
+        for(char tmp=str.charAt(iter);iter<str.length(); iter++){
+            tmp=str.charAt(iter);
+            if(tmp==' '|| tmp=='\n'){
                 iter++;
                 break;
             }
             minStr.append(tmp);
             charSet.add(tmp);
-            tmp=str.charAt(iter+1);
+
         }
         minimum=charSet.size();
         for(;numOfWords!=0;numOfWords--){
@@ -753,6 +755,6 @@ public class Solver implements ISolver {
     }
     public static void main(String[] args) {
         Solver a=new Solver();
-        a.task13();
+        a.task4();
     }
 }
