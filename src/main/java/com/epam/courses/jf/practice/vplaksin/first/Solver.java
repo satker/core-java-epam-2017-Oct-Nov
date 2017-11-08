@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.regex.Pattern;
+import java.util.Set;
 
 import static java.lang.Math.min;
 import static java.lang.Math.max;
@@ -23,7 +24,6 @@ import static java.lang.Math.abs;
 public class Solver implements ISolver {
 
     private static String[] readStrings(Scanner scanner) {
-
         int n = Integer.parseInt(scanner.nextLine());
 
         String[] result = new String[n];
@@ -32,7 +32,6 @@ public class Solver implements ISolver {
         }
 
         return result;
-
     }
 
     @Override
@@ -91,7 +90,7 @@ public class Solver implements ISolver {
 
     private static String[] readWords(Scanner scanner) {
         int n = Integer.parseInt(scanner.nextLine());
-        return scanner.nextLine().split("\\s+");
+        return scanner.nextLine().split("\\s+", n);
     }
 
     @Override
@@ -102,7 +101,7 @@ public class Solver implements ISolver {
 
         for (String word : words) {
             char[] chars = word.toCharArray();
-            HashSet<Character> set = new HashSet<>();
+            Set<Character> set = new HashSet<>();
 
             for (Character c : chars) {
                 set.add(c);
@@ -121,8 +120,7 @@ public class Solver implements ISolver {
     public void task5() {
         String[] words = readWords(new Scanner(System.in));
 
-        final Character[] temp = {'a', 'e', 'i', 'o', 'u', 'y'};
-        final List<Character> vowels = Arrays.asList(temp);
+        final List<Character> vowels = Arrays.asList('a', 'e', 'i', 'o', 'u', 'y');
         int result = 0;
 
         for (String word : words) {
@@ -178,13 +176,13 @@ public class Solver implements ISolver {
     @Override
     public void task7() {
         String[] words = readWords(new Scanner(System.in));
-        HashSet<String> wordSet = new HashSet<>();
+        Set<String> wordSet = new HashSet<>();
         StringBuilder builder = new StringBuilder();
 
         loop:
         for (String word : words) {
             char[] chars = word.toCharArray();
-            HashSet<Character> charSet = new HashSet<>();
+            Set<Character> charSet = new HashSet<>();
 
             for (char c : chars) {
                 if (!charSet.add(c)) {
@@ -326,7 +324,7 @@ public class Solver implements ISolver {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
 
-        if (!Pattern.matches("\\d\\d?", input)) {
+        if (!Pattern.matches("\\d{1,2}", input)) {
             System.out.println("INCORRECT INPUT DATA");
             return;
         }
@@ -415,10 +413,6 @@ public class Solver implements ISolver {
 
         int maxRow = 1;
         int tempRow = 1;
-        if (n == 1) {
-            System.out.println(0);
-            return;
-        }
 
         for (int i = 1; i < numbers.length; i++) {
             if (numbers[i] > numbers[i - 1]) {
@@ -543,8 +537,8 @@ public class Solver implements ISolver {
             }
         }
 
-        HashSet<Integer> rowsToDelete = new HashSet<>();
-        HashSet<Integer> columnsToDelete = new HashSet<>();
+        Set<Integer> rowsToDelete = new HashSet<>();
+        Set<Integer> columnsToDelete = new HashSet<>();
 
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
@@ -579,7 +573,7 @@ public class Solver implements ISolver {
     public void task19() {
         int[][] matrix = readMatrix(new Scanner(System.in));
 
-        ArrayList<Integer> rowsToDelete = new ArrayList<>();
+        List<Integer> rowsToDelete = new ArrayList<>();
         loop:
         for (int i = 0; i < matrix.length; i++) {
             for (int element : matrix[i]) {
@@ -590,7 +584,7 @@ public class Solver implements ISolver {
             rowsToDelete.add(i);
         }
 
-        ArrayList<Integer> columnsToDelete = new ArrayList<>();
+        List<Integer> columnsToDelete = new ArrayList<>();
         loop:
         for (int j = 0; j < matrix.length; j++) {
             for (int[] row : matrix) {
@@ -762,7 +756,7 @@ public class Solver implements ISolver {
 
         int[][] matrix = readMatrix(new Scanner(System.in));
 
-        ArrayList<Structure> structures = new ArrayList<>();
+        List<Structure> structures = new ArrayList<>();
 
         for (int i = 0; i < matrix.length; i++) {
             int sum = 0;
@@ -910,7 +904,7 @@ public class Solver implements ISolver {
 
         int[][] matrix = readMatrix(new Scanner(System.in));
 
-        ArrayList<Structure> structures = new ArrayList<>();
+        List<Structure> structures = new ArrayList<>();
 
         for (int j = 0; j < matrix[0].length; j++) {
             int sum = 0;
