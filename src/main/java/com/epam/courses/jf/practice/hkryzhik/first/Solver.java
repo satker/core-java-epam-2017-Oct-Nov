@@ -853,7 +853,7 @@ public class Solver implements ISolver {
         }
 
     }
-    
+
     @Override
     public void task23() {
         Scanner inputData = new Scanner(System.in);
@@ -955,5 +955,82 @@ public class Solver implements ISolver {
             System.out.println();
         }
 
+    }
+
+    //TODO: Shit to do here
+    @Override
+    public void task25() {
+
+    }
+
+    //TODO: So as here
+    @Override
+    public void task26() {
+
+    }
+
+    @Override
+    public void task27() {
+        Scanner inputData = new Scanner(System.in);
+
+        int size = 0;
+
+        if (inputData.hasNextInt()) {
+            size = Integer.parseInt(inputData.nextLine());
+        }
+
+        ArrayList<int[]> rowsList = new ArrayList<>();
+
+        ArrayList<int[]> collsList = new ArrayList<>();
+
+
+        for (int i = 0; i < size; i++) {
+
+            String[] inputLine = inputData.nextLine().split(" ");
+
+            int[] rowBuffer = new int[size];
+
+            for (int j = 0; j < size; j++) {
+                rowBuffer[j] = Integer.valueOf(inputLine[j]);
+            }
+            rowsList.add(rowBuffer);
+        }
+
+        for (int i = 0; i < size; i++) {
+
+            int[] colBuffer = new int[size];
+
+            for (int j = 0; j < size; j++) {
+                colBuffer[j] = rowsList.get(j)[i];
+            }
+
+            collsList.add(colBuffer);
+        }
+
+        collsList.sort((e1, e2) -> {
+
+            int collE1ItemsCount = 0;
+
+            int collE2ItemsCount = 0;
+
+            for(int i = 0; i < e1.length; i++){
+                collE1ItemsCount += abs(e1[i]);
+                collE2ItemsCount += abs(e2[i]);
+            }
+            if(collE1ItemsCount == collE2ItemsCount){
+                return 0;
+            }
+
+            return collE2ItemsCount - collE1ItemsCount;
+        });
+
+        System.out.println(size);
+
+        for(int i = 0; i < size; i++){
+            for (int j = 0; j < size; j++){
+                System.out.printf("%d ", collsList.get(j)[i]);
+            }
+            System.out.println();
+        }
     }
 }
