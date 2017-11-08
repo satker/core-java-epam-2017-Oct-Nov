@@ -1,6 +1,5 @@
 package com.epam.courses.jf.practice.hkryzhik.second;
 
-import com.epam.courses.jf.practice.common.second.ITaskStorage;
 import com.epam.courses.jf.practice.common.second.ITestableTask1;
 
 import java.io.*;
@@ -13,7 +12,7 @@ public class Task1 implements ITestableTask1{
     public List<String> reverseFile(File input, File output) {
 
         if(input.canRead() && input.exists()){
-            ArrayList<String> inputStringList = new ArrayList<>();
+            List<String> inputStringList = new ArrayList<>();
             try {
                 char[] inputLineBuffer = new char[(int)input.length()];
 
