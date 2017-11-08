@@ -409,8 +409,36 @@ public class Solver implements ISolver {
 
     }
 
-    //@Override
-    //public void task15() TODO
+    @Override
+    public void task15() {
+        Scanner scanner = new Scanner(System.in);
+        final int DIMENSION = scanner.nextInt();
+        int[][] matrix = readMatrix(scanner, DIMENSION);
+        int sum = 0;
+
+        for (int i = 0; i < DIMENSION; i++) {
+            int[] indexes = {-1, -1};
+            int j = 0;
+            int s = 0;
+            while (((indexes[0] == -1) || (indexes[1] == -1)) && (j < DIMENSION))  {
+                if (matrix[i][j] > 0) {
+                    indexes[s] = j;
+                    s++;
+                }
+                j++;
+            }
+
+            if ((indexes.length < 2) || (indexes[1] == indexes[0] + 1)) {
+                continue;
+            }
+
+            for (int k = indexes[0] + 1; k < indexes[1]; k++) {
+                sum = sum + matrix[i][k];
+            }
+        }
+
+        System.out.println(sum);
+    }
 
     //@Override
     //public void task16() TODO
