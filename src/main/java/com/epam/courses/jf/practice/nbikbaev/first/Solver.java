@@ -6,8 +6,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -150,6 +148,7 @@ public class Solver implements ISolver {
     }
 
     @Override
+    @SuppressWarnings("unused")
     public void task6() {
         try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in))) {
             int k = 0;
@@ -185,6 +184,7 @@ public class Solver implements ISolver {
     }
 
     @Override
+    @SuppressWarnings("unused")
     public void task7() {
         try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in))) {
             int n = Integer.valueOf(in.readLine());
@@ -216,6 +216,7 @@ public class Solver implements ISolver {
     }
 
     @Override
+    @SuppressWarnings("unused")
     public void task8() {
         try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in))) {
             boolean palindromeExists = false;
@@ -263,6 +264,7 @@ public class Solver implements ISolver {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void task10() {
         Scanner scanner = new Scanner(System.in);
         float a = scanner.nextInt();
