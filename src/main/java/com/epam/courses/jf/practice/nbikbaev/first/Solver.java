@@ -244,7 +244,19 @@ public class Solver implements ISolver {
 
     @Override
     public void task9() {
-
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in))) {
+            int n = Integer.valueOf(in.readLine());
+            for (int i = 1; i <= n * n; i++) {
+                System.out.print(i);
+                if ((i % n) == 0) {
+                    System.out.println();
+                } else {
+                    System.out.print(" ");
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
