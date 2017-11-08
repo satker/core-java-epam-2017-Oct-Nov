@@ -10,6 +10,9 @@ import java.util.*;
  */
 public class Solver implements ISolver {
     public void task1() {
+
+        //natasha
+        
         Scanner scanner = new Scanner(System.in);
         int number = Integer.valueOf(scanner.nextLine());/* number of lines */
         int maxLength, minLength;
