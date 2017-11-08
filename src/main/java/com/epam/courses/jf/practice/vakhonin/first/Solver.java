@@ -53,9 +53,9 @@ public class Solver implements ISolver {
         Scanner in;
 
         in = new Scanner(System.in);
-        numberOfStrings = in.nextInt();
+        numberOfStrings = Integer.valueOf(in.nextLine());
         String[] strings = new String[numberOfStrings];
-        in = new Scanner(System.in);
+//        in = new Scanner(System.in);
         for (int j = 0; j < numberOfStrings; j++) {
             strings[j] = in.nextLine();
         }
