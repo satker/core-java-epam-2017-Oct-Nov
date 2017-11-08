@@ -215,8 +215,41 @@ public class Solver implements ISolver {
         }
     }
 
-    //@Override
-    //public void task8() TODO
+    @Override
+    public void task8() {
+        Scanner scan = new Scanner(System.in);
+        int N = scan.nextInt();
+        String currentWord;
+        ArrayList<Integer> palyndroms = new ArrayList<Integer>();
+        scan.nextLine();
+
+
+        for (int i = 0; i < N; i++) {
+            currentWord = scan.next();
+
+            try {
+                int number = Integer.parseInt(currentWord);
+                if (isPalyndrom(number)) {
+                    palyndroms.add(number);
+                }
+            } catch (NumberFormatException e) {
+                continue;
+            }
+        }
+
+        switch (palyndroms.size()) {
+            case 0:
+                System.out.println("NOT FOUND");
+                break;
+            case 1:
+                System.out.println(palyndroms.get(0));
+                break;
+            default:
+                System.out.println(palyndroms.get(1));
+                break;
+        }
+
+    }
 
     @Override
     public void task9() {
@@ -406,6 +439,14 @@ public class Solver implements ISolver {
             vocalCounter++;
         }
         return vocalCounter;
+    }
+
+    private boolean isPalyndrom(int number) {
+        String stringNumber = String.valueOf(number);
+        if (stringNumber.length() == 1) {
+            return true;
+        }
+        return stringNumber.equals(new StringBuilder(stringNumber).reverse().toString());
     }
 
 }
