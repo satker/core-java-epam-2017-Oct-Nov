@@ -443,7 +443,7 @@ public class Solver implements ISolver {
             res[y]=tmp;
 
             for(int x : res[y])
-                System.out.print(x+"\t");
+                System.out.print(x+"    ");
 
             System.out.print("\n");
 
@@ -751,6 +751,6 @@ public class Solver implements ISolver {
     }
     public static void main(String[] args) {
         Solver a=new Solver();
-        a.task10();
+        a.task12();
     }
 }
