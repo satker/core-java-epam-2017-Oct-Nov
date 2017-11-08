@@ -27,7 +27,7 @@ public class Task10Test {
         System.setIn(new ByteArrayInputStream(dataIn.getBytes()));
         solver.task10();
         String outData = outContent.toString();
-        assertTrue("Test10 Failed!", outData.equals("Two solutions: -3.50,0.00"));
+        assertTrue("Test10 Failed!", outData.equals("Two solutions: -3.50,0.00\r\n"));
     }
 
     @Test
@@ -36,7 +36,7 @@ public class Task10Test {
         System.setIn(new ByteArrayInputStream(dataIn.getBytes()));
         solver.task10();
         String outData = outContent.toString();
-        assertTrue("Test10 Failed!", outData.equals("One solution: -0.50"));
+        assertTrue("Test10 Failed!", outData.equals("One solution: -0.50\r\n"));
     }
 
     @Test
@@ -45,7 +45,7 @@ public class Task10Test {
         System.setIn(new ByteArrayInputStream(dataIn.getBytes()));
         solver.task10();
         String outData = outContent.toString();
-        assertTrue("Test10 Failed!", outData.equals("No solution"));
+        assertTrue("Test10 Failed!", outData.equals("No solution\r\n"));
     }
 
     @After
