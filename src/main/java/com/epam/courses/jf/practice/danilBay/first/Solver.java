@@ -441,6 +441,7 @@ public class Solver implements ISolver {
             int tmp[]=res[minAd];
             res[minAd]=res[y];
             res[y]=tmp;
+            System.out.println(b);
 
             for(int x : res[y])
                 System.out.print(x+"    ");
