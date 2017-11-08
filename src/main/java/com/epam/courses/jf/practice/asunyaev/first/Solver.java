@@ -179,8 +179,41 @@ public class Solver implements ISolver {
         }
     }
 
-    //@Override
-    //public void task7() TODO
+    @Override
+    public void task7() {
+        Scanner scan = new Scanner(System.in);
+        int N = scan.nextInt();
+        String currentWord;
+        int wordsCounter = 0;
+        scan.nextLine();
+
+        cycle:
+        for (int i = 0; i < N; i++) {
+            currentWord = scan.next();
+
+            if (currentWord.length() == 1) {
+                System.out.print(currentWord + " ");
+                continue;
+            }
+
+            for (int j = 1; j < currentWord.length(); j++) {
+                String subString = currentWord.substring(0, j);
+                if (subString.indexOf(currentWord.charAt(j)) != -1) {
+                    continue cycle;
+                }
+
+            }
+            wordsCounter++;
+            if (wordsCounter == 1) {
+                System.out.println();
+            }
+            System.out.print(currentWord + " ");
+        }
+
+        if (wordsCounter == 0) {
+            System.out.print("NOT FOUND");
+        }
+    }
 
     //@Override
     //public void task8() TODO
