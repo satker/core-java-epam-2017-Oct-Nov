@@ -219,10 +219,10 @@ public class Solver implements ISolver {
             String result = null;
             int n = Integer.valueOf(in.readLine());
             String data = in.readLine();
-            Pattern pattern = Pattern.compile("([0-9]+)");
+            Pattern pattern = Pattern.compile("( [0-9]+) ");
             Matcher matcher = pattern.matcher(data);
             while (matcher.find()) {
-                String s = matcher.group();
+                String s = matcher.group().trim();
                 if (new StringBuilder(s).reverse().toString().equals(s)) {
                     if (palindromeExists) {
                         result = s;
