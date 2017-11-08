@@ -464,6 +464,7 @@ public class Solver implements ISolver {
             for (int j = 0; j < b; j++)
                 res[i][j] = in.nextInt();
         }
+        System.out.println(b);
 
         if(a>=0)
             for (int x = 0; x < b; x++) {
@@ -475,7 +476,7 @@ public class Solver implements ISolver {
         else
             for (int x = 0; x >-b; x--) {
                 for (int y = 0; y < b; y++)
-                    System.out.print(res[Math.abs((a + x) % b)][y]+" ");
+                    System.out.print(res[Math.abs((a + x) % b)][y]+"    ");
 
                 System.out.print("\n");
             }
@@ -751,6 +752,6 @@ public class Solver implements ISolver {
     }
     public static void main(String[] args) {
         Solver a=new Solver();
-        a.task12();
+        a.task13();
     }
 }
