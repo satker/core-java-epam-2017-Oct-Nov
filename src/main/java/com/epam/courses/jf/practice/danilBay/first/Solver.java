@@ -688,5 +688,7 @@ public class Solver implements ISolver {
 
     }
 
+    public void task20(){
 
+    }
 }
