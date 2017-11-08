@@ -440,8 +440,21 @@ public class Solver implements ISolver {
         System.out.println(sum);
     }
 
-    //@Override
-    //public void task16() TODO
+    @Override
+    public void task16() {
+        Scanner scanner = new Scanner(System.in);
+        final int DIMENSION = scanner.nextInt();
+        int[][] matrix = readMatrix(scanner, DIMENSION);
+        int[][] turnedMatrix = new int[DIMENSION][DIMENSION];
+
+        for (int i = 0; i < DIMENSION; i++) {
+            for (int j = 0; j < DIMENSION; j++) {
+                turnedMatrix[i][j] = matrix[j][DIMENSION - i - 1];
+            }
+        }
+
+        printMatrix(turnedMatrix, DIMENSION);
+    }
 
     //@Override
     //public void task17() TODO
