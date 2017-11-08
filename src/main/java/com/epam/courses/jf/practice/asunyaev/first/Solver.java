@@ -2,12 +2,9 @@ package com.epam.courses.jf.practice.asunyaev.first;
 
 import com.epam.courses.jf.practice.common.first.ISolver;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Scanner;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,7 +12,7 @@ public class Solver implements ISolver {
 
     public static void main(String[] args) {
         Solver solver = new Solver();
-        solver.task5();
+        solver.task17();
     }
 
     @Override
@@ -150,6 +147,45 @@ public class Solver implements ISolver {
     }
 
     @Override
+    public void task6() {
+        Scanner scan = new Scanner(System.in);
+        int N = scan.nextInt();
+        String currentWord;
+        int wordsCounter = 0;
+
+        cycle:
+        for (int i = 0; i < N; i++) {
+            currentWord = scan.next();
+
+            if (currentWord.length() == 1) {
+                continue;
+            }
+
+            for (int j = 0; j < currentWord.length() - 1; j++) {
+                if (currentWord.codePointAt(j+1) < currentWord.codePointAt(j)) {
+                    continue cycle;
+                }
+            }
+
+            wordsCounter++;
+            if (wordsCounter == 1) {
+                System.out.println();
+            }
+            System.out.print(currentWord + " ");
+        }
+
+        if (wordsCounter == 0) {
+            System.out.print("NOT FOUND");
+        }
+    }
+
+    //@Override
+    //public void task7() TODO
+
+    //@Override
+    //public void task8() TODO
+
+    @Override
     public void task9() {
         Scanner scan = new Scanner(System.in);
         int N = scan.nextInt();
@@ -163,6 +199,9 @@ public class Solver implements ISolver {
             System.out.println();
         }
     }
+
+    //@Override
+    //public void task10() TODO
 
     @Override
     public void task11() {
@@ -259,6 +298,48 @@ public class Solver implements ISolver {
 
     }
 
+    //@Override
+    //public void task14() TODO
+
+    //@Override
+    //public void task15() TODO
+
+    //@Override
+    //public void task16() TODO
+
+    //@Override
+    //public void task17() TODO
+
+    //@Override
+    //public void task18() TODO
+
+    //@Override
+    //public void task19() TODO
+
+    //@Override
+    //public void task20() TODO
+
+    //@Override
+    //public void task21() TODO
+
+    //@Override
+    //public void task22() TODO
+
+    //@Override
+    //public void task23() TODO
+
+    //@Override
+    //public void task24() TODO
+
+    //@Override
+    //public void task25() TODO
+
+    //@Override
+    //public void task26() TODO
+
+    //@Override
+    //public void task27() TODO
+
     private void copyRow(int[][] fromMatrix, int rowIndex1, int[][] toMatrix, int rowIndex2) {
         for (int i = 0; i < fromMatrix.length; i++) {
             toMatrix[rowIndex2][i] = fromMatrix[rowIndex1][i];
@@ -293,4 +374,5 @@ public class Solver implements ISolver {
         }
         return vocalCounter;
     }
+
 }
