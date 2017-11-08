@@ -9,10 +9,7 @@ import static java.lang.Math.sqrt;
 
 public class Solver implements ISolver {
 
-    public static void main(String[] args) {
-        Solver a=new Solver();
-        a.task19();
-    }
+
 
     public void task1() {
         Scanner in = new Scanner(System.in);
@@ -689,6 +686,53 @@ public class Solver implements ISolver {
     }
 
     public void task20(){
+        Scanner in = new Scanner(System.in);
+        int row = in.nextInt();
+        int col = in.nextInt();
 
+        int b = in.nextInt();
+        int[][] res = new int[b][b];
+        for (int i = 0; i < b; i++)
+            for (int j = 0; j < b; j++)
+                res[i][j] = in.nextInt();
+
+        int minimum=res[0][0];
+        int min_row=0;
+        int min_col=0;
+
+        for (int i = 0; i < b; i++)
+            for (int j = 0; j < b; j++)
+                if(res[i][j]<minimum){
+                    minimum=res[i][j];
+                    min_col=j;
+                    min_row=i;
+                }
+        int iterI,iterJ;
+        for (int i = 0; i < b; i++) {
+            if(i==min_row)
+                iterI=row;
+            else if(i==row)
+                iterI=min_row;
+            else
+                iterI=i;
+            for (int j = 0; j < b; j++) {
+                if(j==min_col)
+                    iterJ=col;
+                else if(j==col)
+                    iterJ=min_col;
+                else
+                    iterJ=j;
+
+                System.out.print(res[iterI][iterJ]+"  ");
+            }
+            System.out.println();
+        }
+    }
+    public void task21(){
+
+    }
+    public static void main(String[] args) {
+        Solver a=new Solver();
+        a.task20();
     }
 }
