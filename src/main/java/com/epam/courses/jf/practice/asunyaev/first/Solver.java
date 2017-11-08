@@ -456,8 +456,13 @@ public class Solver implements ISolver {
         printMatrix(turnedMatrix, DIMENSION);
     }
 
-    //@Override
-    //public void task17() TODO
+    @Override
+    public void task17() {
+        Scanner scanner = new Scanner(System.in);
+        final int DIMENSION = scanner.nextInt();
+        double[][] matrix = readDoubleMatrix(scanner, DIMENSION);
+        System.out.println((int) determinant(matrix, DIMENSION));
+    }
 
     //@Override
     //public void task18() TODO
@@ -531,5 +536,47 @@ public class Solver implements ISolver {
         }
         return stringNumber.equals(new StringBuilder(stringNumber).reverse().toString());
     }
+
+    public double determinant(double A[][], int N) {
+        double det = 0;
+        if (N == 1) {
+            det = A[0][0];
+        }
+        else if (N == 2) {
+            det = A[0][0]*A[1][1] - A[1][0]*A[0][1];
+        }
+        else {
+            det = 0;
+            for(int j1 = 0; j1 < N; j1++) {
+                double[][] m = new double[N-1][];
+                for(int k = 0; k < N-1; k++) {
+                    m[k] = new double[N-1];
+                }
+                for(int i = 1; i < N; i++) {
+                    int j2 = 0;
+                    for(int j = 0; j < N; j++) {
+                        if (j == j1) {
+                            continue;
+                        }
+                        m[i-1][j2] = A[i][j];
+                        j2++;
+                    }
+                }
+                det += Math.pow(-1.0,1.0+j1+1.0)* A[0][j1] * determinant(m,N-1);
+            }
+        }
+        return det;
+    }
+
+    private double[][] readDoubleMatrix(Scanner scanner, int dimension) {
+        double[][] matrix = new double[dimension][dimension];
+        for (int row = 0; row < dimension; ++row) {
+            for (int col = 0; col < dimension; ++col) {
+                matrix[row][col] = scanner.nextDouble();
+            }
+        }
+        return matrix;
+    }
+
 
 }
