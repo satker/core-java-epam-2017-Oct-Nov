@@ -214,7 +214,32 @@ public class Solver implements ISolver {
 
     @Override
     public void task8() {
-
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in))) {
+            boolean palindromeExists = false;
+            String result = null;
+            int n = Integer.valueOf(in.readLine());
+            String data = in.readLine();
+            Pattern pattern = Pattern.compile("([0-9]+)");
+            Matcher matcher = pattern.matcher(data);
+            while (matcher.find()) {
+                String s = matcher.group();
+                if (new StringBuilder(s).reverse().toString().equals(s)) {
+                    if (palindromeExists) {
+                        result = s;
+                        break;
+                    } else {
+                        palindromeExists = true;
+                    }
+                }
+            }
+            if (result == null) {
+                System.out.println("NOT FOUND");
+            } else {
+                System.out.println(result);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
