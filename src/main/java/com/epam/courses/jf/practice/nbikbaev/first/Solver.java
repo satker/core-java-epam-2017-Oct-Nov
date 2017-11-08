@@ -183,19 +183,33 @@ public class Solver implements ISolver {
 
     @Override
     public void task7() {
-//        try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in))) {
-//            String result = null;
-//            int n = Integer.valueOf(in.readLine());
-//            String[] words = in.readLine().trim().split(" ");
-//            for (String word : words) {
-//                if (word.matches("")) {
-//                    continue;
-//                }
-//
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in))) {
+            int n = Integer.valueOf(in.readLine());
+            String[] words = in.readLine().trim().split(" ");
+            Set<Character> wordSet = new HashSet<>();
+            StringBuilder result = new StringBuilder();
+            for (String word : words) {
+                boolean flag = true;
+                for (Character letter : word.toCharArray()) {
+                    if (!wordSet.contains(letter)) {
+                        wordSet.add(letter);
+                    } else {
+                        wordSet.clear();
+                        flag = false;
+                        break;
+                    }
+                }
+                if (flag) {
+                    result.append(word).append(" ");
+                }
+            }
+            if (result.length() == 0) {
+                System.out.println("NOT FOUND");
+            }
+            System.out.println(result.toString().trim());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
