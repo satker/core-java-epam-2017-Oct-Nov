@@ -181,7 +181,7 @@ public class Solver implements ISolver {
         String result;
 
         in = new Scanner(System.in);
-        numberOfStrings = Integer.valueOf(in.next());
+        numberOfStrings = Integer.valueOf(in.nextLine());
 
         String[] strings = new String[numberOfStrings];
 //        in = new Scanner(System.in);
