@@ -9,40 +9,26 @@ import java.util.*;
  */
 public class Solver implements ISolver {
     public void task1() {
-        Scanner in;
-        int numberOfStrings, length, minLength, maxLength;
-        int numberOfShortestString = 0;
-        int numberOfLongestString = 0;
-        String s, minString, maxString;
-        String[] strings;
-
-        in = new Scanner(System.in);
-        numberOfStrings = Integer.valueOf(in.nextLine());
-        strings = new String[numberOfStrings];
-//        in = new Scanner(System.in);
-
-        for (int j = 0; j < numberOfStrings; j++) {
-            strings[j] = in.nextLine();
-        }
-
-        numberOfShortestString = 0;
-        numberOfLongestString = 0;
-        minLength = strings[0].length();
-        maxLength = minLength;
-        for (int j = 1; j < numberOfStrings; j++) {
-            s = strings[j];
-            length = s.length();
-            if (length <= minLength) {
-                minLength = length;
-                numberOfShortestString = j;
+        Scanner scanner = new Scanner(System.in);
+        int number = Integer.valueOf(scanner.nextLine());/* number of lines */
+        int maxLength, minLength;
+        String maxString = "", minString = "";
+        String str = scanner.nextLine();//reading a row
+        maxLength = str.length();
+        minLength = str.length();
+        maxString = str;
+        minString = str;
+        for (int i = 0; i < number - 1; ++i) {
+            str = scanner.nextLine();//reading a next row
+            if (str.length() >= maxLength) {
+                maxLength = str.length();
+                maxString = str;
             }
-            if (length >= maxLength) {
-                maxLength = length;
-                numberOfLongestString = j;
+            if (str.length() <= minLength) {
+                minLength = str.length();
+                minString = str;
             }
         }
-        minString = strings[numberOfShortestString];
-        maxString = strings[numberOfLongestString];
         System.out.printf("MIN (%d): \"%s\"%n", minLength, minString);
         System.out.printf("MAX (%d): \"%s\"%n", maxLength, maxString);
     }
