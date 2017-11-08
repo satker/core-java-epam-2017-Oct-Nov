@@ -135,11 +135,11 @@ public class SolverImpl implements ISolver {
         return temp;
     }
 
-    static private void reverse(int[] arr, int from, int to) {
-        for (int i = from; i < to; ++i) {
-            int temp = arr[from];
-            arr[from] = arr[to];
-            arr[to--] = temp;
+    static private void reverse(int[] arr, int start, int end) {
+        for (int i = start; i <= (start + end) / 2; ++i) {
+            int temp = arr[start + end - i];
+            arr[start + end - i] = arr[i];
+            arr[i] = temp;
         }
     }
 
@@ -271,7 +271,7 @@ public class SolverImpl implements ISolver {
         Scanner sc = new Scanner(System.in);
         int n = Integer.parseInt(sc.nextLine());
 
-        ArrayList<String> englishInput = new ArrayList<>();
+        List<String> englishInput = new ArrayList<>();
         for (int i = 0; i < n; ++i) {
             String current = sc.next();
             if (current.matches("^[A-z]+$")) {
@@ -516,6 +516,7 @@ public class SolverImpl implements ISolver {
                 }
             }
         }
+        System.out.println(matrix.length);
         showMatrix(matrix);
 
         sc.close();
@@ -528,22 +529,25 @@ public class SolverImpl implements ISolver {
         int[][] matrix = readMatrix(sc);
         matrix = transposeMatrix(matrix);
 
-        if (k != 0) {
+        if ((k % matrix.length) != 0) {
             for (int[] aMatrix : matrix) {
-                int to = (matrix.length - 2);
+                int to = (Math.abs(k) % matrix.length);
+
 
                 if (k < 0) {
-                    reverse(aMatrix, 0, to);
-                    reverse(aMatrix, to + 1, matrix.length - 1);
-                } else {
-                    reverse(aMatrix, to + 1, matrix.length - 1);
-                    reverse(aMatrix, 0, to);
+                    reverse(aMatrix, 0, matrix.length - 1);
                 }
 
-                reverse(aMatrix, 0, matrix.length - 1);
+                reverse(aMatrix, 0, to);
+                reverse(aMatrix, to + 1, matrix.length - 1);
+
+                if (k > 0) {
+                    reverse(aMatrix, 0, matrix.length - 1);
+                }
             }
         }
         matrix = transposeMatrix(matrix);
+        System.out.println(matrix.length);
         showMatrix(matrix);
 
         sc.close();
@@ -603,7 +607,7 @@ public class SolverImpl implements ISolver {
         int[][] matrix = readMatrix(sc);
 
         for (int x = 0; x < matrix.length / 2; ++x) {
-            for (int y = 0; y < matrix.length - x - 1; ++y) {
+            for (int y = x; y < matrix.length - x - 1; ++y) {
                 int temp = matrix[x][y];
 
                 matrix[x][y] = matrix[y][matrix.length - x - 1];
@@ -612,6 +616,7 @@ public class SolverImpl implements ISolver {
                 matrix[matrix.length - y - 1][x] = temp;
             }
         }
+        System.out.println(matrix.length);
         showMatrix(matrix);
 
         sc.close();
@@ -757,6 +762,7 @@ public class SolverImpl implements ISolver {
             }
         }
 
+        System.out.println(matrix.length);
         showMatrix(matrix);
 
         sc.close();
@@ -775,6 +781,7 @@ public class SolverImpl implements ISolver {
             }
         }
 
+        System.out.println(matrix.length);
         showMatrix(matrix);
 
         sc.close();
@@ -786,6 +793,7 @@ public class SolverImpl implements ISolver {
 
         final int DIMENSION = sc.nextInt();
         double[][] matrix = new double[DIMENSION][DIMENSION];
+        System.out.println(DIMENSION);
         for (int row = 0; row < DIMENSION; ++row) {
             for (int col = 0; col < DIMENSION; ++col) {
                 matrix[row][col] = sc.nextDouble();
@@ -856,6 +864,7 @@ public class SolverImpl implements ISolver {
         }
 
         matrix = newMatrix;
+        System.out.println(matrix.length);
         showMatrix(matrix);
 
         sc.close();
@@ -907,36 +916,28 @@ public class SolverImpl implements ISolver {
     public void task27() {
         Scanner sc = new Scanner(System.in);
         int[][] matrix = readMatrix(sc);
-        matrix = transposeMatrix(matrix);
 
-        PriorityQueue<Map.Entry<Integer, Integer>> priorityQueue = new PriorityQueue<>(Comparator.comparingInt(Map.Entry::getValue)); // key - row, value - max
+        PriorityQueue<Map.Entry<Integer, Integer>> priorityQueue = new PriorityQueue<>((o1, o2) -> o2.getValue() - o1.getValue()); // key - column, value - sum //key - row, value - max
 
-        for (int i = 0; i < matrix.length; ++i) {
+        for (int j = 0; j < matrix.length; ++j) {
             int sum = 0;
-            for (int j = 0; j < matrix.length; ++j) {
+            for (int i = 0; i < matrix.length; ++i) {
                 sum += Math.abs(matrix[i][j]);
             }
-            priorityQueue.add(new AbstractMap.SimpleEntry<>(i, sum));
+            priorityQueue.add(new AbstractMap.SimpleEntry<>(j, sum));
         }
 
         int[][] newMatrix = new int[matrix.length][matrix.length];
 
         while (!priorityQueue.isEmpty()) {
             Map.Entry<Integer, Integer> map = priorityQueue.poll();
-            for (int j = 0; j < newMatrix.length; ++j) {
-                newMatrix[matrix.length - priorityQueue.size() - 1][j] = matrix[map.getKey()][j];
+            for (int i = 0; i < newMatrix.length; ++i) {
+                newMatrix[i][matrix.length - priorityQueue.size() - 1] = matrix[i][map.getKey()];
             }
         }
 
         matrix = newMatrix;
-        matrix = transposeMatrix(matrix);
-        for (int[] row : matrix) {
-            for (int i = 0; i < row.length / 2; ++i) {
-                int temp = row[i];
-                row[i] = row[row.length - i - 1];
-                row[row.length - i - 1] = temp;
-            }
-        }
+        System.out.println(matrix.length);
         showMatrix(matrix);
 
         sc.close();
