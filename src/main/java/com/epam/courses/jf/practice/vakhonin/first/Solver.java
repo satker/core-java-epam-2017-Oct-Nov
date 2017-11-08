@@ -173,52 +173,52 @@ public class Solver implements ISolver {
 
         System.out.println(countOfWords);
 
+    }   // DOING!
+//
+    public void task6() {
+        Scanner in;
+        int numberOfStrings, last, it;
+        String result;
+
+        in = new Scanner(System.in);
+        numberOfStrings = Integer.valueOf(in.nextLine());
+
+        String[] strings = new String[numberOfStrings];
+//        in = new Scanner(System.in);
+        for (int j = 0; j < numberOfStrings; j++) {
+            strings[j] = in.next();
+        }
+
+        result = "";
+        last = -1;
+
+        for (String string : strings) {
+
+            for (Character ch : string.toCharArray()) {
+                if (string.length() == 1) {
+                    break;
+                }
+//
+                it = (int) ch;
+                if (it > last) {
+                    last = it;
+                } else {
+                    last = -1;
+                    break;
+                }
+            }
+            if (last != -1) {
+                result = string;
+                break;
+            }
+        }
+
+        if (result.equals("")) {
+            System.out.printf("NOT FOUND");
+        } else {
+            System.out.printf(result);
+        }
     }
-//
-//    public void task6() {
-//        Scanner in;
-//        int numberOfStrings, last, it;
-//        String result;
-//
-//        in = new Scanner(System.in);
-//        numberOfStrings = in.nextInt();
-//
-//        String[] strings = new String[numberOfStrings];
-//        in = new Scanner(System.in);
-//        for (int j = 0; j < numberOfStrings; j++) {
-//            strings[j] = in.next();
-//        }
-//
-//        result = "";
-//        last = -1;
-//
-//        for (String string : strings) {
-//
-//            for (Character ch : string.toCharArray()) {
-//                if (string.length() == 1) {
-//                    break;
-//                }
-////
-//                it = (int) ch;
-//                if (it > last) {
-//                    last = it;
-//                } else {
-//                    last = -1;
-//                    break;
-//                }
-//            }
-//            if (last != -1) {
-//                result = string;
-//                break;
-//            }
-//        }
-//
-//        if (result.equals("")) {
-//            System.out.printf("NOT FOUND");
-//        } else {
-//            System.out.printf(result);
-//        }
-//    }
 //
 //    public void task7() {
 //        Scanner in;
