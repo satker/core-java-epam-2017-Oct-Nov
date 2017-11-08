@@ -176,21 +176,48 @@ public class Solver implements ISolver {
     }   // DOING!
 //
     public void task6() {
-        Scanner scanner = new Scanner(System.in);
-        //    System.out.println("Enter numbers of lines: ");
-        int number = Integer.valueOf(scanner.nextLine());
-        //   System.out.println("Enter words: ");
-        for (int i = 0; i < number; ++i) {
-            char[] word = scanner.next().toCharArray();
-            for (int j = 0; j < word.length - 1; ++j) {
-                if (word[j] >= word[j + 1]) break;
-                if (word.length - 2 == j) {
-                    System.out.printf("%s%n", new String(word));
-                    return;
+        Scanner in = new Scanner(System.in);
+        int numberOfStrings, last, it;
+        String result;
+
+//        in = new Scanner(System.in);
+        numberOfStrings = Integer.valueOf(in.next());
+
+        String[] strings = new String[numberOfStrings];
+//        in = new Scanner(System.in);
+        for (int j = 0; j < numberOfStrings; j++) {
+            strings[j] = in.next();
+        }
+
+        result = "";
+        last = -1;
+
+        for (String string : strings) {
+
+            for (Character ch : string.toCharArray()) {
+                if (string.length() == 1) {
+                    break;
+                }
+//
+                it = (int) ch;
+                if (it > last) {
+                    last = it;
+                } else {
+                    last = -1;
+                    break;
                 }
             }
+            if (last != -1) {
+                result = string;
+                break;
+            }
         }
-        System.out.printf("%s%n", "NOT FOUND");
+
+        if (result.equals("")) {
+            System.out.printf("%s%n", "NOT FOUND");
+        } else {
+            System.out.printf("%s%n", result);
+        }
     }
 //
 //    public void task7() {
