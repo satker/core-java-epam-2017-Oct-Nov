@@ -251,7 +251,7 @@ public class Solver implements ISolver {
                 if ((i % n) == 0) {
                     System.out.println();
                 } else {
-                    System.out.print(" ");
+                    System.out.print("\t");
                 }
             }
         } catch (IOException e) {
