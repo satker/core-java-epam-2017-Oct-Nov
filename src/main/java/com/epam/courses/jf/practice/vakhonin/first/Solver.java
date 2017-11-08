@@ -45,7 +45,7 @@ public class Solver implements ISolver {
         maxString = strings[numberOfLongestString];
         System.out.printf("MIN (%d): \"%s\"%n", minLength, minString);
         System.out.printf("MAX (%d): \"%s\"%n", maxLength, maxString);
-    }
+    }   // DOING!
 
     public void task2() {
         int numberOfStrings, length;
@@ -75,39 +75,38 @@ public class Solver implements ISolver {
                 System.out.printf("(%d): \"%s\"%n", entry.getKey(), s);
             }
         }
+    }   // DOING!
+//
+    public void task3() {
+        Scanner in;
+        int length, numberOfStrings, averageLength, sumLength = 0;
+        Object[][] stringsWithLength;
+        String string;
+
+        in = new Scanner(System.in);
+        numberOfStrings = Integer.valueOf(in.nextLine());
+        stringsWithLength = new Object[numberOfStrings][2];
+
+        for (int j = 0; j < numberOfStrings; j++) {
+            string = in.nextLine();
+            length = string.length();
+            stringsWithLength[j][0] = length;
+            stringsWithLength[j][1] = string;
+            sumLength += length;
+        }
+
+        averageLength = sumLength / numberOfStrings;
+        System.out.printf("AVERAGE (%d)%n", averageLength);
+
+        for (int j = 0; j < numberOfStrings; j++) {
+            length = (int) stringsWithLength[j][0];
+            string = (String) stringsWithLength[j][1];
+
+            if (length < averageLength) {
+                System.out.printf("(%d): \"%s\"%n", length, string);
+            }
+        }
     }
-//
-//    public void task3() {
-//        Scanner in;
-//        int length, numberOfStrings, averageLength, sumLength = 0;
-//        Object[][] stringsWithLength;
-//        String string;
-//
-//        in = new Scanner(System.in);
-//        numberOfStrings = in.nextInt();
-//        stringsWithLength = new Object[numberOfStrings][2];
-//        in = new Scanner(System.in);
-//
-//        for (int j = 0; j < numberOfStrings; j++) {
-//            string = in.nextLine();
-//            length = string.length();
-//            stringsWithLength[j][0] = length;
-//            stringsWithLength[j][1] = string;
-//            sumLength += length;
-//        }
-//
-//        averageLength = sumLength / numberOfStrings;
-//        System.out.printf("AVERAGE (%d)%n", averageLength);
-//
-//        for (int j = 0; j < numberOfStrings; j++) {
-//            length = (int) stringsWithLength[j][0];
-//            string = (String) stringsWithLength[j][1];
-//
-//            if (length < averageLength) {
-//                System.out.printf("(%d): \"%s\"%n", length, string);
-//            }
-//        }
-//    }
 //
 //    public void task4() {
 //        Scanner in = new Scanner(System.in);
