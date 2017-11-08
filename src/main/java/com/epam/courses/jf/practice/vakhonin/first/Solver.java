@@ -138,42 +138,42 @@ public class Solver implements ISolver {
             counter++;
         }
         System.out.println(stringList.get(number));
-    }
+    }   // DOING!
 //
-//    public void task5() {
-//        Scanner in = new Scanner(System.in);
-//        int n = in.nextInt();
+    public void task5() {
+        Scanner in = new Scanner(System.in);
+        int n = Integer.valueOf(in.nextLine());
 //        in = new Scanner(System.in);
-//        List<String> stringList = new ArrayList<String>();
-//        for (int j = 0; j < n; j++) {
-//            stringList.add(in.next());
-//        }
-//
-//
-//        int length;
-//        int countOfVowels, countOfWords;
-//        countOfWords = 0;
-//        for (String s : stringList) {
-//            length = s.length();
-//            if (((length % 2) == 0) && (s.matches("^[a-zA-Z]+$"))) {
-//                countOfVowels = 0;
-//                for (Character ch : s.toCharArray()) {
-//                    if ((ch.toString()).matches("(?i:[aeiouy])")) {
-//                        countOfVowels++;
-//                    }
-//                }
-//
-//
-//                if (countOfVowels * 2 == length) {
-//                    countOfWords++;
-//                }
-//
-//            }
-//        }
-//
-//        System.out.println(countOfWords);
-//
-//    }
+        List<String> stringList = new ArrayList<String>();
+        for (int j = 0; j < n; j++) {
+            stringList.add(in.next());
+        }
+
+
+        int length;
+        int countOfVowels, countOfWords;
+        countOfWords = 0;
+        for (String s : stringList) {
+            length = s.length();
+            if (((length % 2) == 0) && (s.matches("^[a-zA-Z]+$"))) {
+                countOfVowels = 0;
+                for (Character ch : s.toCharArray()) {
+                    if ((ch.toString()).matches("(?i:[aeiouy])")) {
+                        countOfVowels++;
+                    }
+                }
+
+
+                if (countOfVowels * 2 == length) {
+                    countOfWords++;
+                }
+
+            }
+        }
+
+        System.out.println(countOfWords);
+
+    }
 //
 //    public void task6() {
 //        Scanner in;
