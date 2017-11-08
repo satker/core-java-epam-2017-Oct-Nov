@@ -348,7 +348,15 @@ public class Solver implements ISolver {
      */
     public void task11() {
         Scanner in = new Scanner(System.in);
-        int a = in.nextInt();
+        String temp=in.nextLine();
+        int a;
+        try {
+            a = Integer.parseInt(temp);
+        } catch (NumberFormatException e) {
+            System.out.println("INCORRECT INPUT DATA");
+            return;
+        }
+
         switch (a){
             case 1:
                 System.out.println("January");
@@ -733,6 +741,6 @@ public class Solver implements ISolver {
     }
     public static void main(String[] args) {
         Solver a=new Solver();
-        a.task20();
+        a.task11();
     }
 }
