@@ -104,7 +104,7 @@ public class Solver implements ISolver {
             String minWord = null;
             strLine = in.readLine();
             String[] words = strLine.trim().split(" ");
-            Set<Character> uniqKeys = new TreeSet<>();
+            Set<Character> uniqKeys = new HashSet<>();
             for (int i = 0; i < n; i++) {
                 for (int k = 0; k < words[i].length(); k++) {
                     uniqKeys.add(words[i].charAt(k));
@@ -183,7 +183,19 @@ public class Solver implements ISolver {
 
     @Override
     public void task7() {
-
+//        try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in))) {
+//            String result = null;
+//            int n = Integer.valueOf(in.readLine());
+//            String[] words = in.readLine().trim().split(" ");
+//            for (String word : words) {
+//                if (word.matches("")) {
+//                    continue;
+//                }
+//
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Override
