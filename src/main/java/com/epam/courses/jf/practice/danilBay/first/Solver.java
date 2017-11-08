@@ -2,6 +2,8 @@ package com.epam.courses.jf.practice.danilBay.first;
 
 import com.epam.courses.jf.practice.common.first.ISolver;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -332,13 +334,21 @@ public class Solver implements ISolver {
         }
         if (d == 0) {
             double x = -b/2/a;
-            System.out.println("One solution: "+x);
+
+            BigDecimal bd=new BigDecimal(x);
+            BigDecimal normalizedField = bd.setScale(2, RoundingMode.HALF_UP);
+            System.out.println("One solution: "+normalizedField);
             return;
         }
         else {
             double x1 = (-b - sqrt(d))/2/a;
             double x2 = (-b + sqrt(d))/2/a;
-            System.out.println("Two solutions: "+x1+", "+x2);
+            BigDecimal bd1=new BigDecimal(x1);
+            BigDecimal bd2=new BigDecimal(x2);
+
+            BigDecimal normalizedField1 = bd1.setScale(2, RoundingMode.HALF_UP);
+            BigDecimal normalizedField2 = bd2.setScale(2, RoundingMode.HALF_UP);
+            System.out.println("Two solutions: "+normalizedField1+", "+normalizedField2);
             return;
         }
     }
@@ -741,6 +751,6 @@ public class Solver implements ISolver {
     }
     public static void main(String[] args) {
         Solver a=new Solver();
-        a.task11();
+        a.task10();
     }
 }
