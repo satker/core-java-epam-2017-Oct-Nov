@@ -269,16 +269,24 @@ public class Solver implements ISolver {
         float b = scanner.nextInt();
         float c = scanner.nextInt();
         double discriminant = b * b - 4 * a * c;
-        double discriminantRoot = Math.sqrt(discriminant);
-        if (discriminantRoot == 0) {
-            float root = (-b/(2*a));
-            System.out.printf(Locale.US,"One solution: %.2f", root);
-        } else if (discriminantRoot < 0) {
+        if (discriminant == 0) {
+            float root = -b / 2 / a;
+            BigDecimal rootBd = new BigDecimal(root)
+                    .setScale(2, BigDecimal.ROUND_HALF_UP);
+            System.out.print("One solution: " + rootBd);
+        } else if (discriminant < 0) {
             System.out.print("No solution");
         } else {
-            double firstRoot = (-b + discriminantRoot) / (2 * a);
-            double secondRoot = (-b - discriminantRoot) / (2 * a);
-            System.out.printf(Locale.US, "Two solutions: %.2f,%.2f", secondRoot, firstRoot);
+            double discriminantRoot = Math.sqrt(discriminant);
+            double firstRoot = (-b + discriminantRoot) / 2 / a;
+            double secondRoot = (-b - discriminantRoot) / 2 / a;
+
+            BigDecimal firstRootBd = new BigDecimal(firstRoot)
+                    .setScale(2, BigDecimal.ROUND_HALF_UP);
+            BigDecimal secondRootBd = new BigDecimal(secondRoot)
+                    .setScale(2, BigDecimal.ROUND_HALF_UP);
+
+            System.out.print("Two solutions: " + secondRootBd + "," + firstRootBd);
         }
 
     }
