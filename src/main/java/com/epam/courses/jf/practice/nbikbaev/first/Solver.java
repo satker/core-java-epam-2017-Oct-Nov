@@ -5,6 +5,9 @@ import com.epam.courses.jf.practice.common.first.ISolver;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -261,6 +264,22 @@ public class Solver implements ISolver {
 
     @Override
     public void task10() {
+        Scanner scanner = new Scanner(System.in);
+        float a = scanner.nextInt();
+        float b = scanner.nextInt();
+        float c = scanner.nextInt();
+        double discriminant = b * b - 4 * a * c;
+        double discriminantRoot = Math.sqrt(discriminant);
+        if (discriminantRoot == 0) {
+            float root = (-b/(2*a));
+            System.out.printf(Locale.US,"One solution: %.2f", root);
+        } else if (discriminantRoot < 0) {
+            System.out.print("No solution");
+        } else {
+            double firstRoot = (-b + discriminantRoot) / (2 * a);
+            double secondRoot = (-b - discriminantRoot) / (2 * a);
+            System.out.printf(Locale.US, "Two solutions: %.2f,%.2f", secondRoot, firstRoot);
+        }
 
     }
 
