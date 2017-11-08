@@ -107,38 +107,38 @@ public class Solver implements ISolver {
                 System.out.printf("(%d): \"%s\"%n", length, string);
             }
         }
-    }
+    }   // DOING!
 //
-//    public void task4() {
-//        Scanner in = new Scanner(System.in);
-//        int n = in.nextInt();
+    public void task4() {
+        Scanner in = new Scanner(System.in);
+        int n = Integer.valueOf(in.nextLine());
 //        in = new Scanner(System.in);
-//        List<String> stringList = new ArrayList<String>();
-//        for (int j = 0; j < n; j++) {
-//            stringList.add(in.next());
-//        }
-//        Set<Character> characterSet = new HashSet<Character>();
-//        Set<Character> tempSet;
-//        int tempSize;
-//        int counter = 0;
-//        int number = 0;
-//        int size = stringList.get(0).length();
-//        for (String s : stringList) {
-//            tempSet = new HashSet<Character>();
-//            for (Character ch : s.toCharArray()) {
-//                tempSet.add(ch);
-//            }
-//            tempSize = tempSet.size();
-//            if (size > tempSize) {
-//                size = tempSize;
-//                characterSet = tempSet;
-//                number = counter;
-//            }
-//
-//            counter++;
-//        }
-//        System.out.println(stringList.get(number));
-//    }
+        List<String> stringList = new ArrayList<String>();
+        for (int j = 0; j < n; j++) {
+            stringList.add(in.next());
+        }
+        Set<Character> characterSet = new HashSet<Character>();
+        Set<Character> tempSet;
+        int tempSize;
+        int counter = 0;
+        int number = 0;
+        int size = stringList.get(0).length();
+        for (String s : stringList) {
+            tempSet = new HashSet<Character>();
+            for (Character ch : s.toCharArray()) {
+                tempSet.add(ch);
+            }
+            tempSize = tempSet.size();
+            if (size > tempSize) {
+                size = tempSize;
+                characterSet = tempSet;
+                number = counter;
+            }
+
+            counter++;
+        }
+        System.out.println(stringList.get(number));
+    }
 //
 //    public void task5() {
 //        Scanner in = new Scanner(System.in);
