@@ -258,7 +258,7 @@ public class Solver implements ISolver {
         } else {
             result.deleteCharAt(resultLength - 1);
         }
-        System.out.printf(result.toString());
+        System.out.println(result.toString());
     }
 //
 //    public void task8() {
