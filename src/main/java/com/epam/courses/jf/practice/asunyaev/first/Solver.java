@@ -568,10 +568,8 @@ public class Solver implements ISolver {
         for (int i = 0; i < DIMENSION; i++) {
             ArrayList<Integer> rowList = new ArrayList<Integer>(Arrays.asList(Arrays.stream(matrix[i]).boxed().toArray(Integer[]::new)));
             for (int j = 0; j < DIMENSION - 1; j++) {
-                if (matrix[i][j] == 0 && matrix[i][j+1] != 0) {
-                    rowList.remove((Integer) 0);
-                    rowList.add(0);
-                }
+                rowList.remove((Integer) 0);
+                rowList.add(0);
             }
             modifiedMatrix[i] = rowList.toArray(modifiedMatrix[i]);
         }
