@@ -437,6 +437,8 @@ public class Solver implements ISolver {
                 return row1[numberOfColumn] - row2[numberOfColumn];
             }
         });
+        System.out.println(matrix.length);
+
         printMatrixInteger(matrix);
     }
 //
