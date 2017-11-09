@@ -517,29 +517,20 @@ public class Solver implements ISolver {
             inputArray[i] = Integer.valueOf(inputLine[i]);
         }
 
-
-        List<Integer> sequenceCountsList = new ArrayList<>();
-
-        Integer count = 0;
-        for (int i = 0; i < size; i++) {
-            if(i != size - 1) {
-                if (inputArray[i] < inputArray[i + 1]) {
-                    count++;
-                } else {
-                    sequenceCountsList.add(count);
-                    count = 1;
-                }
-            }else {
-                if (inputArray[i] < inputArray[size]) {
-                    count++;
-                } else {
-                    sequenceCountsList.add(count);
-                    count = 1;
-                }
+        Integer count = 1;
+        for (int i = 0; i < size-1; i++) {
+            int j = i;
+            int subArrayLength = 1;
+            while (inputArray[j] < inputArray[j + 1] && j < size) {
+                subArrayLength++;
+                j++;
+            }
+            if (subArrayLength > count) {
+                count = subArrayLength;
             }
         }
+        System.out.println(count);
 
-        System.out.println(sequenceCountsList.stream().max(Comparator.comparingInt(e -> e)).get());
     }
 
     @Override
