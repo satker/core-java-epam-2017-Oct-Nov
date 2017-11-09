@@ -662,7 +662,6 @@ public class Solver implements ISolver {
                 column[i] = matrix[i][j];
             }
             Integer[] entry = {j, Arrays.stream(column).map(p -> Math.abs(p)).sum()};
-            System.out.print(entry[1] + " ");
             sums.add(entry);
         }
         sums.sort(new Comparator<Integer[]>() {
