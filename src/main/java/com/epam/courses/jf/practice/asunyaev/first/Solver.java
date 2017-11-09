@@ -12,7 +12,7 @@ public class Solver implements ISolver {
 
     public static void main(String[] args) {
         Solver solver = new Solver();
-        solver.task27();
+        solver.task25();
     }
 
     @Override
@@ -643,8 +643,42 @@ public class Solver implements ISolver {
         printMatrix(modifiedMatrix, DIMENSION);
     }
 
-    //@Override
-    //public void task25() TODO
+    @Override
+    public void task25() {
+        Scanner scanner = new Scanner(System.in);
+        final int DIMENSION = scanner.nextInt();
+        int[][] matrix = readMatrix(scanner, DIMENSION);
+        int[][] modifiedMatrix = new int[DIMENSION + 2][DIMENSION + 2];
+        int localMinsCount = 0;
+        if (DIMENSION == 1) {
+            localMinsCount = 1;
+        }
+        for (int i = 0; i < DIMENSION + 2; i++) {
+            for (int j = 0; j < DIMENSION + 2; j++) {
+                if ((i == 0) || (i == DIMENSION + 1) || (j == 0) || (j == DIMENSION + 1)) {
+                    modifiedMatrix[i][j] = 999;
+                } else {
+                    modifiedMatrix[i][j] = matrix[i - 1][j - 1];
+                }
+
+            }
+        }
+        for (int i = 1; i < DIMENSION + 1; i++) {
+            for (int j = 1; j < DIMENSION + 1; j++) {
+                if (modifiedMatrix[i][j] < modifiedMatrix[i + 1][j - 1] &&
+                        modifiedMatrix[i][j] < modifiedMatrix[i + 1][j] &&
+                        modifiedMatrix[i][j] < modifiedMatrix[i + 1][j + 1] &&
+                        modifiedMatrix[i][j] < modifiedMatrix[i][j - 1] &&
+                        modifiedMatrix[i][j] < modifiedMatrix[i][j + 1] &&
+                        modifiedMatrix[i][j] < modifiedMatrix[i - 1][j - 1] &&
+                        modifiedMatrix[i][j] < modifiedMatrix[i - 1][j] &&
+                        modifiedMatrix[i][j] < modifiedMatrix[i - 1][j + 1]) {
+                    localMinsCount++;
+                }
+            }
+        }
+        System.out.println(localMinsCount);
+    }
 
     //@Override
     //public void task26() TODO
