@@ -218,48 +218,48 @@ public class Solver implements ISolver {
         } else {
             System.out.printf("%s%n", result);
         }
+    }   // DOING!
+//
+    public void task7() {
+        Scanner in;
+        int numberOfStrings, resultLength;
+
+        in = new Scanner(System.in);
+        numberOfStrings = Integer.valueOf(in.nextLine());
+
+        String[] strings = new String[numberOfStrings];
+        in = new Scanner(System.in);
+        for (int j = 0; j < numberOfStrings; j++) {
+            strings[j] = in.next();
+        }
+
+        int length;
+        Set<Character> charSet;
+        StringBuilder result;
+
+        result = new StringBuilder("");
+        for (String string : strings) {
+
+            charSet = new LinkedHashSet();
+            length = string.length();
+            for (Character ch : string.toCharArray()) {
+                charSet.add(ch);
+            }
+
+            if (length == charSet.size()) {
+                result.append(string).append(" ");
+            }
+        }
+
+        resultLength = result.length();
+
+        if (resultLength == 0) {
+            result.append("NOT FOUND");
+        } else {
+            result.deleteCharAt(resultLength - 1);
+        }
+        System.out.printf(result.toString());
     }
-//
-//    public void task7() {
-//        Scanner in;
-//        int numberOfStrings, resultLength;
-//
-//        in = new Scanner(System.in);
-//        numberOfStrings = in.nextInt();
-//
-//        String[] strings = new String[numberOfStrings];
-//        in = new Scanner(System.in);
-//        for (int j = 0; j < numberOfStrings; j++) {
-//            strings[j] = in.next();
-//        }
-//
-//        int length;
-//        Set<Character> charSet;
-//        StringBuilder result;
-//
-//        result = new StringBuilder("");
-//        for (String string : strings) {
-//
-//            charSet = new LinkedHashSet();
-//            length = string.length();
-//            for (Character ch : string.toCharArray()) {
-//                charSet.add(ch);
-//            }
-//
-//            if (length == charSet.size()) {
-//                result.append(string).append(" ");
-//            }
-//        }
-//
-//        resultLength = result.length();
-//
-//        if (resultLength == 0) {
-//            result.append("NOT FOUND");
-//        } else {
-//            result.deleteCharAt(resultLength - 1);
-//        }
-//        System.out.printf(result.toString());
-//    }
 //
 //    public void task8() {
 //        Scanner in;
