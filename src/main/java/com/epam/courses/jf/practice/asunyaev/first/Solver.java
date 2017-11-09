@@ -652,6 +652,8 @@ public class Solver implements ISolver {
         int localMinsCount = 0;
         if (DIMENSION == 1) {
             localMinsCount = 1;
+            System.out.println(localMinsCount);
+            return;
         }
         for (int i = 0; i < DIMENSION + 2; i++) {
             for (int j = 0; j < DIMENSION + 2; j++) {
