@@ -12,7 +12,7 @@ public class Solver implements ISolver {
 
     public static void main(String[] args) {
         Solver solver = new Solver();
-        solver.task17();
+        solver.task18();
     }
 
     @Override
@@ -464,8 +464,37 @@ public class Solver implements ISolver {
         System.out.println((int) determinant(matrix, DIMENSION));
     }
 
-    //@Override
-    //public void task18() TODO
+    @Override
+    public void task18() {
+        Scanner scanner = new Scanner(System.in);
+        final int DIMENSION = scanner.nextInt();
+        int[][] matrix = readMatrix(scanner, DIMENSION);
+        int maxElement = 0;
+        HashSet<Integer> rowsToDelete = new HashSet<Integer>();
+        HashSet<Integer> columnsToDelete = new HashSet<Integer>();
+        int[][] modifiedMatrix;
+        for (int i = 0; i < DIMENSION; i++) {
+            for (int j = 0; j < DIMENSION; j++) {
+                if (matrix[i][j] > maxElement) {
+                    maxElement = matrix[i][j];
+                }
+            }
+        }
+        for (int i = 0; i < DIMENSION; i++) {
+            for (int j = 0; j < DIMENSION; j++) {
+                if (matrix[i][j] == maxElement) {
+                    rowsToDelete.add(i);
+                    columnsToDelete.add(j);
+                }
+            }
+        }
+
+        modifiedMatrix = removeRows(matrix, rowsToDelete);
+        modifiedMatrix = removeColumns(modifiedMatrix, columnsToDelete);
+        System.out.println(modifiedMatrix.length);
+        System.out.println(modifiedMatrix[0].length);
+        printAnyMatrix(modifiedMatrix);
+    }
 
     //@Override
     //public void task19() TODO
@@ -578,5 +607,41 @@ public class Solver implements ISolver {
         return matrix;
     }
 
+    private int[][] removeRows (int[][] matrix, HashSet<Integer> indexes) {
+        int[][] modifiedMatrix = new int[matrix.length - indexes.size()][matrix[0].length];
+        int k = 0;
+        for (int i = 0; i < matrix.length; i++) {
+            if (!indexes.contains(i)) {
+                for (int j = 0; j < matrix[0].length; j++) {
+                    modifiedMatrix[k][j] = matrix[i][j];
+                }
+                k++;
+            }
+        }
+        return modifiedMatrix;
+    }
+
+    private int[][] removeColumns (int[][] matrix, HashSet<Integer> indexes) {
+        int[][] modifiedMatrix = new int[matrix.length][matrix[0].length - indexes.size()];
+        int k = 0;
+        for(int i = 0; i < matrix[0].length; i++) {
+            if (!indexes.contains(i)) {
+                for (int j = 0; j < matrix.length; j++) {
+                    modifiedMatrix[j][k] = matrix[j][i];
+                }
+                k++;
+            }
+        }
+        return modifiedMatrix;
+    }
+
+    private void printAnyMatrix(int[][] matrix) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                System.out.print(matrix[i][j] + "\t");
+            }
+            System.out.println();
+        }
+    }
 
 }
