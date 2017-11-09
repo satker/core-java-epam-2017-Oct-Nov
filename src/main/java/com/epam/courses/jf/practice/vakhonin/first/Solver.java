@@ -271,13 +271,13 @@ public class Solver implements ISolver {
     public void task8() {
         Scanner in = new Scanner(System.in);
         int n = Integer.valueOf(in.nextLine());
-        in = new Scanner(System.in);
+
         List<String> stringList = new ArrayList<>();
         for (int j = 0; j < n; j++) {
             stringList.add(in.next());
         }
         int counter = 0;
-        String result = "NOT FOUND"; // TODO: применить такое везде, сразу нот фаунд
+        String result = "NOT FOUND";
         StringBuffer strBuf;
         for(String str: stringList){
             if(str.matches("^\\d+$")){
