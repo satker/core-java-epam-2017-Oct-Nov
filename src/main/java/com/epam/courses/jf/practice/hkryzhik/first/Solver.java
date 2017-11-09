@@ -6,6 +6,8 @@ package com.epam.courses.jf.practice.hkryzhik.first;
 
 import com.epam.courses.jf.practice.common.first.ISolver;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -89,7 +91,7 @@ public class Solver implements ISolver {
         });
 
         for (String string: inputStringList) {
-            System.out.printf("%d: \"%s\"\n", string.length(), string);
+            System.out.printf("(%d): \"%s\"\n", string.length(), string);
         }
 
     }
@@ -118,7 +120,7 @@ public class Solver implements ISolver {
 
         final int stringLength = length / size;
 
-        System.out.println("AVERAGE(" + stringLength + ")");
+        System.out.println("AVERAGE (" + stringLength + ")");
 
         inputStringList.forEach((String s) ->{
 
@@ -334,6 +336,7 @@ public class Solver implements ISolver {
         }
     }
 
+    //TODO: output needs to be fixed
     @Override
     public void task10() {
         Scanner inputData = new Scanner(System.in);
@@ -365,11 +368,17 @@ public class Solver implements ISolver {
         if(d > 0){
             x1 = (-b + Math.sqrt(Math.pow(b, 2) - 4*a*c))/(2 * a);
             x2 = (-b - Math.sqrt(Math.pow(b, 2) - 4*a*c))/(2 * a);
-            System.out.printf("Two solutions: %f, %f\n", x1, x2);
+            System.out.printf("Two solutions: %f, %f\n", BigDecimal.valueOf(x1)
+                    .setScale(2, RoundingMode.DOWN)
+                    .doubleValue(), BigDecimal.valueOf(x2)
+                    .setScale(2, RoundingMode.DOWN)
+                    .doubleValue());
         }
         if(d == 0){
             x1 = -b / (2*a);
-            System.out.printf("One solution: %f\n", x1);
+            System.out.printf("One solution: %f\n", BigDecimal.valueOf(x1)
+                    .setScale(2, RoundingMode.HALF_DOWN)
+                    .doubleValue());
         }
         if(d < 0){
             System.out.printf("No solution\n");
