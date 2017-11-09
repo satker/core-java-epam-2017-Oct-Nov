@@ -12,7 +12,7 @@ public class Solver implements ISolver {
 
     public static void main(String[] args) {
         Solver solver = new Solver();
-        solver.task24();
+        solver.task27();
     }
 
     @Override
@@ -649,8 +649,38 @@ public class Solver implements ISolver {
     //@Override
     //public void task26() TODO
 
-    //@Override
-    //public void task27() TODO
+    @Override
+    public void task27() {
+        Scanner scanner = new Scanner(System.in);
+        final int DIMENSION = scanner.nextInt();
+        int[][] matrix = readMatrix(scanner, DIMENSION);
+        int[][] modifiedMatrix = new int[DIMENSION][DIMENSION];
+        ArrayList<Integer[]> sums = new ArrayList<>();
+        for (int j = 0; j < DIMENSION; j++) {
+            int[] column = new int[DIMENSION];
+            for (int i = 0; i < DIMENSION; i++) {
+                column[i] = matrix[i][j];
+            }
+            Integer[] entry = {j, Arrays.stream(column).map(p -> Math.abs(p)).sum()};
+            System.out.print(entry[1] + " ");
+            sums.add(entry);
+        }
+        sums.sort(new Comparator<Integer[]>() {
+            @Override
+            public int compare(Integer[] o1, Integer[] o2) {
+                return o2[1].compareTo(o1[1]);
+            }
+        });
+
+        for (int j = 0; j < DIMENSION; j++) {
+            for (int i = 0; i < DIMENSION; i++) {
+                modifiedMatrix[i][j] = matrix[i][sums.get(j)[0]];
+            }
+        }
+
+        System.out.println(DIMENSION);
+        printMatrix(modifiedMatrix, DIMENSION);
+    }
 
     private void copyRow(int[][] fromMatrix, int rowIndex1, int[][] toMatrix, int rowIndex2) {
         for (int i = 0; i < fromMatrix.length; i++) {
