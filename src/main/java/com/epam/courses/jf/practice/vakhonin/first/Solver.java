@@ -296,7 +296,7 @@ public class Solver implements ISolver {
 
         }
 
-        System.out.println(result);
+        System.out.printf("%s%n", result);
     }
 //
 //    public void task9() {
