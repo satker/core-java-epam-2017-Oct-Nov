@@ -20,9 +20,12 @@ public class Utils {
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < dimension; j++) {
                 System.out.print(matrix[i][j]);
-                System.out.print(" ");
+                if (j == 4) {
+                    System.out.println();
+                } else {
+                    System.out.print(" ");
+                }
             }
-            System.out.println();
         }
 
     }

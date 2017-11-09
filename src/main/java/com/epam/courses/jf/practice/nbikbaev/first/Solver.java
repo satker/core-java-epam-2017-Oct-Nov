@@ -352,8 +352,8 @@ public class Solver implements ISolver {
     @Override
     public void task12() {
         try (Scanner scanner = new Scanner(System.in)) {
-            int columnNumber = scanner.nextInt();
-            final int dimension = scanner.nextInt();
+            final int columnNumber = scanner.nextInt();
+            int dimension = scanner.nextInt();
             int[][] matrix = Utils.readMatrix(scanner, dimension);
             Arrays.sort(matrix, (o1, o2) -> Integer.compare(o2[columnNumber], o1[columnNumber]));
             System.out.println(dimension);
