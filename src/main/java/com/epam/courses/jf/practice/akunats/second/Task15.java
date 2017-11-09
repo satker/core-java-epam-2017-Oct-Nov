@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class Task15 implements ITestableTask15 {
     @Override
     public IFileWithLines analyze(Set<I2DPoint> points, File output) {
-        ArrayList<I2DPoint> previousStep = new ArrayList<>(); // Исключенные точки из перебора
+        List<I2DPoint> previousStep = new ArrayList<>(); // Исключенные точки из перебора
         Set<ILine> lines = new HashSet<>();
 
         Iterator<I2DPoint> iter = points.iterator();

@@ -4,13 +4,14 @@ import com.epam.courses.jf.practice.common.second.ITestableTask19;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Set;
 
 public class Task19 implements ITestableTask19 {
     @Override
     public int getNumberOvertaking(Set<ICar> cars, long lengthLap, int numberLaps) {
-        ArrayList<Integer> list = new ArrayList<>();
-        ArrayList<ICar> inputData = new ArrayList<>(cars);
+        List<Integer> list = new ArrayList<>();
+        List<ICar> inputData = new ArrayList<>(cars);
         inputData.stream()
                 .sorted(Comparator.comparingInt(ICar::getStartPosition))
                 .forEach(i -> {

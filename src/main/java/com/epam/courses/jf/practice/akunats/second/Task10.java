@@ -8,10 +8,11 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Task10 implements ITestableTask10 {
     public HashMap<String, Integer> countNumberWords(File input) {
-        HashMap<String, Integer> result = new HashMap<>();
+        Map<String, Integer> result = new HashMap<>();
         try {
             Files.lines(Paths.get(input.getPath()), Charset.forName("ISO-8859-1"))
                     .forEach(i -> {
@@ -26,6 +27,6 @@ public class Task10 implements ITestableTask10 {
         } catch (IOException e) {
             System.out.println();
         }
-        return result;
+        return new HashMap<>(result);
     }
 }

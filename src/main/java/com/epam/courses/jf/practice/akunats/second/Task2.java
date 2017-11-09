@@ -9,7 +9,6 @@ import java.util.Set;
 
 public class Task2 implements ITestableTask2 {
     private Set<File> result = new HashSet<>(); // Записываем результат
-
     public Set<File> getFiles(File directory) {
         // Список файлов текущей директории
         String[] currentFiles = directory.list();

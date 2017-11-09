@@ -88,9 +88,9 @@ public class Solver implements ISolver {
         if (numberOfStrings != inputStrings.length) {
             throw new IndexOutOfBoundsException("Ввели неверный массив");
         }
-        ArrayList<Integer> numOfUniqueChars = new ArrayList<>();
+        List<Integer> numOfUniqueChars = new ArrayList<>();
         for (String inputString : inputStrings) {
-            HashMap<String, Integer> interMap = new HashMap<>();
+            Map<String, Integer> interMap = new HashMap<>();
             Arrays.stream(inputString.split("")).forEach(i -> {
                 if (interMap.containsKey(i)) {
                     interMap.put(i, interMap.get(i) + 1);
@@ -135,7 +135,7 @@ public class Solver implements ISolver {
         }
         int numStringResult = 0;
         for (String inputString : inputStrings) {
-            HashMap<String, Integer> interMap = new HashMap<>();
+            Map<String, Integer> interMap = new HashMap<>();
             interMap.put("vowel", 0);
             interMap.put("consonant", 0);
             Arrays.stream(inputString.split("")).forEach(i -> {
@@ -163,9 +163,9 @@ public class Solver implements ISolver {
         if (numberOfStrings != inputStrings.length) {
             throw new IndexOutOfBoundsException("Ввели неверный массив");
         }
-        ArrayList<String> resultList = new ArrayList<>();
+        List<String> resultList = new ArrayList<>();
         for (String inputString : inputStrings) {
-            ArrayList<Integer> interList = new ArrayList<>();
+            List<Integer> interList = new ArrayList<>();
             char[] charMass = inputString.toCharArray();
             for (char charMas : charMass) interList.add((int) charMas);
             int count = 0;
@@ -208,17 +208,17 @@ public class Solver implements ISolver {
         if (numberOfStrings != inputStrings.length) {
             throw new IndexOutOfBoundsException("Ввели неверный массив");
         }
-        Set<String> resultList = new HashSet<>();
+        Set<String> resultSet = new HashSet<>();
         for (String inputString : inputStrings) {
             Set<String> interSet = Arrays.stream(inputString.split(""))
                     .collect(toSet());
             if (interSet.size() == inputString.length()) {
-                resultList.add(inputString);
+                resultSet.add(inputString);
             }
         }
         String result = "";
-        for (String s : resultList) {
-            if (resultList.size() == 1) {
+        for (String s : resultSet) {
+            if (resultSet.size() == 1) {
                 result = s;
             } else {
                 if (result.equals("")) {
@@ -245,9 +245,9 @@ public class Solver implements ISolver {
         if (numberOfStrings != inputStrings.length) {
             throw new IndexOutOfBoundsException("Ввели неверный массив");
         }
-        ArrayList<String> resultList = new ArrayList<>();
+        List<String> resultList = new ArrayList<>();
         for (String inputString : inputStrings) {
-            ArrayList<String> interList = new ArrayList<>();
+            List<String> interList = new ArrayList<>();
             Arrays.stream(inputString.split("")).forEach(i -> {
                 if (Pattern.compile("^(?i:[0-9]).*").matcher(i).matches()) {
                     interList.add(i);
@@ -399,7 +399,7 @@ public class Solver implements ISolver {
                 inputMatrix[i][j] = Integer.parseInt(scannerString[j]);
             }
         }
-        ArrayList<Integer> resultList = new ArrayList<>();
+        List<Integer> resultList = new ArrayList<>();
         Arrays.stream(inputMatrix)
                 .sorted(Comparator.comparing(a -> a[numColumn]))
                 .forEach(a -> resultList.addAll(Arrays.asList(a).subList(0, arrayDimension)));
@@ -467,7 +467,7 @@ public class Solver implements ISolver {
         int[] inputMassive = Arrays.stream(scanner.nextLine().split(" "))
                 .mapToInt(Integer::parseInt)
                 .toArray();
-        ArrayList<Integer> numberSequences = new ArrayList<>();
+        List<Integer> numberSequences = new ArrayList<>();
         int num = 1;
         for (int i = 1; i < numElements; i++) {
             if (inputMassive[i] > inputMassive[i - 1]) {
@@ -503,7 +503,7 @@ public class Solver implements ISolver {
         }
         int result = 0;
         for (int i = 0; i < arrayDimension; i++) {
-            ArrayList<Integer> interList = new ArrayList<>();
+            List<Integer> interList = new ArrayList<>();
             for (int j = 0; j < arrayDimension; j++) {
                 if (inputMatrix[i][j] > 0 && interList.size() < 2) {
                     interList.add(j);
@@ -630,19 +630,19 @@ public class Solver implements ISolver {
                 .mapToInt(i -> Arrays.stream(i).reduce((m1, m2) -> m1 > m2 ? m1 : m2).orElse(0))
                 .reduce((a, b) -> a > b ? a : b)
                 .orElse(0);
-        HashSet<Integer> columnsList = new HashSet<>();
-        HashSet<Integer> stringsList = new HashSet<>();
+        Set<Integer> columnsSet = new HashSet<>();
+        Set<Integer> stringsSet = new HashSet<>();
         for (int i = 0; i < arrayDimension; i++) {
             for (int j = 0; j < arrayDimension; j++) {
                 if (inputMatrix[i][j] == max) {
-                    columnsList.add(j);
-                    stringsList.add(i);
+                    columnsSet.add(j);
+                    stringsSet.add(i);
                 }
             }
         }
-        int[][] resultMatrix = resultMatrix(arrayDimension, inputMatrix, columnsList, stringsList);
-        int numStringsResult = arrayDimension - stringsList.size();
-        int numColumnsResult = arrayDimension - columnsList.size();
+        int[][] resultMatrix = resultMatrix(arrayDimension, inputMatrix, columnsSet, stringsSet);
+        int numStringsResult = arrayDimension - stringsSet.size();
+        int numColumnsResult = arrayDimension - columnsSet.size();
         System.out.println(numStringsResult);
         System.out.println(numColumnsResult);
         for (int i = 0; i < numStringsResult; i++) {
@@ -654,7 +654,7 @@ public class Solver implements ISolver {
     }
 
     private int[][] resultMatrix(int arrayDimension, int[][] inputMatrix,
-                                 HashSet<Integer> columnsList, HashSet<Integer> stringsList) {
+                                 Set<Integer> columnsList, Set<Integer> stringsList) {
         int[][] resultMatrix = new int[arrayDimension - stringsList.size()][arrayDimension - columnsList.size()];
         int str = 0;
         int col = 0;
@@ -689,8 +689,8 @@ public class Solver implements ISolver {
                 inputMatrix[i][j] = Integer.parseInt(scannerString[j]);
             }
         }
-        HashSet<Integer> columnsList = new HashSet<>();
-        HashSet<Integer> stringsList = new HashSet<>();
+        Set<Integer> columnsSet = new HashSet<>();
+        Set<Integer> stringsSet = new HashSet<>();
         for (int i = 0; i < arrayDimension; i++) {
             int string = 0;
             int indexString = 0;
@@ -707,15 +707,15 @@ public class Solver implements ISolver {
                 }
             }
             if (column == arrayDimension) {
-                columnsList.add(indexColumn);
+                columnsSet.add(indexColumn);
             }
             if (string == arrayDimension) {
-                stringsList.add(indexString);
+                stringsSet.add(indexString);
             }
         }
-        int[][] resultMatrix = resultMatrix(arrayDimension, inputMatrix, columnsList, stringsList);
-        int numStringsResult = arrayDimension - stringsList.size();
-        int numColumnsResult = arrayDimension - columnsList.size();
+        int[][] resultMatrix = resultMatrix(arrayDimension, inputMatrix, columnsSet, stringsSet);
+        int numStringsResult = arrayDimension - stringsSet.size();
+        int numColumnsResult = arrayDimension - columnsSet.size();
         System.out.println(numStringsResult);
         System.out.println(numColumnsResult);
         for (int i = 0; i < numStringsResult; i++) {
@@ -883,7 +883,7 @@ public class Solver implements ISolver {
             sumStrings[i][0] = i;
             sumStrings[i][1] = sumString;
         }
-        ArrayList<Integer> interList = new ArrayList<>();
+        List<Integer> interList = new ArrayList<>();
         Arrays.stream(sumStrings).sorted((a, b) -> !a[1].equals(b[1])
                 ? a[1].compareTo(b[1]) : 1)
                 .forEach(o -> interList.add(o[0]));
@@ -972,7 +972,7 @@ public class Solver implements ISolver {
             }
         }
         if (arrayDimension != 1) {
-            ArrayList<Integer> resultList = new ArrayList<>();
+            List<Integer> resultList = new ArrayList<>();
             for (int i = 0; i < arrayDimension; i++) {
                 for (int j = 0; j < arrayDimension; j++) {
                     if (i > 0 && i < arrayDimension - 1) {
@@ -1047,7 +1047,7 @@ public class Solver implements ISolver {
             sumStrings[i][0] = i;
             sumStrings[i][1] = sumString;
         }
-        ArrayList<Integer> interList = new ArrayList<>();
+        List<Integer> interList = new ArrayList<>();
         Arrays.stream(sumStrings)
                 .sorted((a, b) -> !a[1].equals(b[1]) ? a[1].compareTo(b[1]) : -1)
                 .forEach(o -> interList.add(o[0]));

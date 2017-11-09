@@ -6,8 +6,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Task18 implements ITestableTask18 {
-    private ArrayList<Integer[]> addToList(Integer[] secondStage1, Integer[] secondStage2){
-        ArrayList<Integer[]> firstStage = new ArrayList<>();
+    private List<Integer[]> addToList(Integer[] secondStage1, Integer[] secondStage2){
+        List<Integer[]> firstStage = new ArrayList<>();
         firstStage.add(secondStage1);
         firstStage.add(secondStage2);
         return firstStage;
@@ -24,8 +24,8 @@ public class Task18 implements ITestableTask18 {
             int col = 0;
             int str = 0;
             int[] interMas = new int[matrix.getWidth()];
-            ArrayList<ArrayList> storageCol = new ArrayList<>();
-            ArrayList<ArrayList> storageStr = new ArrayList<>();
+            List<List> storageCol = new ArrayList<>();
+            List<List> storageStr = new ArrayList<>();
             while (stack.size() > 0) {
                 int next = stack.pop();
                 if (str == 0) {
@@ -53,11 +53,11 @@ public class Task18 implements ITestableTask18 {
                     str++;
                 }
             }
-            List<ArrayList> result = new ArrayList<>();
-            ArrayList<ArrayList> resStrList = createSubStrMatrix(storageStr, matrix);
+            List<List> result = new ArrayList<>();
+            List<List> resStrList = createSubStrMatrix(storageStr, matrix);
             if (!resStrList.isEmpty()) {
                 result.addAll(connector(resStrList).stream()
-                        .sorted(Comparator.comparing(ArrayList::size, Collections.reverseOrder()))
+                        .sorted(Comparator.comparing(List::size, Collections.reverseOrder()))
                         .collect(Collectors.toList()));
             } else {
                 if (storageStr.isEmpty()) {
@@ -66,7 +66,7 @@ public class Task18 implements ITestableTask18 {
                     result.add(storageStr.get(0));
                 }
             }
-            ArrayList res = result.get(0); // Выбираем первый элемент отсотированной коллекции так как он максимальный
+            List res = result.get(0); // Выбираем первый элемент отсотированной коллекции так как он максимальный
             // делим индексы строк и столбцов в разные листы
             Set<Integer> numCol = new HashSet<>();
             Set<Integer> numStr = new HashSet<>();
@@ -75,8 +75,8 @@ public class Task18 implements ITestableTask18 {
                 numCol.add(pointNext[1]);
                 numStr.add(pointNext[0]);
             });
-            ArrayList<Integer> numColList = new ArrayList<>(numCol.stream().sorted().collect(Collectors.toList()));
-            ArrayList<Integer> numStrList = new ArrayList<>(numStr.stream().sorted().collect(Collectors.toList()));
+            List<Integer> numColList = new ArrayList<>(numCol.stream().sorted().collect(Collectors.toList()));
+            List<Integer> numStrList = new ArrayList<>(numStr.stream().sorted().collect(Collectors.toList()));
             //
             RectangularIntegerMatrix resultMatrix = new RectangularIntegerMatrix(numColList.size(), numStrList.size());
             for (int i = 0; i < numStrList.size(); i++) {
@@ -92,10 +92,10 @@ public class Task18 implements ITestableTask18 {
     }
 
     //  Соединение соседних подматриц
-    private ArrayList<ArrayList> connector(ArrayList<ArrayList> resStrList) {
-        ArrayList<Integer> garbage = new ArrayList<>();
-        ArrayList<Integer> listsUse = new ArrayList<>();
-        ArrayList<ArrayList> listForRemove = new ArrayList<>();
+    private List<List> connector(List<List> resStrList) {
+        List<Integer> garbage = new ArrayList<>();
+        List<Integer> listsUse = new ArrayList<>();
+        List<List> listForRemove = new ArrayList<>();
         resStrList.forEach(member -> {
             int useList = member.size();
             Map<Integer, Integer> map = new HashMap<>();
@@ -158,17 +158,16 @@ public class Task18 implements ITestableTask18 {
     }
 
     // Создание подматриц из строк
-    private ArrayList<ArrayList> createSubStrMatrix(ArrayList<ArrayList> storageStr, IRectangularIntegerMatrix
-            matrix) {
-        ArrayList<Integer[]> garbageList = new ArrayList<>();
-        ArrayList<ArrayList> resStrList = new ArrayList<>();
+    private List<List> createSubStrMatrix(List<List> storageStr, IRectangularIntegerMatrix matrix) {
+        List<Integer[]> garbageList = new ArrayList<>();
+        List<List> resStrList = new ArrayList<>();
         // Cоздаю подматрицу из этих строк n x 2
-        for (ArrayList line : storageStr) { // первый шаг
-            ArrayList<Integer[]> firstStage = new ArrayList<>();
+        for (List line : storageStr) { // первый шаг
+            List<Integer[]> firstStage = new ArrayList<>();
             // Беру первые 2 индекса элемента массива
             Integer[] point1 = (Integer[]) line.get(0);
             Integer[] point2 = (Integer[]) line.get(1);
-            for (ArrayList lineNext : storageStr) { // первый шаг
+            for (List lineNext : storageStr) { // первый шаг
                 // Беру вторые 2 индекса элемента массива
                 Integer[] pointNextS1 = (Integer[]) lineNext.get(0);
                 Integer[] pointNextS2 = (Integer[]) lineNext.get(1);

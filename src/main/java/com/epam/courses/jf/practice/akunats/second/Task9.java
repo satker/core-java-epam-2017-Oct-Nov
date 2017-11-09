@@ -8,10 +8,11 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashSet;
+import java.util.Set;
 
 public class Task9 implements ITestableTask9 {
     public HashSet<String> getUniqueWords(File input) {
-        HashSet<String> result = new HashSet<>();
+        Set<String> result = new HashSet<>();
         try {
             Files.lines(Paths.get(input.getPath()), Charset.forName("ISO-8859-1"))
                     .forEach(i -> {
@@ -26,6 +27,6 @@ public class Task9 implements ITestableTask9 {
         } catch (IOException e) {
             System.out.println();
         }
-        return result;
+        return new HashSet<>(result);
     }
 }
