@@ -328,45 +328,45 @@ public class Solver implements ISolver {
         stringMatrix.setLength(length - 1);
 
         System.out.println(stringMatrix);
+    }   // DOING!
+//
+    public void task10() { //TODO: HALF_UP
+        Scanner in;
+        String result;
+        double a, b, c, d;
+        BigDecimal x1, x2;
+
+        in = new Scanner(System.in);
+        a = in.nextDouble();
+        b = in.nextDouble();
+        c = in.nextDouble();
+
+        result = new String();
+
+        if (a == 0) {
+            if (b == 0) {
+                result = "No solution";
+            } else {
+                x1 = (new BigDecimal(-c / b)).setScale(2, BigDecimal.ROUND_UP);
+                result = "One solution: " + x1;
+            }
+        } else {
+            d = b * b - 4 * a * c;
+            if (d > 0) {
+                x1 = (new BigDecimal((-b + Math.sqrt(d)) / (2 * a))).setScale(2, BigDecimal.ROUND_UP);
+                x2 = (new BigDecimal((-b - Math.sqrt(d)) / (2 * a))).setScale(2, BigDecimal.ROUND_UP);
+                result = "Two solutions: " + x1 + ", " + x2;
+            }
+            if (d == 0) {
+                x1 = (new BigDecimal(-b / (2 * a))).setScale(2, BigDecimal.ROUND_UP);
+                result = "One solution: " + x1;
+            }
+            if (d < 0) {
+                result = "No solution";
+            }
+        }
+        System.out.println(result);
     }
-//
-//    public void task10() { //TODO: HALF_UP
-//        Scanner in;
-//        String result;
-//        double a, b, c, d;
-//        BigDecimal x1, x2;
-//
-//        in = new Scanner(System.in);
-//        a = in.nextDouble();
-//        b = in.nextDouble();
-//        c = in.nextDouble();
-//
-//        result = new String();
-//
-//        if (a == 0) {
-//            if (b == 0) {
-//                result = "No solution";
-//            } else {
-//                x1 = (new BigDecimal(-c / b)).setScale(2, BigDecimal.ROUND_UP);
-//                result = "One solution: " + x1;
-//            }
-//        } else {
-//            d = b * b - 4 * a * c;
-//            if (d > 0) {
-//                x1 = (new BigDecimal((-b + Math.sqrt(d)) / (2 * a))).setScale(2, BigDecimal.ROUND_UP);
-//                x2 = (new BigDecimal((-b - Math.sqrt(d)) / (2 * a))).setScale(2, BigDecimal.ROUND_UP);
-//                result = "Two solutions: " + x1 + ", " + x2;
-//            }
-//            if (d == 0) {
-//                x1 = (new BigDecimal(-b / (2 * a))).setScale(2, BigDecimal.ROUND_UP);
-//                result = "One solution: " + x1;
-//            }
-//            if (d < 0) {
-//                result = "No solution";
-//            }
-//        }
-//        System.out.println(result);
-//    }
 //
 //    public void task11() {
 //        Scanner in;
