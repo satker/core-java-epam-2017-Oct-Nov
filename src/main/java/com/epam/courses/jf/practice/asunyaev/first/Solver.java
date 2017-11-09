@@ -625,15 +625,19 @@ public class Solver implements ISolver {
         final int DIMENSION = scanner.nextInt();
         int[][] matrix = readMatrix(scanner, DIMENSION);
         int[][] modifiedMatrix = new int[DIMENSION][DIMENSION];
-        TreeMap<Integer, Integer> sums = new TreeMap<>();
+        ArrayList<Integer[]> sums = new ArrayList<>();
         for (int i = 0; i < DIMENSION; i++) {
-            sums.put(Arrays.stream(matrix[i]).sum(), i);
+            Integer[] entry = {i, Arrays.stream(matrix[i]).sum()};
+            sums.add(entry);
         }
-        for (int i = 0; i < DIMENSION; i++) {
-            if (!sums.containsValue(i)) {
-                modifiedMatrix[i] = matrix[i];
+        sums.sort(new Comparator<Integer[]>() {
+            @Override
+            public int compare(Integer[] o1, Integer[] o2) {
+                return o1[1].compareTo(o2[1]);
             }
-            modifiedMatrix[i] = matrix[(int) (sums.values().toArray()[i])];
+        });
+        for (int i = 0; i < DIMENSION; i++) {
+            modifiedMatrix[i] = matrix[sums.get(i)[0]];
         }
         System.out.println(DIMENSION);
         printMatrix(modifiedMatrix, DIMENSION);
