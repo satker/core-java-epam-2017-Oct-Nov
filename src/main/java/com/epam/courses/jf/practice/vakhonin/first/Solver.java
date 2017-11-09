@@ -297,38 +297,38 @@ public class Solver implements ISolver {
         }
 
         System.out.printf("%s%n", result);
+    }   // DOING!
+//
+    public void task9() {
+        Scanner in;
+        int n, length;
+        int[][] matrix;
+        StringBuilder stringMatrix;
+
+        in = new Scanner(System.in);
+        n = in.nextInt();
+        matrix = new int[n][n];
+        for (int j = 0; j < n; j++) {
+            for (int k = 0; k < n; k++) {
+                matrix[j][k] = j * n + k + 1;
+            }
+        }
+
+        stringMatrix = new StringBuilder();
+        for (int j = 0; j < n; j++) {
+            for (int k = 0; k < n; k++) {
+                stringMatrix.append(matrix[j][k] + "\t");
+            }
+            length = stringMatrix.length();
+            stringMatrix.setLength(length - 1);
+            stringMatrix.append("\n");
+        }
+
+        length = stringMatrix.length();
+        stringMatrix.setLength(length - 1);
+
+        System.out.println(stringMatrix);
     }
-//
-//    public void task9() {
-//        Scanner in;
-//        int n, length;
-//        int[][] matrix;
-//        StringBuilder stringMatrix;
-//
-//        in = new Scanner(System.in);
-//        n = in.nextInt();
-//        matrix = new int[n][n];
-//        for (int j = 0; j < n; j++) {
-//            for (int k = 0; k < n; k++) {
-//                matrix[j][k] = j * n + k + 1;
-//            }
-//        }
-//
-//        stringMatrix = new StringBuilder();
-//        for (int j = 0; j < n; j++) {
-//            for (int k = 0; k < n; k++) {
-//                stringMatrix.append(matrix[j][k] + "\t");
-//            }
-//            length = stringMatrix.length();
-//            stringMatrix.setLength(length - 1);
-//            stringMatrix.append("\n");
-//        }
-//
-//        length = stringMatrix.length();
-//        stringMatrix.setLength(length - 1);
-//
-//        System.out.println(stringMatrix);
-//    }
 //
 //    public void task10() { //TODO: HALF_UP
 //        Scanner in;
