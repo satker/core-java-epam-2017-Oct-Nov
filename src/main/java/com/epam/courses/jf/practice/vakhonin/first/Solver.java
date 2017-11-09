@@ -330,7 +330,7 @@ public class Solver implements ISolver {
         System.out.println(stringMatrix);
     }   // DOING!
 //
-    public void task10() { //TODO: HALF_UP
+    public void task10() {
         Scanner in;
         String result;
         double a, b, c, d;
