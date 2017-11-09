@@ -440,43 +440,44 @@ public class Solver implements ISolver {
         System.out.println(matrix.length);
 
         printMatrixInteger(matrix);
-    }
+    }   // DOING!
 //
-//    public void task13() {
-//        Scanner in;
-//        int n, k, length, shift;
-//        int[][] matrix;
-//        StringBuilder stringMatrix;
-//
-//        in = new Scanner(System.in);
-//        System.out.println("Enter matrix dimension:");
-//        n = in.nextInt();
-//        System.out.println("Enter displacement quantity:");
-//        k = in.nextInt();
-//        matrix = new int[n][n];
-//        System.out.println("Enter matrix of " + n + "x" + n + ":");
-//        for (int j = 0; j < n; j++) {
-//            for (int q = 0; q < n; q++) {
-//                matrix[j][q] = in.nextInt();
-//            }
-//        }
-//        shift = -(n + k % n) % n + n;
-//
+    public void task13() {
+        Scanner in;
+        int n, k, length, shift;
+        Integer[][] matrix;
+        StringBuilder stringMatrix;
+
+        in = new Scanner(System.in);
+
+
+        //        System.out.println("Enter displacement quantity:");
+        k = in.nextInt();
+
+
+        matrix = enterMatrixInteger(in);
+
+        n = matrix.length;
+
+        Integer[][] newMatrix = new Integer[n][n];
+
+        shift = -(n + k % n) % n + n;
+
 //        stringMatrix = new StringBuilder();
-//
-//        for (int j = 0; j < n; j++) {
-//            for (int q = 0; q < n; q++) {
+
+        for (int j = 0; j < n; j++) {
+            for (int q = 0; q < n; q++) {
+                newMatrix[j][q] = matrix[(j + shift) % n][q];
 //                stringMatrix.append(matrix[(j + shift) % n][q] + "\t");
-//            }
-//            length = stringMatrix.length();
-//            stringMatrix.setLength(length - 1);
-//            stringMatrix.append("\n");
-//        }
-//
-//        length = stringMatrix.length();
-//        stringMatrix.setLength(length - 1);
-//        System.out.println(stringMatrix);
-//    }
+            }
+        }
+
+        System.out.println(n);
+
+        printMatrixInteger(newMatrix);
+    }
+
+    
 //
 //    public void task14() {
 //        Scanner in;
