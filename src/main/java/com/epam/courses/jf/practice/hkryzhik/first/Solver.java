@@ -78,21 +78,17 @@ public class Solver implements ISolver {
         }
 
         inputStringList.sort((String s1, String s2) -> {
-            if(s1.equals(s2)){
-                return 0;
-            }else {
-                if(s1.length() != s2.length()){
-                    return s1.length() - s2.length();
-                }else{
-                    for (int i = 0; i < s1.length(); i++) {
-                        if((int)s1.charAt(i) > (int)s2.charAt(i)){
-                            return -1;
-                        }else {
-                            return 1;
-                        }
+            if (s1.length() != s2.length()) {
+                return s1.length() - s2.length();
+            } else {
+                for (int i = 0; i < s1.length(); i++) {
+                    if ((int) s1.charAt(i) < (int) s2.charAt(i)) {
+                        return -1;
+                    } else {
+                        return 1;
                     }
-                    return 0;
                 }
+                return 0;
             }
         });
 
