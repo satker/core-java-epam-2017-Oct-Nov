@@ -425,48 +425,32 @@ public class Solver implements ISolver {
             result += "INCORRECT INPUT DATA";
         }
         System.out.println(result);
-    }
+    }   // DOING!
 //
-//    public void task12() {
-//        Scanner in;
-//        int n, k, length, shift;
-//        int[][] matrix;
-//        StringBuilder stringMatrix;
-//
-//        in = new Scanner(System.in);
-//        System.out.println("Enter matrix dimension:");
-//        n = in.nextInt();
+    public void task12() {
+        Scanner in;
+        int n, k, length, shift;
+        Integer[][] matrix;
+        StringBuilder stringMatrix;
+
+        in = new Scanner(System.in);
+
 //        System.out.println("Enter column number for sort:");
-//        k = in.nextInt();
-//        matrix = new int[n][n];
-//        System.out.println("Enter matrix of " + n + "x" + n + ":");
-//        for (int j = 0; j < n; j++) {
-//            for (int q = 0; q < n; q++) {
-//                matrix[j][q] = in.nextInt();
-//            }
-//        }
-//
-//        Arrays.sort(matrix, new Comparator<int[]>() {
-//            public int compare(int[] row1, int[] row2) {
-//                return row1[k] - row2[k];
-//            }
-//        });
-//
-//        stringMatrix = new StringBuilder();
-//
-//        for (int j = 0; j < n; j++) {
-//            for (int q = 0; q < n; q++) {
-//                stringMatrix.append(matrix[j][q] + "\t");
-//            }
-//            length = stringMatrix.length();
-//            stringMatrix.setLength(length - 1);
-//            stringMatrix.append("\n");
-//        }
-//
-//        length = stringMatrix.length();
-//        stringMatrix.setLength(length - 1);
-//        System.out.println(stringMatrix);
-//    }
+        k = in.nextInt();
+
+        matrix = enterMatrixInteger();
+//        System.out.println("Enter matrix dimension:");
+        n = matrix.length;
+
+        Arrays.sort(matrix, new Comparator<Integer[]>() {
+            public int compare(Integer[] row1, Integer[] row2) {
+                return row1[k] - row2[k];
+            }
+        });
+
+
+        printMatrixInteger(matrix);
+    }
 //
 //    public void task13() {
 //        Scanner in;
@@ -1173,23 +1157,23 @@ public class Solver implements ISolver {
 //        matrix[k] = temp;
 //    }
 //
-//    public Integer[][] enterMatrixInteger() {
-//        Scanner in;
-//        int n;
-//        Integer[][] matrix;
-//
-//        in = new Scanner(System.in);
-//        System.out.println("Enter matrix dimension:");
-//        n = in.nextInt();
-//        matrix = new Integer[n][n];
-//        System.out.println("Enter matrix of " + n + "x" + n + ":");
-//        for (int j = 0; j < n; j++) {
-//            for (int q = 0; q < n; q++) {
-//                matrix[j][q] = in.nextInt();
-//            }
-//        }
-//        return matrix;
-//    }
+    public Integer[][] enterMatrixInteger() {
+        Scanner in;
+        int n;
+        Integer[][] matrix;
+
+        in = new Scanner(System.in);
+        System.out.println("Enter matrix dimension:");
+        n = in.nextInt();
+        matrix = new Integer[n][n];
+        System.out.println("Enter matrix of " + n + "x" + n + ":");
+        for (int j = 0; j < n; j++) {
+            for (int q = 0; q < n; q++) {
+                matrix[j][q] = in.nextInt();
+            }
+        }
+        return matrix;
+    }
 //
 //    public Double[][] enterMatrixDouble() {
 //        Scanner in;
@@ -1232,27 +1216,27 @@ public class Solver implements ISolver {
 //        System.out.println(stringMatrix);
 //    }
 //
-//    public void printMatrixInteger(Integer[][] matrix) {
-//
-//        StringBuilder stringMatrix = new StringBuilder();
-//        int length, n, m;
-//
-//        n = matrix.length;
-//        m = matrix[0].length;
-//
-//        for (int j = 0; j < n; j++) {
-//            for (int q = 0; q < m; q++) {
-//                stringMatrix.append(matrix[j][q] + "\t");
-//            }
-//            length = stringMatrix.length();
-//            stringMatrix.setLength(length - 1);
-//            stringMatrix.append("\n");
-//        }
-//
-//        length = stringMatrix.length();
-//        stringMatrix.setLength(length - 1);
-//        System.out.println(stringMatrix);
-//    }
+    public void printMatrixInteger(Integer[][] matrix) {
+
+        StringBuilder stringMatrix = new StringBuilder();
+        int length, n, m;
+
+        n = matrix.length;
+        m = matrix[0].length;
+
+        for (int j = 0; j < n; j++) {
+            for (int q = 0; q < m; q++) {
+                stringMatrix.append(matrix[j][q] + "\t");
+            }
+            length = stringMatrix.length();
+            stringMatrix.setLength(length - 1);
+            stringMatrix.append("\n");
+        }
+
+        length = stringMatrix.length();
+        stringMatrix.setLength(length - 1);
+        System.out.println(stringMatrix);
+    }
 //
 //    public int[][] transposeMatrix(int[][] matrix) {
 //        int n, m;
