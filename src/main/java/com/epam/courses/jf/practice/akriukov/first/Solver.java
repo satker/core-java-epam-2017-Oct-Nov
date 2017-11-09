@@ -13,9 +13,7 @@ public class Solver implements ISolver{
 
     @Override
     public void task1() {
-        try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            int numberOfLines = Integer.parseInt(reader.readLine());
+            int numberOfLines = Integer.parseInt(readLineFromConsole());
 
             int minLength = Integer.MAX_VALUE;
             int maxLength = Integer.MIN_VALUE;
@@ -23,7 +21,7 @@ public class Solver implements ISolver{
             String maxString = "";
 
             for (int i = 0; i < numberOfLines; i++) {
-                String s = reader.readLine();
+                String s = readLineFromConsole();
                 if (minLength >= s.length()) {
                     minLength = s.length();
                     minString = s;
@@ -36,41 +34,14 @@ public class Solver implements ISolver{
             }
             System.out.printf("MIN (%d): \"%s\"%n", minLength, minString);
             System.out.printf("MAX (%d): \"%s\"%n", maxLength, maxString);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
     public void task2() {
-        try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            int numberOfLines = Integer.parseInt(reader.readLine());
-            String[] lines = new String[numberOfLines];
-
-            for (int i = 0; i < numberOfLines; i++) {
-                lines[i] = reader.readLine();
-            }
-            Arrays.sort(lines, new compByLength());
-            int length;
-            String string;
-            for (int i = 0; i < numberOfLines; i++) {
-                length = lines[i].length();
-                string = lines[i];
-                System.out.printf("(%d): \"%s\"%n", length, string);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    static class compByLength implements Comparator<String> { //comparator for task2
-        public int compare(String o1, String o2) {
-            if (o1.length() != o2.length()) {
-                return Integer.compare(o1.length(), o2.length()); //firstly compare length
-            } else {
-                return String.CASE_INSENSITIVE_ORDER.compare(o1, o2); //compare symbols, if same length
-            }
+        String[] lines = readLinesToStringArray();
+        Arrays.sort(lines, new compByLength());
+        for (String s: lines) {
+            System.out.printf("(%d): \"%s\"%n", s.length(), s);
         }
     }
 
@@ -79,16 +50,44 @@ public class Solver implements ISolver{
 
     }
 
+    /**
+     * Custom comparator for task2()
+     * Firstly compares string length. If length is the same, then compare by symbol codes
+     */
+    static class compByLength implements Comparator<String> {
+        public int compare(String o1, String o2) {
+            if (o1.length() != o2.length()) {
+                return Integer.compare(o1.length(), o2.length()); //compare length
+            } else {
+                return String.CASE_INSENSITIVE_ORDER.compare(o1, o2); //compare symbols
+            }
+        }
+    }
+
+    /**
+     * Reads lines from console
+     * Input number of lines first
+     * Then input lines
+     * @return String[]
+     */
     public static String[] readLinesToStringArray() {
-        try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            int numberOfLines = Integer.parseInt(reader.readLine());
+            int numberOfLines = Integer.parseInt(readLineFromConsole());
             String[] lines = new String[numberOfLines];
 
             for (int i = 0; i < numberOfLines; i++) {
-                lines[i] = reader.readLine();
+                lines[i] = readLineFromConsole();
             }
             return lines;
+    }
+
+    /**
+     * Reads one line from console
+     * @return entered in console line or null
+     */
+    public static String readLineFromConsole() {
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            return reader.readLine();
         } catch (IOException e) {
             e.printStackTrace();
         }
