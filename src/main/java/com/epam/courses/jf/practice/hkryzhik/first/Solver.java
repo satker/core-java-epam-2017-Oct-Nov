@@ -56,7 +56,7 @@ public class Solver implements ISolver {
 
         System.out.printf("MAX (%d): \"%s\"%n" ,inputStringList.get(inputStringList.size() - 1).length(),
                 inputStringList.get(inputStringList.size() - 1));
-        
+
     }
 
     @Override
@@ -341,7 +341,6 @@ public class Solver implements ISolver {
         }
     }
 
-    //TODO: output needs to be fixed
     @Override
     public void task10() {
         Scanner inputData = new Scanner(System.in);
@@ -373,17 +372,21 @@ public class Solver implements ISolver {
         if(d > 0){
             x1 = (-b + Math.sqrt(Math.pow(b, 2) - 4*a*c))/(2 * a);
             x2 = (-b - Math.sqrt(Math.pow(b, 2) - 4*a*c))/(2 * a);
-            System.out.printf("Two solutions: %f, %f\n", BigDecimal.valueOf(x1)
-                    .setScale(2, RoundingMode.DOWN)
-                    .doubleValue(), BigDecimal.valueOf(x2)
-                    .setScale(2, RoundingMode.DOWN)
-                    .doubleValue());
+            if(x1 == 0) {
+                System.out.printf("Two solutions: %.1f, %.0f\n", x2, x1);
+            }else if (x2 == 0){
+                System.out.printf("Two solutions: %.0f, %.1f\n", x2, x1);
+            }else{
+                System.out.printf("Two solutions: %.1f, %.1f\n", x2, x1);
+            }
         }
         if(d == 0){
             x1 = -b / (2*a);
-            System.out.printf("One solution: %f\n", BigDecimal.valueOf(x1)
-                    .setScale(2, RoundingMode.HALF_DOWN)
-                    .doubleValue());
+            if(x1 == 0) {
+                System.out.printf("One solution: %.0f\n", x1);
+            }else {
+                System.out.printf("One solution: %.1f\n", x1);
+            }
         }
         if(d < 0){
             System.out.printf("No solution\n");
