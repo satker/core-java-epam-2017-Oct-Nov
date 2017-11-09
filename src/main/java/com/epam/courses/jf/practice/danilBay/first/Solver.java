@@ -192,7 +192,11 @@ public class Solver implements ISolver {
         in.useDelimiter(p);
         while (numOfWords!=0) {
             buf=in.next();
-            boolean fag=true;
+            boolean fag;
+            if(buf.length()>1)
+                fag=true;
+            else
+                fag=false;
             for(int i=1;i<buf.length();i++){
                 if(buf.charAt(i)<buf.charAt(i-1)){
                     fag=false;
@@ -200,10 +204,13 @@ public class Solver implements ISolver {
                 }
 
             }
-            if(fag && buf.length()!=1){
+            if(fag ){
+                System.out.println();
                 System.out.println(buf);
                 return;
             }
+            numOfWords--;
+
         }
         System.out.println("NOT FOUND");
     }
@@ -245,9 +252,14 @@ public class Solver implements ISolver {
             numOfWords--;
 
         }
-        if(!resultat.isEmpty())
-            for(String s : resultat)
-                System.out.print(s+" ");
+        if(!resultat.isEmpty()) {
+            for (int i=0;i<resultat.size();i++) {
+                System.out.print(resultat.get(i));
+                if(i!=(resultat.size()-1))
+                    System.out.print(" ");
+            }
+            System.out.println();
+        }
         else
             System.out.println("NOT FOUND");
     }
@@ -313,10 +325,11 @@ public class Solver implements ISolver {
         int a=in.nextInt();
         int i=1;
         for(int g=0;g<a;g++) {
-            for (int j = 0; j < a; j++) {
+            for (int j = 0; j < (a-1); j++) {
                 System.out.print(i + "\t");
                 i++;
             }
+            System.out.print(i++);
             System.out.print('\n');
         }
 
@@ -785,6 +798,6 @@ public class Solver implements ISolver {
     }
     public static void main(String[] args) {
         Solver a=new Solver();
-        a.task20();
+        a.task9();
     }
 }
