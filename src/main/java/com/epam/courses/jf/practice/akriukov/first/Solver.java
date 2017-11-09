@@ -84,6 +84,43 @@ public class Solver implements ISolver{
         System.out.println(minNumberOfLetterString);
     }
 
+    @Override
+    public void task5() {
+        int numberOfWords = Integer.parseInt(readLineFromConsole());
+        Set<Character> vowels = new HashSet<>();
+        vowels.add('a');
+        vowels.add('e');
+        vowels.add('i');
+        vowels.add('o');
+        vowels.add('u');
+        vowels.add('y');
+        String[] strings = readLineFromConsole().split(" ");
+        int wordsWithEqualVowelsNConsonants = 0;
+
+        for (String str : strings) {
+            int vowelCountInWord = 0;
+            boolean latinFlag = true; //false if nonLatin letter detected
+            for (int i = 0; i < str.length(); i++) {
+                char currentSymbol = Character.toLowerCase(str.charAt(i)); //using lowercase to minimize check
+                int charIntValue = (int) currentSymbol;
+                if ((charIntValue > 96) && //character must be latin
+                        (charIntValue < 123)) {
+                    if (vowels.contains(currentSymbol)) {
+                        vowelCountInWord++;
+                    }
+                } else {
+                    latinFlag = false; //nonLatin letter detected
+                    break;
+                }
+            }
+            if (((str.length() - vowelCountInWord) == vowelCountInWord) && //pass with no actions if nonLatin letter detected
+                    latinFlag){
+                wordsWithEqualVowelsNConsonants++;
+            }
+        }
+        System.out.println(wordsWithEqualVowelsNConsonants);
+    }
+
     /**
      * Custom comparator for task2()
      * Firstly compares string length. If length is the same, then compare by symbol codes
