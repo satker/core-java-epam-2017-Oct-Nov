@@ -10,15 +10,14 @@ public class Task14 implements ITestableTask14 {
         return new MyNumberCollection<T>();
     }
 
-    private class MyNumberCollection<T extends Number> extends AbstractCollection implements INumberCollection {
+    private class MyNumberCollection<T extends Number> extends AbstractCollection<T> implements INumberCollection<T> {
         List<T> repository = new ArrayList<>();
 
         @Override
-        public Number nearest(Number value) {
-            Number resultNumber = 0;
+        public T nearest(Number value) {
+            T resultNumber = repository.get(0);
             for (T t : repository) {
                 if (t.equals(value)) {
-                    resultNumber = t;
                     break;
                 }
                 if (resultNumber.equals(0)
@@ -40,8 +39,13 @@ public class Task14 implements ITestableTask14 {
         }
 
         @Override
-        public Iterator iterator() {
+        public Iterator<T> iterator() {
             return repository.listIterator();
+        }
+
+        @Override
+        public boolean add(T elem) {
+            return repository.add(elem);
         }
 
     }
