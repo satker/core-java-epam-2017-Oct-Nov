@@ -366,64 +366,66 @@ public class Solver implements ISolver {
             }
         }
         System.out.println(result);
+    }   // DOING!
+//
+    public void task11() {
+        Scanner in;
+        String month, data, result;
+        int numberOfMonth;
+
+        in = new Scanner(System.in);
+        data = in.nextLine();
+        result = "";
+        month = "";
+
+        if (data.matches("([1][0-2])|([1-9])")) {
+            numberOfMonth = Integer.valueOf(data);
+            switch (numberOfMonth) {
+                case 1:
+                    month = "January";
+                    break;
+                case 2:
+                    month = "February";
+                    break;
+                case 3:
+                    month = "March";
+                    break;
+                case 4:
+                    month = "April";
+                    break;
+                case 5:
+                    month = "May";
+                    break;
+                case 6:
+                    month = "June";
+                    break;
+                case 7:
+                    month = "July";
+                    break;
+                case 8:
+                    month = "August";
+                    break;
+                case 9:
+                    month = "September";
+                    break;
+                case 10:
+                    month = "October";
+                    break;
+                case 11:
+                    month = "November";
+                    break;
+                case 12:
+                    month = "December";
+                    break;
+                default:
+                    break;
+            }
+            result += month;
+        } else {
+            result += "INCORRECT INPUT DATA";
+        }
+        System.out.println(result);
     }
-//
-//    public void task11() {
-//        Scanner in;
-//        String month, data, result;
-//        int numberOfMonth;
-//
-//        in = new Scanner(System.in);
-//        data = in.nextLine();
-//        result = "";
-//        month = "";
-//
-//        if (data.matches("([1][0-2])|([1-9])")) {
-//            numberOfMonth = Integer.valueOf(data);
-//            switch (numberOfMonth) {
-//                case 1:
-//                    month = "January";
-//                    break;
-//                case 2:
-//                    month = "February";
-//                    break;
-//                case 3:
-//                    month = "March";
-//                    break;
-//                case 4:
-//                    month = "April";
-//                    break;
-//                case 5:
-//                    month = "May";
-//                    break;
-//                case 6:
-//                    month = "June";
-//                    break;
-//                case 7:
-//                    month = "July";
-//                    break;
-//                case 8:
-//                    month = "August";
-//                    break;
-//                case 9:
-//                    month = "September";
-//                    break;
-//                case 10:
-//                    month = "October";
-//                    break;
-//                case 11:
-//                    month = "November";
-//                    break;
-//                case 12:
-//                    month = "December";
-//                    break;
-//            }
-//            result += month;
-//        } else {
-//            result += "INCORRECT INPUT DATA";
-//        }
-//        System.out.println(result);
-//    }
 //
 //    public void task12() {
 //        Scanner in;
