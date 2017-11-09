@@ -7,6 +7,7 @@ import java.math.RoundingMode;
 import java.util.*;
 import java.util.regex.Pattern;
 
+import static java.lang.Math.max;
 import static java.lang.Math.sqrt;
 
 public class Solver implements ISolver {
@@ -448,7 +449,7 @@ public class Solver implements ISolver {
             for(int x : res[y])
                 System.out.print(x+"    ");
 
-            System.out.print("\n");
+            System.out.println();
 
         }
 
@@ -474,14 +475,14 @@ public class Solver implements ISolver {
                 for (int y = 0; y < b; y++)
                     System.out.print(res[Math.abs((a + x) % b)][y]+" ");
 
-                System.out.print("\n");
+                System.out.println();
             }
         else
             for (int x = 0; x >-b; x--) {
                 for (int y = 0; y < b; y++)
                     System.out.print(res[Math.abs((a + x) % b)][y]+"    ");
 
-                System.out.print("\n");
+                System.out.println();
             }
 
     }
@@ -497,18 +498,24 @@ public class Solver implements ISolver {
         int maxPosTemp=1;
         int first=in.nextInt();
         int second;
+        if(a==0)
+            maxPosl=0;
         while(a!=0){
             second=in.nextInt();
             if(second>first)
                 maxPosTemp++;
 
-            else {
+            if(maxPosTemp>maxPosl)
                 maxPosl=maxPosTemp;
+
+            else {
+
                 maxPosTemp = 1;
             }
             first=second;
             a--;
         }
+
         System.out.println(maxPosl);
     }
 
@@ -534,7 +541,6 @@ public class Solver implements ISolver {
                     break;
                 }
             }
-        System.out.println();
         System.out.println(result);
     }
 
@@ -555,10 +561,11 @@ public class Solver implements ISolver {
         for(int j=0,x=0;j<b;j++,x++)
             for(int i=b-1,y=0;i>-1;i--,y++)
                 result[i][j]=res[x][y];
+        System.out.println(b);
 
         for (int i = 0; i < b; i++) {
             for (int j = 0; j < b; j++)
-                System.out.print(result[i][j] + " ");
+                System.out.print(result[i][j] + "    ");
             System.out.println();
         }
     }
@@ -609,7 +616,7 @@ public class Solver implements ISolver {
             for (int j = 0; j < b; j++)
                 res[i][j] = in.nextDouble();
 
-        System.out.println(determ.matrixDeterminant(res));
+        System.out.println((int)determ.matrixDeterminant(res));
 
 
     }
@@ -639,17 +646,32 @@ public class Solver implements ISolver {
                     rows.add(i);
                     columns.add(j);
                 }
+        int row=0,col=0;
+        boolean flag = true;
+        StringBuilder s=new StringBuilder();
         for (int i = 0; i < b; i++) {
-            if(rows.contains(i))
+            if (rows.contains(i))
                 continue;
-            for (int j = 0; j < b; j++) {
-                if(columns.contains(j))
-                    continue;
-                System.out.print(res[i][j]+" ");
+                row++;
+                for (int j =  0; j < b; j++) {
+                    if (columns.contains(j))
+                        continue;
+                  //  if(flag)
+                        col++;
+                    s.append(res[i][j] + "    ");
 
-            }
-            System.out.println();
+                }
+                s.append("\n");
+
+
         }
+        col/=row;
+
+        System.out.println(row);
+        System.out.println(col);
+        System.out.print(s);
+
+
     }
 
     /**
@@ -692,18 +714,25 @@ public class Solver implements ISolver {
 
             }
         }
-
+        int col=0,row=0;
+        StringBuilder s=new StringBuilder();
         for (int i = 0; i < b; i++) {
             if(rows.contains(i))
                 continue;
+            row++;
             for (int j = 0; j < b; j++) {
                 if(columns.contains(j))
                     continue;
-                System.out.print(res[i][j]+" ");
+                col++;
+                s.append(res[i][j]+"    ");
 
             }
-            System.out.println();
+            s.append("\n");
         }
+        col/=row;
+        System.out.println(row);
+        System.out.println(col);
+        System.out.print(s);
 
     }
 
@@ -730,6 +759,7 @@ public class Solver implements ISolver {
                     min_row=i;
                 }
         int iterI,iterJ;
+        System.out.println(b);
         for (int i = 0; i < b; i++) {
             if(i==min_row)
                 iterI=row;
@@ -745,7 +775,7 @@ public class Solver implements ISolver {
                 else
                     iterJ=j;
 
-                System.out.print(res[iterI][iterJ]+"  ");
+                System.out.print(res[iterI][iterJ]+"    ");
             }
             System.out.println();
         }
@@ -755,6 +785,6 @@ public class Solver implements ISolver {
     }
     public static void main(String[] args) {
         Solver a=new Solver();
-        a.task4();
+        a.task20();
     }
 }
