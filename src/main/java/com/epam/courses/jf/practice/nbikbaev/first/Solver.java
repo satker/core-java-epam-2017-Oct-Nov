@@ -6,7 +6,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -352,7 +351,14 @@ public class Solver implements ISolver {
 
     @Override
     public void task12() {
-
+        try (Scanner scanner = new Scanner(System.in)) {
+            int columnNumber = scanner.nextInt();
+            int dimension = scanner.nextInt();
+            int[][] matrix = Utils.readMatrix(scanner, dimension);
+            Arrays.sort(matrix, (o1, o2) -> Integer.compare(o2[columnNumber + 1], o1[columnNumber + 1]));
+            System.out.println(dimension);
+            Utils.printMatrix(matrix, dimension);
+        }
     }
 
     @Override
