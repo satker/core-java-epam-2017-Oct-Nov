@@ -5,6 +5,7 @@ import com.epam.courses.jf.practice.common.first.ISolver;
 import java.math.BigDecimal;
 import java.util.*;
 
+
 /**
  * Created by igorvahonin on 03.11.17.
  */
@@ -428,27 +429,11 @@ public class Solver implements ISolver {
     }   // DOING!
 //
     public void task12() {
-        Scanner in;
-        int n, k, length, shift;
-        Integer[][] matrix;
-        StringBuilder stringMatrix;
-
-        in = new Scanner(System.in);
-
-//        System.out.println("Enter column number for sort:");
-        k = in.nextInt();
-
-        matrix = enterMatrixInteger(in);
-//        System.out.println("Enter matrix dimension:");
-        n = matrix.length;
-
-        Arrays.sort(matrix, new Comparator<Integer[]>() {
-            public int compare(Integer[] row1, Integer[] row2) {
-                return row1[k] - row2[k];
-            }
-        });
-
-
+        Scanner scanner = new Scanner(System.in);
+        int ncol = scanner.nextInt();
+        Integer[][] matrix = enterMatrixInteger(scanner);
+        Arrays.sort(matrix, (o1, o2) -> o1[ncol] > o2[ncol] ? 1 : o1[ncol] < o2[ncol] ? -1 : Integer.compare(o1[ncol], o2[ncol]));
+        System.out.println(matrix.length);
         printMatrixInteger(matrix);
     }
 //
