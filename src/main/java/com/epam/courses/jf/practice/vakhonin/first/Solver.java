@@ -222,22 +222,23 @@ public class Solver implements ISolver {
 //
     public void task7() {
         Scanner in;
-        int numberOfStrings, resultLength;
+        int numberOfStrings, wordsSize;
 
         in = new Scanner(System.in);
         numberOfStrings = Integer.valueOf(in.nextLine());
 
         String[] strings = new String[numberOfStrings];
-        in = new Scanner(System.in);
         for (int j = 0; j < numberOfStrings; j++) {
             strings[j] = in.next();
         }
 
         int length;
         Set<Character> charSet;
-        StringBuilder result;
 
+        StringBuilder result;
         result = new StringBuilder("");
+        Set<String> words = new LinkedHashSet<>();
+
         for (String string : strings) {
 
             charSet = new LinkedHashSet();
@@ -247,16 +248,20 @@ public class Solver implements ISolver {
             }
 
             if (length == charSet.size()) {
-                result.append(string).append(" ");
+                words.add(string);
             }
         }
 
-        resultLength = result.length();
+        wordsSize = words.size();
 
-        if (resultLength == 0) {
+        if (wordsSize == 0) {
             result.append("NOT FOUND");
         } else {
-            result.deleteCharAt(resultLength - 1);
+            for (String s: words){
+                result.append(s);
+                result.append(" ");
+            }
+            result.deleteCharAt(wordsSize - 1);
         }
         System.out.println(result.toString());
     }
