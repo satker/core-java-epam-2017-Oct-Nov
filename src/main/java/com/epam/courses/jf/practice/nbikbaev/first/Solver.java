@@ -267,29 +267,30 @@ public class Solver implements ISolver {
     @Override
     @SuppressWarnings("deprecation")
     public void task10() {
-        Scanner scanner = new Scanner(System.in);
-        float a = scanner.nextInt();
-        float b = scanner.nextInt();
-        float c = scanner.nextInt();
-        double discriminant = b * b - 4 * a * c;
-        if (discriminant == 0) {
-            float root = -b / 2 / a;
-            BigDecimal rootBd = new BigDecimal(root)
-                    .setScale(2, BigDecimal.ROUND_HALF_UP);
-            System.out.println("One solution: " + rootBd);
-        } else if (discriminant < 0) {
-            System.out.println("No solution");
-        } else {
-            double discriminantRoot = Math.sqrt(discriminant);
-            double firstRoot = (-b + discriminantRoot) / 2 / a;
-            double secondRoot = (-b - discriminantRoot) / 2 / a;
+        try (Scanner scanner = new Scanner(System.in);) {
+            float a = scanner.nextInt();
+            float b = scanner.nextInt();
+            float c = scanner.nextInt();
+            double discriminant = b * b - 4 * a * c;
+            if (discriminant == 0) {
+                float root = -b / 2 / a;
+                BigDecimal rootBd = new BigDecimal(root)
+                        .setScale(2, BigDecimal.ROUND_HALF_UP);
+                System.out.println("One solution: " + rootBd);
+            } else if (discriminant < 0) {
+                System.out.println("No solution");
+            } else {
+                double discriminantRoot = Math.sqrt(discriminant);
+                double firstRoot = (-b + discriminantRoot) / 2 / a;
+                double secondRoot = (-b - discriminantRoot) / 2 / a;
 
-            BigDecimal firstRootBd = new BigDecimal(firstRoot)
-                    .setScale(2, BigDecimal.ROUND_HALF_UP);
-            BigDecimal secondRootBd = new BigDecimal(secondRoot)
-                    .setScale(2, BigDecimal.ROUND_HALF_UP);
+                BigDecimal firstRootBd = new BigDecimal(firstRoot)
+                        .setScale(2, BigDecimal.ROUND_HALF_UP);
+                BigDecimal secondRootBd = new BigDecimal(secondRoot)
+                        .setScale(2, BigDecimal.ROUND_HALF_UP);
 
-            System.out.println("Two solutions: " + secondRootBd + "," + firstRootBd);
+                System.out.println("Two solutions: " + secondRootBd + "," + firstRootBd);
+            }
         }
 
     }
@@ -297,7 +298,13 @@ public class Solver implements ISolver {
     @Override
     public void task11() {
         Scanner scanner = new Scanner(System.in);
-        int month = scanner.nextInt();
+        String dataIn = scanner.nextLine();
+        int month = 0;
+        try {
+            month = Integer.valueOf(dataIn);
+        } catch (RuntimeException e) {
+            System.out.println("INCORRECT INPUT DATA");
+        }
         switch (month) {
             case 1:
                 System.out.println("January");
