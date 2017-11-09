@@ -12,7 +12,7 @@ public class Solver implements ISolver {
 
     public static void main(String[] args) {
         Solver solver = new Solver();
-        solver.task20();
+        solver.task21();
     }
 
     @Override
@@ -559,8 +559,26 @@ public class Solver implements ISolver {
         printMatrix(modifiedMatrix, DIMENSION);
     }
 
-    //@Override
-    //public void task21() TODO
+    @Override
+    public void task21() {
+        Scanner scanner = new Scanner(System.in);
+        final int DIMENSION = scanner.nextInt();
+        int[][] matrix = readMatrix(scanner, DIMENSION);
+        Integer[][] modifiedMatrix = new Integer[DIMENSION][DIMENSION];
+        for (int i = 0; i < DIMENSION; i++) {
+            ArrayList<Integer> rowList = new ArrayList<Integer>(Arrays.asList(Arrays.stream(matrix[i]).boxed().toArray(Integer[]::new)));
+            for (int j = 0; j < DIMENSION - 1; j++) {
+                if (matrix[i][j] == 0 && matrix[i][j+1] != 0) {
+                    rowList.remove((Integer) 0);
+                    rowList.add(0);
+                }
+            }
+            modifiedMatrix[i] = rowList.toArray(modifiedMatrix[i]);
+        }
+
+        System.out.println(DIMENSION);
+        printIntegerMatrix(modifiedMatrix, DIMENSION);
+    }
 
     //@Override
     //public void task22() TODO
@@ -597,6 +615,15 @@ public class Solver implements ISolver {
     }
 
     private void printMatrix(int[][] matrix, int dimension) {
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < dimension; j++) {
+                System.out.print(matrix[i][j] + "\t");
+            }
+            System.out.println();
+        }
+    }
+
+    private void printIntegerMatrix(Integer[][] matrix, int dimension) {
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < dimension; j++) {
                 System.out.print(matrix[i][j] + "\t");
