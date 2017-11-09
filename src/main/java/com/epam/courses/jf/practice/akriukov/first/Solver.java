@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Solver implements ISolver{
-
+    
 
     @Override
     public void task1() {
@@ -222,6 +222,19 @@ public class Solver implements ISolver{
                 break;
             case 2: System.out.println(palindromes[1]);
                 break;
+        }
+    }
+
+    @Override
+    public void task9() {
+        int matrixDim = Integer.parseInt(readLineFromConsole());
+        int counter = 1;
+        for (int i = 0; i < matrixDim; i++) {
+            for (int j = 0; j <matrixDim; j++) {
+                System.out.print(counter + "\t");
+                counter++;
+            }
+            System.out.println();
         }
     }
 
