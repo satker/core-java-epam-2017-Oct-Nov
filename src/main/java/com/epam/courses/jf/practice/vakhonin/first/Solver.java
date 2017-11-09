@@ -347,18 +347,18 @@ public class Solver implements ISolver {
             if (b == 0) {
                 result = "No solution";
             } else {
-                x1 = (new BigDecimal(-c / b)).setScale(2, BigDecimal.ROUND_UP);
+                x1 = (new BigDecimal(-c / b)).setScale(2, BigDecimal.ROUND_HALF_UP);
                 result = "One solution: " + x1;
             }
         } else {
             d = b * b - 4 * a * c;
             if (d > 0) {
-                x1 = (new BigDecimal((-b + Math.sqrt(d)) / (2 * a))).setScale(2, BigDecimal.ROUND_UP);
-                x2 = (new BigDecimal((-b - Math.sqrt(d)) / (2 * a))).setScale(2, BigDecimal.ROUND_UP);
+                x1 = (new BigDecimal((-b + Math.sqrt(d)) / (2 * a))).setScale(2, BigDecimal.ROUND_HALF_UP);
+                x2 = (new BigDecimal((-b - Math.sqrt(d)) / (2 * a))).setScale(2, BigDecimal.ROUND_HALF_UP);
                 result = "Two solutions: " + x1 + ", " + x2;
             }
             if (d == 0) {
-                x1 = (new BigDecimal(-b / (2 * a))).setScale(2, BigDecimal.ROUND_UP);
+                x1 = (new BigDecimal(-b / (2 * a))).setScale(2, BigDecimal.ROUND_HALF_UP);
                 result = "One solution: " + x1;
             }
             if (d < 0) {
