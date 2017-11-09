@@ -176,6 +176,55 @@ public class Solver implements ISolver{
         }
     }
 
+    @Override
+    public void task8() {
+        int numberOfWords = Integer.parseInt(readLineFromConsole());
+        HashSet<Character> numbers = new HashSet<>();
+        numbers.add('0');
+        numbers.add('1');
+        numbers.add('2');
+        numbers.add('3');
+        numbers.add('4');
+        numbers.add('5');
+        numbers.add('6');
+        numbers.add('7');
+        numbers.add('8');
+        numbers.add('9');
+        String[] strings = readLineFromConsole().split(" ");
+        String[] palindromes = new String[2];
+        int palindromeNumbersFound = 0;
+
+        for (String str : strings) {
+            int numberCountInWord = 0;
+            for (int i = 0; i < str.length(); i++) {
+                char currentSymbol = str.charAt(i);
+                if (numbers.contains(currentSymbol)) {
+                    numberCountInWord++;
+                } else {
+                    break;
+                }
+            }
+            if ((str.length() - numberCountInWord) == 0) { //next actions only if no letters in word (it is number)
+                if (str.equals(new StringBuilder(str).reverse().toString())) { //check for palindrome
+                    palindromes[palindromeNumbersFound] = str;
+                    palindromeNumbersFound++;
+//                    System.out.println(str);
+                }
+            }
+            if (palindromeNumbersFound == 2) {
+                break;
+            }
+        }
+        switch (palindromeNumbersFound) {
+            case 0: System.out.println("NOT FOUND");
+                break;
+            case 1: System.out.println(palindromes[0]);
+                break;
+            case 2: System.out.println(palindromes[1]);
+                break;
+        }
+    }
+
     /**
      * Custom comparator for task2()
      * Firstly compares string length. If length is the same, then compare by symbol codes
