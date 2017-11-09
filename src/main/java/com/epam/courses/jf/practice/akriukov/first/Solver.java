@@ -113,12 +113,43 @@ public class Solver implements ISolver{
                     break;
                 }
             }
-            if (((str.length() - vowelCountInWord) == vowelCountInWord) && //pass with no actions if nonLatin letter detected
+            //pass with no actions if nonLatin letter detected
+            if (((str.length() - vowelCountInWord) == vowelCountInWord) &&
                     latinFlag){
                 wordsWithEqualVowelsNConsonants++;
             }
         }
         System.out.println(wordsWithEqualVowelsNConsonants);
+    }
+
+    @Override
+    public void task6() {
+        int numberOfWords = Integer.parseInt(readLineFromConsole());
+        String[] strings = readLineFromConsole().split(" ");
+        for (String str : strings) {
+            int charIntValueToCompare = 0;
+            boolean wordFound = false;
+            if (str.length() < 2) {
+                continue;
+            }
+            for (int i = 0; i < str.length(); i++) {
+                char currentSymbol = str.charAt(i);
+                int charIntValue = (int) currentSymbol;
+                if (charIntValue > charIntValueToCompare) { //use >= for same neighboring letters
+                    charIntValueToCompare = charIntValue;
+                    if (i == (str.length() - 1)) {
+                        wordFound = true;
+                    }
+                } else {
+                    break;
+                }
+            }
+            if (wordFound) {
+                System.out.println(str);
+                return;
+            }
+        }
+        System.out.println("NOT FOUND");
     }
 
     /**
