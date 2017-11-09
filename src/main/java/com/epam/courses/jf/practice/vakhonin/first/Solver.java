@@ -432,7 +432,11 @@ public class Solver implements ISolver {
         Scanner scanner = new Scanner(System.in);
         int ncol = scanner.nextInt();
         Integer[][] matrix = enterMatrixInteger(scanner);
-        Arrays.sort(matrix, (o1, o2) -> o1[ncol] > o2[ncol] ? 1 : o1[ncol] < o2[ncol] ? -1 : Integer.compare(o1[ncol], o2[ncol]));
+        Arrays.sort(matrix, new Comparator<Integer[]>() {
+            public int compare(Integer[] row1, Integer[] row2) {
+                return row1[ncol] - row2[ncol];
+            }
+        });
         System.out.println(matrix.length);
         printMatrixInteger(matrix);
     }
