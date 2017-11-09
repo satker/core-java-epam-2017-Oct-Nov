@@ -12,7 +12,7 @@ public class Solver implements ISolver {
 
     public static void main(String[] args) {
         Solver solver = new Solver();
-        solver.task18();
+        solver.task19();
     }
 
     @Override
@@ -496,8 +496,40 @@ public class Solver implements ISolver {
         printAnyMatrix(modifiedMatrix);
     }
 
-    //@Override
-    //public void task19() TODO
+    @Override
+    public void task19() {
+        Scanner scanner = new Scanner(System.in);
+        final int DIMENSION = scanner.nextInt();
+        int[][] matrix = readMatrix(scanner, DIMENSION);
+        HashSet<Integer> rowsToDelete = new HashSet<Integer>();
+        HashSet<Integer> columnsToDelete = new HashSet<Integer>();
+        int[][] modifiedMatrix;
+        outer:
+        for (int i = 0; i < DIMENSION; i++) {
+            for (int j = 0; j < DIMENSION; j++) {
+                if (matrix[i][j] != 0) {
+                    continue outer;
+                }
+            }
+            rowsToDelete.add(i);
+        }
+
+        outer:
+        for (int j = 0; j < DIMENSION; j++) {
+            for (int i = 0; i < DIMENSION; i++) {
+                if (matrix[i][j] != 0) {
+                    continue outer;
+                }
+            }
+            columnsToDelete.add(j);
+        }
+
+        modifiedMatrix = removeRows(matrix, rowsToDelete);
+        modifiedMatrix = removeColumns(modifiedMatrix, columnsToDelete);
+        System.out.println(modifiedMatrix.length);
+        System.out.println(modifiedMatrix[0].length);
+        printAnyMatrix(modifiedMatrix);
+    }
 
     //@Override
     //public void task20() TODO
@@ -566,7 +598,7 @@ public class Solver implements ISolver {
         return stringNumber.equals(new StringBuilder(stringNumber).reverse().toString());
     }
 
-    public double determinant(double A[][], int N) {
+    private double determinant(double A[][], int N) {
         double det = 0;
         if (N == 1) {
             det = A[0][0];
@@ -591,7 +623,7 @@ public class Solver implements ISolver {
                         j2++;
                     }
                 }
-                det += Math.pow(-1.0,1.0+j1+1.0)* A[0][j1] * determinant(m,N-1);
+                det += Math.pow(-1.0, 1.0 + j1 + 1.0)* A[0][j1] * determinant(m,N-1);
             }
         }
         return det;
