@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Solver implements ISolver{
     
@@ -61,6 +63,25 @@ public class Solver implements ISolver{
                 System.out.printf("(%d): \"%s\"%n", string.length(), string);
             }
         }
+    }
+
+    @Override
+    public void task4() {
+        int numberOfWords = Integer.parseInt(readLineFromConsole());
+        int minNumberOfLetters = Integer.MAX_VALUE;
+        String minNumberOfLetterString = "";
+        String[] strings = readLineFromConsole().split(" ");
+        for (String s : strings) {
+            Set<Character> word = new HashSet<>();
+            for (int i = 0; i < s.length(); i++) {
+                word.add(s.charAt(i));
+            }
+            if (minNumberOfLetters > word.size()) {
+                minNumberOfLetters = word.size();
+                minNumberOfLetterString = s;
+            }
+        }
+        System.out.println(minNumberOfLetterString);
     }
 
     /**
