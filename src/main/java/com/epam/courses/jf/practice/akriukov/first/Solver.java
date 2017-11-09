@@ -9,31 +9,28 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 public class Solver implements ISolver{
+    
 
     @Override
     public void task1() {
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             int numberOfLines = Integer.parseInt(reader.readLine());
-            String[] lines = new String[numberOfLines];
+
+            int minLength = Integer.MAX_VALUE;
+            int maxLength = Integer.MIN_VALUE;
+            String minString = "";
+            String maxString = "";
 
             for (int i = 0; i < numberOfLines; i++) {
-                lines[i] = reader.readLine();
-            }
-
-            int minLength = lines[0].length();
-            int maxLength = lines[0].length();
-            String minString = lines[0];
-            String maxString = lines[0];
-
-            for (int i = 0; i < numberOfLines; i++) {
-                if (minLength >= lines[i].length()) {
-                    minLength = lines[i].length();
-                    minString = lines[i];
+                String s = reader.readLine();
+                if (minLength >= s.length()) {
+                    minLength = s.length();
+                    minString = s;
                 }
-                if (maxLength <= lines[i].length()) {
-                    maxLength = lines[i].length();
-                    maxString = lines[i];
+                if (maxLength <= s.length()) {
+                    maxLength = s.length();
+                    maxString = s;
                 }
 
             }
@@ -75,5 +72,26 @@ public class Solver implements ISolver{
                 return String.CASE_INSENSITIVE_ORDER.compare(o1, o2); //compare symbols, if same length
             }
         }
+    }
+
+    @Override
+    public void task3() {
+
+    }
+
+    public static String[] readLinesToStringArray() {
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            int numberOfLines = Integer.parseInt(reader.readLine());
+            String[] lines = new String[numberOfLines];
+
+            for (int i = 0; i < numberOfLines; i++) {
+                lines[i] = reader.readLine();
+            }
+            return lines;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
