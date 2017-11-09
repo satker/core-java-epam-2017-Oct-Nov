@@ -47,11 +47,16 @@ public class Solver implements ISolver {
             inputStringList.add(inputData.nextLine());
         }
 
+        inputStringList.sort((s1, s2) -> s2.length() - s1.length());
+
+        System.out.printf("MIN (%d): \"%s\"%n" ,inputStringList.get(inputStringList.size() - 1).length(),
+                inputStringList.get(inputStringList.size() - 1));
+
         inputStringList.sort((s1, s2) -> s1.length() - s2.length());
 
-        System.out.printf("MIN (%d): \"%s\"%n", inputStringList.get(0).length(), inputStringList.get(0));
         System.out.printf("MAX (%d): \"%s\"%n" ,inputStringList.get(inputStringList.size() - 1).length(),
                 inputStringList.get(inputStringList.size() - 1));
+        
     }
 
     @Override
