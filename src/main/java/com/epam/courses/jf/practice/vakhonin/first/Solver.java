@@ -261,7 +261,7 @@ public class Solver implements ISolver {
                 result.append(s);
                 result.append(" ");
             }
-            result.deleteCharAt(wordsSize - 1);
+            result.deleteCharAt(result.length() - 1);
         }
         System.out.println(result.toString());
     }
