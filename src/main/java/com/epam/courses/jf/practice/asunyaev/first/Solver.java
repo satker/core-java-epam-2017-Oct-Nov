@@ -12,7 +12,7 @@ public class Solver implements ISolver {
 
     public static void main(String[] args) {
         Solver solver = new Solver();
-        solver.task21();
+        solver.task22();
     }
 
     @Override
@@ -578,8 +578,20 @@ public class Solver implements ISolver {
         printIntegerMatrix(modifiedMatrix, DIMENSION);
     }
 
-    //@Override
-    //public void task22() TODO
+    @Override
+    public void task22() {
+        Scanner scanner = new Scanner(System.in);
+        final int DIMENSION = scanner.nextInt();
+        double[][] matrix = readDoubleMatrix(scanner, DIMENSION);
+        int[][] modifiedMatrix = new int[DIMENSION][DIMENSION];
+        for (int i = 0; i < DIMENSION; i++) {
+            for (int j = 0; j < DIMENSION; j++) {
+                modifiedMatrix[i][j] = (int) Math.round(matrix[i][j]);
+            }
+        }
+        System.out.println(DIMENSION);
+        printMatrix(modifiedMatrix, DIMENSION);
+    }
 
     //@Override
     //public void task23() TODO
