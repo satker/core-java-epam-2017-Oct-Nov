@@ -521,7 +521,7 @@ public class Solver implements ISolver {
         for (int i = 0; i < size-1; i++) {
             int j = i;
             int subArrayLength = 1;
-            while (inputArray[j] < inputArray[j + 1] && j < size) {
+            while (inputArray[j] < inputArray[j + 1] && j < size-1) {
                 subArrayLength++;
                 j++;
             }
