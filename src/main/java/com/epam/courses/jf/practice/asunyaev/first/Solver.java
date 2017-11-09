@@ -12,7 +12,7 @@ public class Solver implements ISolver {
 
     public static void main(String[] args) {
         Solver solver = new Solver();
-        solver.task23();
+        solver.task24();
     }
 
     @Override
@@ -619,8 +619,25 @@ public class Solver implements ISolver {
 
     }
 
-    //@Override
-    //public void task24() TODO
+    @Override
+    public void task24() {
+        Scanner scanner = new Scanner(System.in);
+        final int DIMENSION = scanner.nextInt();
+        int[][] matrix = readMatrix(scanner, DIMENSION);
+        int[][] modifiedMatrix = new int[DIMENSION][DIMENSION];
+        TreeMap<Integer, Integer> sums = new TreeMap<>();
+        for (int i = 0; i < DIMENSION; i++) {
+            sums.put(Arrays.stream(matrix[i]).sum(), i);
+        }
+        for (int i = 0; i < DIMENSION; i++) {
+            if (!sums.containsValue(i)) {
+                modifiedMatrix[i] = matrix[i];
+            }
+            modifiedMatrix[i] = matrix[(int) (sums.values().toArray()[i])];
+        }
+        System.out.println(DIMENSION);
+        printMatrix(modifiedMatrix, DIMENSION);
+    }
 
     //@Override
     //public void task25() TODO
