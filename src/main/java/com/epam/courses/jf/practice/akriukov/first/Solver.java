@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Solver implements ISolver{
-    
+
 
     @Override
     public void task1() {
@@ -150,6 +150,30 @@ public class Solver implements ISolver{
             }
         }
         System.out.println("NOT FOUND");
+    }
+
+    @Override
+    public void task7() {
+        int numberOfWords = Integer.parseInt(readLineFromConsole());
+        String[] strings = readLineFromConsole().split(" ");
+        Set<String> printedWords = new HashSet<>();
+        for (String str : strings) {
+            if (printedWords.contains(str)) {
+                continue;
+            } else {
+                Set<Character> word = new HashSet<>();
+                for (int i = 0; i < str.length(); i++) {
+                    word.add(str.charAt(i)); //if non-register sensitive algorithm is needed Use Character.toLowerCase(str.charAt(i))
+                }
+                if (str.length() == word.size()) {
+                    System.out.print(str + " "); //" " in the end of line may be a problem
+                    printedWords.add(str);
+                }
+            }
+        }
+        if (printedWords.size() == 0) {
+            System.out.println("NOT FOUND");
+        }
     }
 
     /**
