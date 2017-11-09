@@ -532,7 +532,12 @@ public class Solver implements ISolver {
                 count = subArrayLength;
             }
         }
-        System.out.println(count);
+        if (count == 1) {
+            System.out.println(0);
+        }
+        else {
+            System.out.println(count);
+        }
 
     }
 
