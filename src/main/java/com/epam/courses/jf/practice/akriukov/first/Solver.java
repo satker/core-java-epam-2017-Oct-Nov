@@ -47,7 +47,20 @@ public class Solver implements ISolver{
 
     @Override
     public void task3() {
+        int averageLength =0;
+        String[] lines = readLinesToStringArray();
 
+        for (String string: lines) {
+            averageLength += string.length();
+        }
+        averageLength /= lines.length;
+        System.out.printf("AVERAGE (%d)%n", averageLength);
+
+        for (String string: lines) {
+            if (averageLength > string.length()) {
+                System.out.printf("(%d): \"%s\"%n", string.length(), string);
+            }
+        }
     }
 
     /**
