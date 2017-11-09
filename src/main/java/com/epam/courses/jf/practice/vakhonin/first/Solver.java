@@ -1212,7 +1212,7 @@ public class Solver implements ISolver {
                 if(j == numberColumns - 1) System.out.printf("%d", matrix[i][j]);
                 else System.out.printf("%d\t", matrix[i][j]);
             }
-            System.out.printf("\n");
+            System.out.printf("%n");
         }
     }
 //
