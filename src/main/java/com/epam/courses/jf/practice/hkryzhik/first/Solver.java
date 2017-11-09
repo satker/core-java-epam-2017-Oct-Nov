@@ -518,15 +518,24 @@ public class Solver implements ISolver {
         }
 
 
-        ArrayList<Integer> sequenceCountsList = new ArrayList<>();
+        List<Integer> sequenceCountsList = new ArrayList<>();
 
         Integer count = 0;
-        for (int i = 0; i < (size - 1); i++) {
-            if(inputArray[i] < inputArray[i + 1]){
-                count++;
+        for (int i = 0; i < size; i++) {
+            if(i != size - 1) {
+                if (inputArray[i] < inputArray[i + 1]) {
+                    count++;
+                } else {
+                    sequenceCountsList.add(count);
+                    count = 1;
+                }
             }else {
-                sequenceCountsList.add(count);
-                count = 1;
+                if (inputArray[i] < inputArray[size]) {
+                    count++;
+                } else {
+                    sequenceCountsList.add(count);
+                    count = 1;
+                }
             }
         }
 
