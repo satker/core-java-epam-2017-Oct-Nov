@@ -517,13 +517,16 @@ public class Solver implements ISolver {
             inputArray[i] = Integer.valueOf(inputLine[i]);
         }
 
-        Integer count = 1;
+        int count = 1;
         for (int i = 0; i < size-1; i++) {
             int j = i;
             int subArrayLength = 1;
-            while (inputArray[j] < inputArray[j + 1] && j < size-1) {
+            while (inputArray[j] < inputArray[j + 1]) {
                 subArrayLength++;
                 j++;
+                if (j == size - 1) {
+                    break;
+                }
             }
             if (subArrayLength > count) {
                 count = subArrayLength;
