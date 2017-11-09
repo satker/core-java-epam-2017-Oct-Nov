@@ -12,7 +12,7 @@ public class Solver implements ISolver {
 
     public static void main(String[] args) {
         Solver solver = new Solver();
-        solver.task19();
+        solver.task20();
     }
 
     @Override
@@ -531,8 +531,33 @@ public class Solver implements ISolver {
         printAnyMatrix(modifiedMatrix);
     }
 
-    //@Override
-    //public void task20() TODO
+    @Override
+    public void task20() {
+        Scanner scanner = new Scanner(System.in);
+        final int newRow = scanner.nextInt();
+        final int newColumn = scanner.nextInt();
+        final int DIMENSION = scanner.nextInt();
+        int[][] matrix = readMatrix(scanner, DIMENSION);
+        int[][] modifiedMatrix;
+        int minElement = 1000;
+        int minElementRow = -1;
+        int minElementColumn = -1;
+        for (int i = 0; i < DIMENSION; i++) {
+            for (int j = 0; j < DIMENSION; j++) {
+                if (matrix[i][j] < minElement) {
+                    minElement = matrix[i][j];
+                    minElementRow = i;
+                    minElementColumn = j;
+                }
+            }
+        }
+
+        modifiedMatrix = swapRows(matrix, minElementRow, newRow);
+        modifiedMatrix = swapColumns(modifiedMatrix, minElementColumn, newColumn);
+
+        System.out.println(DIMENSION);
+        printMatrix(modifiedMatrix, DIMENSION);
+    }
 
     //@Override
     //public void task21() TODO
@@ -674,6 +699,38 @@ public class Solver implements ISolver {
             }
             System.out.println();
         }
+    }
+
+    private int[][] swapRows (int[][] matrix, int index1, int index2) {
+        int[] row1 = new int[matrix.length];
+        int[] row2 = new int[matrix.length];
+        for (int j = 0; j < matrix.length; j++) {
+            row1[j] = matrix[index1][j];
+            row2[j] = matrix[index2][j];
+        }
+
+        for (int j = 0; j < matrix.length; j++) {
+            matrix[index2][j] = row1[j];
+            matrix[index1][j] = row2[j];
+        }
+
+        return matrix;
+    }
+
+    private int[][] swapColumns (int[][] matrix, int index1, int index2) {
+        int[] row1 = new int[matrix.length];
+        int[] row2 = new int[matrix.length];
+        for (int i = 0; i < matrix.length; i++) {
+            row1[i] = matrix[i][index1];
+            row2[i] = matrix[i][index2];
+        }
+
+        for (int i = 0; i < matrix.length; i++) {
+            matrix[i][index2] = row1[i];
+            matrix[i][index1] = row2[i];
+        }
+
+        return matrix;
     }
 
 }
