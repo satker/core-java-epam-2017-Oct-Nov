@@ -264,49 +264,40 @@ public class Solver implements ISolver {
             result.deleteCharAt(result.length() - 1);
         }
         System.out.println(result.toString());
+    }   // DOING!
+
+
+//
+    public void task8() {
+        Scanner in = new Scanner(System.in);
+        int n = Integer.valueOf(in.nextLine());
+        in = new Scanner(System.in);
+        List<String> stringList = new ArrayList<>();
+        for (int j = 0; j < n; j++) {
+            stringList.add(in.next());
+        }
+        int counter = 0;
+        String result = "NOT FOUND"; // TODO: применить такое везде, сразу нот фаунд
+        StringBuffer strBuf;
+        for(String str: stringList){
+            if(str.matches("^\\d+$")){
+                strBuf = new StringBuffer(str);
+                strBuf.reverse();
+                if(strBuf.toString().equals(str)){
+                    result = str;
+                    counter++;
+                    if(counter == 2){
+                        break;
+                    }
+                }
+
+            }
+
+
+        }
+
+        System.out.println(result);
     }
-//
-//    public void task8() {
-//        Scanner in;
-//        int numberOfStrings;
-//
-//        in = new Scanner(System.in);
-//        numberOfStrings = in.nextInt();
-//
-//        String[] strings = new String[numberOfStrings];
-//        in = new Scanner(System.in);
-//        for (int j = 0; j < numberOfStrings; j++) {
-//            strings[j] = in.next();
-//        }
-//
-//        int length, counter = 0;
-//        char[] charArray;
-//        String result = "";
-//
-//        for (String string : strings) {
-//            if (string.matches("^\\d+$")) {
-//                charArray = string.toCharArray();
-//                length = string.length();
-//                for (int j = 0; j < string.length() / 2; j++) {
-//                    if (charArray[j] != charArray[length - 1 - j]) {
-//                        break;
-//                    }
-//                    counter++;
-//                }
-//            }
-//
-//            if (counter == 2) {
-//                result = string;
-//                break;
-//            }
-//        }
-//
-//        if (result.length() == 0) {
-//            result = "NOT FOUND";
-//        }
-//
-//        System.out.printf(result);
-//    }
 //
 //    public void task9() {
 //        Scanner in;
