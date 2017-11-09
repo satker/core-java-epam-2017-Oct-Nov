@@ -12,7 +12,7 @@ public class Solver implements ISolver {
 
     public static void main(String[] args) {
         Solver solver = new Solver();
-        solver.task22();
+        solver.task23();
     }
 
     @Override
@@ -593,8 +593,31 @@ public class Solver implements ISolver {
         printMatrix(modifiedMatrix, DIMENSION);
     }
 
-    //@Override
-    //public void task23() TODO
+    @Override
+    public void task23() {
+        Scanner scanner = new Scanner(System.in);
+        final int DIMENSION = scanner.nextInt();
+        int[][] matrix = readMatrix(scanner, DIMENSION);
+        int saddlePointCount = 0;
+        for (int i = 0; i < DIMENSION; i++) {
+            for (int j = 0; j < DIMENSION; j++) {
+                int[] column = new int[DIMENSION];
+                int[] row = new int[DIMENSION];
+                for (int k = 0; k < DIMENSION; k++) {
+                    column[k] = matrix[k][j];
+                    row[k] = matrix[i][k];
+                }
+                Arrays.sort(row);
+                Arrays.sort(column);
+                if ((matrix[i][j] == row[0]) && (matrix[i][j] == column[DIMENSION-1])){
+                    saddlePointCount++;
+                }
+            }
+        }
+
+        System.out.println(saddlePointCount);
+
+    }
 
     //@Override
     //public void task24() TODO
