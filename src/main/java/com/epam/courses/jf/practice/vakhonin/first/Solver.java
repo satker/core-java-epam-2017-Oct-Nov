@@ -625,55 +625,59 @@ public class Solver implements ISolver {
             }
         }
         System.out.println(det);
+    }   // DOING!
+//
+    public void task18() {
+        int n, max, k, i;
+        Integer[][] matrix, matrixNew;
+        Set<Integer> rows, columns;
+        Scanner in = new Scanner(System.in);
+        matrix = enterMatrixInteger(in);
+        n = matrix.length;
+
+        rows = new HashSet();
+        columns = new HashSet();
+
+        max = matrix[0][0];
+
+        for (int j = 0; j < n; j++) {
+            for (int q = 0; q < n; q++) {
+                if (matrix[j][q] >= max) {
+                    if (matrix[j][q] == max) {
+                        rows.add(j);
+                        columns.add(q);
+                    } else {
+                        rows = new HashSet();
+                        columns = new HashSet();
+                        rows.add(j);
+                        columns.add(q);
+                        max = matrix[j][q];
+                    }
+                }
+
+            }
+        }
+
+        matrixNew = new Integer[n - rows.size()][n - columns.size()];
+
+        k = 0;
+        for (int j = 0; j < n; j++) {
+            if (!rows.contains(j)) {
+                i = 0;
+                for (int q = 0; q < n; q++) {
+                    if (!columns.contains(q)) {
+                        matrixNew[k][i] = matrix[j][q];
+                        i++;
+                    }
+                }
+                k++;
+            }
+        }
+        System.out.println(matrixNew.length);
+        System.out.println(matrixNew[0].length);
+
+        printMatrixInteger(matrixNew);
     }
-//
-//    public void task18() {
-//        int n, max, k, i;
-//        int[][] matrix, matrixNew;
-//        Set<Integer> rows, columns;
-//        matrix = enterMatrix();
-//        n = matrix.length;
-//
-//        rows = new HashSet();
-//        columns = new HashSet();
-//
-//        max = matrix[0][0];
-//
-//        for (int j = 0; j < n; j++) {
-//            for (int q = 0; q < n; q++) {
-//                if (matrix[j][q] >= max) {
-//                    if (matrix[j][q] == max) {
-//                        rows.add(j);
-//                        columns.add(q);
-//                    } else {
-//                        rows = new HashSet();
-//                        columns = new HashSet();
-//                        rows.add(j);
-//                        columns.add(q);
-//                        max = matrix[j][q];
-//                    }
-//                }
-//
-//            }
-//        }
-//
-//        matrixNew = new int[n - rows.size()][n - columns.size()];
-//
-//        k = 0;
-//        for (int j = 0; j < n; j++) {
-//            if (!rows.contains(j)) {
-//                i = 0;
-//                for (int q = 0; q < n; q++) {
-//                    if (!columns.contains(q)) {
-//                        matrixNew[k][i] = matrix[j][q];
-//                        i++;
-//                    }
-//                }
-//                k++;
-//            }
-//        }
-//        printMatrix(matrixNew);
-//    }
 //
 //    public void task19() {
 //        int n, i, k, numberOfZeros;
