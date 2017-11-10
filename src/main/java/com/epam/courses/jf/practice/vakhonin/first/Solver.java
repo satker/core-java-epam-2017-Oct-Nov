@@ -475,8 +475,7 @@ public class Solver implements ISolver {
         System.out.println(n);
 
         printMatrixInteger(newMatrix);
-    }
-
+    }   // DOING!
 
 //
     public void task14() {
@@ -514,54 +513,49 @@ public class Solver implements ISolver {
         }
 
         System.out.println(result);
+    }   // DOING!
+//
+    public void task15() {
+        Scanner in;
+        int n, sumIn, sumOut;
+        Integer[][] matrix;
+
+        in = new Scanner(System.in);
+        System.out.println("Enter matrix dimension:");
+        n = Integer.valueOf(in.nextLine());
+        matrix = new Integer[n][n];
+
+        matrix = enterMatrixInteger(in);
+
+        sumOut = 0;
+
+        for (int k = 0; k < n; k++) {
+
+            int counter = 0;
+            int index1 = -1;
+            int index2 = -1;
+            for (int j = 0; !((counter == 2) || (j == n)); j++) {
+                if (matrix[k][j] > 0) {
+                    counter++;
+                    if (index1 > -1) {
+                        index2 = j;
+                    } else {
+                        index1 = j;
+                    }
+                }
+            }
+
+            sumIn = 0;
+
+            if ((counter == 2) && ((index2 - index1) > 1)) {
+                for (int j = index1 + 1; j < index2; j++) {
+                    sumIn += matrix[k][j];
+                }
+            }
+            sumOut += sumIn;
+        }
+        System.out.println(sumOut);
     }
-//
-//    public void task15() {
-//        Scanner in;
-//        int n, sumIn, sumOut;
-//        int[][] matrix;
-//        StringBuilder stringMatrix;
-//
-//        in = new Scanner(System.in);
-//        System.out.println("Enter matrix dimension:");
-//        n = in.nextInt();
-//        matrix = new int[n][n];
-//        System.out.println("Enter matrix of " + n + "x" + n + ":");
-//        for (int j = 0; j < n; j++) {
-//            for (int q = 0; q < n; q++) {
-//                matrix[j][q] = in.nextInt();
-//            }
-//        }
-//
-//        sumOut = 0;
-//
-//        for (int k = 0; k < n; k++) {
-//
-//            int counter = 0;
-//            int index1 = -1;
-//            int index2 = -1;
-//            for (int j = 0; !((counter == 2) || (j == n)); j++) {
-//                if (matrix[k][j] > 0) {
-//                    counter++;
-//                    if (index1 > -1) {
-//                        index2 = j;
-//                    } else {
-//                        index1 = j;
-//                    }
-//                }
-//            }
-//
-//            sumIn = 0;
-//
-//            if ((counter == 2) && ((index2 - index1) > 1)) {
-//                for (int j = index1 + 1; j < index2; j++) {
-//                    sumIn += matrix[k][j];
-//                }
-//            }
-//            sumOut += sumIn;
-//        }
-//        System.out.println(sumOut);
-//    }
 //
 //    //TODO: где-то нужно еще какие то размерности выводить...
 //    //TODO: compareToIgnoreCase
