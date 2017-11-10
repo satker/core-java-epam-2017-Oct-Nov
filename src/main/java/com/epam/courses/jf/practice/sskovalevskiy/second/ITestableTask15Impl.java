@@ -14,145 +14,84 @@ public class ITestableTask15Impl implements ITestableTask15 {
     @Override
     public IFileWithLines analyze(Set<I2DPoint> points, File output) {
 
-        List<I2DPoint> pointsList = new ArrayList<>(points);
-        HashMap<ABCMultipliers, Set<I2DPoint>> threePointsLine = new HashMap<>();
-
-        for (int i = 0; i < pointsList.size() - 1; i++) {
-            for (int j = i + 1; j < pointsList.size(); j++) {
-                ABCMultipliers ABC = new ABCMultipliers(pointsList.get(i), pointsList.get(j));
-                if (threePointsLine.containsKey(ABC)) {
-                    threePointsLine.get(ABC).add(pointsList.get(j));
-                } else {
-                    threePointsLine.put(ABC, new HashSet<I2DPoint>());
-                    threePointsLine.get(ABC).add(pointsList.get(i));
-                    threePointsLine.get(ABC).add(pointsList.get(j));
+        List<Line> allLines = new ArrayList<>();
+        Set<Line> lines = new HashSet<>();
+        for (I2DPoint point : points) {
+            for (I2DPoint anotherPoint : points) {
+                if (point != anotherPoint) {
+                    allLines.add(new Line(point, anotherPoint));
                 }
-
             }
         }
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(output))) {
-            for (Map.Entry<ABCMultipliers, Set<I2DPoint>> entry : threePointsLine.entrySet()) {
-                if (entry.getValue().size() < 3) continue;
-
-                Set<I2DPoint> i2DPoints = entry.getValue();
-                for (I2DPoint i2DPoint : i2DPoints) {
-                    writer.write(String.format(Locale.ENGLISH,"(%f;%f) ", i2DPoint.getX(), i2DPoint.getY()));
+        for (Line line : allLines) {
+            for (Line anotherLine : allLines) {
+                if (line.equals(anotherLine)) {
+                    line.getPoints().addAll(anotherLine.getPoints());
+                    anotherLine.getPoints().addAll(line.getPoints());
                 }
-                writer.write(System.getProperty("line.separator"));
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
 
-        IFileWithLines resultFile = new IFileWithLinesImpl(output);
+        lines.addAll(allLines);
 
-        return resultFile;
+        return new IFileWithLines() {
+            @Override
+            public File getFile() {
+                return output;
+            }
+
+            @Override
+            public Set<ILine> getLines() {
+                return new HashSet<>(lines);
+            }
+        };
     }
 
-    class ABCMultipliers {
-        private double A;
-        private double B;
-        private double C;
+    class Line implements ILine {
 
-        public ABCMultipliers(I2DPoint point1, I2DPoint point2) {
-            A = point2.getY() - point1.getY();
-            B = point1.getX() - point2.getX();
-            C = point1.getY() * point2.getX() - point1.getX() * point2.getY();
+        private Set<I2DPoint> points;
+        private double angle;
+        private double shift;
+
+        Line(I2DPoint first, I2DPoint second) {
+            if (points == null) {
+                points = new HashSet<>();
+            }
+            points.add(first);
+            points.add(second);
+            angle = (first.getY() - second.getY()) / (first.getX() - second.getX());
+            shift = first.getY() - angle * first.getX();
+        }
+
+        @Override
+        public Set<I2DPoint> getPoints() {
+            return points;
         }
 
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
 
-            ABCMultipliers that = (ABCMultipliers) o;
+            Line line = (Line) o;
 
-            if (Double.compare(that.A, A) != 0) return false;
-            if (Double.compare(that.B, B) != 0) return false;
-            return Double.compare(that.C, C) == 0;
+            return Double.compare(line.angle, angle) == 0 && Double.compare(line.shift, shift) == 0;
         }
 
         @Override
         public int hashCode() {
             int result;
             long temp;
-            temp = Double.doubleToLongBits(A);
+            temp = Double.doubleToLongBits(angle);
             result = (int) (temp ^ (temp >>> 32));
-            temp = Double.doubleToLongBits(B);
-            result = 31 * result + (int) (temp ^ (temp >>> 32));
-            temp = Double.doubleToLongBits(C);
+            temp = Double.doubleToLongBits(shift);
             result = 31 * result + (int) (temp ^ (temp >>> 32));
             return result;
-        }
-    }
-
-    class IFileWithLinesImpl implements IFileWithLines {
-        File file;
-        Set<ILine> iLines;
-
-        public IFileWithLinesImpl(File file) {
-            this.file = file;
-        }
-
-        @Override
-        public File getFile() {
-            return file;
-        }
-
-        @Override
-        public Set<ILine> getLines() {
-
-            iLines = new HashSet<>();
-
-            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-
-                while (reader.ready()) {
-                    String[] coordinates = reader.readLine().split(" \\(\\);");
-                    Set<I2DPoint> points = new HashSet<>();
-                    for (int i = 0; i < coordinates.length; i += 2) {
-                        double x = Double.parseDouble(coordinates[i]);
-                        double y = Double.parseDouble(coordinates[i + 1]);
-                        points.add(new Point2D(x, y));
-                    }
-                    iLines.add(new Line(points));
-                }
-
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return iLines;
-        }
-    }
-
-    class Line implements ILine {
-
-        private final Set<I2DPoint> POINTS;
-
-        public Line(Set<I2DPoint> points) {
-            this.POINTS = points;
-        }
-
-        @Override
-        public Set<I2DPoint> getPoints() {
-            return POINTS;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-
-            Line line = (Line) o;
-
-            return POINTS != null ? POINTS.equals(line.POINTS) : line.POINTS == null;
-        }
-
-        @Override
-        public int hashCode() {
-            return POINTS != null ? POINTS.hashCode() : 0;
         }
     }
 }
