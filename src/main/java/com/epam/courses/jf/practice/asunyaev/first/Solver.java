@@ -13,7 +13,7 @@ public class Solver implements ISolver {
 
     public static void main(String[] args) {
         Solver solver = new Solver();
-        solver.task9();
+        solver.task11();
     }
 
     @Override
@@ -324,7 +324,7 @@ public class Solver implements ISolver {
 
         try {
             monthNumber = Integer.valueOf(string);
-            if (monthNumber <= 1 && monthNumber >= 12) {
+            if (monthNumber < 1 || monthNumber > 12) {
                 System.out.println("INCORRECT INPUT DATA");
             }
             switch (monthNumber) {
