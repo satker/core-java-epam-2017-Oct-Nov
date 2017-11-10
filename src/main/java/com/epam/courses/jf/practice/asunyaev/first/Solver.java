@@ -398,7 +398,9 @@ public class Solver implements ISolver {
         int[][] shiftedMatrix = new int[DIMENSION][DIMENSION];
 
         if (shift == 0) {
+            System.out.println(DIMENSION);
             printMatrix(matrix, DIMENSION);
+            return;
         } else {
             for (int index = 0; index < DIMENSION; index++) {
                 newIndex = index + shift >= 0
