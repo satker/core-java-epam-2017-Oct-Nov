@@ -498,6 +498,7 @@ public class Solver implements ISolver {
             }
         }
 
+        System.out.println(DIMENSION);
         printMatrix(turnedMatrix, DIMENSION);
     }
 
