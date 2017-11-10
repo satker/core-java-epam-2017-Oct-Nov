@@ -230,13 +230,13 @@ public class Solver implements ISolver {
         }
 
         if (words.size() == 0) {
-            System.out.print("NOT FOUND");
+            System.out.println("NOT FOUND");
         } else {
             for (String word : words) {
                 System.out.print(word + " ");
             }
         }
-
+        System.out.println();
     }
 
     @Override
