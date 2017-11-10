@@ -477,39 +477,38 @@ public class Solver implements ISolver {
         printMatrixInteger(newMatrix);
     }
 
-    
+
 //
-//    public void task14() {
-//        Scanner in;
-//        int n, count, max;
-//        int[] seq;
-//
-//        in = new Scanner(System.in);
-//        n = in.nextInt();
-//        in = new Scanner(System.in);
-//        seq = new int[n];
-//        for (int j = 0; j < n; j++) {
-//            seq[j] = in.nextInt();
-//        }
-//
-//        count = 1;
-//        max = 1;
-//
-//        for (int j = 1; j < n; j++) {
-//            if (seq[j] > seq[j - 1]) {
-//                count++;
-//            } else {
-//                max = count;
-//                count = 1;
-//            }
-//        }
-//
-//        if (count > max) {
-//            max = count;
-//        }
-//
-//        System.out.println(max);
-//    }
+    public void task14() {
+        Scanner in;
+        int n, count, max;
+        int[] seq;
+
+        in = new Scanner(System.in);
+        n = Integer.valueOf(in.nextLine());
+        seq = new int[n];
+        for (int j = 0; j < n; j++) {
+            seq[j] = in.nextInt();
+        }
+
+        count = 1;
+        max = 1;
+
+        for (int j = 1; j < n; j++) {
+            if (seq[j] > seq[j - 1]) {
+                count++;
+            } else {
+                max = count;
+                count = 1;
+            }
+        }
+
+        if (count > max) {
+            max = count;
+        }
+
+        System.out.println(max);
+    }
 //
 //    public void task15() {
 //        Scanner in;
