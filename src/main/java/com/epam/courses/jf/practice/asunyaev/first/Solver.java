@@ -12,7 +12,7 @@ public class Solver implements ISolver {
 
     public static void main(String[] args) {
         Solver solver = new Solver();
-        solver.task2();
+        solver.task4();
     }
 
     @Override
@@ -119,7 +119,17 @@ public class Solver implements ISolver {
         Scanner scan = new Scanner(System.in);
         int N = scan.nextInt();
         scan.nextLine();
-        HashMap<String, HashSet> words = new HashMap<>();
+        class Pair {
+            String word;
+            HashSet uniqueLetters;
+
+            public Pair (String word, HashSet uniqueLetters) {
+               this.word = word;
+               this.uniqueLetters = uniqueLetters;
+            }
+        }
+
+        List<Pair> words = new ArrayList<>();
         String currentWord;
         String maxWord = "";
         int maxLength = 80;
@@ -128,16 +138,16 @@ public class Solver implements ISolver {
             currentWord = scan.next();
             HashSet letters = new HashSet();
             for (int j = 0; j < currentWord.length(); j++) {
-                letters.add(currentWord.charAt(j));
+                letters.add(Character.codePointAt(currentWord, j));
             }
-            words.put(currentWord, letters);
+            words.add(new Pair(currentWord, letters));
         }
 
-        for(Map.Entry<String, HashSet> entry : words.entrySet()) {
-            int currentLength = entry.getValue().size();
+        for(int i = 0; i < N; i++) {
+            int currentLength = words.get(i).uniqueLetters.size();
             if (currentLength < maxLength) {
                 maxLength = currentLength;
-                maxWord = entry.getKey();
+                maxWord = words.get(i).word;
             }
         }
         System.out.println(maxWord);
