@@ -233,7 +233,7 @@ public class Solver implements ISolver {
             System.out.print("NOT FOUND");
         } else {
             for (String word : words) {
-                System.out.println(word + " ");
+                System.out.print(word + " ");
             }
         }
 
