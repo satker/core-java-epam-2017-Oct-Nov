@@ -521,9 +521,9 @@ public class Solver implements ISolver {
         Integer[][] matrix;
 
         in = new Scanner(System.in);
-        System.out.println("Enter matrix dimension:");
+//        System.out.println("Enter matrix dimension:");
         n = Integer.valueOf(in.nextLine());
-        matrix = new Integer[n][n];
+//        matrix = new Integer[n][n];
 
         matrix = enterMatrixInteger(in);
 
