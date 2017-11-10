@@ -616,7 +616,7 @@ public class Solver implements ISolver {
 
 
         if (det != 0) {
-            printMatrixInteger(matrix);
+//            printMatrixInteger(matrix);
             det = matrix[length - 1][length - 1];
             for (int j = 0; j < length; j++) {
                 for (int k = 0; k < (length - j - 2); k++) {
