@@ -2,6 +2,7 @@ package com.epam.courses.jf.practice.asunyaev.first;
 
 import com.epam.courses.jf.practice.common.first.ISolver;
 
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
@@ -12,7 +13,7 @@ public class Solver implements ISolver {
 
     public static void main(String[] args) {
         Solver solver = new Solver();
-        solver.task7();
+        solver.task8();
     }
 
     @Override
@@ -249,20 +250,17 @@ public class Solver implements ISolver {
         Scanner scan = new Scanner(System.in);
         int N = scan.nextInt();
         String currentWord;
-        ArrayList<Integer> palyndroms = new ArrayList<Integer>();
+        ArrayList<String> palyndroms = new ArrayList<String>();
         scan.nextLine();
 
 
         for (int i = 0; i < N; i++) {
             currentWord = scan.next();
 
-            try {
-                int number = Integer.parseInt(currentWord);
-                if (isPalyndrom(number)) {
-                    palyndroms.add(number);
+            if (isNumeric(currentWord)) {
+                if (isPalyndrom(currentWord)) {
+                    palyndroms.add(currentWord);
                 }
-            } catch (NumberFormatException e) {
-                continue;
             }
         }
 
@@ -832,12 +830,17 @@ public class Solver implements ISolver {
         return vocalCounter;
     }
 
-    private boolean isPalyndrom(int number) {
+    private boolean isPalyndrom(String number) {
         String stringNumber = String.valueOf(number);
         if (stringNumber.length() == 1) {
             return true;
         }
         return stringNumber.equals(new StringBuilder(stringNumber).reverse().toString());
+    }
+
+    public static boolean isNumeric(String str)
+    {
+        return str.matches("-?\\d+(\\.\\d+)?");
     }
 
     private double determinant(double A[][], int N) {
