@@ -232,8 +232,13 @@ public class Solver implements ISolver {
         if (words.size() == 0) {
             System.out.println("NOT FOUND");
         } else {
+            int i = 0;
             for (String word : words) {
-                System.out.print(word + " ");
+                System.out.print(word);
+                i++;
+                if (i < words.size() - 1) {
+                    System.out.print(" ");
+                }
             }
         }
         System.out.println();
