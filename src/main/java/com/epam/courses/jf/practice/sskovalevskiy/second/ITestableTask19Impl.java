@@ -4,105 +4,112 @@ import com.epam.courses.jf.practice.common.second.ITestableTask19;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Created by asus on 28.10.2017.
  */
 public class ITestableTask19Impl implements ITestableTask19 {
+
+    private int countOvertaking = 0;
+
     @Override
     public int getNumberOvertaking(Set<ICar> cars, long lengthLap, int numberLaps) {
+        long[] positionsCars = new long[cars.size()];
+        Set<RaceCar> raceCars = new HashSet<>();
 
-//        1й за время t проедет S1 = V1*t,
-//        2й за время t проедет S2 = V2*t = lengthLap + V1*t => t = lengthLap/(V2 - V1), где t - время на один обгон
-//        Далее:
-//        Общее время движения любой ICar: T = lengthLap*numberLaps/ICar.getSpeed()
-//        Тогда за своё время движения T ICarX обгонит ICarY T/t раз, при условии, что ICarX.getSpeed() > ICarY.getSpeed()
+        cars.forEach(car -> raceCars.add(new RaceCar(car)));
+        RaceCar[] masRaceCars = raceCars.toArray(new RaceCar[cars.size()]);
 
-
-        ArrayList<ICar> list = new ArrayList<>(cars);
-        Comparator<ICar> comparator = (o1, o2) -> o2.getSpeed() - o1.getSpeed();
-        list.sort(comparator);
-
-        int totalNumberOfOvertakings = 0;
-        for (int i = 0; i < list.size() - 1; i++) {
-            double T = (lengthLap * numberLaps) / list.get(i).getSpeed();
-            for (int j = i + 1; j < list.size(); j++) {
-
-                if (list.get(i).getSpeed() == list.get(j).getSpeed()){
-                    continue;
-                }
-                double t = lengthLap / (list.get(i).getSpeed() - list.get(j).getSpeed());
-                totalNumberOfOvertakings += (int) T/t;
-            }
+        for (int i = 0; i < positionsCars.length; i++) {
+            positionsCars[i] = masRaceCars[i].getPosition();
         }
-        return totalNumberOfOvertakings;
+        bubbleSort(positionsCars, masRaceCars, false);
+
+        //main race
+        while (true) {
+            //one step
+            for (int i = 0; i < positionsCars.length; i++) {
+                if (masRaceCars[i].getPosition() != Long.MAX_VALUE) {
+                    masRaceCars[i].moveCar();
+
+                    if (masRaceCars[i].position >= lengthLap) {
+                        masRaceCars[i].setPosition(masRaceCars[i].position - lengthLap);
+                        masRaceCars[i].nextLap();
+                        if (masRaceCars[i].lap > numberLaps) {
+                            //set MAX_VALUE as a finish
+                            masRaceCars[i].setPosition(Long.MAX_VALUE);
+                        }
+                    }
+                }
+                positionsCars[i] = masRaceCars[i].getPosition();
+            }
+            bubbleSort(positionsCars,masRaceCars,true);
+            if(masRaceCars[0].getPosition() == Long.MAX_VALUE) break;
+        }
+
+        return countOvertaking;
     }
 
-    static class Car implements ICar, Comparable<Car> {
-        private int racePosition;
-        private final int startPosition;
-        private final int speed;
-        private int laps;
-        private long currentPosition;
+    private class RaceCar {
+        private int lap;
+        private long position;
+        private int speed;
 
-        int getRacePosition() {
-            return racePosition;
+        public RaceCar(ICar car) {
+            this.lap = 1;
+            this.position = car.getStartPosition();
+            this.speed = car.getSpeed();
         }
 
-        void setRacePosition(int racePosition) {
-            this.racePosition = racePosition;
+        public void moveCar() {
+            position += speed;
         }
 
-        int getLaps() {
-            return laps;
+        public void nextLap() {
+            lap++;
         }
 
-        void setLaps(int laps) {
-            this.laps = laps;
+        public long getPosition() {
+            return position;
         }
 
-        long getCurrentPosition() {
-            return currentPosition;
+        public int getLap() {
+            return lap;
         }
 
-        void setCurrentPosition(long currentPosition) {
-            this.currentPosition = currentPosition;
+        public void setPosition(long position) {
+            this.position = position;
         }
+    }
 
-        Car(int startPosition, int speed) {
-            this.startPosition = startPosition;
-            this.speed = speed;
-            this.laps = 0;
-            this.racePosition = 0;
-            this.currentPosition = startPosition;
-        }
-
-        @Override
-        public int getStartPosition() {
-            return startPosition;
-        }
-
-        @Override
-        public int getSpeed() {
-            return speed;
-        }
-
-        @Override
-        public int compareTo(Car o) {
-            if (currentPosition != o.currentPosition) {
-                return Long.compare(this.currentPosition, o.currentPosition);
-            } else {
-                return Integer.compare(racePosition, o.racePosition);
+    private void bubbleSort(long[] massive, RaceCar[] masCars, boolean isRace) {
+        boolean isAlreadySorted = false;
+        for (int i = 0; i < massive.length - 1 && !isAlreadySorted; i++) {
+            isAlreadySorted = true;
+            for (int j = 0; j < massive.length - i - 1; j++) {
+                if(masCars[j].getLap() <= masCars[j+1].getLap()) {
+                    if (massive[j] > massive[j + 1]) {
+                        swap(massive, masCars, j, j + 1);
+                        isAlreadySorted = false;
+                        if (isRace) {
+                            countOvertaking++;
+                        }
+                    }
+                }
             }
         }
+    }
 
-        @Override
-        public String toString() {
-            return "Car{" +
-                    "laps=" + laps +
-                    ", currentPosition=" + currentPosition +
-                    '}';
-        }
+    private void swap(long[] massive, RaceCar[] masCars, int leftIndex, int rightIndex) {
+
+        long temp = massive[rightIndex];
+        massive[rightIndex] = massive[leftIndex];
+        massive[leftIndex] = temp;
+
+        RaceCar tempCar = masCars[rightIndex];
+        masCars[rightIndex] = masCars[leftIndex];
+        masCars[leftIndex] = tempCar;
     }
 }
