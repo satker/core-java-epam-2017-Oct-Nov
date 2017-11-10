@@ -407,7 +407,7 @@ public class Solver implements ISolver {
                 copyRow(matrix, index, shiftedMatrix, newIndex);
             }
         }
-
+        System.out.println(DIMENSION);
         printMatrix(shiftedMatrix, DIMENSION);
 
     }
