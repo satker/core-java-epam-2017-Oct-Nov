@@ -13,7 +13,7 @@ public class Solver implements ISolver {
 
     public static void main(String[] args) {
         Solver solver = new Solver();
-        solver.task11();
+        solver.task12();
     }
 
     @Override
@@ -384,6 +384,7 @@ public class Solver implements ISolver {
                 return value1.compareTo(value2);
             }
         });
+        System.out.println(DIMENSION);
         printMatrix(matrix, DIMENSION);
     }
 
@@ -808,7 +809,10 @@ public class Solver implements ISolver {
     private void printMatrix(int[][] matrix, int dimension) {
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < dimension; j++) {
-                System.out.print(matrix[i][j] + "\t");
+                System.out.print(matrix[i][j]);
+                if (j < dimension - 1) {
+                    System.out.print("\t");
+                }
             }
             System.out.println();
         }
@@ -817,7 +821,10 @@ public class Solver implements ISolver {
     private void printIntegerMatrix(Integer[][] matrix, int dimension) {
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < dimension; j++) {
-                System.out.print(matrix[i][j] + "\t");
+                System.out.print(matrix[i][j]);
+                if (j < dimension - 1) {
+                    System.out.print("\t");
+                }
             }
             System.out.println();
         }
@@ -841,8 +848,7 @@ public class Solver implements ISolver {
         return stringNumber.equals(new StringBuilder(stringNumber).reverse().toString());
     }
 
-    public static boolean isNumeric(String str)
-    {
+    public static boolean isNumeric(String str) {
         return str.matches("-?\\d+(\\.\\d+)?");
     }
 
@@ -918,7 +924,10 @@ public class Solver implements ISolver {
     private void printAnyMatrix(int[][] matrix) {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
-                System.out.print(matrix[i][j] + "\t");
+                System.out.print(matrix[i][j]);
+                if (j < matrix[0].length - 1) {
+                    System.out.print("\t");
+                }
             }
             System.out.println();
         }
