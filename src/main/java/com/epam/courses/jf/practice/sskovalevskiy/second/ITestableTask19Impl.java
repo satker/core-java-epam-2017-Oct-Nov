@@ -5,7 +5,6 @@ import com.epam.courses.jf.practice.common.second.ITestableTask19;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * Created by asus on 28.10.2017.
@@ -38,5 +37,72 @@ public class ITestableTask19Impl implements ITestableTask19 {
             }
         }
         return totalNumberOfOvertakings;
+    }
+
+    static class Car implements ICar, Comparable<Car> {
+        private int racePosition;
+        private final int startPosition;
+        private final int speed;
+        private int laps;
+        private long currentPosition;
+
+        int getRacePosition() {
+            return racePosition;
+        }
+
+        void setRacePosition(int racePosition) {
+            this.racePosition = racePosition;
+        }
+
+        int getLaps() {
+            return laps;
+        }
+
+        void setLaps(int laps) {
+            this.laps = laps;
+        }
+
+        long getCurrentPosition() {
+            return currentPosition;
+        }
+
+        void setCurrentPosition(long currentPosition) {
+            this.currentPosition = currentPosition;
+        }
+
+        Car(int startPosition, int speed) {
+            this.startPosition = startPosition;
+            this.speed = speed;
+            this.laps = 0;
+            this.racePosition = 0;
+            this.currentPosition = startPosition;
+        }
+
+        @Override
+        public int getStartPosition() {
+            return startPosition;
+        }
+
+        @Override
+        public int getSpeed() {
+            return speed;
+        }
+
+        @Override
+        public int compareTo(Car o) {
+            if (currentPosition != o.currentPosition) {
+                return Long.compare(this.currentPosition, o.currentPosition);
+            } else {
+                return Integer.compare(racePosition, o.racePosition);
+            }
+        }
+
+        @Override
+        public String toString() {
+            return "Car{" +
+                    "laps=" + laps +
+                    ", currentPosition=" + currentPosition +
+                    '}';
+        }
     }
 }
