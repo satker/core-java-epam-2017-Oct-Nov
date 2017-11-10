@@ -355,7 +355,11 @@ public class Solver implements ISolver {
             final int columnNumber = scanner.nextInt();
             int dimension = scanner.nextInt();
             int[][] matrix = Utils.readMatrix(scanner, dimension);
-            Arrays.sort(matrix, (o1, o2) -> Integer.compare(o2[columnNumber], o1[columnNumber]));
+            Arrays.sort(matrix, (o1, o2) -> {
+                Integer numOfKeys1 = o1[columnNumber];
+                Integer numOfKeys2 = o2[columnNumber];
+                return numOfKeys1.compareTo(numOfKeys2);
+            });
             System.out.print(dimension + "\n");
             Utils.printMatrix(matrix, dimension, System.out);
         }
