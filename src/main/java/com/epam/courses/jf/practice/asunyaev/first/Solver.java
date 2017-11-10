@@ -12,7 +12,7 @@ public class Solver implements ISolver {
 
     public static void main(String[] args) {
         Solver solver = new Solver();
-        solver.task4();
+        solver.task6();
     }
 
     @Override
@@ -188,20 +188,18 @@ public class Solver implements ISolver {
             }
 
             for (int j = 0; j < currentWord.length() - 1; j++) {
-                if (currentWord.codePointAt(j+1) < currentWord.codePointAt(j)) {
+                if (currentWord.codePointAt(j+1) <= currentWord.codePointAt(j)) {
                     continue cycle;
                 }
             }
 
             wordsCounter++;
-            if (wordsCounter == 1) {
-                System.out.println();
-            }
-            System.out.print(currentWord + " ");
+            System.out.println(currentWord);
+            break;
         }
 
         if (wordsCounter == 0) {
-            System.out.print("NOT FOUND");
+            System.out.println("NOT FOUND");
         }
     }
 
