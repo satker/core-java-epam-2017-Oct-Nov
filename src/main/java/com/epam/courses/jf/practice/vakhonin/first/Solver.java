@@ -582,48 +582,50 @@ public class Solver implements ISolver {
         }
         System.out.println(n);
         printMatrixInteger(matrixNew);
+    }   // DOING!
+//
+    public void task17() {
+        Scanner in = new Scanner(System.in);
+
+        Integer[][] matrix;
+        matrix = enterMatrixInteger(in);
+
+        Integer element;
+        int det = 1;
+        int length = matrix.length;
+        for (int j = 0; j < length; j++) {
+
+            for (int k = j; k < length; k++) {
+                element = matrix[j][k];
+                if (!element.equals(0)) {
+                    swapRows(matrix, j, k);
+                    break;
+                }
+                det = 0;
+                break;
+            }
+
+            if (det != 0) {
+                for (int k = j + 1; k < length; k++) {
+                    for (int i = length - 1; i >= j; i--) {
+                        matrix[k][i] = matrix[j][j] * matrix[k][i] - matrix[k][j] * matrix[j][i];
+                    }
+                }
+            }
+        }
+
+
+        if (det != 0) {
+            printMatrixInteger(matrix);
+            det = matrix[length - 1][length - 1];
+            for (int j = 0; j < length; j++) {
+                for (int k = 0; k < (length - j - 2); k++) {
+                    det /= matrix[j][j];
+                }
+            }
+        }
+        System.out.println(det);
     }
-//
-//    public void task17() {
-//        Integer[][] matrix;
-//        matrix = enterMatrixInteger();
-//
-//        Integer element;
-//        int det = 1;
-//        int length = matrix.length;
-//        for (int j = 0; j < length; j++) {
-//
-//            for (int k = j; k < length; k++) {
-//                element = matrix[j][k];
-//                if (!element.equals(0)) {
-//                    swapRows(matrix, j, k);
-//                    break;
-//                }
-//                det = 0;
-//                break;
-//            }
-//
-//            if (det != 0) {
-//                for (int k = j + 1; k < length; k++) {
-//                    for (int i = length - 1; i >= j; i--) {
-//                        matrix[k][i] = matrix[j][j] * matrix[k][i] - matrix[k][j] * matrix[j][i];
-//                    }
-//                }
-//            }
-//        }
-//
-//
-//        if (det != 0) {
-//            printMatrixInteger(matrix);
-//            det = matrix[length - 1][length - 1];
-//            for (int j = 0; j < length; j++) {
-//                for (int k = 0; k < (length - j - 2); k++) {
-//                    det /= matrix[j][j];
-//                }
-//            }
-//        }
-//        System.out.println(det);
-//    }
 //
 //    public void task18() {
 //        int n, max, k, i;
@@ -1128,12 +1130,12 @@ public class Solver implements ISolver {
 //        return matrix;
 //    }
 //
-//    public void swapRows(Integer[][] matrix, int j, int k) {
-//        Integer[] temp;
-//        temp = matrix[j];
-//        matrix[j] = matrix[k];
-//        matrix[k] = temp;
-//    }
+    public void swapRows(Integer[][] matrix, int j, int k) {
+        Integer[] temp;
+        temp = matrix[j];
+        matrix[j] = matrix[k];
+        matrix[k] = temp;
+    }
 //
     public Integer[][] enterMatrixInteger(Scanner in) {
 
