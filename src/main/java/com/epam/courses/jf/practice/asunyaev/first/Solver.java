@@ -13,7 +13,7 @@ public class Solver implements ISolver {
 
     public static void main(String[] args) {
         Solver solver = new Solver();
-        solver.task12();
+        solver.task14();
     }
 
     @Override
@@ -418,28 +418,40 @@ public class Solver implements ISolver {
     public void task14() {
         Scanner scanner = new Scanner(System.in);
         final int N = scanner.nextInt();
-        int maxLength = 1;
+        int maxLength = 0;
         scanner.nextLine();
         int array[] = new int[N];
+
+
         for (int i = 0; i < N; i++) {
             array[i] = scanner.nextInt();
         }
 
+        /*if (N == 1) {
+            System.out.println(0);
+            return;
+        }*/
+
+
+        outer:
         for (int i = 0; i < N - 1; i++) {
             int j = i;
             int currentLength = 1;
-            while (array[j+1] > array[j]) {
+            while (array[j + 1] > array[j]) {
                 currentLength++;
                 j++;
-            }
-            if (maxLength < currentLength) {
-                maxLength = currentLength;
+                if (j == N - 1) {
+                    if (maxLength < currentLength) {
+                        maxLength = currentLength;
+                    }
+                    continue outer;
+                }
+                if (maxLength < currentLength) {
+                    maxLength = currentLength;
+                }
             }
         }
-
         System.out.println(maxLength);
-
-
     }
 
     @Override
