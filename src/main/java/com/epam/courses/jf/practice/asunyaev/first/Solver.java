@@ -12,7 +12,7 @@ public class Solver implements ISolver {
 
     public static void main(String[] args) {
         Solver solver = new Solver();
-        solver.task25();
+        solver.task26();
     }
 
     @Override
@@ -682,8 +682,50 @@ public class Solver implements ISolver {
         System.out.println(localMinsCount);
     }
 
-    //@Override
-    //public void task26() TODO
+    @Override
+    public void task26() {
+        Scanner scanner = new Scanner(System.in);
+        final int DIMENSION = scanner.nextInt();
+        int[][] matrix = readMatrix(scanner, DIMENSION);
+        int[][] modifiedMatrix = new int[DIMENSION + 2][DIMENSION + 2];
+        int max = -1;
+        if (DIMENSION == 1) {
+            max = matrix[0][0];
+            System.out.println(max);
+            return;
+        }
+        for (int i = 0; i < DIMENSION + 2; i++) {
+            for (int j = 0; j < DIMENSION + 2; j++) {
+                if ((i == 0) || (i == DIMENSION + 1) || (j == 0) || (j == DIMENSION + 1)) {
+                    modifiedMatrix[i][j] = -999;
+                } else {
+                    modifiedMatrix[i][j] = matrix[i - 1][j - 1];
+                }
+
+            }
+        }
+        for (int i = 1; i < DIMENSION + 1; i++) {
+            for (int j = 1; j < DIMENSION + 1; j++) {
+                if (modifiedMatrix[i][j] > modifiedMatrix[i + 1][j - 1] &&
+                        modifiedMatrix[i][j] > modifiedMatrix[i + 1][j] &&
+                        modifiedMatrix[i][j] > modifiedMatrix[i + 1][j + 1] &&
+                        modifiedMatrix[i][j] > modifiedMatrix[i][j - 1] &&
+                        modifiedMatrix[i][j] > modifiedMatrix[i][j + 1] &&
+                        modifiedMatrix[i][j] > modifiedMatrix[i - 1][j - 1] &&
+                        modifiedMatrix[i][j] > modifiedMatrix[i - 1][j] &&
+                        modifiedMatrix[i][j] > modifiedMatrix[i - 1][j + 1] &&
+                        modifiedMatrix[i][j] > max) {
+                    max = modifiedMatrix[i][j];
+                }
+            }
+        }
+
+        if (max != -1) {
+            System.out.println(max);
+        } else {
+            System.out.println("NOT FOUND");
+        }
+    }
 
     @Override
     public void task27() {
