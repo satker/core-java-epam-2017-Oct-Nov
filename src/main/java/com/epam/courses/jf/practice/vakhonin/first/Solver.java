@@ -555,46 +555,33 @@ public class Solver implements ISolver {
             sumOut += sumIn;
         }
         System.out.println(sumOut);
-    }
+    }   // DOING!
 //
 //    //TODO: где-то нужно еще какие то размерности выводить...
 //    //TODO: compareToIgnoreCase
 //    //TODO: корни уравнения, разобрать все случаи
 //    //TODO: седловые точки в 23. что делать, если минимальный элемент в нескольких экзамеплярах ?
-//    public void task16() {
-//        Scanner in;
-//        int n, length;
-//        int[][] matrix, matrixNew;
+    public void task16() {
+        Scanner in;
+        int n, length;
+        Integer[][] matrix, matrixNew;
 //        StringBuilder stringMatrix;
-//
-//        in = new Scanner(System.in);
+
+        in = new Scanner(System.in);
 //        System.out.println("Enter matrix dimension:");
 //        n = in.nextInt();
-//        matrix = new int[n][n];
-//        matrixNew = new int[n][n];
+        matrix = enterMatrixInteger(in);
+        n = matrix.length;
+        matrixNew = new Integer[n][n];
 //        System.out.println("Enter matrix of " + n + "x" + n + ":");
-//        for (int j = 0; j < n; j++) {
-//            for (int q = 0; q < n; q++) {
+        for (int j = 0; j < n; j++) {
+            for (int q = 0; q < n; q++) {
 //                matrix[j][q] = in.nextInt();
-//                matrixNew[n - q - 1][j] = matrix[j][q];
-//            }
-//        }
-//
-//        stringMatrix = new StringBuilder();
-//
-//        for (int j = 0; j < n; j++) {
-//            for (int q = 0; q < n; q++) {
-//                stringMatrix.append(matrixNew[j][q] + "\t");
-//            }
-//            length = stringMatrix.length();
-//            stringMatrix.setLength(length - 1);
-//            stringMatrix.append("\n");
-//        }
-//
-//        length = stringMatrix.length();
-//        stringMatrix.setLength(length - 1);
-//        System.out.println(stringMatrix);
-//    }
+                matrixNew[n - q - 1][j] = matrix[j][q];
+            }
+        }
+        printMatrixInteger(matrixNew);
+    }
 //
 //    public void task17() {
 //        Integer[][] matrix;
