@@ -481,7 +481,7 @@ public class Solver implements ISolver {
 //
     public void task14() {
         Scanner in;
-        int n, count, max;
+        int n, count, max, result;
         int[] seq;
 
         in = new Scanner(System.in);
@@ -506,8 +506,14 @@ public class Solver implements ISolver {
         if (count > max) {
             max = count;
         }
+        if (max == 1){
+            result = 0;
+        }
+        else{
+            result = max;
+        }
 
-        System.out.println(max);
+        System.out.println(result);
     }
 //
 //    public void task15() {
