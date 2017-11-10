@@ -12,7 +12,7 @@ public class Solver implements ISolver {
 
     public static void main(String[] args) {
         Solver solver = new Solver();
-        solver.task26();
+        solver.task2();
     }
 
     @Override
@@ -51,23 +51,39 @@ public class Solver implements ISolver {
     public void task2() {
         Scanner scan = new Scanner(System.in);
         int N = scan.nextInt();
-        HashMap<Integer, String> lines = new HashMap<>();
-        int[] lengths = new int[N];
+        class Pair {
+            Integer length;
+            String line;
+
+            public Pair(Integer i, String s) {
+                length = i;
+                line = s;
+            }
+        }
+
+        List<Pair> lines = new ArrayList<>();
         String currentString;
 
         scan.nextLine();
 
         for (int i = 0; i < N; i++) {
             currentString = scan.nextLine();
-            lengths[i] = currentString.length();
-            lines.put(lengths[i], currentString);
+            lines.add(new Pair(currentString.length(), currentString));
         }
 
-        Arrays.sort(lengths);
+        lines.sort(new Comparator<Pair>() {
+            @Override
+            public int compare(Pair o1, Pair o2) {
+                if (o1.length.compareTo(o2.length) == 0) {
+                    return o1.line.compareTo(o2.line);
+                } else {
+                    return o1.length.compareTo(o2.length);
+                }
+            }
+        });
 
         for (int i = 0; i < N; i++) {
-            lines.get(lengths[i]);
-            System.out.printf("(%d): \"%s\"%n", lengths[i], lines.get(lengths[i]));
+            System.out.printf("(%d): \"%s\"%n", lines.get(i).length, lines.get(i).line);
         }
     }
 
