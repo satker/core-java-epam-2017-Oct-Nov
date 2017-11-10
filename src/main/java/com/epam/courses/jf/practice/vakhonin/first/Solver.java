@@ -522,11 +522,11 @@ public class Solver implements ISolver {
 
         in = new Scanner(System.in);
 //        System.out.println("Enter matrix dimension:");
-        n = Integer.valueOf(in.nextLine());
+//        n = Integer.valueOf(in.nextLine());
 //        matrix = new Integer[n][n];
 
         matrix = enterMatrixInteger(in);
-
+        n = matrix.length;
         sumOut = 0;
 
         for (int k = 0; k < n; k++) {
