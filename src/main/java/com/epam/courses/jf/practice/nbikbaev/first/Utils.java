@@ -2,6 +2,7 @@ package com.epam.courses.jf.practice.nbikbaev.first;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 public class Utils {
@@ -16,14 +17,14 @@ public class Utils {
         return matrix;
     }
 
-    public static void printMatrix(int[][] matrix, int dimension) {
+    public static void printMatrix(int[][] matrix, int dimension, PrintStream printStream) {
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < dimension; j++) {
-                System.out.print(matrix[i][j]);
+                printStream.print(matrix[i][j]);
                 if (j == 4) {
-                    System.out.println();
+                    printStream.print("\n");
                 } else {
-                    System.out.print(" ");
+                    printStream.print(" ");
                 }
             }
         }
