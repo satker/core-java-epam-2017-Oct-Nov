@@ -13,7 +13,7 @@ public class Solver implements ISolver {
 
     public static void main(String[] args) {
         Solver solver = new Solver();
-        solver.task8();
+        solver.task9();
     }
 
     @Override
@@ -286,7 +286,10 @@ public class Solver implements ISolver {
 
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                System.out.print(k + "\t");
+                System.out.print(k);
+                if (j < N - 1) {
+                    System.out.print("\t");
+                }
                 k++;
             }
             System.out.println();
