@@ -12,7 +12,7 @@ public class Solver implements ISolver {
 
     public static void main(String[] args) {
         Solver solver = new Solver();
-        solver.task6();
+        solver.task7();
     }
 
     @Override
@@ -208,15 +208,14 @@ public class Solver implements ISolver {
         Scanner scan = new Scanner(System.in);
         int N = scan.nextInt();
         String currentWord;
-        int wordsCounter = 0;
         scan.nextLine();
-
+        Set<String> words = new LinkedHashSet<>();
         cycle:
         for (int i = 0; i < N; i++) {
             currentWord = scan.next();
 
             if (currentWord.length() == 1) {
-                System.out.print(currentWord + " ");
+                words.add(currentWord);
                 continue;
             }
 
@@ -227,16 +226,17 @@ public class Solver implements ISolver {
                 }
 
             }
-            wordsCounter++;
-            if (wordsCounter == 1) {
-                System.out.println();
-            }
-            System.out.print(currentWord + " ");
+            words.add(currentWord);
         }
 
-        if (wordsCounter == 0) {
+        if (words.size() == 0) {
             System.out.print("NOT FOUND");
+        } else {
+            for (String word : words) {
+                System.out.println(word + " ");
+            }
         }
+
     }
 
     @Override
