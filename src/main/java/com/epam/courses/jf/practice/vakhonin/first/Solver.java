@@ -580,6 +580,7 @@ public class Solver implements ISolver {
                 matrixNew[n - q - 1][j] = matrix[j][q];
             }
         }
+        System.out.println(n);
         printMatrixInteger(matrixNew);
     }
 //
