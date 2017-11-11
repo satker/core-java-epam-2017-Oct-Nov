@@ -872,52 +872,53 @@ public class Solver implements ISolver {
 //        //TODO: to do INF on the sides
 //    }
 //
-//    public void task26() { //TODO: оформить код!!!!
-//
-//        Scanner in;
-//        int n;
-//        Integer[][] matrix;
-//
-//        in = new Scanner(System.in);
+    public void task26() { //TODO: оформить код!!!!
+
+        Scanner in;
+        int n;
+        Integer[][] matrix;
+
+        in = new Scanner(System.in);
 //        System.out.println("Enter matrix dimension:");
-//        n = in.nextInt();
-//        matrix = new Integer[n + 2][n + 2];
+        n = in.nextInt();
+        matrix = new Integer[n + 2][n + 2];
 //        System.out.println("Enter matrix of " + n + "x" + n + ":");
-//
-//
-//        for (int q = 1; q < n + 1; q++) {
-//            for (int j = 1; j < n + 1; j++) {
-//                matrix[j][q] = in.nextInt();
-//            }
-//        }
-//        for (int j = 0; j < n + 2; j++) {
-//            matrix[j][0] = Integer.MIN_VALUE;
-//            matrix[j][n + 1] = Integer.MIN_VALUE;
-//            matrix[0][j] = Integer.MIN_VALUE;
-//            matrix[n + 1][j] = Integer.MIN_VALUE;
-//
-//        }
-//
-//
-//        int length = matrix.length;
-//        Integer maximum = Integer.MIN_VALUE;
-//
-//        for (int j = 1; j < n + 1; j++) {
-//            for (int k = 1; k < n + 1; k++) {
-//                if ((matrix[j][k] > maximum) && ((matrix[j][k] > matrix[j - 1][k]) && (matrix[j][k] > matrix[j - 1][k - 1]) && (matrix[j][k] > matrix[j][k - 1]) && (matrix[j][k] > matrix[j + 1][k - 1]) && (matrix[j][k] > matrix[j + 1][k + 1]) && (matrix[j][k] > matrix[j + 1][k]) && (matrix[j][k] > matrix[j][k + 1]) && (matrix[j][k] > matrix[j - 1][k + 1]))) {
-//                    maximum = matrix[j][k];
-//                }
-//            }
-//        }
-//        String result;
-//
-//        if (maximum.equals(Integer.MIN_VALUE)) {
-//            result = "NOT FOUND";
-//        } else {
-//            result = "" + maximum;
-//        }
-//        System.out.println(result);
-//    }
+
+
+        for (int q = 1; q < n + 1; q++) {
+            for (int j = 1; j < n + 1; j++) {
+                matrix[j][q] = in.nextInt();
+            }
+        }
+        for (int j = 0; j < n + 2; j++) {
+            matrix[j][0] = Integer.MIN_VALUE;
+            matrix[j][n + 1] = Integer.MIN_VALUE;
+            matrix[0][j] = Integer.MIN_VALUE;
+            matrix[n + 1][j] = Integer.MIN_VALUE;
+
+        }
+
+
+        int length = matrix.length;
+        Integer maximum = Integer.MIN_VALUE;
+
+        for (int j = 1; j < n + 1; j++) {
+            for (int k = 1; k < n + 1; k++) {
+                if ((matrix[j][k] > maximum) && ((matrix[j][k] > matrix[j - 1][k]) && (matrix[j][k] > matrix[j - 1][k - 1]) && (matrix[j][k] > matrix[j][k - 1]) && (matrix[j][k] > matrix[j + 1][k - 1]) && (matrix[j][k] > matrix[j + 1][k + 1]) && (matrix[j][k] > matrix[j + 1][k]) && (matrix[j][k] > matrix[j][k + 1]) && (matrix[j][k] > matrix[j - 1][k + 1]))) {
+                    maximum = matrix[j][k];
+                }
+            }
+        }
+        String result;
+
+        if (maximum.equals(Integer.MIN_VALUE)) {
+            result = "NOT FOUND";
+        } else {
+            result = "" + maximum;
+        }
+
+        System.out.println(result);
+    }
 //
 //    public void task27() {
 //        Integer[][] matrix = transposeMatrixInteger(enterMatrixInteger());
