@@ -864,7 +864,7 @@ public class Solver implements ISolver {
 
         System.out.println(n);
         printMatrixInteger(matrix);
-    }
+    }   // DOING!
 //
 //    public void task25() {
 //
@@ -918,20 +918,23 @@ public class Solver implements ISolver {
         }
 
         System.out.println(result);
+    }   // DOING!
+//
+    public void task27() {
+
+        Scanner in = new Scanner(System.in);
+        Integer[][] matrix = transposeMatrix(enterMatrixInteger(in));
+        int n = matrix.length;
+        Arrays.sort(matrix, new Comparator<Integer[]>() {
+            public int compare(Integer[] line1, Integer[] line2) {
+                return characteristic(line2) - characteristic(line1);
+            }
+        });
+
+        Integer[][] matrixNew = transposeMatrix(matrix);
+        System.out.println(n);
+        printMatrixInteger(matrixNew);
     }
-//
-//    public void task27() {
-//        Integer[][] matrix = transposeMatrixInteger(enterMatrixInteger());
-//
-//        Arrays.sort(matrix, new Comparator<Integer[]>() {
-//            public int compare(Integer[] line1, Integer[] line2) {
-//                return characteristic(line2) - characteristic(line1);
-//            }
-//        });
-//
-//        Integer[][] matrixNew = transposeMatrixInteger(matrix);
-//        printMatrixInteger(matrixNew);
-//    }
 
 //
 //    HashMap<Integer, Integer> task2_6_addPolynomials(HashMap<Integer, Integer> first, HashMap<Integer, Integer> second) {
@@ -1115,15 +1118,15 @@ public class Solver implements ISolver {
 
 //
 //
-//    public Integer characteristic(Integer[] line) {
-//        int length = line.length;
-//        Integer result;
-//        result = 0;
-//        for (int j : line) {
-//            result += Math.abs(j);
-//        }
-//        return result;
-//    }
+    public Integer characteristic(Integer[] line) {
+        int length = line.length;
+        Integer result;
+        result = 0;
+        for (int j : line) {
+            result += Math.abs(j);
+        }
+        return result;
+    }
 //
     public int sum(Integer[] arr) {
         int sum = 0;
