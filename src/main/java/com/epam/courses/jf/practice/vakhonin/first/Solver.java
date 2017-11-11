@@ -784,37 +784,40 @@ public class Solver implements ISolver {
 
         System.out.println(n);
         printMatrixInteger(matrix);
-    }
+    }   // DOING!
 //
 //
 //    //    TODO: to do universe method: enterMatrix
-//    public void task21() {
-//
-////        int length;
-//        Integer[][] matrix = enterMatrixInteger();
-////        length = matrix.length;
-//
-//        for (Integer[] arr : matrix) {
-//            Arrays.sort(arr, new Comparator<Integer>() {
-//                public int compare(Integer r1, Integer r2) {
-//                    int result = 0;
-//
-//                    if (r1 == 0 && r2 != 0) {
-//                        result = 1;
-//                    }
-//                    if (r1 != 0 && r2 == 0) {
-//                        result = -1;
-//                    }
-//                    //TODO: это можно убрать, наверное, так как резалт уже задан как 0
-//                    if (r1 == r2) {
-//                        result = 0;
-//                    }
-//                    return result;
-//                }
-//            });
-//        }
-//        printMatrixInteger(matrix);
-//    }
+    public void task21() {
+
+//        int length;
+        Scanner in = new Scanner(System.in);
+        Integer[][] matrix = enterMatrixInteger(in);
+//        length = matrix.length;
+        int n = matrix.length;
+
+        for (Integer[] arr : matrix) {
+            Arrays.sort(arr, new Comparator<Integer>() {
+                public int compare(Integer r1, Integer r2) {
+                    int result = 0;
+
+                    if (r1 == 0 && r2 != 0) {
+                        result = 1;
+                    }
+                    if (r1 != 0 && r2 == 0) {
+                        result = -1;
+                    }
+                    //TODO: это можно убрать, наверное, так как резалт уже задан как 0
+                    if (r1 == r2) {
+                        result = 0;
+                    }
+                    return result;
+                }
+            });
+        }
+        System.out.println(n);
+        printMatrixInteger(matrix);
+    }
 //
 //    public void task22() {
 //        Double[][] matrix = enterMatrixDouble();
