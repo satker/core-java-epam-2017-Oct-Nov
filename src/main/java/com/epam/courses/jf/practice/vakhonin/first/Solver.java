@@ -817,7 +817,7 @@ public class Solver implements ISolver {
         }
         System.out.println(n);
         printMatrixInteger(matrix);
-    }   // DOING !
+    }   // DOING!
 //
     public void task22() {
 
@@ -836,32 +836,35 @@ public class Solver implements ISolver {
 
         System.out.println(length);
         printMatrixInteger(matrixNew);
+    }   // DOING!
+
+    public void task24() {
+
+
+        Scanner in = new Scanner(System.in);
+        Integer[][] matrix = enterMatrixInteger(in);
+        int n = matrix.length;
+        Arrays.sort(matrix, new Comparator<Integer[]>() {
+            public int compare(Integer[] arr1, Integer[] arr2) {
+
+                int result = 0;
+                int sum1, sum2;
+                sum1 = sum(arr1);
+                sum2 = sum(arr2);
+                if (sum2 > sum1) {
+                    result = -1;
+                }
+                if (sum2 < sum1) {
+                    result = 1;
+                }
+
+                return result;
+            }
+        });
+
+        System.out.println(n);
+        printMatrixInteger(matrix);
     }
-//
-//    public void task24() {
-//
-//        Integer[][] matrix = enterMatrixInteger();
-//        Arrays.sort(matrix, new Comparator<Integer[]>() {
-//            public int compare(Integer[] arr1, Integer[] arr2) {
-//
-//                int result = 0;
-//                int sum1, sum2;
-//                sum1 = sum(arr1);
-//                sum2 = sum(arr2);
-//                if (sum2 > sum1) {
-//                    result = -1;
-//                }
-//                if (sum2 < sum1) {
-//                    result = 1;
-//                }
-//
-//                return result;
-//            }
-//        });
-//
-//
-//        printMatrixInteger(matrix);
-//    }
 //
 //    public void task25() {
 //
@@ -1121,13 +1124,13 @@ public class Solver implements ISolver {
 //        return result;
 //    }
 //
-//    public int sum(Integer[] arr) {
-//        int sum = 0;
-//        for (int j : arr) {
-//            sum += j;
-//        }
-//        return sum;
-//    }
+    public int sum(Integer[] arr) {
+        int sum = 0;
+        for (int j : arr) {
+            sum += j;
+        }
+        return sum;
+    }
 //
 //    public int[][] enterMatrix() {
 //        Scanner in;
