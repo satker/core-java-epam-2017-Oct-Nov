@@ -833,6 +833,8 @@ public class Solver implements ISolver {
             }
 
         }
+
+        System.out.println(length);
         printMatrixInteger(matrixNew);
     }
 //
