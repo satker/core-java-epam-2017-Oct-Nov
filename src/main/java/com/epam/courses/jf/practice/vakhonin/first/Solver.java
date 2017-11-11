@@ -677,7 +677,7 @@ public class Solver implements ISolver {
         System.out.println(matrixNew[0].length);
 
         printMatrixInteger(matrixNew);
-    }
+    }   // DOING!
 //
     public void task19() {
         int n, i, k, numberOfZeros;
@@ -736,54 +736,55 @@ public class Solver implements ISolver {
         System.out.println(matrixNew[0].length);
 
         printMatrixInteger(matrixNew);
-    }
+    }   // DOING!
 //
-//    public void task20() {
-//
-//        Scanner in;
-//
-//        int n, min, row, column, targetRow, targetColumn;
-//        int[][] matrix, matrixT, matrixNew;
-//        int[] temp;
-//
-//        in = new Scanner(System.in);
-//
+    public void task20() {
+
+        Scanner in;
+
+        int n, min, row, column, targetRow, targetColumn;
+        Integer[][] matrix, matrixT, matrixNew;
+        Integer[] temp;
+
+        in = new Scanner(System.in);
+
 //        System.out.println("Enter target row: ");
-//        targetRow = in.nextInt();
+        targetRow = in.nextInt();
 //        System.out.println("Enter target column: ");
-//        targetColumn = in.nextInt();
-//
-//        matrix = enterMatrix();
-//        n = matrix.length;
-//        matrixNew = new int[n][n];
-//        row = 0;
-//        column = 0;
-//        min = matrix[0][0];
-//
-//        for (int j = 0; j < n; j++) {
-//            for (int k = 0; k < n; k++) {
-//                if (matrix[j][k] <= min) {
-//                    min = matrix[j][k];
-//                    row = j;
-//                    column = k;
-//                }
-//            }
-//        }
-//
-//        temp = matrix[targetRow].clone();
-//        matrix[targetRow] = matrix[row].clone();
-//        matrix[row] = temp.clone();
-//
-//        matrixT = transposeMatrix(matrix);
-//
-//        temp = matrixT[targetColumn].clone();
-//        matrixT[targetColumn] = matrixT[column].clone();
-//        matrixT[column] = temp.clone();
-//
-//        matrix = transposeMatrix(matrixT);
-//
-//        printMatrix(matrix);
-//    }
+        targetColumn = in.nextInt();
+
+        matrix = enterMatrixInteger(in);
+        n = matrix.length;
+//        matrixNew = new Integer[n][n];
+        row = 0;
+        column = 0;
+        min = matrix[0][0];
+
+        for (int j = 0; j < n; j++) {
+            for (int k = 0; k < n; k++) {
+                if (matrix[j][k] <= min) {
+                    min = matrix[j][k];
+                    row = j;
+                    column = k;
+                }
+            }
+        }
+
+        temp = matrix[targetRow].clone();
+        matrix[targetRow] = matrix[row].clone();
+        matrix[row] = temp.clone();
+
+        matrixT = transposeMatrix(matrix);
+
+        temp = matrixT[targetColumn].clone();
+        matrixT[targetColumn] = matrixT[column].clone();
+        matrixT[column] = temp.clone();
+
+        matrix = transposeMatrix(matrixT);
+
+        System.out.println(n);
+        printMatrixInteger(matrix);
+    }
 //
 //
 //    //    TODO: to do universe method: enterMatrix
@@ -1226,22 +1227,22 @@ public class Solver implements ISolver {
         System.out.println(stringMatrix);
     }
 //
-//    public int[][] transposeMatrix(int[][] matrix) {
-//        int n, m;
-//        int[][] matrixNew;
-//        n = matrix.length;
-//        m = matrix[0].length;
-//
-//        matrixNew = new int[m][n];
-//
-//        for (int j = 0; j < n; j++) {
-//            for (int k = 0; k < m; k++) {
-//                matrixNew[k][j] = matrix[j][k];
-//            }
-//        }
-//
-//        return matrixNew;
-//    }
+    public Integer[][] transposeMatrix(Integer[][] matrix) {
+        int n, m;
+        Integer[][] matrixNew;
+        n = matrix.length;
+        m = matrix[0].length;
+
+        matrixNew = new Integer[m][n];
+
+        for (int j = 0; j < n; j++) {
+            for (int k = 0; k < m; k++) {
+                matrixNew[k][j] = matrix[j][k];
+            }
+        }
+
+        return matrixNew;
+    }
 //
 //    public Integer[][] transposeMatrixInteger(Integer[][] matrix) {
 //        int n, m;
