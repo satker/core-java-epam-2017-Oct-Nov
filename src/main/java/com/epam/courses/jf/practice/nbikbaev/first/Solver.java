@@ -360,14 +360,32 @@ public class Solver implements ISolver {
                 Integer numOfKeys2 = o2[columnNumber];
                 return numOfKeys1.compareTo(numOfKeys2);
             });
-            System.out.print(dimension + "\n");
+            System.out.println(dimension);
             Utils.printMatrix(matrix, dimension, System.out);
         }
     }
 
     @Override
     public void task13() {
-
+        try (Scanner scanner = new Scanner(System.in)) {
+            int shift = scanner.nextInt();
+            int shiftAbs = Math.abs(shift);
+            int dimension = scanner.nextInt();
+            int[][] matrix = Utils.readMatrix(scanner, dimension);
+            if (shiftAbs == dimension) {
+                System.out.println(dimension);
+                Utils.printMatrix(matrix, dimension, System.out);
+            } else {
+                shiftAbs = (shiftAbs < dimension) ? shiftAbs : shiftAbs % dimension;
+                if (shift < 0) {
+                    Utils.matrixUpShift(matrix, shiftAbs, dimension);
+                } else {
+                    Utils.matrixDownShift(matrix, shiftAbs, dimension);
+                }
+                System.out.println(dimension);
+                Utils.printMatrix(matrix, dimension, System.out);
+            }
+        }
     }
 
     @Override
