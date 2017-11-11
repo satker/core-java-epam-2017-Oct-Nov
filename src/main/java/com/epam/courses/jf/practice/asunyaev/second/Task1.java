@@ -14,26 +14,26 @@ import java.util.List;
 public class Task1 implements ITestableTask1 {
     @Override
     public List<String> reverseFile(File input, File output) {
-        List<String> result = new ArrayList<>();
+        List<String> readStrings = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(input))) {
-            String s;
-            while ((s = reader.readLine()) != null) {
-                result.add(s);
+            String string;
+            while ((string = reader.readLine()) != null) {
+                readStrings.add(string);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(output))) {
-            for (int i = result.size() - 1; i >= 0; i--) {
-                writer.write(result.get(i));
+            for (int i = readStrings.size() - 1; i >= 0; i--) {
+                writer.write(readStrings.get(i));
                 writer.write("\n");
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return result;
+        return readStrings;
     }
 }
