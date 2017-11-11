@@ -388,7 +388,7 @@ public class Solver implements ISolver {
         }
     }
 
-    @Override//2 1 3 3 4 5 6 5
+    @Override
     public void task14() {
         try (Scanner scanner = new Scanner(System.in)) {
             int n = scanner.nextInt();
@@ -406,8 +406,7 @@ public class Solver implements ISolver {
                 prev = x;
                 currentLength++;
             }
-            System.out.print(maxLength);
-
+            System.out.println(maxLength);
         }
     }
 
