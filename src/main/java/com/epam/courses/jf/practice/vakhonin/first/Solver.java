@@ -817,22 +817,24 @@ public class Solver implements ISolver {
         }
         System.out.println(n);
         printMatrixInteger(matrix);
+    }   // DOING !
+//
+    public void task22() {
+
+        Scanner in = new Scanner(System.in);
+        Double[][] matrix = enterMatrixDouble(in);
+        Integer[][] matrixNew;
+
+        int length = matrix.length;
+        matrixNew = new Integer[length][length];
+        for (int j = 0; j < length; j++) {
+            for (int k = 0; k < length; k++) {
+                matrixNew[j][k] = (int) Math.round(matrix[j][k]);
+            }
+
+        }
+        printMatrixInteger(matrixNew);
     }
-//
-//    public void task22() {
-//        Double[][] matrix = enterMatrixDouble();
-//        Integer[][] matrixNew;
-//
-//        int length = matrix.length;
-//        matrixNew = new Integer[length][length];
-//        for (int j = 0; j < length; j++) {
-//            for (int k = 0; k < length; k++) {
-//                matrixNew[j][k] = (int) Math.round(matrix[j][k]);
-//            }
-//
-//        }
-//        printMatrixInteger(matrixNew);
-//    }
 //
 //    public void task24() {
 //
@@ -1167,23 +1169,23 @@ public class Solver implements ISolver {
         return matrix;
     }
 //
-//    public Double[][] enterMatrixDouble() {
-//        Scanner in;
-//        int n;
-//        Double[][] matrix;
-//
-//        in = new Scanner(System.in);
+    public Double[][] enterMatrixDouble(Scanner in) {
+
+        int n;
+        Double[][] matrix;
+
+
 //        System.out.println("Enter matrix dimension:");
-//        n = in.nextInt();
-//        matrix = new Double[n][n];
+        n = in.nextInt();
+        matrix = new Double[n][n];
 //        System.out.println("Enter matrix of " + n + "x" + n + ":");
-//        for (int j = 0; j < n; j++) {
-//            for (int q = 0; q < n; q++) {
-//                matrix[j][q] = in.nextDouble();
-//            }
-//        }
-//        return matrix;
-//    }
+        for (int j = 0; j < n; j++) {
+            for (int q = 0; q < n; q++) {
+                matrix[j][q] = in.nextDouble();
+            }
+        }
+        return matrix;
+    }
 //
 //
 //    public void printMatrix(int[][] matrix) {
