@@ -393,20 +393,24 @@ public class Solver implements ISolver {
         try (Scanner scanner = new Scanner(System.in)) {
             int n = scanner.nextInt();
             int maxLength = 0;
-            int currentLength = 0;
-            int prev = scanner.nextInt();
-            for (int i = 0; i < n - 1; i++) {
-                int x = scanner.nextInt();
-                currentLength++;
-                if (x > prev) {
-                    prev = x;
-                } else {
-                    if (currentLength > 1 && currentLength > maxLength) {
-                        maxLength = currentLength;
+            int startPos = 0;
+            int[] data = new int[n];
+            for (int i = 0; i < n; i++) {
+                data[i] = scanner.nextInt();
+            }
+            for (int i = 0; i < n; i++) {
+                if ((i + 1) < n) {
+                    if (data[i] >= data[i + 1]) {
+                        int x = i + 1 - startPos;
+                        if (x > 1 && x > maxLength) {
+                            maxLength = x;
+                        }
+                        startPos = i + 1;
                     }
-                    currentLength = 0;
-                    prev = x;
                 }
+            }
+            if (startPos == 0) {
+                maxLength = n;
             }
             System.out.println(maxLength);
         }
