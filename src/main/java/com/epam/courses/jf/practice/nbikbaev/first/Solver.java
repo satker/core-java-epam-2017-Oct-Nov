@@ -127,8 +127,7 @@ public class Solver implements ISolver {
     public void task5() {
         try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in))) {
             String sentence = in.readLine();
-            //Pattern vowelPattern = Pattern.compile("[AEIOUaeiou]");
-            Pattern vowelPattern = Pattern.compile("[AE]");
+            Pattern vowelPattern = Pattern.compile("[AEIOUaeiou]");
             int k = 0;
             for (String word : sentence.trim().split(" ")) {
                 if (word.matches("\\w+")) {
@@ -395,8 +394,8 @@ public class Solver implements ISolver {
             int n = scanner.nextInt();
             int maxLength = 0;
             int currentLength = 0;
-            int prev = 0;
-            for (int i = 0; i < n; i++) {
+            int prev = scanner.nextInt();
+            for (int i = 0; i < n - 1; i++) {
                 int x = scanner.nextInt();
                 if (x <= prev) {
                     if (currentLength > maxLength) {
