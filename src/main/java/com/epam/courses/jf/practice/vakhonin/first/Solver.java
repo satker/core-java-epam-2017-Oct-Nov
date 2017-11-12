@@ -866,11 +866,36 @@ public class Solver implements ISolver {
         printMatrixInteger(matrix);
     }   // DOING!
 //
-//    public void task25() {
-//
-//
-//        //TODO: to do INF on the sides
-//    }
+    public void task25() {
+
+        Scanner in = new Scanner(System.in);
+        Integer[][] matrix = enterMatrixInteger(in);
+        int n = matrix.length;
+        Integer[][] matrixExpanded = new Integer[n+2][n+2];
+        for(int j = 0; j<(n+2); j++){
+            matrixExpanded[j][0] = Integer.MAX_VALUE;
+            matrixExpanded[j][n+1] = Integer.MAX_VALUE;
+            matrixExpanded[0][j] = Integer.MAX_VALUE;
+            matrixExpanded[n+1][j] = Integer.MAX_VALUE;
+        }
+        for(int j = 0; j < n; j++){
+            for(int k = 0; k<n; k++){
+                matrixExpanded[j+1][k+1] = matrix[j][k];
+            }
+        }
+        int result;
+        int number = 0;
+        for(int j = 1; j < n+1; j++){
+            for(int k = 1; k < n+1; k++){
+                Integer el = matrixExpanded[j][k];
+                if (((el > matrixExpanded[j - 1][k]) && (el > matrixExpanded[j - 1][k - 1]) && (el > matrixExpanded[j][k - 1]) && (el > matrixExpanded[j + 1][k - 1]) && (el > matrixExpanded[j + 1][k + 1]) && (el > matrixExpanded[j + 1][k]) && (el > matrixExpanded[j][k + 1]) && (el > matrixExpanded[j - 1][k + 1]))) {
+                    number++;
+                }
+            }
+        }
+
+        System.out.println(number);
+    }
 //
     public void task26() { //TODO: оформить код!!!!
 
@@ -934,7 +959,7 @@ public class Solver implements ISolver {
         Integer[][] matrixNew = transposeMatrix(matrix);
         System.out.println(n);
         printMatrixInteger(matrixNew);
-    }
+    }   // DOING!
 
 //
 //    HashMap<Integer, Integer> task2_6_addPolynomials(HashMap<Integer, Integer> first, HashMap<Integer, Integer> second) {
