@@ -399,14 +399,14 @@ public class Solver implements ISolver {
                 data[i] = scanner.nextInt();
             }
             for (int i = 0; i < n - 1; i++) {
-                if (data[i] >= data[i + 1]) {
+                if (data[i] > data[i + 1]) {
                     int currentPosition = i + 1;
                     int length = currentPosition - startPosition;
                     if ((length > 1 && length > maxLength)) {
                         maxLength = length;
                     }
                     startPosition = i + 1;
-                } else if (i == (n - 2)) {
+                } else if (i == (n - 2) && startPosition == 0) {
                     maxLength = n;
                 }
             }
