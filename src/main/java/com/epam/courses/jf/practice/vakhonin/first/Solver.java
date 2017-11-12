@@ -838,6 +838,22 @@ public class Solver implements ISolver {
         printMatrixInteger(matrixNew);
     }   // DOING!
 
+    public void task23() {
+        Scanner in = new Scanner(System.in);
+        Integer[][] matrix = enterMatrixInteger(in);
+        int n = matrix.length;
+        Integer[][] matrixT = transposeMatrix(matrix.clone());
+        int number = 0;
+        for (int j = 0; j<n; j++){
+            if(minElementInArray(matrix[j]).equals(maxElementInArray(matrixT[j]))){
+                number++;
+            }
+        }
+
+
+        System.out.println(number);
+    }
+
     public void task24() {
 
 
@@ -895,7 +911,7 @@ public class Solver implements ISolver {
         }
 
         System.out.println(number);
-    }
+    }   // DOING!
 //
     public void task26() { //TODO: оформить код!!!!
 
@@ -1282,6 +1298,28 @@ public class Solver implements ISolver {
 
         return matrixNew;
     }
+
+
+    Integer minElementInArray(Integer[] arr){
+        Integer min = Integer.MAX_VALUE;
+        for(Integer el: arr){
+            if(el < min){
+                min = el;
+            }
+        }
+        return min;
+    }
+
+    Integer maxElementInArray(Integer[] arr){
+        Integer max = Integer.MIN_VALUE;
+        for(Integer el: arr){
+            if(el < max){
+                max = el;
+            }
+        }
+        return max;
+    }
+
 //
 //    public Integer[][] transposeMatrixInteger(Integer[][] matrix) {
 //        int n, m;
