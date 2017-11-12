@@ -354,14 +354,14 @@ public class Solver implements ISolver {
         try (Scanner scanner = new Scanner(System.in)) {
             final int columnNumber = scanner.nextInt();
             int dimension = scanner.nextInt();
-            int[][] matrix = Utils.readMatrix(scanner, dimension);
+            int[][] matrix = Utils.readIntMatrix(scanner, dimension);
             Arrays.sort(matrix, (o1, o2) -> {
                 Integer numOfKeys1 = o1[columnNumber];
                 Integer numOfKeys2 = o2[columnNumber];
                 return numOfKeys1.compareTo(numOfKeys2);
             });
             System.out.println(dimension);
-            Utils.printMatrix(matrix, dimension, System.out);
+            Utils.printIntMatrix(matrix, dimension, System.out);
         }
     }
 
@@ -371,10 +371,10 @@ public class Solver implements ISolver {
             int shift = scanner.nextInt();
             int shiftAbs = Math.abs(shift);
             int dimension = scanner.nextInt();
-            int[][] matrix = Utils.readMatrix(scanner, dimension);
+            int[][] matrix = Utils.readIntMatrix(scanner, dimension);
             if (shiftAbs == dimension) {
                 System.out.println(dimension);
-                Utils.printMatrix(matrix, dimension, System.out);
+                Utils.printIntMatrix(matrix, dimension, System.out);
             } else {
                 shiftAbs = (shiftAbs < dimension) ? shiftAbs : shiftAbs % dimension;
                 if (shift < 0) {
@@ -383,7 +383,7 @@ public class Solver implements ISolver {
                     Utils.matrixDownShift(matrix, shiftAbs, dimension);
                 }
                 System.out.println(dimension);
-                Utils.printMatrix(matrix, dimension, System.out);
+                Utils.printIntMatrix(matrix, dimension, System.out);
             }
         }
     }
@@ -393,23 +393,26 @@ public class Solver implements ISolver {
         try (Scanner scanner = new Scanner(System.in)) {
             int n = scanner.nextInt();
             int maxLength = 0;
-            int startPos = 0;
+            int startPosition = 0;
             int[] data = new int[n];
+            if (n == 1) {
+                System.out.println(0);
+                return;
+            }
             for (int i = 0; i < n; i++) {
                 data[i] = scanner.nextInt();
             }
-            for (int i = 0; i < n; i++) {
-                if ((i + 1) < n) {
-                    if (data[i] >= data[i + 1]) {
-                        int x = i + 1 - startPos;
-                        if (x > 1 && x > maxLength) {
-                            maxLength = x;
-                        }
-                        startPos = i + 1;
+            for (int i = 0; i < n - 1; i++) {
+                if (data[i] >= data[i + 1]) {
+                    int currentPosition = i + 1;
+                    int length = currentPosition - startPosition;
+                    if (length > 1 && length > maxLength) {
+                        maxLength = length;
                     }
+                    startPosition = i + 1;
                 }
             }
-            if (startPos == 0) {
+            if (startPosition == 0) {
                 maxLength = n;
             }
             System.out.println(maxLength);

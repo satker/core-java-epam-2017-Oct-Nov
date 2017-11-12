@@ -15,7 +15,7 @@ public class Utils {
      * @param dimension Matrix dimension
      * @return Matrix scanned from input stream
      */
-    public static int[][] readMatrix(Scanner scanner, int dimension) {
+    public static int[][] readIntMatrix(Scanner scanner, int dimension) {
         int[][] matrix = new int[dimension][dimension];
         for (int row = 0; row < dimension; ++row) {
             for (int col = 0; col < dimension; ++col) {
@@ -32,7 +32,7 @@ public class Utils {
      * @param dimension   Matrix dimension
      * @param printStream The output stream to which matrix will be printed
      */
-    public static void printMatrix(int[][] matrix, int dimension, PrintStream printStream) {
+    public static void printIntMatrix(int[][] matrix, int dimension, PrintStream printStream) {
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < dimension; j++) {
                 printStream.print(matrix[i][j]);
