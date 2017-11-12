@@ -5,14 +5,14 @@ import com.epam.courses.jf.practice.nbikbaev.first.Solver;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-
 import static org.junit.Assert.assertTrue;
 
-public class Task13Test {
+public class Task14Test {
 
     protected final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     protected final ISolver solver = new Solver();
@@ -31,18 +31,10 @@ public class Task13Test {
 
     @Test
     public void case1() {
-        String dataIn = "-2\n" + "3\n" +
-                "-1 2 3\n" +
-                "1 0 -3\n" +
-                "-2 -1 2\n";
+        String dataIn = "8\n" + "2 1 3 3 4 5 6 5";
         System.setIn(new ByteArrayInputStream(dataIn.getBytes()));
-        solver.task13();
+        solver.task14();
         String outData = outContent.toString();
-        assertTrue("Test13 Failed!", outData.equals("3\r\n" +
-                "-2 -1 2\n" +
-                "-1 2 3\n" +
-                "1 0 -3\n"
-        ));
+        assertTrue("Test14 Failed!", outData.equals("4"));
     }
-
 }

@@ -32,7 +32,7 @@ public class Task12Test {
         System.setIn(new ByteArrayInputStream(dataIn.getBytes()));
         solver.task12();
         String outData = outContent.toString();
-        assertTrue("Test11 Failed!", outData.equals("5\n" +
+        assertTrue("Test12 Failed!", outData.equals("5\n" +
                 "-1 -1 -5 5 0\n" +
                 "5 4 -4 -2 2\n" +
                 "1 3 -3 -4 3\n" +
