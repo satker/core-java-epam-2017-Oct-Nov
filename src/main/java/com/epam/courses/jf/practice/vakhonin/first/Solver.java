@@ -888,7 +888,7 @@ public class Solver implements ISolver {
         for(int j = 1; j < n+1; j++){
             for(int k = 1; k < n+1; k++){
                 Integer el = matrixExpanded[j][k];
-                if (((el > matrixExpanded[j - 1][k]) && (el > matrixExpanded[j - 1][k - 1]) && (el > matrixExpanded[j][k - 1]) && (el > matrixExpanded[j + 1][k - 1]) && (el > matrixExpanded[j + 1][k + 1]) && (el > matrixExpanded[j + 1][k]) && (el > matrixExpanded[j][k + 1]) && (el > matrixExpanded[j - 1][k + 1]))) {
+                if (((el < matrixExpanded[j - 1][k]) && (el < matrixExpanded[j - 1][k - 1]) && (el < matrixExpanded[j][k - 1]) && (el < matrixExpanded[j + 1][k - 1]) && (el < matrixExpanded[j + 1][k + 1]) && (el < matrixExpanded[j + 1][k]) && (el < matrixExpanded[j][k + 1]) && (el < matrixExpanded[j - 1][k + 1]))) {
                     number++;
                 }
             }
