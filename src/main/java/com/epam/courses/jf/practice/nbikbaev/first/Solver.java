@@ -389,7 +389,7 @@ public class Solver implements ISolver {
     }
 
     @Override
-    public void task14() {
+    public void task14() {//2 1 3 3 4 5 6 5   //0 6 5 4 3 2 1 0 -1
         try (Scanner scanner = new Scanner(System.in)) {
             int n = scanner.nextInt();
             int maxLength = 0;
@@ -397,14 +397,16 @@ public class Solver implements ISolver {
             int prev = scanner.nextInt();
             for (int i = 0; i < n - 1; i++) {
                 int x = scanner.nextInt();
-                if (x <= prev) {
-                    if (currentLength > maxLength) {
+                currentLength++;
+                if (x > prev) {
+                    prev = x;
+                } else {
+                    if (currentLength > 1 && currentLength > maxLength) {
                         maxLength = currentLength;
                     }
                     currentLength = 0;
+                    prev = x;
                 }
-                prev = x;
-                currentLength++;
             }
             System.out.println(maxLength);
         }
