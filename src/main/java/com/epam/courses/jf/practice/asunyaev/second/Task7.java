@@ -13,7 +13,7 @@ public class Task7 implements ITestableTask7 {
         for (int i = 0; i < n + m - 1; i++) {
             int s = 0;
             for (int j = 0; j <= i; j++) {
-                if (i >= n || i-j >= m) {
+                if (j >= n || i-j >= m) {
                     continue;
                 }
                 s += first.get(j) * second.get(i-j);
