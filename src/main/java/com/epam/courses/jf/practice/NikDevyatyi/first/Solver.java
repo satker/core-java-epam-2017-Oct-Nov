@@ -298,5 +298,37 @@ public class Solver implements ISolver {
             row.setLength(0);
         }
     }
+    @Override
+    public void task10() {
+        Scanner scanner = new Scanner(System.in);
+        final int A = scanner.nextInt();
+        final int B = scanner.nextInt();
+        final int C = scanner.nextInt();
+        final double D = B * B - 4 * A * C;
+        double x1 =0;
+        double x2 = 0;
+        StringBuilder result = new StringBuilder();
+        if(D > 0){
+            x2 = (-B + Math.sqrt(D))/(2*A);
+            x1 = (-B - Math.sqrt(D))/(2*A);
+            //BigDecimal res = new BigDecimal(x1);
+            result.append("Two solutions: ");
+            result.append(new BigDecimal(x1).setScale(1, ROUND_HALF_UP));
+            result.append(", ");
+            result.append(new BigDecimal(x2).setScale(1, ROUND_HALF_UP));
+
+        }
+        else if(D == 0){
+            x1 = -(double) B /(2*A);
+            result.append("One solution: ");
+            result.append(new BigDecimal(x1).setScale(1, ROUND_HALF_UP));
+
+        }else {
+            result.append("No solution");
+
+        }
+        System.out.println(result.toString());
+    }
+
 
 }
