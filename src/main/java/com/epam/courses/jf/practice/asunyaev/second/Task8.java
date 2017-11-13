@@ -15,14 +15,14 @@ public class Task8 implements ITestableTask8 {
             if ((c == ')' || c == '}' || c == ']') && stack.isEmpty()) {
                 return false;
             }
-            if ((c == ')' && stack.peekLast() == '(' )
-                    || (c == '}'  && stack.peekLast() == '{' )
-                    || (c == ']' && stack.peekLast() == '[' )) {
+            if ((c == ')' && stack.peekFirst() == '(' )
+                    || (c == '}'  && stack.peekFirst() == '{' )
+                    || (c == ']' && stack.peekFirst() == '[' )) {
                 stack.pop();
             }
-            if ((c == ')' && stack.peekLast() != '(' )
-                    || (c == '}'  && stack.peekLast() != '{' )
-                    || (c == ']' && stack.peekLast() != '[' )) {
+            if ((c == ')' && stack.peekFirst() != '(' )
+                    || (c == '}'  && stack.peekFirst() != '{' )
+                    || (c == ']' && stack.peekFirst() != '[' )) {
                 return false;
             }
         }
