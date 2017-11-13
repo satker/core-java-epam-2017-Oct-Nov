@@ -19,9 +19,9 @@ public class TestableTask10 implements ITestableTask10 {
                 Arrays.stream(str.split(" ")).forEach(s -> {
                     Integer count = map.get(s);
                     if(count == null){
-                        count = 1;
+                        count = 0;
                     }
-                    map.put(s, count);
+                    map.put(s, ++count);
                 }
                 );
             }
