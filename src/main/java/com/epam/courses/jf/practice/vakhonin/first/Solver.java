@@ -844,13 +844,18 @@ public class Solver implements ISolver {
         int n = matrix.length;
         Integer[][] matrixT = transposeMatrix(matrix.clone());
         int number = 0;
+        Integer min;
+        int index;
         for (int j = 0; j<n; j++){
-            if(minElementInArray(matrix[j]).equals(maxElementInArray(matrixT[j]))){
+            Integer[] minElementWithIndex = minElementInArray(matrix[j]);
+            min = minElementWithIndex[0];
+            index = minElementWithIndex[1];
+            System.out.println(min);
+            System.out.println(maxElementInArray(matrixT[index]));
+            if(min.equals(maxElementInArray(matrixT[index]))){
                 number++;
             }
         }
-
-
         System.out.println(number);
     }
 
@@ -1300,20 +1305,27 @@ public class Solver implements ISolver {
     }
 
 
-    Integer minElementInArray(Integer[] arr){
+    Integer[] minElementInArray(Integer[] arr){
         Integer min = Integer.MAX_VALUE;
-        for(Integer el: arr){
+        Integer index = 0;
+        Integer el;
+        int n = arr.length;
+
+        for(int j = 0; j<n; j++){
+            el = arr[j];
             if(el < min){
                 min = el;
+                index = j;
             }
         }
-        return min;
+        Integer[] result = {min, index};
+        return result;
     }
 
     Integer maxElementInArray(Integer[] arr){
         Integer max = Integer.MIN_VALUE;
         for(Integer el: arr){
-            if(el < max){
+            if(el > max){
                 max = el;
             }
         }
