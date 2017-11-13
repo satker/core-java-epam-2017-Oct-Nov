@@ -608,5 +608,52 @@ public class Solver implements ISolver {
 
         return det;
     }
+    @Override
+    public void task18() {
+        Scanner scanner =  new Scanner(System.in);
+        int[][] matrix = readMatrix(scanner);
+
+        List<Integer> row = new ArrayList<>();
+        List<Integer> col = new ArrayList<>();
+
+        for (int i = 0; i < matrix.length; i++) {
+            row.add(i);
+            col.add(i);
+        }
+
+        int max = matrix[0][0];
+        for (int[] element : matrix) {
+            for (int j = 0; j < matrix.length; j++) {
+                if (max < element[j]) {
+                    max = element[j];
+                }
+            }
+        }
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
+                if (matrix[i][j] == max) {
+                    if(!row.isEmpty()){
+                        row.remove(Integer.valueOf(i));
+                    }
+                    if(!col.isEmpty()){
+                        col.remove(Integer.valueOf(j));
+                    }
+
+                }
+            }
+        }
+
+        System.out.println(row.size());
+        System.out.println(col.size());
+        for (Integer r : row) {
+            for (Integer c : col) {
+                System.out.printf("%d\t", matrix[r][c]);
+            }
+            System.out.println();
+        }
+
+
+    }
 
 }
