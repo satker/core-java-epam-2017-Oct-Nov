@@ -17,9 +17,9 @@ public class Task5 implements ITestableTask5 {
             iuMean = iuMean.add(i.multiply(u));
             iiMean = iiMean.add(i.multiply(i));
         }
-        BigDecimal n = BigDecimal.valueOf(measurements.size());
-        iuMean = iuMean.divide(n);
-        iiMean = iiMean.divide(n);
+        //BigDecimal n = BigDecimal.valueOf(measurements.size());
+        //iuMean = iuMean.divide(n);
+        //iiMean = iiMean.divide(n);
 
         if (iiMean.equals(BigDecimal.ZERO)) {
             return 0;
