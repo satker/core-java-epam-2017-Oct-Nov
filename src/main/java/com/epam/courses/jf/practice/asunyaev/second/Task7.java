@@ -10,15 +10,15 @@ public class Task7 implements ITestableTask7 {
         int n = first.size();
         int m = second.size();
         List<Integer> result = new ArrayList<>(n + m);
-        for (int k = 0; k < n + m - 1; k++) {
+        for (int i = 0; i < n + m - 1; i++) {
             int s = 0;
-            for (int i = 0; i <= k; i++) {
-                if (i >= n || k-i >= m) {
+            for (int j = 0; j <= i; j++) {
+                if (i >= n || i-j >= m) {
                     continue;
                 }
-                s += first.get(i) * second.get(k-i);
+                s += first.get(j) * second.get(i-j);
             }
-            result.add(k, s);
+            result.add(i, s);
         }
         return result;
     }
