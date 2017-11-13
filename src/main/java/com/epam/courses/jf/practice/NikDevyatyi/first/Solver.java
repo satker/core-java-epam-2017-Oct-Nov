@@ -86,5 +86,56 @@ public class Solver implements ISolver {
             }
         }
     }
+    @Override
+    public  void task4(){
+        Scanner sc = new Scanner(System.in);
+        String[] s = getStrings2(sc);
+        String result = s[0];
+        int checkRepeat = checkLetterRepeat(s[0]);
+
+        for(String word: s){
+            if(word.length() == 1){
+                result= word;
+                break;
+            }
+
+            else if(checkRepeat > checkLetterRepeat(word)  ){
+                result = word;
+                checkRepeat = checkLetterRepeat(word);
+            }
+
+        }
+        System.out.println(result);
+    }
+
+    /***
+
+     * @param nameString
+     * @return int
+     *<p> checkLetterRepeat method to counting how many times letters repeated in word for task5()</p>
+     */
+    private static int checkLetterRepeat(String nameString){
+        int result= 0;
+        char[] symbols = nameString.toCharArray();
+
+        int maxChar = (int)symbols[0];
+        for(char c : symbols) {
+            if (maxChar < (int)c) {
+                maxChar = (int)c;
+            }
+        }
+        int[] code = new int[maxChar+1];
+        Arrays.fill(code, 0);
+        for (char m : symbols) {
+            code[m]++;
+        }
+        for(int item : code){
+            if(item > 1){
+                result+= item;
+            }
+        }
+        return result;
+
+    }
 
 }
