@@ -10,19 +10,19 @@ public class Task8 implements ITestableTask8 {
         Deque<Character> stack = new ArrayDeque<Character>();
         for (char c : string.toCharArray()) {
             if (c == '(' || c == '{' || c == '[') {
-                stack.add(c);
+                stack.push(c);
             }
             if ((c == ')' || c == '}' || c == ']') && stack.isEmpty()) {
                 return false;
             }
-            if ((c == ')' && stack.peekFirst() != '(' )
-                    || (c == '}'  && stack.peekFirst() != '{' )
-                    || (c == ']' && stack.peekFirst() != '[' )) {
+            if ((c == ')' && stack.peek() != '(' )
+                    || (c == '}'  && stack.peek() != '{' )
+                    || (c == ']' && stack.peek() != '[' )) {
                 return false;
             }
-            if ((c == ')' && stack.peekFirst() == '(' )
-                    || (c == '}'  && stack.peekFirst() == '{' )
-                    || (c == ']' && stack.peekFirst() == '[' )) {
+            if ((c == ')' && stack.peek() == '(' )
+                    || (c == '}'  && stack.peek() == '{' )
+                    || (c == ']' && stack.peek() == '[' )) {
                 stack.pop();
             }
 
