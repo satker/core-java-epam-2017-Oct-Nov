@@ -19,13 +19,13 @@ public class Task7 implements ITestableTask7{
         int size2 = second.size();
         int val1, val2;
 
-        while(first.get(size1-1) == 0){
-            size1--;
-        }
-
-        while(second.get(size2-1) == 0){
-            size2--;
-        }
+//        while(first.get(size1-1) == 0){
+//            size1--;
+//        }
+//
+//        while(second.get(size2-1) == 0){
+//            size2--;
+//        }
 
 
 
