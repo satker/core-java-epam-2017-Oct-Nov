@@ -12,7 +12,7 @@ public class TestableTask1 implements ITestableTask1 {
     public List<String> reverseFile(File input, File output) {
         List<String> stringList = new LinkedList<>();
         try(BufferedReader bufferedReader = new BufferedReader(new FileReader(input))){
-            for(String str = bufferedReader.readLine(); str != null;){
+            for(String str = bufferedReader.readLine(); str != null; str = bufferedReader.readLine()){
                 stringList.add(str);
             }
         }catch(IOException e){
