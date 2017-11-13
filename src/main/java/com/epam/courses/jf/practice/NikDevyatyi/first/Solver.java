@@ -454,5 +454,54 @@ public class Solver implements ISolver {
             );
         }
     }
+    @Override
+    public void task14() {
+        int count = 0;
+        int max = 0;
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int [] arr = new int[n];
+        for(int i = 0; i<n;i++){
+            arr[i] = scanner.nextInt();
+        }
+        int first = arr[0];
+        int second  = 0;
+        for(int i = 1; i< arr.length;i++){
+            second = arr[i];
+            if(second > first){
+                count++;
+                if(max<count){
+                    max = count;
+                }
+
+            }
+            else {
+                count = 0;
+            }
+            first = second;
+        }
+        System.out.println(max+1);
+    }
+/*checked tasks1-14*/
+    /***
+     *
+     * @param row
+     * @return int
+     * <p>findMiddle  method used in task15 for searching first pair of two positive neighbors</p>
+     */
+    private int findMiddle(int[] row){
+        boolean first =false;
+        int index = 0;
+        for(int i = 0; i< row.length; i++){
+            if(row[i] > 0){
+                first = true;
+                index = i;
+            }
+            if(index<row.length-2&&first&&row[index+2] >0){
+                return row[index + 1];
+            }
+        }
+        return 0;
+    }
 
 }
