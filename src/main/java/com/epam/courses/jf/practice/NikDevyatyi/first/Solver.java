@@ -360,7 +360,55 @@ public class Solver implements ISolver {
         }
         return matrix;
     }
+    @Override
+    public void task12() {
+        Scanner scanner = new Scanner(System.in);
+        int k =  scanner.nextInt();
+        final int DIMENSION = scanner.nextInt();
+        int[][] matrix = new int[DIMENSION][DIMENSION];
+        for (int row = 0; row < DIMENSION; ++row) {
+            for (int col = 0; col < DIMENSION; ++col) {
+                matrix[row][col] = scanner.nextInt();
+            }
+        }
 
+        Arrays.sort(matrix, Comparator.comparing((int[] arr) -> arr[k]));
+        System.out.println(DIMENSION);
+        printMatrixrRows(matrix);
 
+    }
 
+    /***
+     *
+     * @param matrix
+     * <p>printRows method to print in System.out formated rows gets from matrix  used in a many tasks</p>
+     */
+    private void printMatrixrRows(int[][] matrix){
+        StringBuilder result = new StringBuilder();
+        int size = matrix.length;
+        System.out.println(size);
+        for(int[] row : matrix) {
+            for (int item : row) {
+                result.append(item);
+                result.append('\t');
+            }
+            System.out.println(result.toString().trim());
+            result.setLength(0);
+        }
+    }
+
+    /***
+     *
+     * @param row
+     * <p>printRows method to print in System.out formated row from array row used in task13</p>
+     */
+    private void printRows(int[] row){
+        StringBuilder result = new StringBuilder();
+        for (int item : row) {
+            result.append(item);
+            result.append('\t');
+        }
+        System.out.println(result.toString().trim());
+    }
+    
 }
