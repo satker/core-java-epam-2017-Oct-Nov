@@ -503,5 +503,14 @@ public class Solver implements ISolver {
         }
         return 0;
     }
+    public void task15() {
+        int sum =0;
+        Scanner scanner = new Scanner(System.in);
+        int[][] matrix  = readMatrix(scanner);
+        for(int[] row: matrix){
+            sum += findMiddle(row);
+        }
+        System.out.println(sum);
+    }
 
 }
