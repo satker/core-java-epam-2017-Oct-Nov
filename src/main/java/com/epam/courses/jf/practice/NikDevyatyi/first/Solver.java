@@ -807,5 +807,37 @@ public class Solver implements ISolver {
         printMatrixrRows(buffer);
 
     }
+    /***
+     *
+     * @param arr
+     * @return
+     * <p>summ method to calculate summ of items some array for task24</p>
+     */
+    private int summ(int[] arr){
+        int result = 0;
+        for(int item: arr){
+            result+=item;
+        }
+        return  result;
+    }
+
+    /*checked tasks1-24*/
+    @Override
+    public void task24() {
+        Scanner scanner =  new Scanner(System.in);
+        int[][] matrix = readMatrix(scanner);
+        int size = matrix.length;
+        int [] temp = new int[size];
+        for(int k = 0;k<size;k++){
+            for(int i= 0; i <size-1;i++){
+                if(summ(matrix[i]) > summ(matrix[i+1])){
+                    temp = matrix[i];
+                    matrix[i] = matrix[i+1];
+                    matrix[i+1] = temp;
+                }
+            }
+        }
+        printMatrixrRows(matrix);
+    }
 
 }
