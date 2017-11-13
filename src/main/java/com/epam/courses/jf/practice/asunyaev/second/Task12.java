@@ -7,12 +7,11 @@ import java.util.List;
 
 public class Task12 implements ITestableTask12 {
     public List<Integer> transform(List<Integer> integers, int value) {
-        Iterator<Integer> iterator = integers.iterator();
-        while(iterator.hasNext()) {
-            Integer current = iterator.next();
+        for (int i = 0; i < integers.size(); i++) {
+            Integer current = integers.get(i);
             if (current.compareTo(value) > 0) {
-                iterator.remove();
-                integers.add(current);
+                integers.set(i, integers.get(integers.size() - 1));
+                integers.set(integers.size() - 1, integers.get(i));
             }
         }
         return integers;
