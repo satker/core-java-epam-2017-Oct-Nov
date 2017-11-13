@@ -284,5 +284,19 @@ public class Solver implements ISolver {
 
         return dest.toString();
     }
+    @Override
+    public void task9() {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        StringBuilder row = new StringBuilder();
+        for(int i =1; i <= n; i++){
+            for(int j =i*n+1-n; j < i*n+1; j++){
+                row.append(j);
+                row.append('\t');
+            }
+            System.out.println(row.toString().trim());
+            row.setLength(0);
+        }
+    }
 
 }
