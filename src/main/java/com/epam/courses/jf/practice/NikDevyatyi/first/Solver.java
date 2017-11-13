@@ -924,5 +924,61 @@ public class Solver implements ISolver {
         System.out.println(counter);
 
     }
+    /***
+     * @param scanner
+     * @return int[][]
+     *  <p> readSmallMatrix  from System.in gets int and make matrix of int inside frame consist of Integer.MIN_VALUE  for task26</p>
+     */
+    private int[][] readSmallMatrix(Scanner scanner) {
+        final int DIMENSION = scanner.nextInt();
+        int[][] matrix = new int[DIMENSION + 2][DIMENSION + 2];
+        for (int row = 0; row < DIMENSION+2; ++row) {
+            for (int col = 0; col < DIMENSION+2; ++col) {
+                if(row == 0 || row == DIMENSION+1){
+                    matrix[row][col] = Integer.MIN_VALUE;
+                }
+                else if ((col == 0 || col ==DIMENSION+1)&&!(row == 0 || row == DIMENSION+1)){
+                    matrix[row][col] = Integer.MIN_VALUE;
+                }
+                else{
+                    matrix[row][col] = scanner.nextInt();
+                }
+
+            }
+        }
+        return matrix;
+    }
+    /*checked tasks1-26*/
+    @Override
+    public void task26() {
+        Scanner scanner =  new Scanner(System.in);
+        int[][] matrix = readSmallMatrix(scanner);
+        int size = matrix.length;
+        int counter = 0;
+        List<Integer> result = new ArrayList<>();
+        for(int i =1; i < size -1; i++){
+            for(int j =1; j < size -1; j++){
+                int [] buffer = {
+                        matrix[i-1][j], matrix[i + 1][j],
+                        matrix[i-1][j-1], matrix[i][j-1],
+                        matrix[i+1][j-1], matrix[i-1][j+1],
+                        matrix[i][j+1], matrix[i + 1][j +1 ]
+                };
+                Arrays.sort(buffer);
+                if(buffer[buffer.length-1]< matrix[i][j]){
+                    result.add(matrix[i][j]);
+                }
+            }
+
+        }
+        Collections.sort(result);
+
+        if(result.size()!=0){
+            System.out.println(result.get(result.size()-1));
+        }
+        else {
+            System.out.println("NOT FOUND");
+        }
+    }
 
 }
