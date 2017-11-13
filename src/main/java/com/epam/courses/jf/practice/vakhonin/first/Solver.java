@@ -850,8 +850,6 @@ public class Solver implements ISolver {
             Integer[] minElementWithIndex = minElementInArray(matrix[j]);
             min = minElementWithIndex[0];
             index = minElementWithIndex[1];
-            System.out.println(min);
-            System.out.println(maxElementInArray(matrixT[index]));
             if(min.equals(maxElementInArray(matrixT[index]))){
                 number++;
             }
