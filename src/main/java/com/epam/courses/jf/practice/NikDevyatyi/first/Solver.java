@@ -12,31 +12,24 @@ import static java.math.BigDecimal.ROUND_HALF_UP;
 public class Solver implements ISolver {
     @Override
     public void task1() {
-        int N  =0;
-        int bigIndex = 0;
-        int smallIndex = 0;
-        String tempSmall;
-        String tempBig;
-        Scanner sInt = new Scanner(System.in);
-        Scanner sc = new Scanner(System.in);
-        N =  sInt.nextInt();
-        String arrStr [] = new String[N];
-        arrStr[0] = sc.nextLine();
-        tempSmall  = arrStr[1];
-        tempBig = arrStr[1];
-        for (int i = 2; i<arrStr.length; i++){
-            arrStr[i] = sc.nextLine();
-            if(arrStr[i].length()<= tempSmall.length()){
-                tempSmall = arrStr[i];
-                smallIndex = i;
+
+        String tempSmall ="";
+        String tempBig ="";
+        Scanner scanner = new Scanner(System.in);
+        String[] strings = getStrings(scanner);
+        tempSmall = strings[0];
+        tempBig = strings[0];
+        for (String str: strings){
+
+            if(str.length()<= tempSmall.length()){
+                tempSmall = str;
             }
-            if(arrStr[i].length()>= tempBig.length()){
-                tempBig = arrStr[i];
-                bigIndex = i;
+            if(str.length()>= tempBig.length()){
+                tempBig = str;
             }
         }
-        System.out.printf("MIN (%d): \"%s\"%n", arrStr[smallIndex].length(), arrStr[smallIndex]);
-        System.out.printf("MAX (%d): \"%s\"%n", arrStr[bigIndex].length(), arrStr[bigIndex]);
+        System.out.printf("MIN (%d): \"%s\"%n", tempSmall.length(), tempSmall);
+        System.out.printf("MAX (%d): \"%s\"%n", tempBig.length(), tempBig);
 
 
     }
@@ -44,14 +37,22 @@ public class Solver implements ISolver {
     public void task2() {
         Scanner sc = new Scanner(System.in);
         String arrStr [] = getStrings(sc);
-        Arrays.sort(arrStr,Collections.reverseOrder());
+        Arrays.sort(arrStr,Comparator.comparingInt(String::length)
+                .thenComparing(String::compareTo));
 
         for(String str: arrStr){
-            System.out.printf("(%d): \"%s\"%n", str.length(), str);
+            System.out.printf("(%d):\"%s\"%n", str.length(), str);
 
         }
 
     }
+
+    /***
+
+     * @param scanner
+     * @return String[]
+     * <p>getStrings() method to get Strins from System.in()</p>
+     */
     private String[] getStrings(Scanner scanner) {
         int n = Integer.parseInt(scanner.nextLine());
 
@@ -59,6 +60,13 @@ public class Solver implements ISolver {
         for (int i = 0; i < n; i++) {
             strings[i] = scanner.nextLine();
         }
+        return strings;
+    }
+    private String[] getStrings2(Scanner scanner) {
+        int n = Integer.parseInt(scanner.nextLine());
+
+        String[] strings = new String[n];
+        strings = scanner.nextLine().split(" ");
         return strings;
     }
 
