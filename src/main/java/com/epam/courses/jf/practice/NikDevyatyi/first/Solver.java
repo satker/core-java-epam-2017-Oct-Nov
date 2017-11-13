@@ -329,6 +329,38 @@ public class Solver implements ISolver {
         }
         System.out.println(result.toString());
     }
+    @Override
+    public void task11() {
+        Scanner scanner = new Scanner(System.in);
+        try {
+            int month = scanner.nextInt();
+            if (month<=12&&month>0) {
+                //System.out.println(new StringBuilder(Month.of(month).name().toLowerCase()));
+                System.out.println(Month.of(month).name().substring(0,1).toUpperCase() + Month.of(month).name().substring(1).toLowerCase());
+            }
+            else throw new RuntimeException();
+        }catch (RuntimeException e){
+            System.out.println("INCORRECT INPUT DATA");
+        }
+    }
+
+    /***
+     *
+     * @param scanner
+     * @retur int[][]
+     * <p>readMatrix  method to parse int from System.in and make from it square matrix int[][]/p>
+     */
+    private int[][] readMatrix(Scanner scanner) {
+        final int DIMENSION = scanner.nextInt();
+        int[][] matrix = new int[DIMENSION][DIMENSION];
+        for (int row = 0; row < DIMENSION; ++row) {
+            for (int col = 0; col < DIMENSION; ++col) {
+                matrix[row][col] = scanner.nextInt();
+            }
+        }
+        return matrix;
+    }
+
 
 
 }
