@@ -512,5 +512,24 @@ public class Solver implements ISolver {
         }
         System.out.println(sum);
     }
+    public void task16 () {
+        Scanner scanner = new Scanner(System.in);
+        int[][] matrix  = readMatrix(scanner);
+        int width = matrix.length;
+        int height = matrix[0].length;
+
+        int[][] matrix_new = new int[height][width];
+
+
+        for (int x = 0; x <width; x++) {
+            for (int y = height-1; y >=0; y--) {
+                matrix_new[y][x] = matrix[x][y];
+            }
+        }
+        for(int i = width-1; i>=0;i--){
+            printRows(matrix_new[i]);//change matrix rows from []int to string of values
+        }
+
+    }
 
 }
