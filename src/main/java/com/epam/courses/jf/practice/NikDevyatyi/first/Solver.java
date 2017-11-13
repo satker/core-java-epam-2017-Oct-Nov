@@ -199,5 +199,54 @@ public class Solver implements ISolver {
         }
         System.out.println(result);
     }
+    /***
+     * @param nameString
+     * @return boolean
+     * <p>checkTask7() checkTask7 is  method for task7() to search charsiquenceis like in condition of tsak or not</p>
+     */
+
+    public static  boolean checkTask7(String nameString) {
+        char[] symbols = nameString.toCharArray();
+        int pastChar = symbols[0];
+        char range[] = Arrays.copyOfRange( symbols, 1,symbols.length);
+        Arrays.sort(range);
+        if(symbols.length>1){
+            for(char c : range) {
+                if (pastChar == (int)c) {
+                    return false;
+                }
+                pastChar = (int)c;
+            }
+        }
+        return true;
+
+    }
+
+    @Override
+    public void task7() {
+        Scanner sc = new Scanner(System.in);
+        String[] arrStr = getStrings2(sc);
+        String tmp  = "";
+        List<String> res = new ArrayList<>();
+        for(String word :arrStr){
+            if(checkTask7(word) == true){
+                if(!tmp.equals(word)){
+                    res.add(word);
+                    tmp = word;
+                }
+            }
+        }
+        StringBuilder printResult = new StringBuilder();
+        for(String item: res){
+            if(item!=null){
+                printResult.append(item + " ");
+            }
+            else {
+                printResult.append("NOT FOUND");
+            }
+        }
+        System.out.println(printResult.toString().trim());
+
+    }
 
 }
