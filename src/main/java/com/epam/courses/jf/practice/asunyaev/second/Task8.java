@@ -3,8 +3,6 @@ package com.epam.courses.jf.practice.asunyaev.second;
 import com.epam.courses.jf.practice.common.second.ITestableTask8;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Deque;
 
 public class Task8 implements ITestableTask8 {
@@ -21,7 +19,10 @@ public class Task8 implements ITestableTask8 {
                     || (c == '}'  && stack.peekLast() == '{' )
                     || (c == ']' && stack.peekLast() == '[' )) {
                 stack.pop();
-            } else {
+            }
+            if ((c == ')' && stack.peekLast() != '(' )
+                    || (c == '}'  && stack.peekLast() != '{' )
+                    || (c == ']' && stack.peekLast() != '[' )) {
                 return false;
             }
         }
