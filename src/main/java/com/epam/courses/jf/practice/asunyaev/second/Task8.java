@@ -15,17 +15,22 @@ public class Task8 implements ITestableTask8 {
             if ((c == ')' || c == '}' || c == ']') && stack.isEmpty()) {
                 return false;
             }
-            if ((c == ')' && stack.peekFirst() == '(' )
-                    || (c == '}'  && stack.peekFirst() == '{' )
-                    || (c == ']' && stack.peekFirst() == '[' )) {
-                stack.pop();
-            }
             if ((c == ')' && stack.peekFirst() != '(' )
                     || (c == '}'  && stack.peekFirst() != '{' )
                     || (c == ']' && stack.peekFirst() != '[' )) {
                 return false;
             }
+            if ((c == ')' && stack.peekFirst() == '(' )
+                    || (c == '}'  && stack.peekFirst() == '{' )
+                    || (c == ']' && stack.peekFirst() == '[' )) {
+                stack.pop();
+            }
+
         }
-        return true;
+        if (stack.isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
