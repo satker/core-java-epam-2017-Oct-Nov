@@ -980,5 +980,40 @@ public class Solver implements ISolver {
             System.out.println("NOT FOUND");
         }
     }
+    /***
+     * @name summAbs
+     * @param arr
+     * @return
+     * calculate summ of abs(item) for task27
+     */
+    private int summAbs(int[] arr){
+        int result = 0;
+        for(int item: arr){
+            result+=Math.abs(item);
+        }
+        return result;
+    }
+
+    @Override
+    public void task27() {
+        Scanner scanner =  new Scanner(System.in);
+        int[][] matrix = readMatrix(scanner);
+        int size = matrix.length;
+        int [] res =  new int[size];
+        int[][]transpose = trasposeMatrix(matrix);
+        int [] temp = new int[size];
+        for(int k = 0;k<size;k++){
+            for(int i= 0; i <size-1;i++){
+                if(summAbs(transpose[i]) < summAbs(transpose[i+1])){
+                    temp = transpose[i];
+                    transpose[i] = transpose[i+1];
+                    transpose[i+1] = temp;
+                }
+            }
+
+        }
+        matrix =  trasposeMatrix(transpose);
+        printMatrixrRows(matrix);
+    }
 
 }
