@@ -160,5 +160,44 @@ public class Solver implements ISolver {
         }
         System.out.println(counter);
     }
+    /***
+
+     * @param nameString
+     * @return boolean
+     * <p>checkTask6() checkTask6 is  method for task6() to search charsiquenceis like in condition of tsak6 or not</p>
+     */
+
+    public static  boolean checkTask6(String nameString) {
+        char[] symbols = nameString.toLowerCase().toCharArray();
+        int pastChar = symbols[0];
+        if(symbols.length>1){
+            for(char c : Arrays.copyOfRange( symbols, 1,symbols.length )) {
+                if (pastChar < (int)c) {
+                    pastChar = (int)c;
+                }else{
+                    return false;
+                }
+            }
+        }
+        else{
+            return false;
+        }
+        return true;
+
+    }
+    @Override
+    public void task6(){
+        String result = "NOT FOUND";
+        Scanner sc = new Scanner(System.in);
+        String[] arrStr = getStrings2(sc);
+        for(String word :arrStr){
+            if(checkTask6(word) == true){
+                result = word;
+                break;
+
+            }
+        }
+        System.out.println(result);
+    }
 
 }
