@@ -69,5 +69,22 @@ public class Solver implements ISolver {
         strings = scanner.nextLine().split(" ");
         return strings;
     }
+    @Override
+    public void task3() {
+        int summ = 0;
+        Scanner sc = new Scanner(System.in);
+        String arrStr[] = getStrings(sc);
+
+        for (String str : arrStr) {
+            summ+= str.length();
+        }
+        System.out.printf("AVERAGE (%d)%n", summ/arrStr.length);
+
+        for (String str : arrStr){
+            if (str.length() < summ/arrStr.length){
+                System.out.printf("(%d):\"%s\"%n",str.length(),str);
+            }
+        }
+    }
 
 }
