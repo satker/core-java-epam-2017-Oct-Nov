@@ -4,8 +4,10 @@ import com.epam.courses.jf.practice.common.second.ITestableTask1;
 
 import java.io.*;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class TestableTask1 implements ITestableTask1 {
     @Override
@@ -18,10 +20,9 @@ public class TestableTask1 implements ITestableTask1 {
         }catch(IOException e){
             e.printStackTrace();//TODO: Add logger
         }
-        Collections.reverse(stringList);
         try(BufferedWriter bufferedReader = new BufferedWriter(new FileWriter(output))){
-            for(String str : stringList){
-                bufferedReader.write(str);
+            for(Iterator<String> i = ((LinkedList<String>)stringList).descendingIterator(); i.hasNext();){
+                bufferedReader.write(i.next());
             }
         }catch(IOException e){
             e.printStackTrace();//TODO: Add logger
