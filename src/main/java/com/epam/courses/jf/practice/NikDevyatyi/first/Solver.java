@@ -137,5 +137,28 @@ public class Solver implements ISolver {
         return result;
 
     }
+    @Override
+    public  void task5(){
+        Scanner sc = new Scanner(System.in);
+        String[] arrStr = getStrings2(sc);
+
+        int vowelsInWord = 0;
+        int counter =0;
+        for(String word: arrStr){
+            if(word.length() % 2 == 0 && word.matches("[a-zA-Z]+")){
+                for(char c : word.toLowerCase().toCharArray()){
+                    if(Character.toString(c).matches("[aeiouy]")){
+                        vowelsInWord++;
+                    }
+                }
+
+                if(word.length()/2 == vowelsInWord){
+                    counter++;
+                }
+                vowelsInWord = 0;
+            }
+        }
+        System.out.println(counter);
+    }
 
 }
