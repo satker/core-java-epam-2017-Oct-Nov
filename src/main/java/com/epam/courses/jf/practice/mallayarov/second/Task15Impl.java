@@ -4,6 +4,8 @@ import com.epam.courses.jf.practice.common.second.I2DPoint;
 import com.epam.courses.jf.practice.common.second.ITestableTask15;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -35,7 +37,16 @@ public class Task15Impl implements ITestableTask15 {
            }
        }
 
-         return new MyFile(output, allLines);
+       try (FileWriter fileWriter = new FileWriter(output)) {
+           for (SingleLine line : allLines) {
+               fileWriter.write(line.getPoints().toString());
+               fileWriter.write("\n");
+           }
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
+
+        return new MyFile(output, allLines);
     }
 
     // x1 y1; x2 y2; x3 y3;
@@ -69,7 +80,6 @@ public class Task15Impl implements ITestableTask15 {
 
         public SingleLine(I2DPoint firstPoint, I2DPoint secondPoint) {
             allPoints = new HashSet<>();
-           // allPoints.addAll(Arrays.asList(points));
             this.firstPoint = firstPoint;
             this.secondPoint = secondPoint;
             allPoints.add(firstPoint);

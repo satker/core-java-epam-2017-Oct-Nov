@@ -10,9 +10,9 @@ public class TaskStorage implements ITaskStorage {
 
     @Override
     public <T extends ITestableTask> T getSolver(Class<T> taskInterface) {
-//        if (taskInterface == ITestableTask1.class){
-//            return (T) new Task1Impl();
-//        }
+        if (taskInterface == ITestableTask1.class){
+            return (T) new Task1Impl();
+        }
         if (taskInterface == ITestableTask2.class){
             return (T) new Task2Impl();
         }
@@ -43,9 +43,9 @@ public class TaskStorage implements ITaskStorage {
         if (taskInterface == ITestableTask11.class){
             return (T) new Task11Impl();
         }
-//        if (taskInterface == ITestableTask12.class){
-//            return (T) new Task12Impl();
-//        }
+        if (taskInterface == ITestableTask12.class){
+            return (T) new Task12Impl();
+        }
         if (taskInterface == ITestableTask13.class){
             return (T) new Task13Impl();
         }
@@ -56,10 +56,10 @@ public class TaskStorage implements ITaskStorage {
         if (taskInterface == ITestableTask15.class) {
             return (T) new Task15Impl();
         }
-//
-//        if (taskInterface == ITestableTask16.class) {
-//            return (T) new Task16Impl();
-//        }
+
+        if (taskInterface == ITestableTask16.class) {
+            return (T) new Task16Impl();
+        }
         return null;
     }
 }
