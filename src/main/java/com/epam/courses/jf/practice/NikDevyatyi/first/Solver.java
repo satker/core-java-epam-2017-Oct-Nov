@@ -753,5 +753,26 @@ public class Solver implements ISolver {
         tr_matrix[m1] = temp;
         printMatrixrRows(trasposeMatrix(tr_matrix));
     }
+    @Override
+    public void task21() {
+        Scanner scanner =  new Scanner(System.in);
+        int[][] matrix = readMatrix(scanner);
+        int size = matrix.length;
+        int count = 0;
+        for(int[] row: matrix){
+            count =0;
+            for(int i=0; i <size; i++){
+                if(row[i] != 0){
+                    row[count] = row[i];
+                    count++;
+                }
+            }
+            for (int i = count; i< size;i++){
+                row[i] = 0;
+            }
+        }
+        printMatrixrRows(matrix);
+
+    }
 
 }
