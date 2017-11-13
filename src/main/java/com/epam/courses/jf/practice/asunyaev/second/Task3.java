@@ -11,7 +11,7 @@ public class Task3 implements ITestableTask3 {
     public List<String> sortPoems(Set<IPoem> poems, String author) {
         List<String> lines = new ArrayList<>();
         for (IPoem poem : poems) {
-           if (poem.getAuthor().equals(author)) {
+           if (author.equals(poem.getAuthor())) {
                lines.addAll(poem.getLines());
            }
        }
@@ -23,4 +23,5 @@ public class Task3 implements ITestableTask3 {
        });
        return lines;
     }
+
 }
