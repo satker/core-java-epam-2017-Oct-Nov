@@ -655,5 +655,50 @@ public class Solver implements ISolver {
 
 
     }
+    @Override
+    public void task19() {
+        Scanner scanner =  new Scanner(System.in);
+        int[][] matrix = readMatrix(scanner);
+        int count = 0;
+
+        List<Integer> row = new ArrayList<>();
+        List<Integer> col = new ArrayList<>();
+
+        for (int i = 0; i < matrix.length; i++) {
+
+            for(int j =0; j < matrix.length; j++){
+                if (matrix[i][j]==0){
+                    count++;
+                }
+            }
+            if(count!=matrix.length){
+                row.add(i);
+            }
+            count = 0;
+        }
+        count = 0;
+        for (int j = 0;j < matrix[0].length;j++) {
+
+            for(Integer index : row){
+                if (matrix[index][j]==0){
+                    count++;
+                }
+            }
+
+            if(count!=row.size()){
+                col.add(j);
+            }
+            count = 0;
+        }
+        System.out.println(row.size());
+        System.out.println(col.size());
+
+        for (Integer r : row) {
+            for (Integer c : col) {
+                System.out.printf("%d\t", matrix[r][c]);
+            }
+            System.out.println();
+        }
+    }
 
 }
