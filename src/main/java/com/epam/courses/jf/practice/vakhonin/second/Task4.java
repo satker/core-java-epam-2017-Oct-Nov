@@ -11,16 +11,16 @@ import java.util.Set;
 public class Task4 implements ITestableTask4{
 
     @Override
-    public Set<Integer> intersection(Set<Integer> first, Set<Integer> second){
-        Set<Integer> intersectionSet = new HashSet<>(first);
-        intersectionSet.retainAll(second);
-        return intersectionSet;
+    public Set<Integer> intersection(Set<Integer> first, Set<Integer> second) {
+        Set<Integer> result = new HashSet<>(first);
+        result.retainAll(second);
+        return result;
     }
 
     @Override
-    public Set<Integer> union(Set<Integer> first, Set<Integer> second){
-        Set<Integer> unionSet = new HashSet<>(first);
-        unionSet.addAll(second);
-        return unionSet;
+    public Set<Integer> union(Set<Integer> first, Set<Integer> second) {
+        Set<Integer> result = new HashSet<>(first);
+        result.addAll(second);
+        return result;
     }
 }
