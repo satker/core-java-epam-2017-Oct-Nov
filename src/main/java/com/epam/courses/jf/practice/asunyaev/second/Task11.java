@@ -12,6 +12,9 @@ public class Task11 implements ITestableTask11 {
         while(peoples.size() > 1) {
             peoples.remove(i);
             i++;
+            if (i == peoples.size()) {
+                i = 0;
+            }
         }
         return peoples.get(0);
     }
@@ -21,6 +24,9 @@ public class Task11 implements ITestableTask11 {
         while(peoples.size() > 1) {
             peoples.remove(i);
             i++;
+            if (i == peoples.size()) {
+                i = 0;
+            }
         }
         return peoples.get(0);
     }
