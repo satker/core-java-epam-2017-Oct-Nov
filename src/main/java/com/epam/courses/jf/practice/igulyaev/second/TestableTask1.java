@@ -20,9 +20,10 @@ public class TestableTask1 implements ITestableTask1 {
         }catch(IOException e){
             e.printStackTrace();//TODO: Add logger
         }
-        try(BufferedWriter bufferedReader = new BufferedWriter(new FileWriter(output))){
+        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(output))){
             for(Iterator<String> i = ((LinkedList<String>)stringList).descendingIterator(); i.hasNext();){
-                bufferedReader.write(i.next());
+                bufferedWriter.write(i.next());
+                bufferedWriter.write("\n");
             }
         }catch(IOException e){
             e.printStackTrace();//TODO: Add logger
