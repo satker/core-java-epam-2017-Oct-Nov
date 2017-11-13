@@ -700,5 +700,58 @@ public class Solver implements ISolver {
             System.out.println();
         }
     }
+    /***
+     *
+     * @param matrix
+     * @return int[][]
+     * <p> trasposeMatrix method to transpose matrix for task27</p>
+     */
+    public  int[][] trasposeMatrix(int[][] matrix)
+    {
+        int m = matrix.length;
+        int n = matrix[0].length;
+
+        int[][] trasposedMatrix = new int[n][m];
+
+        for(int x = 0; x < n; x++)
+        {
+            for(int y = 0; y < m; y++)
+            {
+                trasposedMatrix[x][y] = matrix[y][x];
+            }
+        }
+
+        return trasposedMatrix;
+
+    }
+    @Override
+    public void task20() {
+        Scanner scanner =  new Scanner(System.in);
+        int n1  = scanner.nextInt();
+        int m1 = scanner.nextInt();
+        int[][] matrix = readMatrix(scanner);
+        int minIndRow = 0;
+        int minIndColl =0;
+        int min = matrix[0][0];
+        for (int i = 0; i < matrix.length; i++) {
+
+            for (int j = 0; j < matrix.length; j++) {
+                if (min > matrix[i][j]) {
+                    min = matrix[i][j];
+                    minIndRow = i;
+                    minIndColl = j;
+
+                }
+            }
+        }
+        int[] temp = matrix[minIndRow];
+        matrix[minIndRow] = matrix[n1];
+        matrix[n1] = temp;
+        int[][] tr_matrix = trasposeMatrix(matrix);
+        temp = tr_matrix[minIndColl];
+        tr_matrix[minIndColl] = tr_matrix[m1];
+        tr_matrix[m1] = temp;
+        printMatrixrRows(trasposeMatrix(tr_matrix));
+    }
 
 }
