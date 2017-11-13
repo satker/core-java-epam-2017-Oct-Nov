@@ -17,8 +17,9 @@ public class Task10 implements ITestableTask10 {
             while ((string = reader.readLine()) != null) {
                 if (words.containsKey(string)) {
                     words.put(string, words.get(string) + 1);
+                } else {
+                    words.put(string, 1);
                 }
-                words.put(string, 1);
             }
         } catch (IOException e) {
             e.printStackTrace();
