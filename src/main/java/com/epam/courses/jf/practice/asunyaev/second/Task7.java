@@ -10,9 +10,9 @@ public class Task7 implements ITestableTask7 {
         int n = first.size();
         int m = second.size();
         List<Integer> result = new ArrayList<>(n + m);
-        for (int k = 0; k < n+m-1; ++k) {
+        for (int k = 0; k < n + m - 1; k++) {
             int s = 0;
-            for (int i = 0; i <= k; ++i) {
+            for (int i = 0; i <= k; i++) {
                 if (i >= n || k-i >= m) {
                     continue;
                 }
