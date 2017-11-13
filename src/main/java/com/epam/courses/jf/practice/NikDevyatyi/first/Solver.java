@@ -410,5 +410,49 @@ public class Solver implements ISolver {
         }
         System.out.println(result.toString().trim());
     }
-    
+    @Override
+    public void task13() {
+        Scanner scanner = new Scanner(System.in);
+        int k =  scanner.nextInt();
+        final int DIMENSION = scanner.nextInt();
+        int[][] matrix = new int[DIMENSION][DIMENSION];
+        for (int row = 0; row < DIMENSION; ++row) {
+            for (int col = 0; col < DIMENSION; ++col) {
+                matrix[row][col] = scanner.nextInt();
+            }
+        }
+        if(k>=0){
+            if(Math.abs(k)> matrix[0].length){
+                k = k%matrix[0].length;
+            }
+            System.out.println(matrix[0].length);
+            IntStream.range(matrix[0].length-k, matrix[0].length).forEach(
+                    n -> {
+                        printRows(matrix[n]);
+                    }
+            );
+            IntStream.range(0, matrix[0].length-k).forEach(
+                    n -> {
+                        printRows(matrix[n]);
+                    }
+            );
+        }
+        if(k<0){
+            if(Math.abs(k)> matrix[0].length){
+                k = k%matrix[0].length;
+            }
+            System.out.println(matrix[0].length);
+            IntStream.range(-k, matrix[0].length).forEach(
+                    n -> {
+                        printRows(matrix[n]);
+                    }
+            );
+            IntStream.range(0, -k).forEach(
+                    n -> {
+                        printRows(matrix[n]);
+                    }
+            );
+        }
+    }
+
 }
