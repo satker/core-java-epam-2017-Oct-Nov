@@ -248,5 +248,41 @@ public class Solver implements ISolver {
         System.out.println(printResult.toString().trim());
 
     }
+    @Override
+    public   void task8(){
+        Scanner sc = new Scanner(System.in);
+        String[] arrStr = getStrings2(sc);
+        ArrayList<Integer> result = new ArrayList<Integer>();
+
+        for(String word: arrStr) {
+            if (word.matches("[0-9]+")) {
+
+                if (word.equals(reverseIt(word))) {
+                    result.add(Integer.parseInt(word));
+
+                }
+            }
+
+        }
+        System.out.println(result.get(1));
+    }
+
+    /***
+     *
+     * @param source
+     * @return String
+     * <p>reverseIt  method to reverse  String used in task8()</p>
+     */
+
+    public static String reverseIt(String source) {
+        int i, len = source.length();
+        StringBuilder dest = new StringBuilder(len);
+
+        for (i = (len - 1); i >= 0; i--){
+            dest.append(source.charAt(i));
+        }
+
+        return dest.toString();
+    }
 
 }
