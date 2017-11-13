@@ -807,6 +807,41 @@ public class Solver implements ISolver {
         printMatrixrRows(buffer);
 
     }
+    @Override
+    public void task23() {
+        Scanner scanner =  new Scanner(System.in);
+        int[][] matrix = readMatrix(scanner);
+        int size = matrix.length;
+        int count = 0;
+        int max;
+        int min;
+        int colIndex =0;
+        int rawIndex = 0;
+        for(int i= 0; i< size;i++){
+            //count =0;
+            for(int j=0; j <size; j++){
+                max = matrix[i][0];
+                if(matrix[i][j] > max){
+                    max = matrix[i][j];
+                    colIndex = j;
+                }
+            }
+            for (int k = 0; k< size;k++){
+                min= matrix[0][colIndex];
+                if(matrix[k][colIndex] < min){
+                    min = matrix[k][colIndex];
+                    rawIndex = k;
+                }
+                //row[i] = 0;
+            }
+            if(i == rawIndex){
+                count++;
+            }
+
+        }
+        System.out.println(count);
+    }
+
     /***
      *
      * @param arr
@@ -838,6 +873,56 @@ public class Solver implements ISolver {
             }
         }
         printMatrixrRows(matrix);
+    }
+    /***
+     *
+     * @param scanner
+     * @return int[][]
+     * <p>readBigMatrixfrom System.in gets int and make matrix of int inside frame consist of Integer.MAX_VALUE  for task25<p/>
+     */
+    private int[][] readBigMatrix(Scanner scanner) {
+        final int DIMENSION = scanner.nextInt();
+        int[][] matrix = new int[DIMENSION + 2][DIMENSION + 2];
+        for (int row = 0; row < DIMENSION+2; ++row) {
+            for (int col = 0; col < DIMENSION+2; ++col) {
+                if(row == 0 || row == DIMENSION+1){
+                    matrix[row][col] = Integer.MAX_VALUE;
+                }
+                else if ((col == 0 || col ==DIMENSION+1)&&!(row == 0 || row == DIMENSION+1)){
+                    matrix[row][col] = Integer.MAX_VALUE;
+                }
+                else{
+                    matrix[row][col] = scanner.nextInt();
+                }
+
+            }
+        }
+        return matrix;
+    }
+    /*checked tasks1-25*/
+    @Override
+    public void task25() {
+        Scanner scanner =  new Scanner(System.in);
+        int[][] matrix = readBigMatrix(scanner);
+        int size = matrix.length;
+        int counter = 0;
+        for(int i =1; i < size -1; i++){
+            for(int j =1; j < size -1; j++){
+                int [] buffer = {
+                        matrix[i-1][j], matrix[i + 1][j],
+                        matrix[i-1][j-1], matrix[i][j-1],
+                        matrix[i+1][j-1], matrix[i-1][j+1],
+                        matrix[i][j+1], matrix[i + 1][j +1 ]
+                };
+                Arrays.sort(buffer);
+                if(buffer[0]> matrix[i][j]){
+                    counter++;
+                }
+            }
+
+        }
+        System.out.println(counter);
+
     }
 
 }
