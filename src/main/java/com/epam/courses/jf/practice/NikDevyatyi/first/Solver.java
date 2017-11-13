@@ -774,5 +774,38 @@ public class Solver implements ISolver {
         printMatrixrRows(matrix);
 
     }
+    /***
+     *
+     * @param scanner
+     * @return double[][]
+     * <p>readDoubleMatrix from System.in gets int and make matrix of double for task22</p>
+     */
+    private double[][] readDoubleMatrix(Scanner scanner) {
+        final int DIMENSION = scanner.nextInt();
+        double[][] matrix = new double[DIMENSION][DIMENSION];
+        for (int row = 0; row < DIMENSION; ++row) {
+            for (int col = 0; col < DIMENSION; ++col) {
+                matrix[row][col] = scanner.nextDouble();
+            }
+        }
+        return matrix;
+    }
+    @Override
+    public void task22() {
+        Scanner scanner =  new Scanner(System.in);
+        double[][] matrix = readDoubleMatrix(scanner);
+        int size = matrix.length;
+        int [][] buffer = new int[size][size];
+
+        for(int row = 0; row< size; row++){
+            for(int i=0; i <size; i++){
+                buffer[row][i] = (int)Math.round(matrix[row][i]);
+
+            }
+        }
+
+        printMatrixrRows(buffer);
+
+    }
 
 }
