@@ -7,10 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import static java.math.BigDecimal.ROUND_HALF_UP;
 
@@ -308,6 +305,35 @@ public class Solver implements ISolver{
             System.out.println("INCORRECT INPUT DATA");
         }
 
+    }
+
+    @Override
+    public void task12() {
+        Scanner scanner = new Scanner(System.in);
+        int k = scanner.nextInt(); //column to sort
+        int matrixDim = scanner.nextInt(); //matrix dimension
+
+        int[][] matrix = new int[matrixDim][matrixDim];
+        for (int row = 0; row < matrixDim; ++row) {
+            for (int col = 0; col < matrixDim; ++col) {
+                matrix[row][col] = scanner.nextInt();
+            }
+        }
+
+        Arrays.sort(matrix, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return o1[k] - o2[k];
+            }
+        });
+
+        System.out.println(matrixDim);
+        for (int i = 0; i < matrixDim; i++) {
+            for (int j = 0; j <matrixDim; j++) {
+                System.out.print(matrix[i][j] + "\t");
+            }
+            System.out.println();
+        }
     }
 
     /**
