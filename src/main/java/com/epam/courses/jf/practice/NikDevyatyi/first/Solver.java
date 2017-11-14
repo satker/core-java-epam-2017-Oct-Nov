@@ -47,6 +47,7 @@ public class Solver implements ISolver {
 
     }
 
+
     /***
 
      * @param scanner
