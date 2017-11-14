@@ -343,6 +343,29 @@ public class Solver implements ISolver{
 
     }
 
+    @Override
+    public void task14() {
+        Scanner scanner = new Scanner(System.in);
+        int elementsCount = scanner.nextInt();
+        int previous = Integer.MAX_VALUE;
+        int currentLength = 1;
+        int maxLength = 1;
+        for (int i = 0; i < elementsCount; i++) {
+            int current = scanner.nextInt();
+            if (current > previous) {
+                currentLength++;
+                if (currentLength > maxLength) {
+                    maxLength = currentLength;
+                }
+            } else {
+                currentLength = 1;
+            }
+            previous = current;
+        }
+        System.out.println(maxLength);
+
+    }
+
     /**
      * Custom comparator for task2()
      * Firstly compares string length. If length is the same, then compare by symbol codes
