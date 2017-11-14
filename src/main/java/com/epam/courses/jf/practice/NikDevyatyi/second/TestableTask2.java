@@ -13,41 +13,23 @@ public class TestableTask2 implements ITestableTask2 {
     public Set<File> getFiles(File directory) {
 
         Set<File> fileTree = new HashSet<File>();
-        List<File> res= new ArrayList<>();
+        //List<File> res= new ArrayList<>();
         if(directory==null||directory.listFiles()==null){
             return fileTree;
         }
         for (File entry : directory.listFiles()) {
             if (entry.isFile()){
-                //fileTree.add(entry);
                 fileTree.add(entry);
             }
             else {
-                //fileTree.addAll(getFiles(entry));
                 fileTree.add(entry);
                 fileTree.addAll(getFiles(entry));
             }
         }
-        //for(File item : fileTree){
-        //    System.out.println(item.toString());
-        //}
+
         return fileTree;
 
     }
-    private static File getAllFiles(File curDir) {
-        File result  = null;
-        File[] filesList = curDir.listFiles();
-        for (File f : filesList) {
-            if (f.isDirectory())
-                getAllFiles(f);
-            if (f.isFile()) {
-                result =  f;
-            }
-
-        }
-        return result;
-
-    }
 
 
-    }
+}
