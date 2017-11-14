@@ -311,14 +311,7 @@ public class Solver implements ISolver{
     public void task12() {
         Scanner scanner = new Scanner(System.in);
         int k = scanner.nextInt(); //column to sort
-        int matrixDim = scanner.nextInt(); //matrix dimension
-
-        int[][] matrix = new int[matrixDim][matrixDim];
-        for (int row = 0; row < matrixDim; ++row) {
-            for (int col = 0; col < matrixDim; ++col) {
-                matrix[row][col] = scanner.nextInt();
-            }
-        }
+        int[][] matrix = matrixInput();
 
         Arrays.sort(matrix, new Comparator<int[]>() {
             @Override
@@ -327,13 +320,27 @@ public class Solver implements ISolver{
             }
         });
 
-        System.out.println(matrixDim);
-        for (int i = 0; i < matrixDim; i++) {
-            for (int j = 0; j <matrixDim; j++) {
-                System.out.print(matrix[i][j] + "\t");
+        matrixOutput(matrix);
+    }
+
+    @Override
+    public void task13() {
+        Scanner scanner = new Scanner(System.in);
+        int k = scanner.nextInt(); //move position
+        int[][] inMatrix = matrixInput();
+        int dim = inMatrix.length;
+        int[][] outMatrix = new int[dim][dim];
+        for (int i = 0; i < dim; i++) {
+            for (int j = 0; j < dim; j++) {
+                if (k >= 0) {
+                    outMatrix[(i + k) % dim][j] = inMatrix[i][j]; //move rows down
+                } else {
+                    outMatrix[i][j] = inMatrix[(i - k) % dim][j]; //move rows up
+                }
             }
-            System.out.println();
         }
+        matrixOutput(outMatrix);
+
     }
 
     /**
@@ -378,6 +385,38 @@ public class Solver implements ISolver{
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * Reads square matrix from console
+     * @return matrix
+     */
+    public static int[][] matrixInput() {
+        Scanner scanner = new Scanner(System.in);
+        int matrixDim = scanner.nextInt(); //matrix dimension
+
+        int[][] matrix = new int[matrixDim][matrixDim];
+        for (int row = 0; row < matrixDim; ++row) {
+            for (int col = 0; col < matrixDim; ++col) {
+                matrix[row][col] = scanner.nextInt();
+            }
+        }
+        return matrix;
+    }
+
+    /**
+     * Prints square matrix to console
+     * @param matrix
+     */
+    public static void matrixOutput(int[][] matrix) {
+        int matrixDim = matrix.length;
+        System.out.println(matrixDim);
+        for (int i = 0; i < matrixDim; i++) {
+            for (int j = 0; j <matrixDim; j++) {
+                System.out.print(matrix[i][j] + "\t");
+            }
+            System.out.println();
+        }
     }
 
 }
