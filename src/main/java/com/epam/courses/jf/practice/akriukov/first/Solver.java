@@ -5,10 +5,14 @@ import com.epam.courses.jf.practice.common.first.ISolver;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
+
+import static java.math.BigDecimal.ROUND_HALF_UP;
 
 public class Solver implements ISolver{
     
@@ -238,6 +242,74 @@ public class Solver implements ISolver{
         }
     }
 
+    /*@Override
+    public void task10() {
+        //TODO: decide use double or BigDecimal
+        String[] coefficients = readLineFromConsole().split(" ");
+        BigDecimal a = new BigDecimal(coefficients[0]);
+        BigDecimal b = new BigDecimal(coefficients[1]);
+        BigDecimal c = new BigDecimal(coefficients[2]);
+        BigDecimal d = b.multiply(b).add(a.multiply(c).multiply(new BigDecimal("4")).negate()); //d = b * b - 4 * a * c
+        BigDecimal x1 = d.sqrt(MathContext.DECIMAL64);
+    }*/
+
+    @Override
+    public void task11() {
+        try {
+            int monthNumber = Integer.parseInt(readLineFromConsole());
+
+            /*if (monthNumber < 1 || monthNumber > 12) { //easy mode
+                System.out.println("INCORRECT INPUT DATA");
+            } else {
+                System.out.println(java.time.Month.of(monthNumber));
+            }*/
+
+            switch (monthNumber) {
+                case 1:
+                    System.out.println("January");
+                    break;
+                case 2:
+                    System.out.println("February");
+                    break;
+                case 3:
+                    System.out.println("March");
+                    break;
+                case 4:
+                    System.out.println("April");
+                    break;
+                case 5:
+                    System.out.println("May");
+                    break;
+                case 6:
+                    System.out.println("June");
+                    break;
+                case 7:
+                    System.out.println("July");
+                    break;
+                case 8:
+                    System.out.println("August");
+                    break;
+                case 9:
+                    System.out.println("September");
+                    break;
+                case 10:
+                    System.out.println("October");
+                    break;
+                case 11:
+                    System.out.println("November");
+                    break;
+                case 12:
+                    System.out.println("December");
+                    break;
+                default:
+                    System.out.println("INCORRECT INPUT DATA");
+            }
+        } catch (Exception e) {
+            System.out.println("INCORRECT INPUT DATA");
+        }
+
+    }
+
     /**
      * Custom comparator for task2()
      * Firstly compares string length. If length is the same, then compare by symbol codes
@@ -281,4 +353,5 @@ public class Solver implements ISolver{
         }
         return null;
     }
+
 }
