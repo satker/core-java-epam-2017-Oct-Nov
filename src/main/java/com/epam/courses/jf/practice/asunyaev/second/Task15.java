@@ -4,7 +4,6 @@ import com.epam.courses.jf.practice.common.second.I2DPoint;
 import com.epam.courses.jf.practice.common.second.ITestableTask15;
 
 import java.io.*;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,7 +19,10 @@ public class Task15 implements ITestableTask15 {
                 for (I2DPoint point3 : points){
                     double x3 = point3.getX();
                     double y3 = point3.getY();
-                    if ((x3 - x1)*(y2 - y1) == (y3 - y1)*(x2 - x1)) {
+                    if ((x3 - x1)*(y2 - y1) == (y3 - y1)*(x2 - x1)
+                            && ((x1 != x2) || (y1 != y2))
+                            && ((x2 != x3) || (y2 != y3))
+                            && ((x1 != x3) || (y1 != y3))) {
                         HashSet<I2DPoint> pointsFound = new HashSet<>();
                         pointsFound.add(point1);
                         pointsFound.add(point2);
@@ -54,7 +56,7 @@ public class Task15 implements ITestableTask15 {
                 for (ILine line : lines) {
                     for (I2DPoint point : line.getPoints()) {
                         writer.write(String.valueOf(point.getX()));
-                        writer.write(", ");
+                        writer.write(" ");
                         writer.write(String.valueOf(point.getY()));
                         writer.write(" ");
                     }
