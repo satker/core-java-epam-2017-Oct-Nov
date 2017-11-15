@@ -24,7 +24,7 @@ public class Task4 implements ITestableTask4 {
             return first;
         }
 
-        first.addAll(second.stream().filter(e -> !first.contains(e)).collect(Collectors.toSet()));
+        first.addAll(second.stream().filter(e -> !first.contains(e)).collect(Collectors.toList()));
 
         return first;
     }

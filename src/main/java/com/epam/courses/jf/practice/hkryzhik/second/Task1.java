@@ -5,6 +5,7 @@ import com.epam.courses.jf.practice.common.second.ITestableTask1;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Task1 implements ITestableTask1{
@@ -12,7 +13,8 @@ public class Task1 implements ITestableTask1{
     public List<String> reverseFile(File input, File output) {
 
         if(input.canRead() && input.exists()){
-            List<String> inputStringList = new ArrayList<>();
+            //not sure about this
+            List<String> inputStringList = Collections.emptyList();
             try {
                 char[] inputLineBuffer = new char[(int)input.length()];
 
