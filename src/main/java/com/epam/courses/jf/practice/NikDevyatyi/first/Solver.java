@@ -480,8 +480,12 @@ public class Solver implements ISolver {
                 count = 0;
             }
             first = second;
+        }if(max == 0){
+            System.out.println(max);
         }
-        System.out.println(max+1);
+        else {
+            System.out.println(max + 1);
+        }
     }
 /*checked tasks1-14*/
     /***
