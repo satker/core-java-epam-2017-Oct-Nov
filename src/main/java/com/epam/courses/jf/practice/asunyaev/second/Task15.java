@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Task15 implements ITestableTask15 {
+
     public IFileWithLines analyze(Set<I2DPoint> points, File output) {
         Set<ILine> linesFound = new HashSet<>();
         for (I2DPoint point1 : points) {
@@ -32,6 +33,7 @@ public class Task15 implements ITestableTask15 {
                 }
             }
         }
+        System.out.println(linesFound.toString());
         return new FileWithLines(linesFound, output);
     }
 
