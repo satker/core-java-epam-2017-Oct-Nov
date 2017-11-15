@@ -28,7 +28,7 @@ public class Task1 implements ITestableTask1{
 
                 for (int i = inputStringList.size() - 1; i != 0; i--) {
                     fileWriter.write(inputStringList.get(i));
-                    fileWriter.write(' ');
+                    fileWriter.write(", ");
                 }
 
                 fileWriter.close();
