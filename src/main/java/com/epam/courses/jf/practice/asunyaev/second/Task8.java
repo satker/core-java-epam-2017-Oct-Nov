@@ -25,7 +25,6 @@ public class Task8 implements ITestableTask8 {
                     || (c == ']' && stack.peek() == '[' )) {
                 stack.pop();
             }
-
         }
         if (stack.isEmpty()) {
             return true;
