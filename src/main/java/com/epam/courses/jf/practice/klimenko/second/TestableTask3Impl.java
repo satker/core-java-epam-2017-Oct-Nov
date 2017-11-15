@@ -18,7 +18,7 @@ public class TestableTask3Impl implements ITestableTask3 {
                 .collect(Collectors.toList())) {
             list.addAll(p.getLines());
         }
-        list.sort(Comparator.comparing(s->s.length()));
+        list.sort(Comparator.comparing(String::length));
         return list;
     }
 }

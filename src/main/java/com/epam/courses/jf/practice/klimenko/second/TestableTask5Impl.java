@@ -12,9 +12,9 @@ public class TestableTask5Impl implements ITestableTask5 {
         BigDecimal sumPower = new BigDecimal(0);
         BigDecimal sumCurrentSquared = new BigDecimal(0);
 
-        for(IMeasurement m : measurements) {
-            sumPower = sumPower.add( new BigDecimal( m.getCurrent() * m.getVoltage() ) );
-            sumCurrentSquared = sumCurrentSquared.add( new BigDecimal( m.getCurrent() * m.getCurrent() ) );
+        for (IMeasurement m : measurements) {
+            sumPower = sumPower.add(new BigDecimal(m.getCurrent() * m.getVoltage()));
+            sumCurrentSquared = sumCurrentSquared.add(new BigDecimal(m.getCurrent() * m.getCurrent()));
         }
 
         return sumPower.divide(sumCurrentSquared, 12, RoundingMode.HALF_UP).doubleValue();

@@ -3,7 +3,6 @@ package com.epam.courses.jf.practice.klimenko.second;
 import com.epam.courses.jf.practice.common.second.ITestableTask11;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
@@ -12,7 +11,7 @@ public class TestableTask11Impl implements ITestableTask11 {
     public String emulate(ArrayList<String> peoples) {
         int first = 0;
         while (peoples.size() > 1) {
-            int next = ( peoples.size() - first ) % 2;
+            int next = (peoples.size() - first) % 2;
             for (int i = first; i < peoples.size(); ++i) {
                 peoples.remove(i);
             }
@@ -27,7 +26,7 @@ public class TestableTask11Impl implements ITestableTask11 {
         while (peoples.size() > 1) {
             for (ListIterator<String> it = peoples.listIterator(); it.hasNext(); ) {
                 it.next();
-                if( doRemove ) {
+                if (doRemove) {
                     it.remove();
                 }
                 doRemove = !doRemove;

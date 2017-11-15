@@ -3,7 +3,6 @@ package com.epam.courses.jf.practice.klimenko.second;
 import com.epam.courses.jf.practice.common.second.ITestableTask2;
 
 import java.io.File;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 

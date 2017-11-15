@@ -3,11 +3,8 @@ package com.epam.courses.jf.practice.klimenko.second;
 import com.epam.courses.jf.practice.common.second.ITestableTask1;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;

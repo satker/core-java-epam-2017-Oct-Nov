@@ -22,7 +22,7 @@ public class TestableTask14Impl implements ITestableTask14 {
             if (isEmpty()) {
                 return null;
             }
-            int index = Collections.binarySearch(collection, value, Comparator.comparing(T::doubleValue) );
+            int index = Collections.binarySearch(collection, value, Comparator.comparing(T::doubleValue));
             if (index >= 0) {
                 return collection.get(index);
             }

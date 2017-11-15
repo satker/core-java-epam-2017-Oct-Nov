@@ -6,7 +6,7 @@ import java.util.List;
 
 public class TestableTask12Impl implements ITestableTask12 {
     private void swap(List<Integer> list, int i, int j) {
-        if( i != j ) {
+        if (i != j) {
             Integer tmp = list.get(i);
             list.set(i, list.get(j));
             list.set(j, tmp);
@@ -19,12 +19,12 @@ public class TestableTask12Impl implements ITestableTask12 {
         for (int i = 0; i < integers.size(); ++i) {
             if (integers.get(i) < value) {
                 swap(integers, less, equals);
-                if( equals != i ) {
+                if (equals != i) {
                     swap(integers, less, i);
                 }
                 ++equals;
                 ++less;
-            } else if(integers.get(i) == value) {
+            } else if (integers.get(i) == value) {
                 swap(integers, equals, i);
                 ++equals;
             }

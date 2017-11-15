@@ -33,7 +33,7 @@ public class TestableTask15Impl implements ITestableTask15 {
 
         for (I2DPoint first : points) {
             for (I2DPoint second : points) {
-                if(first != second) {
+                if (first != second) {
                     Set<I2DPoint> set = new HashSet<>();
                     for (I2DPoint third : points) {
                         if (isOnLine(first, second, third)) {

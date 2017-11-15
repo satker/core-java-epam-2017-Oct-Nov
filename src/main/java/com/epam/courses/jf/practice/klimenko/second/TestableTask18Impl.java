@@ -26,7 +26,7 @@ public class TestableTask18Impl implements ITestableTask18 {
         for (int lastRow = 0; lastRow < matrix.getHeight(); ++lastRow) {
 
             /* Update upper bound */
-            if(lastRow > 0) {
+            if (lastRow > 0) {
                 for (int j = 0; j < matrix.getWidth(); ++j) {
                     if (matrix.getValue(j, lastRow) != matrix.getValue(j, lastRow - 1)) {
                         upperBound[j] = lastRow - 1;
