@@ -809,7 +809,6 @@ public class Solver implements ISolver {
 
         ArrayList<ArrayList<Integer>> inputArray = new ArrayList<>();
 
-
         for(int i = 0; i < size; i++) {
 
             String[] inputLine = inputData.nextLine().split(" ");
