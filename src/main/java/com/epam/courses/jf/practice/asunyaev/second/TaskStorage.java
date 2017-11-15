@@ -36,6 +36,8 @@ public class TaskStorage implements ITaskStorage {
                 return (T) new Task13();
             case "ITestableTask14":
                 return (T) new Task14();
+            case "ITestableTask15":
+                return (T) new Task15();
             default:
                 return null;
         }
