@@ -3,6 +3,7 @@ package com.epam.courses.jf.practice.hkryzhik.second;
 import com.epam.courses.jf.practice.common.second.ITestableTask4;
 
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Task4 implements ITestableTask4 {
@@ -24,7 +25,14 @@ public class Task4 implements ITestableTask4 {
             return first;
         }
 
-        first.addAll(second.stream().filter(e -> !first.contains(e)).collect(Collectors.toList()));
+        for (Integer elementOfSet : second) {
+            if(!first.contains(elementOfSet)){
+                first.add(elementOfSet);
+            }
+        }
+
+
+        //first.addAll(second.stream().filter(e -> !first.contains(e)).collect(Collectors.toList()));
 
         return first;
     }
