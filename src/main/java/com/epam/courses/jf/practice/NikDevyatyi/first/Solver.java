@@ -310,19 +310,19 @@ public class Solver implements ISolver {
         double x2 = 0;
         StringBuilder result = new StringBuilder();
         if(D > 0){
-            x2 = (-B + Math.sqrt(D))/(2*A);
-            x1 = (-B - Math.sqrt(D))/(2*A);
+            x1 = (-B + Math.sqrt(D))/(2*A);
+            x2 = (-B - Math.sqrt(D))/(2*A);
             //BigDecimal res = new BigDecimal(x1);
             result.append("Two solutions: ");
-            result.append(new BigDecimal(x1).setScale(1, ROUND_HALF_UP));
+            result.append(new BigDecimal(x1).setScale(2, ROUND_HALF_UP));
             result.append(", ");
-            result.append(new BigDecimal(x2).setScale(1, ROUND_HALF_UP));
+            result.append(new BigDecimal(x2).setScale(2, ROUND_HALF_UP));
 
         }
         else if(D == 0){
             x1 = -(double) B /(2*A);
             result.append("One solution: ");
-            result.append(new BigDecimal(x1).setScale(1, ROUND_HALF_UP));
+            result.append(new BigDecimal(x1).setScale(2, ROUND_HALF_UP));
 
         }else {
             result.append("No solution");
