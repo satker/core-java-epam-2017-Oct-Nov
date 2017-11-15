@@ -374,7 +374,7 @@ public class Solver implements ISolver {
         }
 
         Arrays.sort(matrix, Comparator.comparing((int[] arr) -> arr[k]));
-        System.out.println(DIMENSION);
+        //System.out.println(DIMENSION);
         printMatrixrRows(matrix);
 
     }
