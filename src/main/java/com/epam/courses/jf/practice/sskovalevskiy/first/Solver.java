@@ -6,7 +6,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
-import java.text.NumberFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -68,14 +67,11 @@ public class Solver implements ISolver {
             e.printStackTrace();
         }
 
-        Comparator<String> comparator = new Comparator<String>() {
-            @Override
-            public int compare(String o1, String o2) {
-                if (o1.length() == o2.length()) {
-                    return o1.compareTo(o2);
-                } else {
-                    return o1.length() - o2.length();
-                }
+        Comparator<String> comparator = (o1, o2) -> {
+            if (o1.length() == o2.length()) {
+                return o1.compareTo(o2);
+            } else {
+                return o1.length() - o2.length();
             }
         };
 
@@ -130,7 +126,7 @@ public class Solver implements ISolver {
         for (int i = 0; i < N; i++) {
             String s = reader.next();
 
-            HashSet<Character> characters = new HashSet();
+            HashSet<Character> characters = new HashSet<>();
             for (int j = 0; j < s.length(); j++) {
                 characters.add(s.charAt(j));
             }
@@ -191,7 +187,6 @@ public class Solver implements ISolver {
             if (word.length() != 1) {
                 for (int i = 1; i < word.length(); i++) {
 
-                    int length = word.length();
                     if ((word.charAt(i - 1) >= word.charAt(i))) {
                         isWordCorrect = false;
                         break;
@@ -247,11 +242,11 @@ public class Solver implements ISolver {
         if (words.isEmpty()) {
             System.out.println("NOT FOUND");
         } else {
-            StringJoiner probel = new StringJoiner(" ");
+            StringJoiner space = new StringJoiner(" ");
             for (String s : words) {
-                probel.add(s);
+                space.add(s);
             }
-            System.out.printf("%s%n", probel.toString());
+            System.out.printf("%s%n", space.toString());
         }
     }
 
@@ -406,12 +401,7 @@ public class Solver implements ISolver {
             }
         }
 
-        Arrays.sort(matrix, new Comparator<Integer[]>() {
-            @Override
-            public int compare(Integer[] o1, Integer[] o2) {
-                return o1[k] - o2[k];
-            }
-        });
+        Arrays.sort(matrix, (o1, o2) -> o1[k] - o2[k]);
 
         System.out.println(N);
 
@@ -589,7 +579,7 @@ public class Solver implements ISolver {
     private static int[][] getMinor(int[][] matrix, int column) {
         int minorLength = matrix.length - 1;
         int[][] minor = new int[minorLength][minorLength];
-        int dJ = 0;
+        int dJ;
         for (int i = 1; i <= minorLength; i++) {
             dJ = 0;
             for (int j = 0; j <= minorLength; j++) {
@@ -639,7 +629,7 @@ public class Solver implements ISolver {
             if (linesToDelete.contains(i)) continue;
             for (Integer j = 0; j < N; j++) {
                 if (columnToDelete.contains(j)) continue;
-                System.out.print(A[i][j] + (j.equals(Integer.valueOf(N - 1)) ? "\n" : "\t"));
+                System.out.print(A[i][j] + (j.equals(N - 1) ? "\n" : "\t"));
             }
         }
 
@@ -683,7 +673,7 @@ public class Solver implements ISolver {
             if (linesToDelete.contains(i)) continue;
             for (Integer j = 0; j < N; j++) {
                 if (columnToDelete.contains(j)) continue;
-                System.out.print(A[i][j] + (j.equals(Integer.valueOf(N - 1)) ? "\n" : "\t"));
+                System.out.print(A[i][j] + (j.equals(N - 1) ? "\n" : "\t"));
             }
         }
     }
@@ -874,17 +864,14 @@ public class Solver implements ISolver {
             }
         }
 
-        Arrays.sort(A, new Comparator<Integer[]>() {
-            @Override
-            public int compare(Integer[] o1, Integer[] o2) {
-                int sum1 = 0;
-                int sum2 = 0;
-                for (int i = 0; i < N; i++) {
-                    sum1 += o1[i];
-                    sum2 += o2[i];
-                }
-                return sum1 - sum2;
+        Arrays.sort(A, (o1, o2) -> {
+            int sum1 = 0;
+            int sum2 = 0;
+            for (int i = 0; i < N; i++) {
+                sum1 += o1[i];
+                sum2 += o2[i];
             }
+            return sum1 - sum2;
         });
 
         System.out.println(N);
@@ -997,17 +984,14 @@ public class Solver implements ISolver {
             }
         }
 
-        Arrays.sort(A, new Comparator<Integer[]>() {
-            @Override
-            public int compare(Integer[] o1, Integer[] o2) {
-                int sum1 = 0;
-                int sum2 = 0;
-                for (int i = 0; i < N; i++) {
-                    sum1 += Math.abs(o1[i]);
-                    sum2 += Math.abs(o2[i]);
-                }
-                return sum2 - sum1;
+        Arrays.sort(A, (o1, o2) -> {
+            int sum1 = 0;
+            int sum2 = 0;
+            for (int i = 0; i < N; i++) {
+                sum1 += Math.abs(o1[i]);
+                sum2 += Math.abs(o2[i]);
             }
+            return sum2 - sum1;
         });
 
         System.out.println(N);
@@ -1017,10 +1001,5 @@ public class Solver implements ISolver {
                 System.out.print(A[j][i] + ((j == (N - 1)) ? "\n" : "\t"));
             }
         }
-    }
-
-    public static void main(String[] args) {
-
-        new Solver().task10();
     }
 }
