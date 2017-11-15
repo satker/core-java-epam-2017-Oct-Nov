@@ -8,6 +8,7 @@ public class TaskStorage implements ITaskStorage{
         String taskInterfaceName = taskInterface.getSimpleName();
         switch(taskInterfaceName){
             case "ITestableTask1": return (T) new TestableTask1();
+            case "ITestableTask2": return (T) new TestableTask2();
             default: return null;
         }
     }
