@@ -9,6 +9,9 @@ public class TaskStorage implements ITaskStorage{
         switch(taskInterfaceName){
             case "ITestableTask1": return (T) new TestableTask1();
             case "ITestableTask2": return (T) new TestableTask2();
+            case "ITestableTask3": return (T) new TestableTask3();
+            case "ITestableTask4": return (T) new TestableTask4();
+            case "ITestableTask5": return (T) new TestableTask5();
             default: return null;
         }
     }
