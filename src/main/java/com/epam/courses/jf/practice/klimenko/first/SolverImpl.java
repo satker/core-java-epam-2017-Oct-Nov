@@ -540,7 +540,7 @@ public class SolverImpl implements ISolver {
             }
         }
 
-        printDoubleSquareMatrix(matrix, ".0f");
+        printDoubleSquareMatrix(matrix, "%.0f");
     }
 
     @Override
