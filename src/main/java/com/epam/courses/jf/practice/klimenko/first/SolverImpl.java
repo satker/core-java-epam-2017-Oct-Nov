@@ -2,25 +2,23 @@ package com.epam.courses.jf.practice.klimenko.first;
 
 import com.epam.courses.jf.practice.common.first.ISolver;
 
-import java.text.DecimalFormat;
+import java.lang.reflect.Array;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class SolverImpl implements ISolver {
     @Override
     public void task1() {
-        int minLength = -1, maxLength = -1;
-        String minString = "???", maxString = "???";
-        Scanner scanner = new Scanner(System.in);
-        int linesNumber = scanner.nextInt();
+        List<String> list = readLines(new Scanner(System.in));
+        String minString = list.get(0), maxString = list.get(0);
+        int minLength = minString.length(), maxLength = maxString.length();
 
-        scanner.nextLine();
-        for (int i = 0; i < linesNumber; ++i) {
-            String currentString = scanner.nextLine();
-            if (minLength == -1 || currentString.length() <= minLength) {
+        for (String currentString : list) {
+            if (currentString.length() <= minLength) {
                 minLength = currentString.length();
                 minString = currentString;
             }
-            if (maxLength == -1 || currentString.length() >= maxLength) {
+            if (currentString.length() >= maxLength) {
                 maxLength = currentString.length();
                 maxString = currentString;
             }
@@ -67,14 +65,14 @@ public class SolverImpl implements ISolver {
     public void task4() {
         List<String> words = readWords(new Scanner(System.in));
         String minWord = "???";
-        int minCharset = -1;
+        int minCharset = 65536;
 
         for (String word : words) {
             Set<Character> charset = new HashSet<>();
             for (int i = 0; i < word.length(); ++i) {
                 charset.add(word.charAt(i));
             }
-            if (minCharset == -1 || charset.size() < minCharset) {
+            if (charset.size() < minCharset) {
                 minCharset = charset.size();
                 minWord = word;
             }
@@ -118,7 +116,6 @@ public class SolverImpl implements ISolver {
         for (String word : words) {
             boolean sorted = word.length() > 1;
             for (int i = 1; i < word.length(); ++i) {
-                // TODO: Convert to lowercase before comparing codes
                 if (word.codePointAt(i - 1) >= word.codePointAt(i)) {
                     sorted = false;
                     break;
@@ -144,20 +141,18 @@ public class SolverImpl implements ISolver {
 
             for (int i = 0; i < word.length(); ++i) {
                 Character c = Character.toLowerCase(word.charAt(i));
-                if (charset.contains(c)) {
+                if (!charset.add(c)) {
                     matched = false;
                     break;
                 }
-                charset.add(c);
             }
 
             if (matched) {
-                if (!matchedWords.contains(word)) {
-                    if(!matchedWords.isEmpty()) {
+                if (matchedWords.add(word)) {
+                    if (matchedWords.size() > 1) {
                         System.out.print(" ");
                     }
                     System.out.printf("%s", word);
-                    matchedWords.add(word);
                 }
             }
         }
@@ -194,11 +189,12 @@ public class SolverImpl implements ISolver {
     @Override
     public void task9() {
         int size = new Scanner(System.in).nextInt();
+
         for (int row = 0; row < size; ++row) {
             for (int col = 0; col < size; ++col) {
                 int element = row * size + col + 1;
                 System.out.printf("%d", element);
-                if( col < size - 1 ) {
+                if (col < size - 1) {
                     System.out.print("\t");
                 }
             }
@@ -278,6 +274,7 @@ public class SolverImpl implements ISolver {
                     monthName = "December";
                     break;
                 default:
+                    // Do nothing
                     break;
             }
         } catch (InputMismatchException e) {
@@ -291,7 +288,7 @@ public class SolverImpl implements ISolver {
     public void task12() {
         Scanner scanner = new Scanner(System.in);
         int column = scanner.nextInt();
-        Integer[][] matrix = readMatrix(scanner);
+        Integer[][] matrix = readMatrix(scanner, Integer.class);
 
         Arrays.asList(matrix).sort(Comparator.comparing((Integer[] row) -> row[column]));
 
@@ -302,7 +299,7 @@ public class SolverImpl implements ISolver {
     public void task13() {
         Scanner scanner = new Scanner(System.in);
         int offset = scanner.nextInt();
-        Integer[][] matrix = readMatrix(scanner);
+        Integer[][] matrix = readMatrix(scanner, Integer.class);
         int matrixSize = matrix.length;
         Integer[][] newMatrix = new Integer[matrixSize][];
 
@@ -341,17 +338,13 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task15() {
-        Integer[][] matrix = readMatrix(new Scanner(System.in));
-        int matrixSize = matrix.length;
+        Integer[][] matrix = readMatrix(new Scanner(System.in), Integer.class);
         int matrixSum = 0;
 
         for (Integer[] row : matrix) {
-            List<Integer> positiveIndex = new ArrayList<>();
-            for (int i = 0; i < row.length; ++i) {
-                if (row[i] > 0) {
-                    positiveIndex.add(i);
-                }
-            }
+            List<Integer> positiveIndex = Arrays.stream(row)
+                    .filter(x -> x > 0)
+                    .collect(Collectors.toList());
             int rowSum = 0;
             if (positiveIndex.size() > 1) {
                 for (int i = positiveIndex.get(0) + 1; i < positiveIndex.get(1); ++i) {
@@ -364,9 +357,10 @@ public class SolverImpl implements ISolver {
         System.out.println(matrixSum);
     }
 
+    @SuppressWarnings("UnnecessaryLocalVariable")
     @Override
     public void task16() {
-        Integer[][] matrix = readMatrix(new Scanner(System.in));
+        Integer[][] matrix = readMatrix(new Scanner(System.in), Integer.class);
         int matrixSize = matrix.length;
         Integer[][] newMatrix = new Integer[matrixSize][matrixSize];
 
@@ -384,16 +378,9 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task17() {
-        Scanner scanner = new Scanner(System.in);
-        int matrixSize = scanner.nextInt();
-        double[][] matrix = new double[matrixSize][matrixSize];
+        Double[][] matrix = readMatrix(new Scanner(System.in), Double.class);
+        int matrixSize = matrix.length;
         double determinant = 1;
-
-        for (double[] row : matrix) {
-            for (int i = 0; i < matrixSize; ++i) {
-                row[i] = scanner.nextInt();
-            }
-        }
 
         for (int rowIndex = 0; rowIndex < matrixSize; ++rowIndex) {
             int lead = -1;
@@ -410,7 +397,7 @@ public class SolverImpl implements ISolver {
                 break;
             }
 
-            double[] tmp = matrix[rowIndex];
+            Double[] tmp = matrix[rowIndex];
             matrix[rowIndex] = matrix[lead];
             matrix[lead] = tmp;
 
@@ -432,7 +419,7 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task18() {
-        Integer[][] matrix = readMatrix(new Scanner(System.in));
+        Integer[][] matrix = readMatrix(new Scanner(System.in), Integer.class);
         int matrixSize = matrix.length;
         Set<Integer> rowsToDelete = new HashSet<>();
         Set<Integer> columnsToDelete = new HashSet<>();
@@ -460,7 +447,7 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task19() {
-        Integer[][] matrix = readMatrix(new Scanner(System.in));
+        Integer[][] matrix = readMatrix(new Scanner(System.in), Integer.class);
         int matrixSize = matrix.length;
         Set<Integer> rowsToDelete = new HashSet<>();
         Set<Integer> columnsToDelete = new HashSet<>();
@@ -477,8 +464,8 @@ public class SolverImpl implements ISolver {
 
         for (int j = 0; j < matrixSize; ++j) {
             boolean allZeroes = true;
-            for (int i = 0; i < matrixSize; ++i) {
-                allZeroes &= matrix[i][j] == 0;
+            for (Integer[] aMatrix : matrix) {
+                allZeroes &= aMatrix[j] == 0;
             }
             if (allZeroes) {
                 columnsToDelete.add(j);
@@ -495,7 +482,7 @@ public class SolverImpl implements ISolver {
         Scanner scanner = new Scanner(System.in);
         int y = scanner.nextInt();
         int x = scanner.nextInt();
-        Integer[][] matrix = readMatrix(scanner);
+        Integer[][] matrix = readMatrix(scanner, Integer.class);
         int matrixSize = matrix.length;
         int imin = 0, jmin = 0, minValue = matrix[0][0];
 
@@ -526,7 +513,7 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task21() {
-        Integer[][] matrix = readMatrix(new Scanner(System.in));
+        Integer[][] matrix = readMatrix(new Scanner(System.in), Integer.class);
 
         for (Integer[] row : matrix) {
             Arrays.sort(row, (Integer a, Integer b) -> {
@@ -542,24 +529,21 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task22() {
-        DecimalFormat format = new DecimalFormat("");
-        Scanner scanner = new Scanner(System.in);
-        int matrixSize = scanner.nextInt();
-        System.out.println(matrixSize);
+        Double[][] matrix = readMatrix(new Scanner(System.in), Double.class);
+        int matrixSize = matrix.length;
 
         for (int i = 0; i < matrixSize; ++i) {
             for (int j = 0; j < matrixSize; ++j) {
-                double val = scanner.nextDouble();
-                val = Math.round(val);
-                System.out.print(format.format(val) + " ");
+                matrix[i][j] = (double) Math.round(matrix[i][j]);
             }
-            System.out.println();
         }
+
+        printMatrix(matrix, true);
     }
 
     @Override
     public void task23() {
-        Integer[][] matrix = readMatrix(new Scanner(System.in));
+        Integer[][] matrix = readMatrix(new Scanner(System.in), Integer.class);
         int matrixSize = matrix.length;
         Integer[] maxColValue = new Integer[matrixSize];
         Integer[] minRowValue = new Integer[matrixSize];
@@ -576,7 +560,7 @@ public class SolverImpl implements ISolver {
 
         for (int i = 0; i < matrixSize; ++i) {
             for (int j = 0; j < matrixSize; ++j) {
-                if (matrix[i][j] == minRowValue[i] && matrix[i][j] == maxColValue[j]) {
+                if (matrix[i][j].equals(minRowValue[i]) && matrix[i][j].equals(maxColValue[j])) {
                     ++count;
                 }
             }
@@ -587,7 +571,7 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task24() {
-        Integer[][] matrix = readMatrix(new Scanner(System.in));
+        Integer[][] matrix = readMatrix(new Scanner(System.in), Integer.class);
         int matrixSize = matrix.length;
 
         Arrays.sort(matrix, (Integer[] a, Integer[] b) -> {
@@ -604,7 +588,7 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task25() {
-        Integer[][] matrix = readMatrix(new Scanner(System.in));
+        Integer[][] matrix = readMatrix(new Scanner(System.in), Integer.class);
         int matrixSize = matrix.length;
         int count = 0;
 
@@ -633,7 +617,7 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task26() {
-        Integer[][] matrix = readMatrix(new Scanner(System.in));
+        Integer[][] matrix = readMatrix(new Scanner(System.in), Integer.class);
         int matrixSize = matrix.length;
         boolean found = false;
         int maxMax = -1;
@@ -668,7 +652,7 @@ public class SolverImpl implements ISolver {
 
     @Override
     public void task27() {
-        Integer[][] matrix = readMatrix(new Scanner(System.in));
+        Integer[][] matrix = readMatrix(new Scanner(System.in), Integer.class);
         int matrixSize = matrix.length;
         Integer[] colIndex = new Integer[matrixSize];
 
@@ -678,9 +662,9 @@ public class SolverImpl implements ISolver {
 
         Arrays.sort(colIndex, (Integer a, Integer b) -> {
             int charA = 0, charB = 0;
-            for (int i = 0; i < matrixSize; ++i) {
-                charA += Math.abs(matrix[i][a]);
-                charB += Math.abs(matrix[i][b]);
+            for (Integer[] aMatrix : matrix) {
+                charA += Math.abs(aMatrix[a]);
+                charB += Math.abs(aMatrix[b]);
             }
             return charB - charA;
         });
@@ -724,27 +708,39 @@ public class SolverImpl implements ISolver {
         return list;
     }
 
-    private static Integer[][] readMatrix(Scanner scanner) {
-        int count = scanner.nextInt();
-        Integer[][] mat = new Integer[count][count];
-        for (int row = 0; row < count; ++row) {
-            for (int col = 0; col < count; ++col) {
-                mat[row][col] = scanner.nextInt();
+    @SuppressWarnings("unchecked")
+    private static <T extends Number> T[][] readMatrix(Scanner scanner, Class<T> c) {
+        int size = scanner.nextInt();
+        T[][] ret = (T[][]) Array.newInstance(c, size, size);
+        for (int i = 0; i < size; ++i) {
+            for (int j = 0; j < size; ++j) {
+                if (c == Integer.class) {
+                    ret[i][j] = (T) (Integer) scanner.nextInt();
+                } else if (c == Double.class) {
+                    ret[i][j] = (T) (Double) scanner.nextDouble();
+                } else {
+                    throw new RuntimeException();
+                }
             }
         }
-        return mat;
+        return ret;
     }
 
-    private static void printMatrix(Integer[][] matrix, boolean square) {
-        int height = matrix.length;
-        int width = matrix[0].length;
-        System.out.println(height);
+    private static <T extends Number> void printMatrix(T[][] matrix, boolean square) {
+        System.out.print(matrix.length);
         if (!square) {
-            System.out.println(width);
+            System.out.printf(" %d", matrix[0].length);
         }
-        for (Integer[] row : matrix) {
-            for (int val : row) {
-                System.out.printf("%d ", val);
+        System.out.println();
+
+        for (T[] row : matrix) {
+            boolean first = true;
+            for (T val : row) {
+                if (!first) {
+                    System.out.print(" ");
+                }
+                System.out.print(val);
+                first = false;
             }
             System.out.println();
         }
