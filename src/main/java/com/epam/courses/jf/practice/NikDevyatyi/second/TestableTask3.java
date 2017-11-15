@@ -12,7 +12,7 @@ public class TestableTask3 implements ITestableTask3 {
     public List<String> sortPoems(Set<IPoem> poems, String author) {
         List<String> result = new ArrayList();
         for(IPoem poem : poems){
-            if(poem.getAuthor() == author){
+            if(poem.getAuthor().equals(author)){
                 result.addAll(poem.getLines());
             }
         }
