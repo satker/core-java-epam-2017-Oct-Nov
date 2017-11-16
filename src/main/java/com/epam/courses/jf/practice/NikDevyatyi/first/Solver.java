@@ -830,17 +830,19 @@ public class Solver implements ISolver {
         int colIndex =0;
         int rawIndex = 0;
         for(int i= 0; i< size;i++){
+
+            min = Integer.MAX_VALUE;
             for(int j=0; j <size; j++){
-                max = Integer.MIN_VALUE;
-                if(matrix[i][j] > max){
-                    max = matrix[i][j];
+                if(matrix[i][j] <= min){
+
+                    min = matrix[i][j];
                     colIndex = j;
                 }
             }
-            for (int k = 0; k< size;k++){
-                min = Integer.MAX_VALUE;
-                if(matrix[k][colIndex] < min){
-                    min = matrix[k][colIndex];
+            max = Integer.MIN_VALUE;
+            for (int k = 0; k< size;k++) {
+                if (matrix[k][colIndex] >= max) {
+                    max = matrix[k][colIndex];
                     rawIndex = k;
                 }
             }
