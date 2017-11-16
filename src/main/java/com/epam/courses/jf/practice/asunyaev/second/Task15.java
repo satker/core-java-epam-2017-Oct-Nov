@@ -68,6 +68,7 @@ public class Task15 implements ITestableTask15 {
                         pointsFound.add(point3.getKey());
                         System.out.println(pointsFound);
                         linesFound.add(new Line(pointsFound));
+                        System.out.println(linesFound);
                     }
                     point3.setValue(false);
                 }
@@ -81,11 +82,11 @@ public class Task15 implements ITestableTask15 {
 
     private class FileWithLines implements IFileWithLines {
 
-        File file;
+        private File file;
 
         FileWithLines (Set<ILine> lines, File file) {
             this.file = file;
-            writeLines(lines);
+            putLines(lines);
         }
 
         @Override
@@ -94,9 +95,9 @@ public class Task15 implements ITestableTask15 {
         }
 
 
-        public void writeLines(Set<ILine> lines) {
-            try {
-                BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+        public void putLines(Set<ILine> lines) {
+            try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+                    new FileOutputStream(file), "utf-8"))) {
                 for (ILine line : lines) {
                     for (I2DPoint point : line.getPoints()) {
                         writer.write(String.valueOf(point.getX()));
@@ -106,7 +107,7 @@ public class Task15 implements ITestableTask15 {
                     }
                     writer.write("\n");
                 }
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -114,8 +115,7 @@ public class Task15 implements ITestableTask15 {
         @Override
         public Set<ILine> getLines() {
             Set<ILine> lines = new HashSet<>();
-            try {
-                BufferedReader reader = new BufferedReader(new FileReader(file));
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))){
                 String string;
                 while ((string = reader.readLine()) != null) {
                     String[] row = string.split("\\s");
