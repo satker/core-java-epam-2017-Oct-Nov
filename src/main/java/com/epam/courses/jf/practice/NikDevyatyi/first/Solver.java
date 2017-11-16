@@ -41,7 +41,7 @@ public class Solver implements ISolver {
                 .thenComparing(String::compareTo));
 
         for(String str: arrStr){
-            System.out.printf("(%d):\"%s\"%n", str.length(), str);
+            System.out.printf("(%d): \"%s\"%n", str.length(), str);
 
         }
 
@@ -83,7 +83,7 @@ public class Solver implements ISolver {
 
         for (String str : arrStr){
             if (str.length() < summ/arrStr.length){
-                System.out.printf("(%d):\"%s\"%n",str.length(),str);
+                System.out.printf("(%d): \"%s\"%n",str.length(),str);
             }
         }
     }
