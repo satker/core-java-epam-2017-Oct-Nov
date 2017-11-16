@@ -32,7 +32,10 @@ public class Task16 implements ITestableTask16 {
         }
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(output))) {
-            writer.write(radius);
+            writer.write(String.valueOf(center.getX()));
+            writer.write(" ");
+            writer.write(String.valueOf(center.getY()));
+            writer.write("\n");
             while (!pointsFound.isEmpty()) {
                 I2DPoint currentPoint = pointsFound.poll();
                 writer.write(String.valueOf(currentPoint.getX()));
