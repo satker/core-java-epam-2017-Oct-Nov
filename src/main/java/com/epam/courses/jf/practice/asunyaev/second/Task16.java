@@ -32,6 +32,7 @@ public class Task16 implements ITestableTask16 {
         }
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(output))) {
+            writer.write(radius);
             while (!pointsFound.isEmpty()) {
                 I2DPoint currentPoint = pointsFound.poll();
                 writer.write(String.valueOf(currentPoint.getX()));
@@ -65,18 +66,30 @@ public class Task16 implements ITestableTask16 {
         }
 
         public SortedMap<I2DPoint, Double> getPoints() {
-            SortedMap<I2DPoint, Double> points = new TreeMap<>();
             try (BufferedReader reader = new BufferedReader(new FileReader(file))){
+                String[] centerInfo =  reader.readLine().split("\\s'");
+                double centerX = Double.parseDouble(centerInfo[0]);
+                double centerY = Double.parseDouble(centerInfo[0]);
+                I2DPoint center = new Point(centerX, centerY);
+                SortedMap<I2DPoint, Double> points = new TreeMap<>(new Comparator<>() {
+                    @Override
+                    public int compare(I2DPoint o1, I2DPoint o2) {
+                        Double dist1 = dist(o1, center);
+                        Double dist2 = dist(o2, center);
+                        return dist1.compareTo(dist2);
+                    }
+                });
                 String string;
                 while ((string = reader.readLine()) != null) {
                     String[] row = string.split("\\s");
                     I2DPoint currentPoint = new Point(Double.parseDouble(row[0]), Double.parseDouble(row[1]));
                     points.put(currentPoint, Double.parseDouble(row[2]));
                 }
+                return points;
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return points;
+            return null;
         }
     }
 
