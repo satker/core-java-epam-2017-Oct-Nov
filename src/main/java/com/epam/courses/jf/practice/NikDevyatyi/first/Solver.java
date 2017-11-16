@@ -496,15 +496,21 @@ public class Solver implements ISolver {
      */
     private int findMiddle(int[] row){
         boolean first =false;
-        int index = 0;
+        int result = 0;
         for(int i = 0; i< row.length; i++){
-            if(row[i] > 0){
+            if((row[i] > 0) && i < (row.length-1) && first == false){
                 first = true;
-                index = i;
+                if(row[i+1]>0){
+                    return 0;
+                }
             }
-            if(index<row.length-2&&first&&row[index+2] >0){
-                return row[index + 1];
+            if(first == true && i < (row.length - 1)){
+                if(row[i+1] > 0){
+                    return result;
+                }
+                result+=row[i+1];
             }
+
         }
         return 0;
     }
