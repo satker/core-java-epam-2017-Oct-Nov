@@ -18,31 +18,7 @@ public class Task15 implements ITestableTask15 {
         for (I2DPoint point : points) {
             pointsWithCheck.put(point, true);
         }
-
-        /*for (I2DPoint point1 : points) {
-            double x1 = point1.getX();
-            double y1 = point1.getY();
-            for (I2DPoint point2 : points) {
-                double x2 = point2.getX();
-                double y2 = point2.getY();
-                for (I2DPoint point3 : points){
-                    double x3 = point3.getX();
-                    double y3 = point3.getY();
-                    if ((x3 - x1)*(y2 - y1) == (y3 - y1)*(x2 - x1)
-                            && ((x1 != x2) || (y1 != y2))
-                            && ((x2 != x3) || (y2 != y3))
-                            && ((x1 != x3) || (y1 != y3))) {
-                        HashSet<I2DPoint> pointsFound = new HashSet<>();
-                        pointsFound.add(point1);
-                        pointsFound.add(point2);
-                        pointsFound.add(point3);
-                        System.out.println(pointsFound);
-                        linesFound.add(new Line(pointsFound));
-                    }
-                }
-            }
-        }*/
-
+        
         for (Map.Entry<I2DPoint, Boolean> point1 : pointsWithCheck.entrySet()) {
             double x1 = point1.getKey().getX();
             double y1 = point1.getKey().getY();
@@ -96,8 +72,7 @@ public class Task15 implements ITestableTask15 {
 
 
         public void putLines(Set<ILine> lines) {
-            try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-                    new FileOutputStream(file), "utf-8"))) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                 for (ILine line : lines) {
                     for (I2DPoint point : line.getPoints()) {
                         writer.write(String.valueOf(point.getX()));
@@ -107,7 +82,7 @@ public class Task15 implements ITestableTask15 {
                     }
                     writer.write("\n");
                 }
-            } catch (Exception e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
