@@ -386,6 +386,51 @@ public class Solver implements ISolver{
         matrixOutput(outMatrix);
     }
 
+    @Override
+    public void task17() {
+        int[][] matrix = matrixInput();
+        int dim = matrix.length;
+        int res = determinant(dim, matrix);
+        System.out.println(res);
+    }
+
+    public static int determinant(int dim, int[][] matrix) {
+        int sum = 0;
+        if (dim == 1) {
+            return matrix[0][0];
+        } else { //is else needed when using return?
+            if (dim == 2) {
+                return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
+            } else {
+                for (int i = 0; i < dim; i++) {
+                    sum += (int) Math.pow(-1, i) * matrix[0][i] * determinant(dim - 1, getMinor(matrix, i));
+                }
+            }
+        }
+        return sum;
+    }
+
+    public static int[][] getMinor(int[][] matrix, int column) {
+        int minorLength = matrix.length - 1;
+        int[][] minor = new int[minorLength][minorLength];
+        for (int i = 1; i <= minorLength; i++) {
+            int m = 0;
+            for (int j = 0; j <= minorLength; j++) {
+                if (j == column) {
+                    m = 1;
+                } else {
+                    minor[i - 1][j - m] = matrix[i][j];
+                }
+            }
+        }
+        return minor;
+    }
+
+    @Override
+    public void task18() {
+
+    }
+
     /**
      * Custom comparator for task2()
      * Firstly compares string length. If length is the same, then compare by symbol codes
