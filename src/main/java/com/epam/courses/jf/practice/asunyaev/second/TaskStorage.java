@@ -53,6 +53,9 @@ public class TaskStorage implements ITaskStorage {
         if (taskInterface == ITestableTask15.class) {
             return (T) new Task15();
         }
+        if (taskInterface == ITestableTask16.class) {
+            return (T) new Task16();
+        }
         return null;
     }
 }
