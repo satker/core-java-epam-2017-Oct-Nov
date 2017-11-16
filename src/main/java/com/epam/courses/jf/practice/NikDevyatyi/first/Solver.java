@@ -270,7 +270,7 @@ public class Solver implements ISolver {
             System.out.println(result.get(1));
         }
         else if(result.size() == 1) System.out.println(result.get(0));
-        else System.out.println("NOT_FOUND");
+        else System.out.println("NOT FOUND");
     }
 
     /***
