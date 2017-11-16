@@ -366,6 +366,26 @@ public class Solver implements ISolver{
 
     }
 
+    /* TODO: do later
+    @Override
+    public void task15() {
+
+    }*/
+
+    @Override
+    public void task16() {
+        int[][] inMatrix = matrixInput();
+        int dim = inMatrix.length;
+        int[][] outMatrix = new int[dim][dim];
+
+        for (int i = 0; i < dim; i++) {
+            for (int j = 0; j < dim; j++) {
+                outMatrix[i][j] = inMatrix[j][dim - i - 1];
+            }
+        }
+        matrixOutput(outMatrix);
+    }
+
     /**
      * Custom comparator for task2()
      * Firstly compares string length. If length is the same, then compare by symbol codes
