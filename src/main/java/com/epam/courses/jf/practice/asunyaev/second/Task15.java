@@ -4,14 +4,22 @@ import com.epam.courses.jf.practice.common.second.I2DPoint;
 import com.epam.courses.jf.practice.common.second.ITestableTask15;
 
 import java.io.*;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class Task15 implements ITestableTask15 {
 
     public IFileWithLines analyze(Set<I2DPoint> points, File output) {
+
         Set<ILine> linesFound = new HashSet<>();
-        for (I2DPoint point1 : points) {
+        Map<I2DPoint, Boolean> pointsWithCheck = new HashMap<>();
+        for (I2DPoint point : points) {
+            pointsWithCheck.put(point, true);
+        }
+
+        /*for (I2DPoint point1 : points) {
             double x1 = point1.getX();
             double y1 = point1.getY();
             for (I2DPoint point2 : points) {
@@ -28,12 +36,46 @@ public class Task15 implements ITestableTask15 {
                         pointsFound.add(point1);
                         pointsFound.add(point2);
                         pointsFound.add(point3);
+                        System.out.println(pointsFound);
                         linesFound.add(new Line(pointsFound));
                     }
                 }
             }
+        }*/
+
+        for (Map.Entry<I2DPoint, Boolean> point1 : pointsWithCheck.entrySet()) {
+            double x1 = point1.getKey().getX();
+            double y1 = point1.getKey().getY();
+            for (Map.Entry<I2DPoint, Boolean> point2 : pointsWithCheck.entrySet()) {
+                if (point1.equals(point2)) {
+                    continue;
+                }
+                double x2 = point2.getKey().getX();
+                double y2 = point2.getKey().getY();
+                for (Map.Entry<I2DPoint, Boolean> point3 : pointsWithCheck.entrySet()){
+                    if (point2.equals(point3) || point1.equals(point3)) {
+                        continue;
+                    }
+                    double x3 = point3.getKey().getX();
+                    double y3 = point3.getKey().getY();
+                    if (((x3 - x1)*(y2 - y1) == (y3 - y1)*(x2 - x1))
+                            && (point1.getValue())
+                            && (point2.getValue())
+                            && (point3.getValue())) {
+                        HashSet<I2DPoint> pointsFound = new HashSet<>();
+                        pointsFound.add(point1.getKey());
+                        pointsFound.add(point2.getKey());
+                        pointsFound.add(point3.getKey());
+                        System.out.println(pointsFound);
+                        linesFound.add(new Line(pointsFound));
+                    }
+                    point3.setValue(false);
+                }
+                point2.setValue(false);
+            }
+            point1.setValue(false);
         }
-        System.out.println(linesFound.toString());
+
         return new FileWithLines(linesFound, output);
     }
 
