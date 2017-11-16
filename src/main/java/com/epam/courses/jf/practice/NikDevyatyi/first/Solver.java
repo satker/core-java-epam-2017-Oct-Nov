@@ -128,15 +128,14 @@ public class Solver implements ISolver {
         int[] code = new int[maxChar+1];
         Arrays.fill(code, 0);
         for (char m : symbols) {
-            code[m]++;
-        }
-        for(int item : code){
-            if(item > 1){
-                result+= item;
+            if(code[(int)m]==0){
+                code[(int)m]++;
             }
         }
+        for(int item : code){
+            result+= item;
+        }
         return result;
-
     }
     @Override
     public  void task5(){
