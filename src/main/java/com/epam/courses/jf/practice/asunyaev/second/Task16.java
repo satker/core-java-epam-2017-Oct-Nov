@@ -14,11 +14,7 @@ public class Task16 implements ITestableTask16 {
             public int compare(I2DPoint o1, I2DPoint o2) {
                 Double dist1 = dist(o1, center);
                 Double dist2 = dist(o2, center);
-                if (Double.compare(dist1, dist2) == 0) {
-                    return -1;
-                } else {
-                    return dist1.compareTo(dist2);
-                }
+                return dist1.compareTo(dist2);
             }
         });
         int xStart = (int) (center.getX() - radius);
@@ -82,7 +78,11 @@ public class Task16 implements ITestableTask16 {
                     public int compare(I2DPoint o1, I2DPoint o2) {
                         Double dist1 = dist(o1, center);
                         Double dist2 = dist(o2, center);
-                        return dist1.compareTo(dist2);
+                        if (Double.compare(dist1, dist2) == 0) {
+                            return -1;
+                        } else {
+                            return dist1.compareTo(dist2);
+                        }
                     }
                 });
                 String string;
