@@ -537,6 +537,7 @@ public class Solver implements ISolver {
                 matrix_new[y][x] = matrix[x][y];
             }
         }
+        System.out.println(width);
         for(int i = width-1; i>=0;i--){
             printRows(matrix_new[i]);//change matrix rows from []int to string of values
         }
