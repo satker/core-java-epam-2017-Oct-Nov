@@ -21,7 +21,9 @@ public class TaskStorage implements ITaskStorage {
         taskMap.put(ITestableTask8.class.getSimpleName(), new TestableTask8());
         taskMap.put(ITestableTask9.class.getSimpleName(), new TestableTask9());
         taskMap.put(ITestableTask10.class.getSimpleName(), new TestableTask10());
+        taskMap.put(ITestableTask11.class.getSimpleName(), new TestableTask11());
         taskMap.put(ITestableTask12.class.getSimpleName(), new TestableTask12());
+        taskMap.put(ITestableTask13.class.getSimpleName(), new TestableTask13());
     }
 
     @Override
