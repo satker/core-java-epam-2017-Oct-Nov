@@ -428,6 +428,45 @@ public class Solver implements ISolver{
 
     @Override
     public void task18() {
+        int inMatrix[][] = matrixInput();
+        int maxElement = Integer.MIN_VALUE;
+        for (int i = 0; i < inMatrix.length; i++) { //search max element in matrix
+            for (int j = 0; j < inMatrix.length; j++) {
+                if (maxElement < inMatrix[i][j]) {
+                    maxElement = inMatrix[i][j];
+                }
+            }
+        }
+        Set<Integer> linesToDelete = new HashSet<>();
+        Set<Integer> columnToDelete = new HashSet<>();
+        for (int i = 0; i < inMatrix.length; i++) { //search rows and columns with max element
+            for (int j = 0; j < inMatrix.length; j++) {
+                if (maxElement == inMatrix[i][j]) {
+                    linesToDelete.add(i);
+                    columnToDelete.add(j);
+                }
+            }
+        }
+        int outMatrix[][] = new int[inMatrix.length - linesToDelete.size()][inMatrix[0].length - columnToDelete.size()];
+        int outMatrixRows = 0;
+        int outMatrixColumns = 0;
+        for (int i = 0; i < inMatrix.length; i++) { //copy non-deleted elements to new matrix
+            if (linesToDelete.contains(i)) {
+                continue;
+            }
+            outMatrixColumns = 0;
+            for (int j = 0; j < inMatrix.length; j++) {
+                if (columnToDelete.contains(j)) {
+                    continue;
+                }
+                outMatrix[outMatrixRows][outMatrixColumns] = inMatrix[i][j];
+                outMatrixColumns++;
+            }
+            outMatrixRows++;
+        }
+        System.out.println(outMatrixRows);
+        System.out.println(outMatrixColumns);
+        matrixOutputNonSquare(outMatrix);
 
     }
 
@@ -500,7 +539,16 @@ public class Solver implements ISolver{
         int matrixDim = matrix.length;
         System.out.println(matrixDim);
         for (int i = 0; i < matrixDim; i++) {
-            for (int j = 0; j <matrixDim; j++) {
+            for (int j = 0; j < matrixDim; j++) {
+                System.out.print(matrix[i][j] + "\t");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void matrixOutputNonSquare(int[][] matrix) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
                 System.out.print(matrix[i][j] + "\t");
             }
             System.out.println();
