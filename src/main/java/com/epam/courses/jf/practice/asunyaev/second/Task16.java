@@ -69,9 +69,9 @@ public class Task16 implements ITestableTask16 {
 
         public SortedMap<I2DPoint, Double> getPoints() {
             try (BufferedReader reader = new BufferedReader(new FileReader(file))){
-                String[] centerInfo =  reader.readLine().split("\\s'");
+                String[] centerInfo =  reader.readLine().split("\\s");
                 double centerX = Double.parseDouble(centerInfo[0]);
-                double centerY = Double.parseDouble(centerInfo[0]);
+                double centerY = Double.parseDouble(centerInfo[1]);
                 I2DPoint center = new Point(centerX, centerY);
                 SortedMap<I2DPoint, Double> points = new TreeMap<>(new Comparator<I2DPoint>() {
                     @Override
