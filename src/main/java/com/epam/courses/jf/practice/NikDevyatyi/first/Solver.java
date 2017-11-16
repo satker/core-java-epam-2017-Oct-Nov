@@ -241,11 +241,12 @@ public class Solver implements ISolver {
             if(item!=null){
                 printResult.append(item + " ");
             }
-            else {
-                printResult.append("NOT FOUND");
-            }
+
         }
-        System.out.println(printResult.toString().trim());
+        if(printResult.length()!=0){
+            System.out.println(printResult.toString().trim());
+        }
+        else System.out.println("NOT FOUND");
 
     }
     @Override
