@@ -6,7 +6,7 @@ import com.epam.courses.jf.practice.common.second.ITestableTask17;
 import java.util.*;
 
 public class Task17 implements ITestableTask17 {
-    
+
     @Override
     public Set<I2DPoint> analyze(Set<ISegment> segments) {
 
@@ -33,6 +33,36 @@ public class Task17 implements ITestableTask17 {
         }
 
         return intersectionPoints.get(intersectionPoints.firstKey());
+    }
+
+    public class Segment implements ISegment {
+
+        private I2DPoint first;
+        private I2DPoint second;
+
+        Segment(I2DPoint first, I2DPoint second) {
+            this.first = first;
+            this.second = second;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) return true;
+            if (obj == null || getClass() != obj.getClass()) return false;
+            Segment segment = (Segment) obj;
+            return (this.first().equals(segment.first()) && this.second().equals(segment.second()));
+        }
+
+        @Override
+        public I2DPoint first() {
+            return first;
+        }
+
+        @Override
+        public I2DPoint second() {
+            return second;
+        }
+
     }
 
     private I2DPoint getIntersectionPoint(ISegment segment1, ISegment segment2) {
@@ -69,52 +99,19 @@ public class Task17 implements ITestableTask17 {
 
         return null;
     }
-
-    public Segment makeSegment (I2DPoint first, I2DPoint second) {
-        return new Segment(first, second);
-    }
-
-    public class Segment implements ISegment {
-
-        private I2DPoint first;
-        private I2DPoint second;
-
-        Segment(I2DPoint first, I2DPoint second) {
-            this.first = first;
-            this.second = second;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (this == obj) return true;
-            if (obj == null || getClass() != obj.getClass()) return false;
-            Segment segment = (Segment) obj;
-            return (this.first().equals(segment.first()) && this.second().equals(segment.second()));
-        }
-
-        @Override
-        public I2DPoint first() {
-            return first;
-        }
-
-        @Override
-        public I2DPoint second() {
-            return second;
-        }
-
-    }
-
-    I2DPoint vectorMinus(I2DPoint v1, I2DPoint v2) {
+    
+    private I2DPoint vectorMinus(I2DPoint v1, I2DPoint v2) {
         return new Point2D(v1.getX() - v2.getX(), v1.getY() - v2.getY());
     }
 
-    double vectorMultiply(I2DPoint v1, I2DPoint v2) {
+    private double vectorMultiply(I2DPoint v1, I2DPoint v2) {
         return v1.getX()*v2.getY() - v2.getX()*v1.getY();
     }
 
-    I2DPoint generateIntersectingPoint (double x1, double x2, double x3, double x4, double y1, double y2, double y3, double y4) {
+    private I2DPoint generateIntersectingPoint (double x1, double x2, double x3, double x4, double y1, double y2, double y3, double y4) {
         double u = ((x4 - x3)*(y1 - y3) - (y4 - y3)*(x1 - x3))/((y4 - y3)*(x2 - x1) - (x4 - x3)*(y2 - y1));
-        //double uB = ((x2 - x1)*(y1 - y3) - (y2 - y1)*(x1 - x3))/((y4 - y3)*(x2 - x1) - (x4 - x3)*(y2 - y1));
         return new Point2D(x1 + u*(x2 - x1), y1 + u*(y2 - y1));
     }
+
+
 }
