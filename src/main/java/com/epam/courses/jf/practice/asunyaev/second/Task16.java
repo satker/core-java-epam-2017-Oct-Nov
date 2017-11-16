@@ -23,7 +23,7 @@ public class Task16 implements ITestableTask16 {
         int yFinish = (int) (center.getY() + radius);
         for (int x = xStart; x <= xFinish; x++) {
             for (int y = yStart; y <= yFinish; y++) {
-                I2DPoint currentPoint = new Point (x, y);
+                I2DPoint currentPoint = new Point2D(x, y);
                 if (dist(currentPoint, center) < radius) {
                     pointsFound.offer(currentPoint);
                 }
@@ -72,7 +72,7 @@ public class Task16 implements ITestableTask16 {
                 String[] centerInfo =  reader.readLine().split("\\s");
                 double centerX = Double.parseDouble(centerInfo[0]);
                 double centerY = Double.parseDouble(centerInfo[1]);
-                I2DPoint center = new Point(centerX, centerY);
+                I2DPoint center = new Point2D(centerX, centerY);
                 SortedMap<I2DPoint, Double> points = new TreeMap<>(new Comparator<I2DPoint>() {
                     @Override
                     public int compare(I2DPoint o1, I2DPoint o2) {
@@ -84,7 +84,7 @@ public class Task16 implements ITestableTask16 {
                 String string;
                 while ((string = reader.readLine()) != null) {
                     String[] row = string.split("\\s");
-                    I2DPoint currentPoint = new Point(Double.parseDouble(row[0]), Double.parseDouble(row[1]));
+                    I2DPoint currentPoint = new Point2D(Double.parseDouble(row[0]), Double.parseDouble(row[1]));
                     points.put(currentPoint, Double.parseDouble(row[2]));
                 }
                 return points;
@@ -95,24 +95,5 @@ public class Task16 implements ITestableTask16 {
         }
     }
 
-    private class Point implements I2DPoint {
-
-        private double x, y;
-
-        public Point (double x, double y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        @Override
-        public double getY() {
-            return x;
-        }
-
-        @Override
-        public double getX() {
-            return y;
-        }
-    }
 
 }
