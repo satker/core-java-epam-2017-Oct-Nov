@@ -11,15 +11,15 @@ import java.util.Arrays;
 public class TestableTask11 implements ITestableTask11 {
 
     public String emulate(ArrayList<String> peoples) {
-        return emulate(peoples);
+        return emulateList(peoples);
     }
 
 
     public String emulate(LinkedList<String> peoples) {
-        return emulate(peoples);
+        return emulateList(peoples);
     }
 
-    private String emulate(List<String> peoples) {
+    private String emulateList(List<String> peoples) {
         int start = 0;
         while(peoples.size() > 1){
             for(Iterator<String> i = peoples.listIterator(start); i.hasNext() && i.next()!= null && i.hasNext();){
