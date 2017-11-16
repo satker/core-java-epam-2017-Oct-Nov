@@ -3,6 +3,7 @@ package com.epam.courses.jf.practice.NikDevyatyi.first;
 import com.epam.courses.jf.practice.common.first.ISolver;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.time.Month;
 import java.util.*;
 import java.util.stream.IntStream;
@@ -253,19 +254,23 @@ public class Solver implements ISolver {
     public   void task8(){
         Scanner sc = new Scanner(System.in);
         String[] arrStr = getStrings2(sc);
-        ArrayList<Integer> result = new ArrayList<Integer>();
+        List<BigInteger> result = new ArrayList<BigInteger>();
 
         for(String word: arrStr) {
             if (word.matches("[0-9]+")) {
 
                 if (word.equals(reverseIt(word))) {
-                    result.add(Integer.parseInt(word));
+                    result.add(new BigInteger(word));
 
                 }
             }
 
         }
-        System.out.println(result.get(1));
+        if(result.size()>1){
+            System.out.println(result.get(1));
+        }
+        else if(result.size() == 1) System.out.println(result.get(0));
+        else System.out.println("NOT_FOUND");
     }
 
     /***
