@@ -1,7 +1,6 @@
 package com.epam.courses.jf.practice.asunyaev.second;
 
 import com.epam.courses.jf.practice.common.second.I2DPoint;
-import com.epam.courses.jf.practice.common.second.ITestableTask15;
 import com.epam.courses.jf.practice.common.second.ITestableTask16;
 
 import java.io.*;
@@ -74,7 +73,7 @@ public class Task16 implements ITestableTask16 {
                 double centerX = Double.parseDouble(centerInfo[0]);
                 double centerY = Double.parseDouble(centerInfo[0]);
                 I2DPoint center = new Point(centerX, centerY);
-                SortedMap<I2DPoint, Double> points = new TreeMap<>(new Comparator<>() {
+                SortedMap<I2DPoint, Double> points = new TreeMap<>(new Comparator<I2DPoint>() {
                     @Override
                     public int compare(I2DPoint o1, I2DPoint o2) {
                         Double dist1 = dist(o1, center);
