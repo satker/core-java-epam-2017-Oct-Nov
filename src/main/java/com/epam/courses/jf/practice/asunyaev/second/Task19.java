@@ -2,27 +2,39 @@ package com.epam.courses.jf.practice.asunyaev.second;
 
 import com.epam.courses.jf.practice.common.second.ITestableTask19;
 
-import java.util.ArrayList;
-import java.util.Set;
+import java.util.*;
+
 import static java.lang.Math.ceil;
 
 public class Task19 implements ITestableTask19 {
+
+    public static void main(String[] args) {
+        Task19 task = new Task19();
+        Set<ICar> cars = new HashSet<ICar>(Arrays.asList(new Car(0, 30), new Car(10, 5)));
+        int t = task.getNumberOvertaking(cars, 100, 2);
+        System.out.print(t);
+    }
+
     @Override
     public int getNumberOvertaking(Set<ICar> cars, long lengthLap, int numberLaps) {
         int overtakingCount = 0;
-        double handicap;
-        ArrayList<ICar> listCars = new ArrayList<>(cars);
-        for (int i = 0; i < listCars.size(); i++) {
-            ICar firstCar = listCars.get(i);
+        ArrayList<ICar> carsList = new ArrayList<>(cars);
+        carsList.sort(Comparator.comparingInt(ICar::getSpeed).reversed());
+        for (int i = 0; i < carsList.size(); i++) {
+            ICar firstCar = carsList.get(i);
 
-            for (int j = i + 1; j < listCars.size(); j++) {
-                ICar secondCar = listCars.get(j);
-                if (firstCar.getSpeed() > secondCar.getSpeed()) {
-                    handicap = (firstCar.getStartPosition() >= secondCar.getStartPosition()) ? 1 : 0;
-                    overtakingCount += numberLaps - handicap;
-                } else {
-                    handicap = (secondCar.getStartPosition() >= firstCar.getStartPosition()) ? 1 : 0;
-                    overtakingCount += numberLaps - handicap;
+            for (int j = i + 1; j < carsList.size(); j++) {
+                ICar secondCar = carsList.get(j);
+                double p1 = firstCar.getStartPosition();
+                double p2 = secondCar.getStartPosition();
+                int v1 = firstCar.getSpeed();
+                int v2 = secondCar.getSpeed();
+                for (int k = 0; k < numberLaps; k++) {
+                    double t = (p2 - p1)/(v1 - v2);
+                    if ((t > 0) && (t < (double) lengthLap/v1)) {
+                        overtakingCount++;
+                    }
+                    p2 += (v2 * (double) lengthLap/v1) % lengthLap;
                 }
             }
         }
@@ -30,7 +42,7 @@ public class Task19 implements ITestableTask19 {
         return overtakingCount;
     }
 
-    private class Car implements ICar {
+    private static class Car implements ICar {
 
         private int startPosition;
 
