@@ -84,26 +84,21 @@ public class Utils {
      */
     public static int findSumBetweenPositives(int[] array) {
         int sum = 0;
-        int firstIndex = 0;
-        int lastIndex = 0;
         boolean flag = false;
-        for (int i = 0; i < array.length; i++) {
+        for (int anArray : array) {
             if (!flag) {
-                if (array[i] > 0) {
+                if (anArray > 0) {
                     flag = true;
-                    firstIndex = i;
                 }
             } else {
-                lastIndex = i;
-                if (array[i] <= 0) {
-                    sum += array[i];
+                if (anArray <= 0) {
+                    sum += anArray;
+                } else {
+                    break;
                 }
             }
         }
-        if ((lastIndex - firstIndex) > 1) {
-            return sum;
-        }
-        return 0;
+        return sum;
     }
 
 //    public static int[][] transposeMatrix(int [][] m){
