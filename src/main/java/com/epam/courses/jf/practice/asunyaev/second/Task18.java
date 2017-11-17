@@ -21,7 +21,7 @@ public class Task18 implements ITestableTask18 {
         }
         for (Integer element : differentValues) {
             IRectangularIntegerMatrix currentSubMatrix = getMaxSubMatrixOfValue(matrix, element);
-            int size = currentSubMatrix.getHeight()*currentSubMatrix.getWidth();
+            int size = currentSubMatrix.getHeight() * currentSubMatrix.getWidth();
             if (size > maxSize) {
                 maxSize = size;
                 result = currentSubMatrix;
