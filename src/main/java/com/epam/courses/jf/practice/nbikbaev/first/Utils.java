@@ -4,9 +4,6 @@ package com.epam.courses.jf.practice.nbikbaev.first;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-/**
- *
- */
 public class Utils {
 
     /**
@@ -139,31 +136,36 @@ public class Utils {
      * @return Determinant value
      */
     public static int determinant(int[][] matrix, int dimension) {
-        int det = 0;
+        int result;
         if (dimension == 1) {
-            det = matrix[0][0];
+            result = matrix[0][0];
         } else if (dimension == 2) {
-            det = matrix[0][0] * matrix[1][1] - matrix[1][0] * matrix[0][1];
+            result = matrix[0][0] * matrix[1][1] - matrix[1][0] * matrix[0][1];
         } else {
-            det = 0;
-            for (int j1 = 0; j1 < dimension; j1++) {
-                int[][] m = new int[dimension - 1][];
-                for (int k = 0; k < (dimension - 1); k++) {
-                    m[k] = new int[dimension - 1];
-                }
-                for (int i = 1; i < dimension; i++) {
-                    int j2 = 0;
-                    for (int j = 0; j < dimension; j++) {
-                        if (j == j1)
-                            continue;
-                        m[i - 1][j2] = matrix[i][j];
-                        j2++;
-                    }
-                }
-                det += Math.pow(-1.0, 1.0 + j1 + 1.0) * matrix[0][j1] * determinant(m, dimension - 1);
+            result = 0;
+            for (int column = 0; column < dimension; column++) {
+                int[][] minor = getMinor(matrix, dimension, column);
+                result += Math.pow(-1.0, 1.0 + column + 1.0) * matrix[0][column] * determinant(minor, dimension - 1);
             }
         }
-        return det;
+        return result;
+    }
+
+    private static int[][] getMinor(int[][] matrix, int dimension, int column) {
+        int[][] minor = new int[dimension - 1][];
+        for (int k = 0; k < (dimension - 1); k++) {
+            minor[k] = new int[dimension - 1];
+        }
+        for (int i = 1; i < dimension; i++) {
+            int j2 = 0;
+            for (int j = 0; j < dimension; j++) {
+                if (j == column)
+                    continue;
+                minor[i - 1][j2] = matrix[i][j];
+                j2++;
+            }
+        }
+        return minor;
     }
 
 
