@@ -34,36 +34,7 @@ public class Task17 implements ITestableTask17 {
 
         return intersectionPoints.get(intersectionPoints.firstKey());
     }
-
-    public class Segment implements ISegment {
-
-        private I2DPoint first;
-        private I2DPoint second;
-
-        Segment(I2DPoint first, I2DPoint second) {
-            this.first = first;
-            this.second = second;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (this == obj) return true;
-            if (obj == null || getClass() != obj.getClass()) return false;
-            Segment segment = (Segment) obj;
-            return (this.first().equals(segment.first()) && this.second().equals(segment.second()));
-        }
-
-        @Override
-        public I2DPoint first() {
-            return first;
-        }
-
-        @Override
-        public I2DPoint second() {
-            return second;
-        }
-
-    }
+    
 
     private I2DPoint getIntersectionPoint(ISegment segment1, ISegment segment2) {
         I2DPoint p1 = segment1.first();
@@ -99,7 +70,7 @@ public class Task17 implements ITestableTask17 {
 
         return null;
     }
-    
+
     private I2DPoint vectorMinus(I2DPoint v1, I2DPoint v2) {
         return new Point2D(v1.getX() - v2.getX(), v1.getY() - v2.getY());
     }
