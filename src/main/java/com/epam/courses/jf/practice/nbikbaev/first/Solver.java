@@ -389,7 +389,7 @@ public class Solver implements ISolver {
     }
 
     @Override
-    public void task14() {//2 1 3 3 4 5 6 5   //0 6 5 4 3 2 1 0 -1
+    public void task14() {
         try (Scanner scanner = new Scanner(System.in)) {
             int n = scanner.nextInt();
             int maxLength = 0;
@@ -417,7 +417,15 @@ public class Solver implements ISolver {
 
     @Override
     public void task15() {
-
+        int sum = 0;
+        try (Scanner scanner = new Scanner(System.in)) {
+            int dimension = scanner.nextInt();
+            int[][] matrix = Utils.readIntMatrix(scanner, dimension);
+            for (int i = 0; i < dimension; i++) {
+                sum += Utils.findSumBetweenPositives(matrix[i]);
+            }
+        }
+        System.out.println(sum);
     }
 
     @Override
