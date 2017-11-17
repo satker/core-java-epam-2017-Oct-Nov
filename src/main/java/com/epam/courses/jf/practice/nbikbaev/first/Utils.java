@@ -1,5 +1,6 @@
 package com.epam.courses.jf.practice.nbikbaev.first;
 
+
 import java.io.PrintStream;
 import java.util.Scanner;
 
@@ -59,6 +60,7 @@ public class Utils {
         matrix[rowIndex2] = tempRow;
     }
 
+
     public static void matrixDownShift(int[][] matrix, int shift, int dimension) {
         for (int i = 0; i < shift; i++) {
             for (int j = dimension - 1; j > 0; j--) {
@@ -73,6 +75,35 @@ public class Utils {
                 Utils.swapMatrixRows(matrix, j, j + 1);
             }
         }
+    }
+
+    /**
+     * Returns sum of the array elements between first and second positive element
+     * @param array Input array
+     * @return Sum of the found elements
+     */
+    public static int findSumBetweenPositives(int[] array) {
+        int sum = 0;
+        int firstIndex = 0;
+        int lastIndex = 0;
+        boolean flag = false;
+        for (int i = 0; i < array.length; i++) {
+            if (!flag) {
+                if (array[i] > 0) {
+                    flag = true;
+                    firstIndex = i;
+                }
+            } else {
+                lastIndex = i;
+                if (array[i] <= 0) {
+                    sum += array[i];
+                }
+            }
+        }
+        if ((lastIndex - firstIndex) > 1) {
+            return sum;
+        }
+        return 0;
     }
 
 //    public static int[][] transposeMatrix(int [][] m){
