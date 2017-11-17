@@ -394,18 +394,21 @@ public class Solver implements ISolver {
             int n = scanner.nextInt();
             int maxLength = 0;
             int startPosition = 0;
-            int length;
+            int lastLength;
             int[] data = new int[n];
             for (int i = 0; i < n; i++) {
                 data[i] = scanner.nextInt();
             }
             for (int i = 0; i < n - 1; i++) {
-                if (data[i] >= data[i + 1]) {
+                if (!(data[i + 1] > data[i])) {
                     startPosition = i;
                 }
-                length = i - startPosition + 1;
-                if ((length > 1 && length > maxLength)) {
-                    maxLength = length;
+                lastLength = i + 1 - startPosition;
+                if ((lastLength > 1 && lastLength > maxLength)) {
+                    maxLength = lastLength;
+                }
+                if (lastLength == n - 1) {
+                    maxLength = n;
                 }
             }
             System.out.println(maxLength);
@@ -476,4 +479,5 @@ public class Solver implements ISolver {
     public void task27() {
 
     }
+
 }
