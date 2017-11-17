@@ -87,10 +87,10 @@ public class Task18 implements ITestableTask18 {
     IRectangularIntegerMatrix generateSubMatrix(IRectangularIntegerMatrix matrix, int iStart, int iFinish, int jStart, int jFinish) {
         int n = iFinish - iStart + 1;
         int m = jFinish - jStart + 1;
-        int[][] subMatrix = new int[n][m];
-        for (int i = iStart; i <= iFinish; i++) {
-            for (int j = jStart; j <= jFinish; j++) {
-                subMatrix[i - iStart][j - jStart] = matrix.getValue(i ,j);
+        int[][] subMatrix = new int[m][n];
+        for (int i = jStart; i <= jFinish; i++) {
+            for (int j = iStart; j <= iFinish; j++) {
+                subMatrix[i - jStart][j - iStart] = matrix.getValue(j ,i);
             }
         }
         return new RectangularIntegerMatrix(subMatrix);
