@@ -430,7 +430,14 @@ public class Solver implements ISolver {
 
     @Override
     public void task16() {
-
+        int sum = 0;
+        int[][] matrix = null;
+        try (Scanner scanner = new Scanner(System.in)) {
+            int dimension = scanner.nextInt();
+            matrix = Utils.readIntMatrix(scanner, dimension);
+            matrix = Utils.transposeMatrix(matrix);
+        }
+        System.out.println(matrix);
     }
 
     @Override
