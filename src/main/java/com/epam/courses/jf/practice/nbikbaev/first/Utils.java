@@ -109,11 +109,11 @@ public class Utils {
      * @return Rotated matrix
      */
     public static int[][] rotateMatrix(int[][] matrix) {
-        int[][] transposedMatrix = new int[matrix[0].length][matrix.length];
+        int[][] rotatedMatrix = new int[matrix[0].length][matrix.length];
         for (int i = 0; i < matrix.length; i++)
             for (int j = 0; j < matrix[0].length; j++)
-                transposedMatrix[j][i] = matrix[i][matrix[0].length - 1 - j];
-        return transposedMatrix;
+                rotatedMatrix[j][i] = matrix[i][matrix[0].length - 1 - j];
+        return rotatedMatrix;
     }
 
 
