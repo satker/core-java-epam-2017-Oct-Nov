@@ -10,7 +10,7 @@ public class Task18 implements ITestableTask18 {
         Task18 task = new Task18();
         IRectangularIntegerMatrix matrix = task.getRectangularIntegerMatrix(new int[][] {{1, 1, 2}, {1, 1, 2}, {1, 1, 2}});
         task.print(task.getMaxSubMatrix(matrix));
-
+        task.print(task.getRectangularIntegerMatrix(new int[][] {{1, 1}, {1, 1}, {1, 1}}));
     }
 
 
@@ -87,10 +87,10 @@ public class Task18 implements ITestableTask18 {
     IRectangularIntegerMatrix generateSubMatrix(IRectangularIntegerMatrix matrix, int iStart, int iFinish, int jStart, int jFinish) {
         int n = iFinish - iStart + 1;
         int m = jFinish - jStart + 1;
-        int[][] subMatrix = new int[m][n];
-        for (int i = jStart; i <= jFinish; i++) {
-            for (int j = iStart; j <= iFinish; j++) {
-                subMatrix[i - jStart][j - iStart] = matrix.getValue(j ,i);
+        int[][] subMatrix = new int[n][m];
+        for (int i = iStart; i <= iFinish; i++) {
+            for (int j = jStart; j <= jFinish; j++) {
+                subMatrix[i - iStart][j - jStart] = matrix.getValue(i, j);
             }
         }
         return new RectangularIntegerMatrix(subMatrix);
@@ -123,8 +123,6 @@ public class Task18 implements ITestableTask18 {
             matrix = Arrays.copyOf(array, array.length);
         }
 
-
-
         @Override
         public int getWidth() {
             return matrix[0].length;
@@ -137,7 +135,25 @@ public class Task18 implements ITestableTask18 {
 
         @Override
         public int getValue(int indexWidth, int indexHeight) {
-            return matrix[indexWidth][indexHeight];
+            return matrix[indexHeight][indexWidth];
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (this == other) return true;
+            if (other == null || !(other instanceof IRectangularIntegerMatrix)) return false;
+            IRectangularIntegerMatrix matrix = (IRectangularIntegerMatrix) other;
+            if (getHeight() != matrix.getHeight() || getWidth() != matrix.getWidth()) {
+                return false;
+            }
+            for (int row = 0; row < getHeight(); row++) {
+                for (int col = 0; col < getWidth(); col++) {
+                    if (getValue(col, row) != matrix.getValue(col, row)) {
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
 
     }
