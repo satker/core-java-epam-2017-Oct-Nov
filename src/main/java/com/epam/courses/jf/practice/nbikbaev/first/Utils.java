@@ -61,6 +61,13 @@ public class Utils {
     }
 
 
+    /**
+     * Cyclically shifts the specified matrix by specified number of rows up
+     *
+     * @param matrix    The matrix to be shifted.
+     * @param shift     Number of rows per which the matrix to be shifted
+     * @param dimension Matrix dimension
+     */
     public static void matrixDownShift(int[][] matrix, int shift, int dimension) {
         for (int i = 0; i < shift; i++) {
             for (int j = dimension - 1; j > 0; j--) {
@@ -69,6 +76,13 @@ public class Utils {
         }
     }
 
+    /**
+     * Cyclically shifts the specified matrix by specified number of rows down
+     *
+     * @param matrix    The matrix to be shifted.
+     * @param shift     Number of rows per which the matrix to be shifted
+     * @param dimension Matrix dimension
+     */
     public static void matrixUpShift(int[][] matrix, int shift, int dimension) {
         for (int i = 0; i < shift; i++) {
             for (int j = 0; j < dimension - 1; j++) {
@@ -114,6 +128,42 @@ public class Utils {
             for (int j = 0; j < matrix[0].length; j++)
                 rotatedMatrix[j][i] = matrix[i][matrix[0].length - 1 - j];
         return rotatedMatrix;
+    }
+
+
+    /**
+     * Returns the determinant of the given matrix
+     *
+     * @param matrix    Matrix, the determinant of which to be calculated
+     * @param dimension Matrix dimension
+     * @return Determinant value
+     */
+    public static int determinant(int[][] matrix, int dimension) {
+        int det = 0;
+        if (dimension == 1) {
+            det = matrix[0][0];
+        } else if (dimension == 2) {
+            det = matrix[0][0] * matrix[1][1] - matrix[1][0] * matrix[0][1];
+        } else {
+            det = 0;
+            for (int j1 = 0; j1 < dimension; j1++) {
+                int[][] m = new int[dimension - 1][];
+                for (int k = 0; k < (dimension - 1); k++) {
+                    m[k] = new int[dimension - 1];
+                }
+                for (int i = 1; i < dimension; i++) {
+                    int j2 = 0;
+                    for (int j = 0; j < dimension; j++) {
+                        if (j == j1)
+                            continue;
+                        m[i - 1][j2] = matrix[i][j];
+                        j2++;
+                    }
+                }
+                det += Math.pow(-1.0, 1.0 + j1 + 1.0) * matrix[0][j1] * determinant(m, dimension - 1);
+            }
+        }
+        return det;
     }
 
 
