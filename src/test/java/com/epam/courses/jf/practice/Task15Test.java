@@ -40,13 +40,6 @@ public class Task15Test {
         assertTrue("Test15 Failed!", outData.equals("-1\r\n"));
     }
 
-    /*
-    *     { 2,   0,  3,  4,  5 },
-                        { 1,   3,  0,  2, -1},
-                        { 2,  -1, -5,  5,  0},
-                        { 5,   4, -4, -2,  2},
-                        { 1,   2,  4, -4,  3 }
-    * */
     @Test(timeout = 2000)
     public void case2() {
         String dataIn = "5\r\n" +
