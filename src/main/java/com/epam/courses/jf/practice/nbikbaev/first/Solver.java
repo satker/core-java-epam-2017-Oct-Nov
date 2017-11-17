@@ -435,7 +435,7 @@ public class Solver implements ISolver {
         try (Scanner scanner = new Scanner(System.in)) {
             int dimension = scanner.nextInt();
             matrix = Utils.readIntMatrix(scanner, dimension);
-            matrix = Utils.transposeMatrix(matrix);
+            matrix = Utils.rotateMatrix(matrix);
             Utils.printIntMatrix(matrix, dimension, System.out);
         }
     }
