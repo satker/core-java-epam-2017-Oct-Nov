@@ -6,6 +6,9 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 public class SolverImpl implements ISolver {
+    /**
+     * Поиск самой короткой и длинной строки.
+     */
     @Override
     public void task1() {
         List<String> list = readLines(new Scanner(System.in));
@@ -27,6 +30,9 @@ public class SolverImpl implements ISolver {
         System.out.printf("MAX (%d): \"%s\"%n", maxLength, maxString);
     }
 
+    /**
+     * Упорядочивание строк по длине.
+     */
     @Override
     public void task2() {
         List<String> list = readLines(new Scanner(System.in));
@@ -41,6 +47,9 @@ public class SolverImpl implements ISolver {
         }
     }
 
+    /**
+     * Поиск строк меньше средней.
+     */
     @Override
     public void task3() {
         List<String> list = readLines(new Scanner(System.in));
@@ -60,6 +69,9 @@ public class SolverImpl implements ISolver {
         }
     }
 
+    /**
+     * Поиск слова с наименьшим числом различных символов.
+     */
     @Override
     public void task4() {
         List<String> words = readWords(new Scanner(System.in));
@@ -80,6 +92,9 @@ public class SolverImpl implements ISolver {
         System.out.println(minWord);
     }
 
+    /**
+     * Поиск слов с равным числом гласных и согласных.
+     */
     @Override
     public void task5() {
         List<String> words = readWords(new Scanner(System.in));
@@ -107,6 +122,9 @@ public class SolverImpl implements ISolver {
         System.out.println(matchedWordsCount);
     }
 
+    /**
+     * Поиск слова с возрастающими буквами.
+     */
     @Override
     public void task6() {
         List<String> words = readWords(new Scanner(System.in));
@@ -129,6 +147,9 @@ public class SolverImpl implements ISolver {
         System.out.println(matchedWord);
     }
 
+    /**
+     * Поиск слова, состоящего из различных символов.
+     */
     @Override
     public void task7() {
         List<String> words = readWords(new Scanner(System.in));
@@ -162,6 +183,9 @@ public class SolverImpl implements ISolver {
         System.out.println();
     }
 
+    /**
+     * Поиск числа-палиндрома.
+     */
     @Override
     public void task8() {
         List<String> words = readWords(new Scanner(System.in));
@@ -185,6 +209,9 @@ public class SolverImpl implements ISolver {
                                 "NOT FOUND");
     }
 
+    /**
+     * Вывод матрицы заданной размерности.
+     */
     @Override
     public void task9() {
         int size = new Scanner(System.in).nextInt();
@@ -201,6 +228,9 @@ public class SolverImpl implements ISolver {
         }
     }
 
+    /**
+     * Поиск корней квадратного уравнения.
+     */
     @Override
     public void task10() {
         Scanner scanner = new Scanner(System.in);
@@ -228,6 +258,9 @@ public class SolverImpl implements ISolver {
         System.out.printf(loc, "Two solutions: %.2f, %.2f\n", solutionA, solutionB);
     }
 
+    /**
+     * Вывод названия месяца.
+     */
     @Override
     public void task11() {
         String monthName = "INCORRECT INPUT DATA";
@@ -283,6 +316,9 @@ public class SolverImpl implements ISolver {
         System.out.println(monthName);
     }
 
+    /**
+     * Упорядочивание строк матрицы.
+     */
     @Override
     public void task12() {
         Scanner scanner = new Scanner(System.in);
@@ -294,6 +330,9 @@ public class SolverImpl implements ISolver {
         printIntegerMatrix(matrix, true);
     }
 
+    /**
+     * Циклический сдвиг матрицы.
+     */
     @Override
     public void task13() {
         Scanner scanner = new Scanner(System.in);
@@ -312,6 +351,9 @@ public class SolverImpl implements ISolver {
         printIntegerMatrix(matrix, true);
     }
 
+    /**
+     * Поиск возрастающей подпоследовательности.
+     */
     @Override
     public void task14() {
         Scanner scanner = new Scanner(System.in);
@@ -335,6 +377,9 @@ public class SolverImpl implements ISolver {
         System.out.println(maxLength);
     }
 
+    /**
+     * Поиск суммы элементов матрицы в строках.
+     */
     @Override
     public void task15() {
         Integer[][] matrix = readSquareMatrix(new Scanner(System.in), Integer.class);
@@ -359,6 +404,9 @@ public class SolverImpl implements ISolver {
         System.out.println(matrixSum);
     }
 
+    /**
+     * Поворот матрицы против часовой стрелки.
+     */
     @SuppressWarnings("UnnecessaryLocalVariable")
     @Override
     public void task16() {
@@ -378,6 +426,9 @@ public class SolverImpl implements ISolver {
         printIntegerMatrix(matrix, true);
     }
 
+    /**
+     * Вычисление определителя матрицы.
+     */
     @Override
     public void task17() {
         Double[][] matrix = readSquareMatrix(new Scanner(System.in), Double.class);
@@ -419,6 +470,9 @@ public class SolverImpl implements ISolver {
         System.out.printf("%.0f%n", determinant);
     }
 
+    /**
+     * Удаление максимального элемента матрицы.
+     */
     @Override
     public void task18() {
         Integer[][] matrix = readSquareMatrix(new Scanner(System.in), Integer.class);
@@ -447,6 +501,9 @@ public class SolverImpl implements ISolver {
         printIntegerMatrix(matrix, false);
     }
 
+    /**
+     * Уплотнение матрицы.
+     */
     @Override
     public void task19() {
         Integer[][] matrix = readSquareMatrix(new Scanner(System.in), Integer.class);
@@ -479,6 +536,9 @@ public class SolverImpl implements ISolver {
         printIntegerMatrix(matrix, false);
     }
 
+    /**
+     * Перемещение минимального элемента матрицы.
+     */
     @Override
     public void task20() {
         Scanner scanner = new Scanner(System.in);
@@ -513,6 +573,9 @@ public class SolverImpl implements ISolver {
         printIntegerMatrix(matrix, true);
     }
 
+    /**
+     * Перемещение нулей в строках матрицы.
+     */
     @Override
     public void task21() {
         Integer[][] matrix = readSquareMatrix(new Scanner(System.in), Integer.class);
@@ -529,6 +592,9 @@ public class SolverImpl implements ISolver {
         printIntegerMatrix(matrix, true);
     }
 
+    /**
+     * Округление элементов матрицы.
+     */
     @Override
     public void task22() {
         Double[][] matrix = readSquareMatrix(new Scanner(System.in), Double.class);
@@ -543,6 +609,9 @@ public class SolverImpl implements ISolver {
         printDoubleSquareMatrix(matrix, "%.0f");
     }
 
+    /**
+     * Поиск седловых точек матрицы.
+     */
     @Override
     public void task23() {
         Integer[][] matrix = readSquareMatrix(new Scanner(System.in), Integer.class);
@@ -571,6 +640,9 @@ public class SolverImpl implements ISolver {
         System.out.println(count);
     }
 
+    /**
+     * Сортировка строк матрицы.
+     */
     @Override
     public void task24() {
         Integer[][] matrix = readSquareMatrix(new Scanner(System.in), Integer.class);
@@ -588,6 +660,9 @@ public class SolverImpl implements ISolver {
         printIntegerMatrix(matrix, true);
     }
 
+    /**
+     * Поиск числа локальных минимумов матрицы.
+     */
     @Override
     public void task25() {
         Integer[][] matrix = readSquareMatrix(new Scanner(System.in), Integer.class);
@@ -617,6 +692,9 @@ public class SolverImpl implements ISolver {
         System.out.println(count);
     }
 
+    /**
+     * Поиск наибольшего локального максимума матрицы.
+     */
     @Override
     public void task26() {
         Integer[][] matrix = readSquareMatrix(new Scanner(System.in), Integer.class);
@@ -652,6 +730,9 @@ public class SolverImpl implements ISolver {
         }
     }
 
+    /**
+     * Сортировка столбцов матрицы.
+     */
     @Override
     public void task27() {
         Integer[][] matrix = readSquareMatrix(new Scanner(System.in), Integer.class);
@@ -685,10 +766,21 @@ public class SolverImpl implements ISolver {
     private static final int[] xOffset8 = {1, 1, 0, -1, -1, -1, 0, 1};
     private static final int[] yOffset8 = {0, -1, -1, -1, 0, 1, 1, 1};
 
+    /**
+     * @param i Номер строки.
+     * @param j Номер столбца.
+     * @param size Размер матрицы.
+     * @return Находится ли указанная позиция внутри матрицы заданного размера.
+     */
     private static boolean validIndexes(int i, int j, int size) {
         return i >= 0 && i < size && j >= 0 && j < size;
     }
 
+    /**
+     * Чтение из входного потока построчно.
+     * @param scanner Входной поток.
+     * @return Список прочитанных строк.
+     */
     private static List<String> readLines(Scanner scanner) {
         List<String> ret = new ArrayList<>();
         int count = scanner.nextInt();
@@ -701,6 +793,11 @@ public class SolverImpl implements ISolver {
         return ret;
     }
 
+    /**
+     * Чтение из входного потока слов, разделенных пробелами.
+     * @param scanner Входной поток.
+     * @return Список прочитанных строк.
+     */
     private static List<String> readWords(Scanner scanner) {
         int count = scanner.nextInt();
         List<String> list = new ArrayList<>();
@@ -710,15 +807,21 @@ public class SolverImpl implements ISolver {
         return list;
     }
 
+    /**
+     * Чтение матрицы.
+     * @param scanner Входной поток.
+     * @param clazz Тип элементов матрицы.
+     * @return Двумерный массив clazz[][].
+     */
     @SuppressWarnings("unchecked")
-    private static <T extends Number> T[][] readSquareMatrix(Scanner scanner, Class<T> c) {
+    private static <T extends Number> T[][] readSquareMatrix(Scanner scanner, Class<T> clazz) {
         int size = scanner.nextInt();
-        T[][] ret = (T[][]) Array.newInstance(c, size, size);
+        T[][] ret = (T[][]) Array.newInstance(clazz, size, size);
         for (int i = 0; i < size; ++i) {
             for (int j = 0; j < size; ++j) {
-                if (c == Integer.class) {
+                if (clazz == Integer.class) {
                     ret[i][j] = (T) (Integer) scanner.nextInt();
-                } else if (c == Double.class) {
+                } else if (clazz == Double.class) {
                     ret[i][j] = (T) (Double) scanner.nextDouble();
                 } else {
                     throw new RuntimeException();
@@ -728,6 +831,11 @@ public class SolverImpl implements ISolver {
         return ret;
     }
 
+    /**
+     * Печать целочисленной матрицы в стандартный вывод.
+     * @param matrix Матрица.
+     * @param square Формат вывода размера матрицы. Для квадратных печатается только одно измерение.
+     */
     private static void printIntegerMatrix(Integer[][] matrix, boolean square) {
         System.out.print(matrix.length);
         if (!square) {
@@ -748,6 +856,11 @@ public class SolverImpl implements ISolver {
         }
     }
 
+    /**
+     * Печать матрицы вещественных чисел в стандартный вывод.
+     * @param matrix Матрица.
+     * @param fmt Формат вывода вещественного числа.
+     */
     private static void printDoubleSquareMatrix(Double[][] matrix, String fmt) {
         System.out.println(matrix.length);
         for (Double[] row : matrix) {
@@ -763,6 +876,13 @@ public class SolverImpl implements ISolver {
         }
     }
 
+    /**
+     * Удаление указанных строк и столбцов из матрицы.
+     * @param matrix Исходная матрица.
+     * @param rowsToDelete Номера строк для удаления.
+     * @param columnsToDelete Номера столбцов для удаления.
+     * @return Новая матрица.
+     */
     private static Integer[][] filterMatrix(Integer[][] matrix, Set<Integer> rowsToDelete, Set<Integer> columnsToDelete) {
         int matrixSize = matrix.length;
         int newWidth = matrixSize - columnsToDelete.size();
