@@ -446,7 +446,7 @@ public class Solver implements ISolver {
         try (Scanner scanner = new Scanner(System.in)) {
             int dimension = scanner.nextInt();
             matrix = Utils.readIntMatrix(scanner, dimension);
-            int x = Utils.determinant(matrix,dimension);
+            int x = Utils.determinant(matrix, dimension);
             System.out.println(x);
         }
     }
