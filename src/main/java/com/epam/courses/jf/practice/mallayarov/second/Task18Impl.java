@@ -4,7 +4,7 @@ import com.epam.courses.jf.practice.common.second.ITestableTask18;
 
 import java.util.ArrayList;
 
-public class Task18Imp implements ITestableTask18 {
+public class Task18Impl implements ITestableTask18 {
     @Override
     public IRectangularIntegerMatrix getMaxSubMatrix(IRectangularIntegerMatrix matrix) {
         int height = matrix.getHeight();
