@@ -79,6 +79,7 @@ public class Utils {
 
     /**
      * Returns sum of the array elements between first and second positive element
+     *
      * @param array Input array
      * @return Sum of the found elements
      */
@@ -101,13 +102,19 @@ public class Utils {
         return sum;
     }
 
-//    public static int[][] transposeMatrix(int [][] m){
-//        int[][] temp = new int[m[0].length][m.length];
-//        for (int i = 0; i < m.length; i++)
-//            for (int j = 0; j < m[0].length; j++)
-//                temp[j][i] = m[i][j];
-//        return temp;
-//    }
+    /**
+     * Returns transposed matrix
+     *
+     * @param matrix Matrix to be transposed
+     * @return Transposed matrix
+     */
+    public static int[][] transposeMatrix(int[][] matrix) {
+        int[][] transposedMatrix = new int[matrix[0].length][matrix.length];
+        for (int i = 0; i < matrix.length; i++)
+            for (int j = 0; j < matrix[0].length; j++)
+                transposedMatrix[j][i] = matrix[i][j];
+        return transposedMatrix;
+    }
 
 
 }
