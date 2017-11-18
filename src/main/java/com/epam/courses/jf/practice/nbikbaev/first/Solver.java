@@ -361,7 +361,7 @@ public class Solver implements ISolver {
                 return numOfKeys1.compareTo(numOfKeys2);
             });
             System.out.println(dimension);
-            Utils.printIntMatrix(matrix, dimension, System.out);
+            Utils.printIntMatrix(matrix, System.out);
         }
     }
 
@@ -374,7 +374,7 @@ public class Solver implements ISolver {
             int[][] matrix = Utils.readIntMatrix(scanner, dimension);
             if (shiftAbs == dimension) {
                 System.out.println(dimension);
-                Utils.printIntMatrix(matrix, dimension, System.out);
+                Utils.printIntMatrix(matrix, System.out);
             } else {
                 shiftAbs = (shiftAbs < dimension) ? shiftAbs : shiftAbs % dimension;
                 if (shift < 0) {
@@ -383,7 +383,7 @@ public class Solver implements ISolver {
                     Utils.matrixDownShift(matrix, shiftAbs, dimension);
                 }
                 System.out.println(dimension);
-                Utils.printIntMatrix(matrix, dimension, System.out);
+                Utils.printIntMatrix(matrix, System.out);
             }
         }
     }
@@ -436,7 +436,7 @@ public class Solver implements ISolver {
             matrix = Utils.readIntMatrix(scanner, dimension);
             matrix = Utils.rotateMatrix(matrix);
             System.out.println(dimension);
-            Utils.printIntMatrix(matrix, dimension, System.out);
+            Utils.printIntMatrix(matrix, System.out);
         }
     }
 
@@ -453,7 +453,49 @@ public class Solver implements ISolver {
 
     @Override
     public void task18() {
+        int[][] matrix = null;
+        try (Scanner scanner = new Scanner(System.in)) {
 
+            int dimension = scanner.nextInt();
+            Set<Integer> rowSet = new HashSet<>();
+            Set<Integer> columnSet = new HashSet<>();
+            matrix = Utils.readIntMatrix(scanner, dimension);
+            int max = matrix[0][0];
+            rowSet.add(0);
+            columnSet.add(0);
+            for (int i = 0; i < dimension; i++) {
+                for (int j = 0; j < dimension; j++) {
+                    if (matrix[i][j] > max) {
+                        max = matrix[i][j];
+                        rowSet.clear();
+                        columnSet.clear();
+                    }
+                    if (matrix[i][j] == max) {
+                        rowSet.add(i);
+                        columnSet.add(j);
+                    }
+                }
+            }
+            int newRows = dimension - rowSet.size();
+            int newColumnsSize = dimension - columnSet.size();
+            int[][] result = new int[newRows][newColumnsSize];
+            int k = 0;
+            for (int i = 0; i < dimension; i++) {
+                int n = 0;
+                if (!(rowSet.contains(i))) {
+                    for (int j = 0; j < dimension; j++) {
+                        if (!(columnSet.contains(j))) {
+                            result[k][n] = matrix[i][j];
+                            n++;
+                        }
+                    }
+                    k++;
+                }
+            }
+            System.out.println(newRows);
+            System.out.println(newColumnsSize);
+            Utils.printIntMatrix(result, System.out);
+        }
     }
 
     @Override
