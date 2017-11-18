@@ -21,7 +21,7 @@ public class Task5 implements ITestableTask5{
             voltage = BigDecimal.valueOf(measurement.getVoltage());
             current = BigDecimal.valueOf(measurement.getCurrent());
             resistance = voltage.divide(current);
-            sumResistance.add(resistance);
+            sumResistance = sumResistance.add(resistance);
         }
         System.out.println(sumResistance);
         averageResistance = sumResistance.divide(size, 6, BigDecimal.ROUND_HALF_UP).doubleValue();
