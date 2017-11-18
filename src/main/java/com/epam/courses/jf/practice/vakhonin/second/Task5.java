@@ -13,18 +13,19 @@ public class Task5 implements ITestableTask5{
 //    OLS - method degenerate into simple average resistance
     @Override
     public double calcResistance(List<IMeasurement> measurements) {
-        BigDecimal size = BigDecimal.valueOf(measurements.size());
         double averageResistance;
-        BigDecimal voltage, current, resistance;
-        BigDecimal sumResistance = BigDecimal.ZERO;
+        BigDecimal voltage, current;
+        BigDecimal sumOfII = BigDecimal.ZERO;
+        BigDecimal sumOfUI = BigDecimal.ZERO;
+
         for(IMeasurement measurement: measurements){
             voltage = BigDecimal.valueOf(measurement.getVoltage());
             current = BigDecimal.valueOf(measurement.getCurrent());
-            resistance = voltage.divide(current);
-            sumResistance = sumResistance.add(resistance);
+            sumOfII = sumOfII.add(current.pow(2));
+            sumOfUI = sumOfUI.add(voltage.multiply(current));
         }
-        System.out.println(sumResistance);
-        averageResistance = sumResistance.divide(size).doubleValue();
+
+        averageResistance = sumOfUI.divide(sumOfII, 6, BigDecimal.ROUND_HALF_UP).doubleValue();
         return averageResistance;
     }
 
