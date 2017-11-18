@@ -2,7 +2,9 @@ package com.epam.courses.jf.practice.SigarevVL.first;
 
 import com.epam.courses.jf.practice.common.first.ISolver;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.util.*;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -27,9 +29,9 @@ public class Solver implements ISolver{
 
         Scanner scanner = new Scanner(System.in);
 
-        int stringCount = Integer.parseInt(scanner.nextLine());
+        int stringNumber = Integer.parseInt(scanner.nextLine());
 
-        String[] string = new String[stringCount];
+        String[] string = new String[stringNumber];
         string[0] = scanner.nextLine();
 
         String minString = string[0];
@@ -38,12 +40,14 @@ public class Solver implements ISolver{
         int minLength = minString.length();
         int maxLength = maxString.length();
 
-        for (int i = 1; i < stringCount - 1; i++) {
+        for (int i = 1; i < stringNumber; i++) {
             string[i] = scanner.nextLine();
+
             if (string[i].length() <= minString.length()) {
                 minString = string[i];
                 minLength = minString.length();
             }
+
             if (string[i].length() >= maxString.length()) {
                 maxString = string[i];
                 maxLength = maxString.length();
@@ -64,11 +68,11 @@ public class Solver implements ISolver{
     public void task2() {
         Scanner scanner = new Scanner(System.in);
 
-        int stringCount = Integer.parseInt(scanner.nextLine());
+        int stringNumber = Integer.parseInt(scanner.nextLine());
 
-        String strings[] = new String[stringCount];
+        String strings[] = new String[stringNumber];
 
-        for (int i = 0; i < stringCount; i++) {
+        for (int i = 0; i < stringNumber; i++) {
             strings[i] = scanner.nextLine();
         }
 
@@ -94,16 +98,16 @@ public class Solver implements ISolver{
     @Override
     public void task3() {
         Scanner scanner = new Scanner(System.in);
-        int stringCount = Integer.parseInt(scanner.nextLine());
-        String strings[] = new String[stringCount];
+        int stringNumber = Integer.parseInt(scanner.nextLine());
+        String strings[] = new String[stringNumber];
         int averageLength = 0;
 
-        for (int i = 0; i < stringCount; i++) {
+        for (int i = 0; i < stringNumber; i++) {
             strings[i] = scanner.nextLine();
             averageLength += strings[i].length();
         }
 
-        averageLength /= stringCount;
+        averageLength /= stringNumber;
         System.out.printf("AVERAGE (%d)%n", averageLength);
 
         for (String str : strings) {
@@ -124,6 +128,8 @@ public class Solver implements ISolver{
     public void task4() {
         Scanner scanner = new Scanner(System.in);
 
+        int wordNumber = Integer.parseInt(scanner.nextLine());
+
         String inputString = scanner.nextLine();
         String inputWords[] = inputString.split(" ");
 
@@ -131,7 +137,7 @@ public class Solver implements ISolver{
         Set<Character> hashWord = new HashSet<>();
         int minSize = 0;
 
-        for (int i = 0; i < inputWords.length; i++) {
+        for (int i = 0; i < wordNumber; i++) {
 
             for (int j = 0; j < inputWords[i].length(); j++) {
                 hashWord.add(inputWords[i].charAt(j));
@@ -207,27 +213,30 @@ public class Solver implements ISolver{
 
         int wordCount = Integer.parseInt(scanner.nextLine());
         String word[] = new String[wordCount];
-        int count = 1, findWord = 0;
+
+        boolean findWord = false;
 
         for (int i = 0; i < wordCount; i++) {
             word[i] = scanner.next();
+            int count = 1;
 
             while (count < word[i].length()) {
-                if ((word[i].charAt(count - 1) > word[i].charAt(count))) {
+
+                if ((word[i].charAt(count - 1) >= word[i].charAt(count))) {
                     break;
                 }
                 count++;
+
                 if (count == word[i].length()) {
                     System.out.println(word[i]);
-                    findWord++;
+                    findWord = true;
                     i = wordCount - 1;
                     break;
                 }
             }
-            count = 1;
         }
 
-        if (findWord == 0) {
+        if (!findWord) {
             System.out.println("NOT FOUND");
         }
 
@@ -265,7 +274,7 @@ public class Solver implements ISolver{
         }
 
         if (countOfUniqueWords) {
-            System.out.print("NOT FOUND");
+            System.out.print("NOT_FOUND");
         }
 
         scanner.close();
@@ -281,18 +290,17 @@ public class Solver implements ISolver{
     public void task8() {
         Scanner scanner = new Scanner(System.in);
 
+        int wordNumber = Integer.parseInt(scanner.nextLine());
         String inputString[] = scanner.nextLine().split(" ");
         BigInteger bigInteger;
-        String number;
-        String reverseNumber;
 
-        StringBuilder palindrom = new StringBuilder("NOT FOUND");
+        StringBuilder palindrom = new StringBuilder("NOT_FOUND");
 
         for (String str : inputString) {
             try {
                 bigInteger = new BigInteger(str);
-                number = bigInteger.toString();
-                reverseNumber = new StringBuilder(number).reverse().toString();
+                String number = bigInteger.toString();
+                String reverseNumber = new StringBuilder(number).reverse().toString();
 
                 if (number.equals(reverseNumber)) {
                     palindrom.replace(0, palindrom.length(), number);
@@ -344,15 +352,20 @@ public class Solver implements ISolver{
         double c = scanner.nextInt();
 
         double D = Math.pow(b, 2) - 4 * a * c;
+        //BigDecimal c = new Bigd
 
         if (D < 0) {
             System.out.println("No solution");
         } else if (D == 0) {
-            double x = ((-b) / (2 * a));
+            BigDecimal x = new BigDecimal(((-b) / (2 * a)));
+            x = x.setScale(2, RoundingMode.HALF_UP);
             System.out.println("One solution: " + x);
         } else {
-            double x1 = (-b - Math.sqrt(D)) / (2 * a);
-            double x2 = (-b + Math.sqrt(D)) / (2 * a);
+
+            BigDecimal x1 = new BigDecimal((-b - Math.sqrt(D)) / (2 * a));
+            x1 = x1.setScale(2, RoundingMode.HALF_UP);
+            BigDecimal x2 = new BigDecimal((-b + Math.sqrt(D)) / (2 * a));
+            x2 = x2.setScale(2, RoundingMode.HALF_UP);
             System.out.println("Two solutions: " + x1 + ", " + x2);
         }
         scanner.close();
@@ -365,56 +378,53 @@ public class Solver implements ISolver{
      */
     @Override
     public void task11() {
-        Scanner scanner = new Scanner(System.in);
-        int month = scanner.nextInt();
 
-        try {
-            month = scanner.nextInt();
+        try(Scanner scanner = new Scanner(System.in);) {
+            int month = scanner.nextInt();
+            switch (month) {
+                case 1:
+                    System.out.println("January");
+                    break;
+                case 2:
+                    System.out.println("February");
+                    break;
+                case 3:
+                    System.out.println("March");
+                    break;
+                case 4:
+                    System.out.println("April");
+                    break;
+                case 5:
+                    System.out.println("May");
+                    break;
+                case 6:
+                    System.out.println("June");
+                    break;
+                case 7:
+                    System.out.println("July");
+                    break;
+                case 8:
+                    System.out.println("August");
+                    break;
+                case 9:
+                    System.out.println("September");
+                    break;
+                case 10:
+                    System.out.println("October");
+                    break;
+                case 11:
+                    System.out.println("November");
+                    break;
+                case 12:
+                    System.out.println("December");
+                    break;
+                default:
+                    System.out.println("INCORRECT INPUT DATA");
+            }
+
         } catch (InputMismatchException e) {
-            System.out.println("Enter a non-numeric value");
+            System.out.println("INCORRECT INPUT DATA");
         }
-
-        switch (month) {
-            case 1:
-                System.out.println("January");
-                break;
-            case 2:
-                System.out.println("February");
-                break;
-            case 3:
-                System.out.println("March");
-                break;
-            case 4:
-                System.out.println("April");
-                break;
-            case 5:
-                System.out.println("May");
-                break;
-            case 6:
-                System.out.println("June");
-                break;
-            case 7:
-                System.out.println("July");
-                break;
-            case 8:
-                System.out.println("August");
-                break;
-            case 9:
-                System.out.println("September");
-                break;
-            case 10:
-                System.out.println("October");
-                break;
-            case 11:
-                System.out.println("November");
-                break;
-            case 12:
-                System.out.println("December");
-                break;
-            default:
-                System.out.println("INCORRECT INPUT DATA");
-        }
-        scanner.close();
     }
 
     /**
@@ -528,14 +538,18 @@ public class Solver implements ISolver{
         if (arraySize < 2) {
             System.out.println(0);
         } else {
+
             for (int i = 0; i < arraySize; i++) {
                 array[i] = scanner.nextInt();
+
                 if ((i > 0) && (array[i - 1] < array[i])) {
                     count++;
-                } else {
-                    if (count > 0 && count > sequence) {
+
+                    if (count >= sequence) {
                         sequence = count + 1;
                     }
+
+                } else {
                     count = 0;
                 }
             }
