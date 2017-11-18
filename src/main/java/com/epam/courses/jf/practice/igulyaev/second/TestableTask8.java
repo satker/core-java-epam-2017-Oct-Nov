@@ -17,7 +17,7 @@ public class TestableTask8 implements ITestableTask8 {
                     .filter(Objects::nonNull)
                     .forEach(s -> stack.push(s.charAt(0)));
             String second = matcher.group(2);
-            if(second != null && !stack.isEmpty() && stack.pop() != pairBracket(second.charAt(0))){
+            if(second != null && (stack.isEmpty() || (!stack.isEmpty() && stack.pop() != pairBracket(second.charAt(0))))){
                 return false;
             }
         }
