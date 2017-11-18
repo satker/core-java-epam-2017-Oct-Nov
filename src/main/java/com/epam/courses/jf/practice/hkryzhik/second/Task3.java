@@ -1,11 +1,8 @@
 package com.epam.courses.jf.practice.hkryzhik.second;
 
 import com.epam.courses.jf.practice.common.second.ITestableTask3;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.SortedList;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 

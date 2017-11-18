@@ -11,8 +11,8 @@ public class TaskStorage implements ITaskStorage{
             case 2: return (T) new Task2();
             case 3: return (T) new Task3();
             case 4: return (T) new Task4();
-//            case "Task5": return (T) new Task5();
-//            case "Task6": return (T) new Task6();
+            case 5: return (T) new Task5();
+            case 6: return (T) new Task6();
 //            case "Task7": return (T) new Task7();
 //            case "Task8": return (T) new Task8();
 //            case "Task9": return (T) new Task9();
