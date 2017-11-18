@@ -24,7 +24,7 @@ public class Task5 implements ITestableTask5{
             sumResistance = sumResistance.add(resistance);
         }
         System.out.println(sumResistance);
-        averageResistance = sumResistance.divide(size, 6, BigDecimal.ROUND_HALF_UP).doubleValue();
+        averageResistance = sumResistance.divide(size).doubleValue();
         return averageResistance;
     }
 
