@@ -438,16 +438,16 @@ public class Solver implements ISolver{
             }
         }
         Set<Integer> linesToDelete = new HashSet<>();
-        Set<Integer> columnToDelete = new HashSet<>();
+        Set<Integer> columnsToDelete = new HashSet<>();
         for (int i = 0; i < inMatrix.length; i++) { //search rows and columns with max element
             for (int j = 0; j < inMatrix.length; j++) {
                 if (maxElement == inMatrix[i][j]) {
                     linesToDelete.add(i);
-                    columnToDelete.add(j);
+                    columnsToDelete.add(j);
                 }
             }
         }
-        int outMatrix[][] = new int[inMatrix.length - linesToDelete.size()][inMatrix[0].length - columnToDelete.size()];
+        int outMatrix[][] = new int[inMatrix.length - linesToDelete.size()][inMatrix[0].length - columnsToDelete.size()];
         int outMatrixRows = 0;
         int outMatrixColumns = 0;
         for (int i = 0; i < inMatrix.length; i++) { //copy non-deleted elements to new matrix
@@ -456,7 +456,7 @@ public class Solver implements ISolver{
             }
             outMatrixColumns = 0;
             for (int j = 0; j < inMatrix.length; j++) {
-                if (columnToDelete.contains(j)) {
+                if (columnsToDelete.contains(j)) {
                     continue;
                 }
                 outMatrix[outMatrixRows][outMatrixColumns] = inMatrix[i][j];
@@ -467,7 +467,58 @@ public class Solver implements ISolver{
         System.out.println(outMatrixRows);
         System.out.println(outMatrixColumns);
         matrixOutputNonSquare(outMatrix);
+    }
 
+    @Override
+    public void task19() {
+        int inMatrix[][] = matrixInput();
+        Set<Integer> linesToDelete = new HashSet<>();
+        for (int i = 0; i < inMatrix.length; i++) { //search zero rows
+            boolean zeroRow = true;
+            for (int j = 0; j < inMatrix.length; j++) {
+                if (inMatrix[i][j] != 0) {
+                    zeroRow = false;
+                    break;
+                }
+            }
+            if (zeroRow) {
+                linesToDelete.add(i);
+            }
+        }
+        Set<Integer> columnsToDelete = new HashSet<>();
+        for (int j = 0; j < inMatrix.length; j++) { //search zero columns
+            boolean zeroColumn = true;
+            for (int i = 0; i < inMatrix.length; i++) {
+                if (inMatrix[i][j] != 0) {
+                    zeroColumn = false;
+                    break;
+                }
+            }
+            if (zeroColumn) {
+                columnsToDelete.add(j);
+            }
+        }
+
+        int outMatrix[][] = new int[inMatrix.length - linesToDelete.size()][inMatrix[0].length - columnsToDelete.size()];
+        int outMatrixRows = 0;
+        int outMatrixColumns = 0;
+        for (int i = 0; i < inMatrix.length; i++) { //copy non-deleted elements to new matrix
+            if (linesToDelete.contains(i)) {
+                continue;
+            }
+            outMatrixColumns = 0;
+            for (int j = 0; j < inMatrix.length; j++) {
+                if (columnsToDelete.contains(j)) {
+                    continue;
+                }
+                outMatrix[outMatrixRows][outMatrixColumns] = inMatrix[i][j];
+                outMatrixColumns++;
+            }
+            outMatrixRows++;
+        }
+        System.out.println(outMatrixRows);
+        System.out.println(outMatrixColumns);
+        matrixOutputNonSquare(outMatrix);
     }
 
     /**
@@ -546,6 +597,10 @@ public class Solver implements ISolver{
         }
     }
 
+    /**
+     * Prints matrix to console
+     * @param matrix
+     */
     public static void matrixOutputNonSquare(int[][] matrix) {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
@@ -553,6 +608,16 @@ public class Solver implements ISolver{
             }
             System.out.println();
         }
+    }
+
+    /**
+     * Search element in matrix and delete rows and columns where element were found
+     * @param elementToDelete
+     * @param inMatrix
+     * @return matrix with remaining elements
+     */
+    public static int[][] deleteElementFromMatrix(int elementToDelete, int[][] inMatrix) {
+        return null;
     }
 
 }
