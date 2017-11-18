@@ -27,21 +27,21 @@ public class Utils {
      * Prints a matrix to the output stream
      *
      * @param matrix      Matrix to be printed
-     * @param dimension   Matrix dimension
      * @param printStream The output stream to which matrix will be printed
      */
-    public static void printIntMatrix(int[][] matrix, int dimension, PrintStream printStream) {
-        for (int i = 0; i < dimension; i++) {
-            for (int j = 0; j < dimension; j++) {
-                printStream.print(matrix[i][j]);
-                if (j == dimension - 1) {
+    public static void printIntMatrix(int[][] matrix, PrintStream printStream) {
+        int colCount = matrix[0].length;
+        int rowCount = matrix.length;
+        for (int[] aMatrix : matrix) {
+            for (int j = 0; j < colCount; j++) {
+                printStream.print(aMatrix[j]);
+                if (j == colCount - 1) {
                     printStream.print("\n");
                 } else {
                     printStream.print(" ");
                 }
             }
         }
-
     }
 
     /**
