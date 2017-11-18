@@ -14,16 +14,13 @@ public class Task5 implements ITestableTask5 {
         BigDecimal voltageAndCurrentMultiplection = new BigDecimal(0);
         BigDecimal currentSquare = new BigDecimal(0);
 
-        //voltageAndCurrentMultiplection.setScale(6, RoundingMode.HALF_UP);
-        //currentSquare.setScale(6, RoundingMode.HALF_UP);
-
         for (IMeasurement measurement : measurements) {
             voltageAndCurrentMultiplection = voltageAndCurrentMultiplection.
                     add(BigDecimal.valueOf(measurement.getCurrent()
                             * measurement.getVoltage()));
 
             currentSquare = currentSquare
-                    .add(BigDecimal.valueOf(Math.sqrt(measurement.getCurrent())));
+                    .add(BigDecimal.valueOf(measurement.getCurrent() * measurement.getCurrent()));
         }
 
         return voltageAndCurrentMultiplection

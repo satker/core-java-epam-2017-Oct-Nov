@@ -53,7 +53,7 @@ public class Solver implements ISolver{
                 maxLength = maxString.length();
             }
         }
-        System.out.println();
+
         System.out.printf("MIN (%d): \"%s\"%n", minLength, minString);
         System.out.printf("MAX (%d): \"%s\"%n", maxLength, maxString);
 
@@ -167,10 +167,10 @@ public class Solver implements ISolver{
     public void task5() {
         Scanner scanner = new Scanner(System.in);
 
-        int wordCount = Integer.parseInt(scanner.nextLine());
+        int wordNumber = Integer.parseInt(scanner.nextLine());
         int vowel = 0;
 
-        String string[] = new String[wordCount];
+        String string[] = new String[wordNumber];
 
         Pattern patternLatinWords = Pattern.compile("[A-z]+");
         Matcher matcherLatinWords = patternLatinWords.matcher(scanner.nextLine());
@@ -178,14 +178,14 @@ public class Solver implements ISolver{
         Pattern patternVowel = Pattern.compile("[aeiou]");
 
         int result = 0;
-        wordCount = 0;
+        wordNumber = 0;
 
         while (matcherLatinWords.find()) {
-            string[wordCount] = matcherLatinWords.group();
-            wordCount++;
+            string[wordNumber] = matcherLatinWords.group();
+            wordNumber++;
         }
 
-        for (int i = 0; i < wordCount; i++) {
+        for (int i = 0; i < wordNumber; i++) {
 
             Matcher matcherVowel = patternVowel.matcher(string[i]);
             while (matcherVowel.find()) {
@@ -211,12 +211,12 @@ public class Solver implements ISolver{
     public void task6() {
         Scanner scanner = new Scanner(System.in);
 
-        int wordCount = Integer.parseInt(scanner.nextLine());
-        String word[] = new String[wordCount];
+        int wordNumber = Integer.parseInt(scanner.nextLine());
+        String word[] = new String[wordNumber];
 
         boolean findWord = false;
 
-        for (int i = 0; i < wordCount; i++) {
+        for (int i = 0; i < wordNumber; i++) {
             word[i] = scanner.next();
             int count = 1;
 
@@ -230,7 +230,7 @@ public class Solver implements ISolver{
                 if (count == word[i].length()) {
                     System.out.println(word[i]);
                     findWord = true;
-                    i = wordCount - 1;
+                    i = wordNumber - 1;
                     break;
                 }
             }
@@ -250,12 +250,14 @@ public class Solver implements ISolver{
     @Override
     public void task7() {
         Scanner scanner = new Scanner(System.in);
-        int wordCount = Integer.parseInt(scanner.nextLine());
+        int wordNumber = Integer.parseInt(scanner.nextLine());
 
         Set<String> set = new LinkedHashSet<>();
         Set<Character> characterSet = new HashSet<>();
 
-        for (int i = 0; i < wordCount; i++) {
+        StringBuffer resultString = new StringBuffer();
+
+        for (int i = 0; i < wordNumber; i++) {
             set.add(scanner.next());
         }
 
@@ -267,14 +269,17 @@ public class Solver implements ISolver{
                 characterSet.add(string.charAt(i));
             }
             if (characterSet.size() == string.length()) {
-                System.out.print(string + " ");
+                resultString.append(string).append(" ");
                 countOfUniqueWords = false;
             }
             characterSet.clear();
         }
 
         if (countOfUniqueWords) {
-            System.out.print("NOT_FOUND");
+            System.out.print("NOT FOUND");
+        } else {
+            resultString.trimToSize();
+            System.out.print(resultString.toString().trim());
         }
 
         scanner.close();
@@ -294,7 +299,7 @@ public class Solver implements ISolver{
         String inputString[] = scanner.nextLine().split(" ");
         BigInteger bigInteger;
 
-        StringBuilder palindrom = new StringBuilder("NOT_FOUND");
+        StringBuilder palindrom = new StringBuilder("NOT FOUND");
 
         for (String str : inputString) {
             try {
