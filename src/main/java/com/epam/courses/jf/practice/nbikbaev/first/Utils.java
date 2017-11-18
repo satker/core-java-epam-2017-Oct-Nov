@@ -57,7 +57,6 @@ public class Utils {
         matrix[rowIndex2] = tempRow;
     }
 
-
     /**
      * Cyclically shifts the specified matrix by specified number of rows up
      *
@@ -129,7 +128,7 @@ public class Utils {
 
 
     /**
-     * Returns the determinant of the given matrix
+     * Returns the determinant of the specified matrix
      *
      * @param matrix    Matrix, the determinant of which to be calculated
      * @param dimension Matrix dimension
@@ -144,29 +143,26 @@ public class Utils {
         } else {
             result = 0;
             for (int column = 0; column < dimension; column++) {
-                int[][] minor = getMinor(matrix, dimension, column);
+                int[][] minor = getMinor(matrix, dimension, 0, column);
                 result += Math.pow(-1.0, 1.0 + column + 1.0) * matrix[0][column] * determinant(minor, dimension - 1);
             }
         }
         return result;
     }
 
-    private static int[][] getMinor(int[][] matrix, int dimension, int column) {
-        int[][] minor = new int[dimension - 1][];
-        for (int k = 0; k < (dimension - 1); k++) {
-            minor[k] = new int[dimension - 1];
-        }
-        for (int i = 1; i < dimension; i++) {
-            int j2 = 0;
-            for (int j = 0; j < dimension; j++) {
-                if (j == column)
-                    continue;
-                minor[i - 1][j2] = matrix[i][j];
-                j2++;
+    private static int[][] getMinor(int[][] matrix, int dimension, int row, int column) {
+        int[][] minor = new int[dimension - 1][dimension - 1];
+
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; i != row && j < dimension; j++) {
+                if (j != column) {
+                    minor[i < row ? i : i - 1][j < column ? j : j - 1] = matrix[i][j];
+                }
             }
+
         }
+
         return minor;
     }
-
 
 }
