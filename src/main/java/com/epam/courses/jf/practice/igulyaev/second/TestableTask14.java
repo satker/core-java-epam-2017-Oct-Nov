@@ -21,8 +21,17 @@ public class TestableTask14 implements ITestableTask14 {
         }
         @Override
         public T nearest(T value) {
-            BigDecimal bigValue = new BigDecimal(value.toString());
+            final BigDecimal bigValue = new BigDecimal(value.toString());
+            final String stringNaN = Double.toString(Double.NaN);
+            final String stringPositiveInf = Double.toString(Double.POSITIVE_INFINITY);
+            final String stringNegativeInf = Double.toString(Double.NEGATIVE_INFINITY);
             return list.stream().reduce((i1, i2) -> {
+                if((i1 instanceof Double || i1 instanceof Float)){
+                    String d1 = i1.toString();
+                    if(d1.equals(stringNaN) || d1.equals(stringPositiveInf) || d1.equals(stringNegativeInf)){
+                        return i2;
+                    }
+                }
                 if(new BigDecimal(i1.toString()).subtract(bigValue).abs()
                         .subtract(new BigDecimal(i2.toString()).subtract(bigValue).abs()).signum() < 0){
                     return i1;
