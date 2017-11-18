@@ -23,7 +23,7 @@ public class Task5 implements ITestableTask5{
             resistance = voltage.divide(current);
             sumResistance.add(resistance);
         }
-
+        System.out.println(sumResistance);
         averageResistance = sumResistance.divide(size, 6, BigDecimal.ROUND_HALF_UP).doubleValue();
         return averageResistance;
     }
