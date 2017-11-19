@@ -60,6 +60,23 @@ public class Utils {
     }
 
     /**
+     * Swaps the columns at the specified positions in the specified matrix.
+     *
+     * @param matrix    Target matrix
+     * @param colIndex1 The index of one column to be swapped.
+     * @param colIndex2 The index of the other column to be swapped.
+     */
+    public static void swapMatrixColumns(int[][] matrix, int colIndex1, int colIndex2) {
+        int dimension = matrix.length;
+        int tmp = 0;
+        for (int i = 0; i < dimension; i++) {
+            tmp = matrix[i][colIndex1];
+            matrix[i][colIndex1] = matrix[i][colIndex2];
+            matrix[i][colIndex2] = tmp;
+        }
+    }
+
+    /**
      * Cyclically shifts the specified matrix by specified number of rows up
      *
      * @param matrix    The matrix to be shifted.
