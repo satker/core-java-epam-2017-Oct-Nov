@@ -280,7 +280,7 @@ public class Solver implements ISolver{
         } else {
             System.out.print(resultString.toString());
         }
-        scanner.close();
+        scanner.close():
     }
 
     /**
