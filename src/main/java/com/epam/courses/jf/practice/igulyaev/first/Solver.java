@@ -198,7 +198,12 @@ public class Solver implements ISolver {
     @Override
     public void task11(){
         final Reader reader = new Reader(System.in);
-        int n = Integer.getInteger(reader.readLine(), 0);
+        int n;
+        try{
+            n = Integer.parseInt(reader.readLine());
+        } catch (NumberFormatException ex){
+            n = 0;
+        }
         String str;
         switch(n){
             case 1:
@@ -402,10 +407,5 @@ public class Solver implements ISolver {
             }
         }
         return matrix;
-    }
-
-
-    public static void main(String[] args) {
-        new Solver().task26();
     }
 }
