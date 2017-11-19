@@ -9,6 +9,7 @@ import java.text.DecimalFormatSymbols;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Solver implements ISolver {
     //private Reader reader;
@@ -277,6 +278,34 @@ public class Solver implements ISolver {
         System.out.println(maxCount == 0 ? 0 : maxCount + 1);
     }
 
+    @Override
+    public void task15(){
+        final Scanner scanner = new Scanner(System.in);
+        int[][] matrix = readMatrix(scanner);
+        System.out.println(
+                Arrays.stream(matrix).flatMapToInt(row -> {
+                    int start = -1;
+                    int end   = -1;
+                    for(int i = 0; i < row.length; ++i){
+                        if(row[i] > 0){
+                            if(start == -1){
+                                start = i;
+                            } else if(end == -1){
+                                end = i;
+                            } else {
+                                break;
+                            }
+                        }
+                    }
+                    if(start != -1 && end != -1 && end - start > 1){
+                        return IntStream.of(Arrays.copyOfRange(row, start + 1, end));
+                    } else {
+                        return IntStream.empty();
+                    }
+                }).sum()
+        );
+    }
+
     private int[][] shiftRows(final int[][] matrix, int shift){
         int[][] newMatrix = new int[matrix.length][matrix.length];
         for (int i = 0; i < matrix.length; ++i){
@@ -303,10 +332,5 @@ public class Solver implements ISolver {
             }
         }
         return matrix;
-    }
-
-
-    public static void main(String[] args) {
-        new Solver().task14();
     }
 }
