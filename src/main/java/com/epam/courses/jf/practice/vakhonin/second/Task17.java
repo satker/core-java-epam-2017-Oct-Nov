@@ -40,7 +40,7 @@ public class Task17 implements ITestableTask17{
                 this.b = 0;
             }
             else {
-                this.b = 1;
+                this.b = -1;
                 this.a = (y2 - y1) / (x2 - x1);
                 this.c = y1 - a * x1;
             }
