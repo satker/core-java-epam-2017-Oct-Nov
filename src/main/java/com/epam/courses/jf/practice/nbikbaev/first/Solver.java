@@ -130,7 +130,7 @@ public class Solver implements ISolver {
             Pattern vowelPattern = Pattern.compile("[AEIOUaeiou]");
             while (scanner.hasNext()) {
                 String word = scanner.next();
-                if (word.matches("\\w+")) {
+                if (word.matches("[A-Za-z]+")) {
                     int vowelCount = 0;
                     Matcher vowelMatcher = vowelPattern.matcher(word);
                     while (vowelMatcher.find()) {
@@ -264,7 +264,7 @@ public class Solver implements ISolver {
     @Override
     @SuppressWarnings("deprecation")
     public void task10() {
-        try (Scanner scanner = new Scanner(System.in);) {
+        try (Scanner scanner = new Scanner(System.in)) {
             float a = scanner.nextInt();
             float b = scanner.nextInt();
             float c = scanner.nextInt();
@@ -294,9 +294,9 @@ public class Solver implements ISolver {
 
     @Override
     public void task11() {
-        try (Scanner scanner = new Scanner(System.in);) {
+        try (Scanner scanner = new Scanner(System.in)) {
             String dataIn = scanner.nextLine();
-            int month = 0;
+            int month;
             try {
                 month = Integer.valueOf(dataIn);
             } catch (RuntimeException e) {
