@@ -256,6 +256,25 @@ public class Solver implements ISolver {
         System.out.print(matrixToString(shiftRows(matrix, k)));
     }
 
+    @Override
+    public void task14(){
+        final Scanner scanner = new Scanner(System.in);
+        final int n = scanner.nextInt();
+        int maxCount = 0;
+        int count = 0;
+        int previousInt = scanner.nextInt();
+        for (int i = 1; i < n; ++i){
+            int currentInt = scanner.nextInt();
+            if(currentInt > previousInt){
+                if(++count > maxCount){
+                    maxCount = count;
+                }
+            }
+            previousInt = currentInt;
+        }
+        System.out.println(maxCount);
+    }
+
     private int[][] shiftRows(final int[][] matrix, int shift){
         int[][] newMatrix = new int[matrix.length][matrix.length];
         for (int i = 0; i < matrix.length; ++i){
