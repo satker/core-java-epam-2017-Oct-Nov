@@ -519,7 +519,29 @@ public class Solver implements ISolver {
 
     @Override
     public void task20() {
-
+        int[][] matrix = null;
+        try (Scanner scanner = new Scanner(System.in)) {
+            int newRowIndex = scanner.nextInt();
+            int newColumnIndex = scanner.nextInt();
+            int dimension = scanner.nextInt();
+            int minRowIndex = 0;
+            int minColumnIndex = 0;
+            matrix = Utils.readIntMatrix(scanner, dimension);
+            int min = matrix[0][0];
+            for (int i = 0; i < dimension; i++) {
+                for (int j = 0; j < dimension; j++) {
+                    if (matrix[i][j] < min) {
+                        min = matrix[i][j];
+                        minRowIndex = i;
+                        minColumnIndex = j;
+                    }
+                }
+            }
+            Utils.swapMatrixRows(matrix, minRowIndex, newRowIndex);
+            Utils.swapMatrixColumns(matrix, minColumnIndex, newColumnIndex);
+            System.out.println(dimension);
+            Utils.printIntMatrix(matrix, System.out);
+        }
     }
 
     @Override
