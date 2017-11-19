@@ -163,7 +163,7 @@ public class Solver implements ISolver {
     @Override
     public void task10(){
         final Scanner scanner = new Scanner(System.in);
-        final DecimalFormat df = new DecimalFormat("#0.#");
+        final DecimalFormat df = new DecimalFormat("#0.##");
         final DecimalFormatSymbols dfs = df.getDecimalFormatSymbols();
         dfs.setDecimalSeparator('.');
         df.setDecimalFormatSymbols(dfs);
