@@ -192,7 +192,7 @@ public class Solver implements ISolver {
     @Override
     public void task11(){
         final Reader reader = new Reader(System.in);
-        int n = Integer.parseInt(reader.readLine());
+        int n = Integer.getInteger(reader.readLine(), 0);
         String str;
         switch(n){
             case 1:
