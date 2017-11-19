@@ -269,10 +269,12 @@ public class Solver implements ISolver {
                 if(++count > maxCount){
                     maxCount = count;
                 }
+            } else {
+                count = 0;
             }
             previousInt = currentInt;
         }
-        System.out.println(maxCount);
+        System.out.println(maxCount == 0 ? 0 : maxCount + 1);
     }
 
     private int[][] shiftRows(final int[][] matrix, int shift){
@@ -301,5 +303,10 @@ public class Solver implements ISolver {
             }
         }
         return matrix;
+    }
+
+
+    public static void main(String[] args) {
+        new Solver().task14();
     }
 }
