@@ -18,6 +18,7 @@ import java.lang.System;
  */
 public class Solver implements ISolver {
 
+    private static Scanner scanner = new Scanner(System.in);
     final static String NOT_FOUND = "NOT FOUND";
     /**
      * Описание:
@@ -180,14 +181,13 @@ public class Solver implements ISolver {
     @Override
     public void task4() {
 
-        Scanner reader = new Scanner(System.in);
-        int N = reader.nextInt();
+        int N = scanner.nextInt();
 
         String word = null;
         Set<Character> wordLetters = new HashSet<>();
 
         for (int i = 0; i < N; i++) {
-            String s = reader.next();
+            String s = scanner.next();
 
             Set<Character> characters = new HashSet<>();
             for (int j = 0; j < s.length(); j++) {
@@ -220,13 +220,12 @@ public class Solver implements ISolver {
     @Override
     public void task5() {
 
-        Scanner reader = new Scanner(System.in);
-        int N = reader.nextInt();
+        int N = scanner.nextInt();
 
         List<String> englishWords = new ArrayList<>();
         for (int i = 0; i < N; i++) {
 
-            String word = reader.next();
+            String word = scanner.next();
             if (word.matches("[A-Za-z]+")) {
 
                 Pattern vocals = Pattern.compile("(?iu)[aeiouy]");
@@ -263,12 +262,11 @@ public class Solver implements ISolver {
     @Override
     public void task6() {
 
-        Scanner reader = new Scanner(System.in);
-        int N = reader.nextInt();
+        int N = scanner.nextInt();
 
         List<String> words = new ArrayList<>();
         for (int i = 0; i < N; i++) {
-            words.add(reader.next());
+            words.add(scanner.next());
         }
 
         int amountOfCorrectWords = 0;
@@ -313,7 +311,6 @@ public class Solver implements ISolver {
     @Override
     public void task7() {
 
-        Scanner scanner = new Scanner(System.in);
         int N = scanner.nextInt();
 
         Set<String> words = new LinkedHashSet<>();
@@ -1125,15 +1122,7 @@ public class Solver implements ISolver {
     public void task25() {
 
         Scanner scanner = new Scanner(System.in);
-        int N = scanner.nextInt();
-
-        int[][] A = new int[N][N];
-
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                A[i][j] = scanner.nextInt();
-            }
-        }
+        Integer[][] matrix = Matrix.readMatrix(scanner);
 
         int numberOfLocalMins = 0;
 
@@ -1142,16 +1131,16 @@ public class Solver implements ISolver {
 //        A[ i ][j-1] A[ i ][j] A[ i ][j+1]
 //        A[i+1][j-1] A[i+1][j] A[i+1][j+1]
 
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
                 boolean isLocalMinimum =
-                        ((i == 0 || ((j == 0 || A[i][j] < A[i - 1][j - 1]) &&
-                                (A[i][j] < A[i - 1][j]) &&
-                                (j == N - 1 || A[i][j] < A[i - 1][j + 1]))) &&
-                                ((j == 0 || A[i][j] < A[i][j - 1]) && (j == N - 1 || A[i][j] < A[i][j + 1])) &&
-                                (i == N - 1 || ((j == 0 || A[i][j] < A[i + 1][j - 1]) &&
-                                        (A[i][j] < A[i + 1][j]) &&
-                                        (j == N - 1 || A[i][j] < A[i + 1][j + 1]))));
+                        ((i == 0 || ((j == 0 || matrix[i][j] < matrix[i - 1][j - 1]) &&
+                                (matrix[i][j] < matrix[i - 1][j]) &&
+                                (j == matrix.length - 1 || matrix[i][j] < matrix[i - 1][j + 1]))) &&
+                                ((j == 0 || matrix[i][j] < matrix[i][j - 1]) && (j == matrix.length - 1 || matrix[i][j] < matrix[i][j + 1])) &&
+                                (i == matrix.length - 1 || ((j == 0 || matrix[i][j] < matrix[i + 1][j - 1]) &&
+                                        (matrix[i][j] < matrix[i + 1][j]) &&
+                                        (j == matrix.length - 1 || matrix[i][j] < matrix[i + 1][j + 1]))));
 
                 if (isLocalMinimum) {
                     numberOfLocalMins++;
@@ -1179,15 +1168,8 @@ public class Solver implements ISolver {
     public void task26() {
 
         Scanner scanner = new Scanner(System.in);
-        int N = scanner.nextInt();
 
-        int[][] A = new int[N][N];
-
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                A[i][j] = scanner.nextInt();
-            }
-        }
+        Integer[][] matrix = Matrix.readMatrix(scanner);
 
         List<Integer> localMaxumums = new ArrayList<>();
 
@@ -1196,19 +1178,19 @@ public class Solver implements ISolver {
 //        A[ i ][j-1] A[ i ][j] A[ i ][j+1]
 //        A[i+1][j-1] A[i+1][j] A[i+1][j+1]
 
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
                 boolean isLocalMaximum =
-                        ((i == 0 || ((j == 0 || A[i][j] > A[i - 1][j - 1]) &&
-                                (A[i][j] > A[i - 1][j]) &&
-                                (j == N - 1 || A[i][j] > A[i - 1][j + 1]))) &&
-                                ((j == 0 || A[i][j] > A[i][j - 1]) && (j == N - 1 || A[i][j] > A[i][j + 1])) &&
-                                (i == N - 1 || ((j == 0 || A[i][j] > A[i + 1][j - 1]) &&
-                                        (A[i][j] > A[i + 1][j]) &&
-                                        (j == N - 1 || A[i][j] > A[i + 1][j + 1]))));
+                        ((i == 0 || ((j == 0 || matrix[i][j] > matrix[i - 1][j - 1]) &&
+                                (matrix[i][j] > matrix[i - 1][j]) &&
+                                (j == matrix.length - 1 || matrix[i][j] > matrix[i - 1][j + 1]))) &&
+                                ((j == 0 || matrix[i][j] > matrix[i][j - 1]) && (j == matrix.length - 1 || matrix[i][j] > matrix[i][j + 1])) &&
+                                (i == matrix.length - 1 || ((j == 0 || matrix[i][j] > matrix[i + 1][j - 1]) &&
+                                        (matrix[i][j] > matrix[i + 1][j]) &&
+                                        (j == matrix.length - 1 || matrix[i][j] > matrix[i + 1][j + 1]))));
 
                 if (isLocalMaximum) {
-                    localMaxumums.add(A[i][j]);
+                    localMaxumums.add(matrix[i][j]);
                 }
             }
         }
@@ -1237,33 +1219,18 @@ public class Solver implements ISolver {
     @Override
     public void task27() {
 
-        Scanner scanner = new Scanner(System.in);
-        int N = scanner.nextInt();
+        Integer[][] matrix = Matrix.readMatrix(scanner);
 
-        Integer[][] A = new Integer[N][N];
-
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                A[j][i] = scanner.nextInt();
-            }
-        }
-
-        Arrays.sort(A, (o1, o2) -> {
+        Arrays.sort(matrix, (o1, o2) -> {
             int sum1 = 0;
             int sum2 = 0;
-            for (int i = 0; i < N; i++) {
+            for (int i = 0; i < matrix.length; i++) {
                 sum1 += Math.abs(o1[i]);
                 sum2 += Math.abs(o2[i]);
             }
             return sum2 - sum1;
         });
 
-        System.out.println(N);
-
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                System.out.print(A[j][i] + ((j == (N - 1)) ? "\n" : "\t"));
-            }
-        }
+        Matrix.printMatrix(matrix);
     }
 }
