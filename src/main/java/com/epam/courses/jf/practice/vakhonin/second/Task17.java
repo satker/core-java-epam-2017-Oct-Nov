@@ -11,6 +11,7 @@ import java.util.logging.Logger;
  */
 
 public class Task17 implements ITestableTask17{
+    static Logger log = Logger.getLogger(Task1.class.getName());
 
 
     class Line {
@@ -93,11 +94,15 @@ public class Task17 implements ITestableTask17{
     }
 
 //    TODO: doing one segment and use second segment!!!
-    static boolean isPointOfSegment(Point point, ISegment segment1){
-        if((point.getX() >= segment1.first().getX()) && (point.getX() <= segment1.second().getX())   && (point.getY() >= segment1.first().getY())   && (point.getY() <= segment1.second().getY())){
+    static boolean isPointOfSegment(Point point, ISegment segment){
+        log.info("point: x = " + point.getX() + "   y = " + point.getY());
+        log.info("segment: x1 = " + segment.first().getX() + "   y1 = " + segment.first().getY() + "   x2 = " + segment.second().getX() + "   y2 = " + segment.second().getY());
+        if((point.getX() >= segment.first().getX()) && (point.getX() <= segment.second().getX())   && (point.getY() >= segment.first().getY())   && (point.getY() <= segment.second().getY())){
+            log.info("" + true);
             return true;
         }
         else{
+            log.info("" + false);
             return false;
         }
     }
@@ -109,7 +114,7 @@ public class Task17 implements ITestableTask17{
         List<Line> linesList = new ArrayList<>();
         Map<Double, Set<I2DPoint>> pointsMap= new TreeMap<>();
 
-        Logger log = Logger.getLogger(Task1.class.getName());
+//        Logger log = Logger.getLogger(Task1.class.getName());
 
         for(ISegment segment: segmentsList){
             linesList.add(new Line(segment));
@@ -128,7 +133,7 @@ public class Task17 implements ITestableTask17{
                 segmentK = segmentsList.get(k);
                 point = lineJ.pointOfIntersection(lineK);
                 log.info("x = " + point.getX() + "   y = " + point.getY());
-                log.info("" + isPointOfSegment(point, segmentJ) + "" + isPointOfSegment(point, segmentK));
+//                log.info("" + isPointOfSegment(point, segmentJ) + "" + isPointOfSegment(point, segmentK));
                 if(isPointOfSegment(point, segmentJ) && isPointOfSegment(point, segmentK)){
                     log.info("INTO");
                     if(pointsMap.containsKey(point.getX())){
