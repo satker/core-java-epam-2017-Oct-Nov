@@ -1225,15 +1225,15 @@ public class Solver implements ISolver {
         Scanner scanner = new Scanner(System.in);
         int N = scanner.nextInt();
 
-        Integer[][] matrix = new Integer[N][N];
+        Integer[][] A = new Integer[N][N];
 
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                matrix[j][i] = scanner.nextInt();
+                A[j][i] = scanner.nextInt();
             }
         }
 
-        Arrays.sort(matrix, (o1, o2) -> {
+        Arrays.sort(A, (o1, o2) -> {
             int sum1 = 0;
             int sum2 = 0;
             for (int i = 0; i < N; i++) {
@@ -1243,6 +1243,12 @@ public class Solver implements ISolver {
             return sum2 - sum1;
         });
 
-        Matrix.printMatrix(matrix);
+        System.out.println(N);
+
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                System.out.print(A[j][i] + ((j == (N - 1)) ? "\n" : "\t"));
+            }
+        }
     }
 }
