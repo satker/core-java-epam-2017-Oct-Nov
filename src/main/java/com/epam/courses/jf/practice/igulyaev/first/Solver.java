@@ -243,18 +243,17 @@ public class Solver implements ISolver {
         final int n = scanner.nextInt();
         int[][] matrix = readMatrix(scanner);
         Arrays.sort(matrix, Comparator.comparingInt(row -> row[n]));
-        System.out.println(printMatrix(matrix));
+        System.out.print(matrixToString(matrix));
     }
 
-
-    private StringBuilder printMatrix(final int[][] matrix){
+    private String matrixToString(final int[][] matrix){
         StringBuilder builder = new StringBuilder();
         AtomicInteger index = new AtomicInteger(1);
         Arrays.stream(matrix).flatMapToInt(Arrays::stream).forEach(i ->{
             builder.append(i);
             builder.append(index.getAndIncrement() % matrix.length == 0 ? "\n" :"\t");
         });
-        return builder;
+        return builder.toString();
     }
     private int[][] readMatrix(Scanner scanner) {
         final int DIMENSION = scanner.nextInt();
