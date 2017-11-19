@@ -904,7 +904,6 @@ public class Solver implements ISolver{
     public void task22() {
         Scanner scanner = new Scanner(System.in);
         final int matrixDimension = scanner.nextInt();
-        scanner.useLocale(Locale.US);
         double matrix[][] = new double[matrixDimension][matrixDimension];
 
         for (int i = 0; i < matrixDimension; i++) {
@@ -922,6 +921,7 @@ public class Solver implements ISolver{
         }
         scanner.close();
     }
+
 
     /**
      * Найти количество всех седловых точек матрицы. Матрица А имеет седловую точку (i, j),
