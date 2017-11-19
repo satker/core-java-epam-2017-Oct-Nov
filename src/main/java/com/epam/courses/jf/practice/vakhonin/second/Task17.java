@@ -5,10 +5,10 @@ import com.epam.courses.jf.practice.common.second.ITestableTask17;
 
 import java.util.*;
 
-import java.util.logging.*;
 /**
  * Created by igorvahonin on 13.11.17.
  */
+
 public class Task17 implements ITestableTask17{
 
 
@@ -91,6 +91,7 @@ public class Task17 implements ITestableTask17{
         }
     }
 
+//    TODO: doing one segment and use second segment!!!
     static boolean isPointOfSegments(Point point, ISegment segment1, ISegment segment2){
         if(           (point.getX() >= segment1.first().getX()) && (point.getX() <= segment1.second().getX())   && (point.getY() >= segment1.first().getY())   && (point.getY() <= segment1.second().getY())         ){
             return true;
@@ -102,11 +103,9 @@ public class Task17 implements ITestableTask17{
 
     @Override
     public Set<I2DPoint> analyze(Set<ISegment> segments) {
-        Logger log = Logger.getLogger(Task17.class.getName());
 
         List<ISegment> segmentsList = new ArrayList<>(segments);
         List<Line> linesList = new ArrayList<>();
-        Set<I2DPoint> pointsSet = new HashSet<>();
         Map<Double, Set<I2DPoint>> pointsMap= new TreeMap<>();
 
 
@@ -122,17 +121,10 @@ public class Task17 implements ITestableTask17{
         for(int j = 0; j < size-1; j++){
             lineJ = linesList.get(j);
             segmentJ = segmentsList.get(j);
-
-            log.info("J: first - (" + segmentJ.first().getX() + " " + segmentJ.first().getY() + ");   second - ("+ segmentJ.second().getX() + " " + segmentJ.second().getY() + ")");
-            log.info("lineJ: a = " + lineJ.getA()+ "  b="+ lineJ.getB()+ "  c="+ lineJ.getC());
             for(int k = j+1; k<size; k++){
                 lineK = linesList.get(k);
                 segmentK = segmentsList.get(k);
-                log.info("K: first - (" + segmentK.first().getX() + " " + segmentK.first().getY() + ");   second - ("+ segmentK.second().getX() + " " + segmentK.second().getY() + ")");
-                log.info("lineK: a = " + lineK.getA()+ "  b="+ lineK.getB()+ "  c="+ lineK.getC());
-//                log.info("parallel? " + lineJ.isParallel(lineK));
                 point = lineJ.pointOfIntersection(lineK);
-                log.info("intersection: x = " + point.getX() + "  y = " + point.getY());
                 if(isPointOfSegments(point, segmentJ, segmentK)){
 //                    log.info("intersection!!!");
                     if(pointsMap.containsKey(point.getX())){
@@ -146,16 +138,8 @@ public class Task17 implements ITestableTask17{
             }
         }
 
-
-        log.info(pointsMap.toString());
         Iterator<Map.Entry<Double, Set<I2DPoint>>> it = pointsMap.entrySet().iterator();
-
-
-
         Set<I2DPoint> result = it.next().getValue();
-
-
-
 
         return result;
     }
