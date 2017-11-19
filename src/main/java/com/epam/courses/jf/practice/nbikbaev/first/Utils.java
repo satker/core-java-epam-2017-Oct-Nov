@@ -13,16 +13,27 @@ public class Utils {
      *
      * @param scanner   Scanner
      * @param dimension Matrix dimension
-     * @return Matrix scanned from input stream
      */
-    public static int[][] readIntMatrix(Scanner scanner, int dimension) {
-        int[][] matrix = new int[dimension][dimension];
+    public static void readMatrix(Scanner scanner, int dimension, int[][] matrix) {
         for (int row = 0; row < dimension; ++row) {
             for (int col = 0; col < dimension; ++col) {
                 matrix[row][col] = scanner.nextInt();
             }
         }
-        return matrix;
+    }
+
+    /**
+     * Reads a matrix from input stream using {@link Scanner} interface.
+     *
+     * @param scanner   Scanner
+     * @param dimension Matrix dimension
+     */
+    public static void readMatrix(Scanner scanner, int dimension, double[][] matrix) {
+        for (int row = 0; row < dimension; ++row) {
+            for (int col = 0; col < dimension; ++col) {
+                matrix[row][col] = scanner.nextDouble();
+            }
+        }
     }
 
     /**
@@ -31,13 +42,32 @@ public class Utils {
      * @param matrix      Matrix to be printed
      * @param printStream The output stream to which matrix will be printed
      */
-    public static void printIntMatrix(int[][] matrix, PrintStream printStream) {
-        int colCount = matrix[0].length;
-        int rowCount = matrix.length;
-        for (int[] aMatrix : matrix) {
-            for (int j = 0; j < colCount; j++) {
+    public static void printMatrix(int[][] matrix, PrintStream printStream) {
+        int dimension = matrix[0].length;
+        for (int[] row : matrix) {
+            for (int j = 0; j < dimension; j++) {
+                printStream.print(row[j]);
+                if (j == dimension - 1) {
+                    printStream.print("\n");
+                } else {
+                    printStream.print(" ");
+                }
+            }
+        }
+    }
+
+    /**
+     * Prints a matrix to the output stream
+     *
+     * @param matrix      Matrix to be printed
+     * @param printStream The output stream to which matrix will be printed
+     */
+    public static void printMatrix(double[][] matrix, PrintStream printStream) {
+        int dimension = matrix.length;
+        for (double[] aMatrix : matrix) {
+            for (int j = 0; j < dimension; j++) {
                 printStream.print(aMatrix[j]);
-                if (j == colCount - 1) {
+                if (j == dimension - 1) {
                     printStream.print("\n");
                 } else {
                     printStream.print(" ");
