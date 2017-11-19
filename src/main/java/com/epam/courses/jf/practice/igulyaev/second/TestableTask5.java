@@ -10,12 +10,12 @@ public class TestableTask5 implements ITestableTask5 {
     public double calcResistance(List<IMeasurement> measurements) {
         BigDecimal numerator   = new BigDecimal(0);
         BigDecimal denominator = new BigDecimal(0);
-        measurements.forEach(m->{
+        for (IMeasurement m : measurements) {
             BigDecimal I = new BigDecimal(m.getCurrent());
             BigDecimal U = new BigDecimal(m.getVoltage());
-            numerator.add(I.multiply(U));
-            denominator.add(I.pow(2));
-        });
+            numerator    = numerator.add(I.multiply(U));
+            denominator  = denominator.add(I.pow(2));
+        }
         return numerator.divide(denominator).doubleValue();
     }
 }
