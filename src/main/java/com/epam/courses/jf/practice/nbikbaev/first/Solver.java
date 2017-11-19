@@ -126,19 +126,18 @@ public class Solver implements ISolver {
     @Override
     public void task5() {
         int k = 0;
-        try (Scanner scanner = new Scanner(System.in)) {
-            Pattern vowelPattern = Pattern.compile("[AEIOUaeiou]");
-            while (scanner.hasNext()) {
-                String word = scanner.next();
-                if (word.matches("[A-Za-z]+")) {
-                    int vowelCount = 0;
-                    Matcher vowelMatcher = vowelPattern.matcher(word);
-                    while (vowelMatcher.find()) {
-                        vowelCount++;
-                    }
-                    if (vowelCount * 2 == word.length()) {
-                        k++;
-                    }
+        Scanner scanner = new Scanner(System.in);
+        Pattern vowelPattern = Pattern.compile("[AEIOUaeiou]");
+        while (scanner.hasNext()) {
+            String word = scanner.next();
+            if (word.matches("[A-Za-z]+")) {
+                int vowelCount = 0;
+                Matcher vowelMatcher = vowelPattern.matcher(word);
+                while (vowelMatcher.find()) {
+                    vowelCount++;
+                }
+                if (vowelCount * 2 == word.length()) {
+                    k++;
                 }
             }
         }
