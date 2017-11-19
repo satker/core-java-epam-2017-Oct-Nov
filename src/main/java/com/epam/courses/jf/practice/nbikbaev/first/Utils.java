@@ -2,7 +2,9 @@ package com.epam.courses.jf.practice.nbikbaev.first;
 
 
 import java.io.PrintStream;
+import java.util.Collection;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Utils {
 
@@ -145,6 +147,33 @@ public class Utils {
             for (int column = 0; column < dimension; column++) {
                 int[][] minor = getMinor(matrix, dimension, 0, column);
                 result += Math.pow(-1.0, 1.0 + column + 1.0) * matrix[0][column] * determinant(minor, dimension - 1);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Removes columns and rows specified in rowSet and columnSet from specified matrix
+     *
+     * @param matrix    Target matrix
+     * @param dimension Matrix dimension
+     * @param rowSet    The set of rows to be deleted
+     * @param columnSet The set of columns to be deleted
+     * @return Matrix which not containing specified rows and columns
+     */
+    public static int[][] removeColumnsAndRows(int[][] matrix, int dimension, Collection<Integer> rowSet, Collection<Integer> columnSet) {
+        int[][] result = new int[dimension - rowSet.size()][dimension - columnSet.size()];
+        int k = 0;
+        for (int i = 0; i < dimension; i++) {
+            int n = 0;
+            if (!(rowSet.contains(i))) {
+                for (int j = 0; j < dimension; j++) {
+                    if (!(columnSet.contains(j))) {
+                        result[k][n] = matrix[i][j];
+                        n++;
+                    }
+                }
+                k++;
             }
         }
         return result;
