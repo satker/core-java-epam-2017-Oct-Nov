@@ -3,8 +3,8 @@ package com.epam.courses.jf.practice.nbikbaev.first;
 
 import java.io.PrintStream;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Scanner;
-import java.util.Set;
 
 public class Utils {
 
@@ -196,19 +196,21 @@ public class Utils {
         return result;
     }
 
+    /**
+     * Swaps the elements at the specified positions in the specified array.
+     *
+     * @param array Target array
+     * @param i     The index of one column to be swapped.
+     * @param j     The index of the other column to be swapped.
+     */
+    public static void swap(int[] array, int i, int j) {
+        int tmp = array[i];
+        array[i] = array[j];
+        array[j] = tmp;
+    }
+
     private static int[][] getMinor(int[][] matrix, int dimension, int row, int column) {
-        int[][] minor = new int[dimension - 1][dimension - 1];
-
-        for (int i = 0; i < dimension; i++) {
-            for (int j = 0; i != row && j < dimension; j++) {
-                if (j != column) {
-                    minor[i < row ? i : i - 1][j < column ? j : j - 1] = matrix[i][j];
-                }
-            }
-
-        }
-
-        return minor;
+        return removeColumnsAndRows(matrix, dimension, Collections.singleton(row), Collections.singleton(column));
     }
 
 }
