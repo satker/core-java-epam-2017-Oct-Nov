@@ -585,7 +585,6 @@ public class Solver implements ISolver{
         }
 
         int summa = 0;
-        //boolean flag = false;
 
         for (int i = 0; i < matrixDimension; i++) {
             boolean flag = false;
@@ -613,6 +612,7 @@ public class Solver implements ISolver{
     @Override
     public void task16() {
         Scanner scanner = new Scanner(System.in);
+
         final int matrixDimension = scanner.nextInt();
         int matrix[][] = new int[matrixDimension][matrixDimension];
         int newMatrix[][] = new int[matrixDimension][matrixDimension];
@@ -629,17 +629,14 @@ public class Solver implements ISolver{
             }
         }
 
+        System.out.println(matrixDimension);
         for (int i = 0; i < matrixDimension; i++) {
             for (int j = 0; j < matrixDimension; j++) {
-                if (j == (matrixDimension - 1)) {
-                    System.out.print(newMatrix[i][j]);
-                } else {
-                    System.out.print(newMatrix[i][j] + "\t");
-                }
+                System.out.print(newMatrix[i][j] + "\t");
             }
             System.out.println();
-            scanner.close();
         }
+        scanner.close();
     }
 
     @Override
@@ -675,19 +672,22 @@ public class Solver implements ISolver{
             }
             //применение метода Гаусса
 
-            for (int decreaseDimension = 1; decreaseDimension
-                    < matrixDimension - 1; decreaseDimension++) {
+            for (int diagonal = 1; diagonal < matrixDimension - 1; diagonal++) {
 
-                for (int i = decreaseDimension; i < matrixDimension; i++) {
+                for (int i = diagonal; i < matrixDimension; i++) {
 
-                    for (int j = matrixDimension - 1; j >= decreaseDimension - 1; j--) {
+                    for (int j = matrixDimension - 1; j >= diagonal - 1; j--) {
 
-                        matrix[i][j] = matrix[i][j] - (matrix[decreaseDimension - 1][j]
-                                * (matrix[i][decreaseDimension - 1]
-                                / matrix[decreaseDimension - 1][decreaseDimension - 1]));
+                        matrix[i][j] = matrix[i][j] - (matrix[diagonal - 1][j]
+                                * (matrix[i][diagonal - 1]
+                                / matrix[diagonal - 1][diagonal - 1]));
                     }
                 }
-                determinant *= matrix[decreaseDimension - 1][decreaseDimension - 1];
+                determinant *= matrix[diagonal - 1][diagonal - 1];
+            }
+
+            if (matrixDimension == 1) {
+                determinant = matrix[0][0];
             }
 
             determinant *= matrix[matrixDimension - 2][matrixDimension - 2]
@@ -695,10 +695,12 @@ public class Solver implements ISolver{
                     - matrix[matrixDimension - 2][matrixDimension - 1]
                     * matrix[matrixDimension - 1][matrixDimension - 2];
 
+            BigDecimal result = new BigDecimal(determinant);
+            System.out.println(result.setScale(0, RoundingMode.HALF_UP));
         } else {
             System.out.println(0);
         }
-        System.out.println(determinant);
+
         scanner.close();
     }
 
@@ -726,9 +728,6 @@ public class Solver implements ISolver{
             columnSet.add(i);
         }
 
-        System.out.println(lineSet.size() + " 1");        //number of lines
-        System.out.println(columnSet.size() + " 1");
-
         int max = matrix[0][0];
 
         for (int i = 0; i < matrixDimension; i++) {
@@ -738,8 +737,6 @@ public class Solver implements ISolver{
                 }
             }
         }
-
-        System.out.println("max " + max);
 
         for (int i = matrixDimension - 1; i >= 0; i--) {
             for (int j = matrixDimension - 1; j >= 0; j--) {
@@ -833,8 +830,6 @@ public class Solver implements ISolver{
             }
         }
 
-        System.out.println(minElement + " " + minElementPosition[0] + " " + minElementPosition[1]);
-
         int buble[] = new int[matrixDimension];
 
         if (minElementPosition[0] < lineNumber) {
@@ -875,6 +870,7 @@ public class Solver implements ISolver{
             }
         }
 
+        System.out.println(matrixDimension);
         for (int i[] : matrix) {
             for (int j : i) {
                 System.out.print(j + "\t");
@@ -918,6 +914,7 @@ public class Solver implements ISolver{
             }
         }
 
+        System.out.println(matrixDimension);
         for (int i[] : matrix) {
             for (int j : i) {
                 System.out.print(j + "\t");
@@ -936,7 +933,7 @@ public class Solver implements ISolver{
     public void task22() {
         Scanner scanner = new Scanner(System.in);
         final int matrixDimension = scanner.nextInt();
-        long matrix[][] = new long[matrixDimension][matrixDimension];
+        double matrix[][] = new double[matrixDimension][matrixDimension];
 
         for (int i = 0; i < matrixDimension; i++) {
             for (int j = 0; j < matrixDimension; j++) {
@@ -944,8 +941,9 @@ public class Solver implements ISolver{
             }
         }
 
-        for (long i[] : matrix) {
-            for (long j : i) {
+        System.out.println(matrixDimension);
+        for (double i[] : matrix) {
+            for (double j : i) {
                 System.out.print(j + "\t");
             }
             System.out.println();
@@ -963,7 +961,6 @@ public class Solver implements ISolver{
         final int matrixDimension = scanner.nextInt();
         int matrix[][] = new int[matrixDimension][matrixDimension];
         int minElement;
-        //int minElementColumn = 0;
         int maxElement;
 
         for (int i = 0; i < matrixDimension; i++) {
@@ -973,7 +970,6 @@ public class Solver implements ISolver{
         }
 
         boolean flagMin = true;
-        //boolean flagMax = false;
         int saddle = 0;
 
         for (int i = 0; i < matrixDimension; i++) {
@@ -1034,8 +1030,10 @@ public class Solver implements ISolver{
             sum = 0;
         }
 
-        Arrays.sort(matrix, (amass, bmass) -> amass[amass.length - 1] - bmass[bmass.length - 1]);
+        Arrays.sort(matrix, (amass, bmass)
+                -> amass[amass.length - 1] - bmass[bmass.length - 1]);
 
+        System.out.println(matrixDimension);
         for (int i[] : matrix) {
             for (int j = 0; j < i.length - 1; j++) {
                 System.out.print(i[j] + "\t");
@@ -1196,8 +1194,9 @@ public class Solver implements ISolver{
         }
 
         Collections.sort(localMax);
+
         if (localMax.size() > 0) {
-            System.out.println(localMax.get(localMax.size() - 1) + " ");
+            System.out.println(localMax.get(localMax.size() - 1));
         } else {
             System.out.println("NOT FOUND");
         }
@@ -1227,7 +1226,8 @@ public class Solver implements ISolver{
 
         }
 
-        System.arraycopy(characteristicsValue, 0, matrix[matrixDimension], 0, characteristicsValue.length);
+        System.arraycopy(characteristicsValue, 0,
+                matrix[matrixDimension], 0, characteristicsValue.length);
 
         int k = 0;
         int h = 1;
@@ -1257,7 +1257,7 @@ public class Solver implements ISolver{
                 }
             }
         }
-
+        System.out.println(matrixDimension);
         for (int i = 0; i < matrixDimension; i++) {
             for (int j : newMatrix[i]){
                 System.out.print(j + "\t");
