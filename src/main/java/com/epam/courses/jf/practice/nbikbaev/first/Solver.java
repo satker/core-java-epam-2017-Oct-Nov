@@ -545,15 +545,24 @@ public class Solver implements ISolver {
     @Override
     public void task21() {
         int[][] matrix = null;
+        int k = 0;
         try (Scanner scanner = new Scanner(System.in)) {
             int dimension = scanner.nextInt();
             matrix = Utils.readIntMatrix(scanner, dimension);
             for (int i = 0; i < dimension; i++) {
-                for (int j = 0; j < dimension - 1; j++) {
+                for (int j = 0; j < dimension; j++) {
                     if (matrix[i][j] == 0) {
-                        Utils.swap(matrix[i], j, j + 1);
+                        k++;
                     }
                 }
+                for (int m = 0; m < k; m++) {
+                    for (int j = 0; j < dimension - 1; j++) {
+                        if (matrix[i][j] == 0) {
+                            Utils.swap(matrix[i], j, j + 1);
+                        }
+                    }
+                }
+                k = 0;
             }
             System.out.println(dimension);
             Utils.printIntMatrix(matrix, System.out);
