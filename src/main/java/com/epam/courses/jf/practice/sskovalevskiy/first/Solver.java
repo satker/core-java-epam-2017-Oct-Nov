@@ -83,7 +83,6 @@ public class Solver implements ISolver {
     @Override
     public void task2() {
 
-
         List<String> strings = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
@@ -538,25 +537,12 @@ public class Solver implements ISolver {
 
         Scanner scanner = new Scanner(System.in);
         int k = scanner.nextInt();
-        int N = scanner.nextInt();
 
-        Integer[][] matrix = new Integer[N][N];
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                matrix[i][j] = scanner.nextInt();
-            }
-        }
+        Integer[][] matrix = Matrix.readMatrix(scanner);
 
         Arrays.sort(matrix, (o1, o2) -> o1[k] - o2[k]);
 
-        System.out.println(N);
-
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                System.out.print(matrix[i][j] + "\t");
-            }
-            System.out.println();
-        }
+        Matrix.printMatrix(matrix);
     }
 
     /**
