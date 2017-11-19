@@ -13,14 +13,20 @@ public class Task17 implements ITestableTask17{
 
 
     class Line {
-        private double k, b;
+//        private double k, b;
+//        Ax + By + C = 0
+        private double a, b, c;
 
-        double getK(){
-            return k;
+        double getA(){
+            return a;
         }
 
         double getB(){
             return b;
+        }
+
+        double getC(){
+            return c;
         }
 
         Line(ISegment segment){
@@ -29,35 +35,37 @@ public class Task17 implements ITestableTask17{
             x2 = segment.second().getX();
             y1 = segment.first().getY();
             y2 = segment.second().getY();
-            k = (y2-y1)/(x2-x1);
-            b = y1 - k * x1;
+
+            if((x2-x1) == 0){
+                this.b = 0;
+            }
+            else {
+                this.b = 1;
+                this.a = (y2 - y1) / (x2 - x1);
+                this.c = y1 - a * x1;
+            }
         }
 
         Point pointOfIntersection(Line line2){
-            double k1,k2,b1,b2, x0,y0;
+            double a1,a2,b1,b2, c1, c2, x0,y0;
 
-            k1 = this.getK();
-            k2 = line2.getK();
+            a1 = this.getA();
+            a2 = line2.getA();
 
             b1 = this.getB();
             b2 = line2.getB();
 
-            x0 = (b2-b1)/(k1-k2);
-            y0 = k1 * x0 + b1;
+            c1 = this.getC();
+            c2 = line2.getC();
+
+            y0 = (a2*c1/a1 - c2)/(b2-b1*a2/a1);
+            x0 = -c1-b1*y0;
 
             Point result = new Point(x0,y0);
 
             return result;
         }
 
-        boolean isParallel(Line line2) {
-            if(this.getK() == line2.getK()){
-                return true;
-            }
-            else{
-                return false;
-            }
-        }
 
     }
 
@@ -113,30 +121,30 @@ public class Task17 implements ITestableTask17{
             lineJ = linesList.get(j);
             segmentJ = segmentsList.get(j);
 
-            log.info("J: first - (" + segmentJ.first().getX() + " " + segmentJ.first().getY() + ");   second - ("+ segmentJ.second().getX() + " " + segmentJ.second().getY() + ")");
-
+//            log.info("J: first - (" + segmentJ.first().getX() + " " + segmentJ.first().getY() + ");   second - ("+ segmentJ.second().getX() + " " + segmentJ.second().getY() + ")");
+//            log.info("lineJ: K = " + lineJ.getK());
             for(int k = j+1; k<size; k++){
                 lineK = linesList.get(k);
                 segmentK = segmentsList.get(k);
-                log.info("K: first - (" + segmentK.first().getX() + " " + segmentK.first().getY() + ");   second - ("+ segmentK.second().getX() + " " + segmentK.second().getY() + ")");
-                if(! lineJ.isParallel(lineK)){
-                    point = lineJ.pointOfIntersection(lineK);
-                    if(isPointOfSegments(point, segmentJ, segmentK)){
-//                        log.info(pointsMap.toString());
-//                        log.info("" + point.getX() + "" + point.getY());
-                        if(pointsMap.containsKey(point.getX())){
-                            pointsMap.get(point.getX()).add(point);
-                        }
-                        else{
-                            pointsMap.put(point.getX(), new HashSet<>());
-                            pointsMap.get(point.getX()).add(point);
-                        }
+//                log.info("K: first - (" + segmentK.first().getX() + " " + segmentK.first().getY() + ");   second - ("+ segmentK.second().getX() + " " + segmentK.second().getY() + ")");
+//                log.info("lineK: K = " + lineK.getK());
+//                log.info("parallel? " + lineJ.isParallel(lineK));
+                point = lineJ.pointOfIntersection(lineK);
+                if(isPointOfSegments(point, segmentJ, segmentK)){
+//                    log.info("intersection!!!");
+                    if(pointsMap.containsKey(point.getX())){
+                        pointsMap.get(point.getX()).add(point);
                     }
-
+                    else{
+                        pointsMap.put(point.getX(), new HashSet<>());
+                        pointsMap.get(point.getX()).add(point);
+                    }
                 }
             }
         }
 
+
+        log.info(pointsMap.toString());
         Iterator<Map.Entry<Double, Set<I2DPoint>>> it = pointsMap.entrySet().iterator();
 
 
