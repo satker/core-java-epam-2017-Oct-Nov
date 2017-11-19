@@ -278,7 +278,6 @@ public class Solver implements ISolver{
         if (countOfUniqueWords) {
             System.out.print("NOT FOUND");
         } else {
-            resultString.trimToSize();
             System.out.print(resultString.toString().trim());
         }
 
@@ -357,7 +356,6 @@ public class Solver implements ISolver{
         double c = scanner.nextInt();
 
         double D = Math.pow(b, 2) - 4 * a * c;
-        //BigDecimal c = new Bigd
 
         if (D < 0) {
             System.out.println("No solution");
@@ -688,13 +686,12 @@ public class Solver implements ISolver{
 
             if (matrixDimension == 1) {
                 determinant = matrix[0][0];
+            } else {
+                determinant *= matrix[matrixDimension - 2][matrixDimension - 2]
+                        * matrix[matrixDimension - 1][matrixDimension - 1]
+                        - matrix[matrixDimension - 2][matrixDimension - 1]
+                        * matrix[matrixDimension - 1][matrixDimension - 2];
             }
-
-            determinant *= matrix[matrixDimension - 2][matrixDimension - 2]
-                    * matrix[matrixDimension - 1][matrixDimension - 1]
-                    - matrix[matrixDimension - 2][matrixDimension - 1]
-                    * matrix[matrixDimension - 1][matrixDimension - 2];
-
             BigDecimal result = new BigDecimal(determinant);
             System.out.println(result.setScale(0, RoundingMode.HALF_UP));
         } else {
@@ -830,44 +827,18 @@ public class Solver implements ISolver{
             }
         }
 
-        int buble[] = new int[matrixDimension];
+        int emptyMass[] = new int[matrixDimension];
 
-        if (minElementPosition[0] < lineNumber) {
-            while (minElementPosition[0] < lineNumber) {
-                buble = matrix[minElementPosition[0]];
-                matrix[minElementPosition[0]] = matrix[minElementPosition[0] + 1];
-                matrix[minElementPosition[0] + 1] = buble;
-                minElementPosition[0] += 1;
-            }
-        } else if (minElementPosition[0] > lineNumber) {
-            while (minElementPosition[0] > lineNumber) {
-                buble = matrix[minElementPosition[0]];
-                matrix[minElementPosition[0]] = matrix[minElementPosition[0] - 1];
-                matrix[minElementPosition[0] - 1] = buble;
-                minElementPosition[0] -= 1;
-            }
-        }
+        emptyMass = matrix[minElementPosition[0]];
+        matrix[minElementPosition[0]] = matrix[lineNumber];
+        matrix[lineNumber] = emptyMass;
 
         int empty = 0;
 
-        if (minElementPosition[1] < columnNumber) {
-            while (minElementPosition[1] < columnNumber) {
-                for (int k = 0; k < matrixDimension; k++) {
-                    empty = matrix[k][minElementPosition[1]];
-                    matrix[k][minElementPosition[1]] = matrix[k][minElementPosition[1] + 1];
-                    matrix[k][minElementPosition[1] + 1] = empty;
-                }
-                minElementPosition[1] += 1;
-            }
-        } else if (minElementPosition[1] > columnNumber) {
-            while (minElementPosition[1] > columnNumber) {
-                for (int k = 0; k < matrixDimension; k++) {
-                    empty = matrix[k][minElementPosition[1]];
-                    matrix[k][minElementPosition[1]] = matrix[k][minElementPosition[1] - 1];
-                    matrix[k][minElementPosition[1] - 1] = empty;
-                }
-                minElementPosition[1] -= 1;
-            }
+        for (int k = 0; k < matrixDimension; k++) {
+            empty = matrix[k][minElementPosition[1]];
+            matrix[k][minElementPosition[1]] = matrix[k][columnNumber];
+            matrix[k][columnNumber] = empty;
         }
 
         System.out.println(matrixDimension);
@@ -933,6 +904,7 @@ public class Solver implements ISolver{
     public void task22() {
         Scanner scanner = new Scanner(System.in);
         final int matrixDimension = scanner.nextInt();
+        scanner.useLocale(Locale.US);
         double matrix[][] = new double[matrixDimension][matrixDimension];
 
         for (int i = 0; i < matrixDimension; i++) {
@@ -1213,6 +1185,7 @@ public class Solver implements ISolver{
     @Override
     public void task27() {
         Scanner scanner = new Scanner(System.in);
+
         final int matrixDimension = scanner.nextInt();
         int matrix[][] = new int[matrixDimension + 1][matrixDimension];
         int characteristicsValue[] = new int[matrixDimension];
@@ -1229,18 +1202,13 @@ public class Solver implements ISolver{
         System.arraycopy(characteristicsValue, 0,
                 matrix[matrixDimension], 0, characteristicsValue.length);
 
-        int k = 0;
-        int h = 1;
-        while(h * 3 < characteristicsValue.length){
-            h = h * 3 + 1;
-        }
-
-        for (int i = h; i < matrixDimension; i ++){
-            for (int j = i; j >= h; j -= h){
-                if (characteristicsValue[j-h] < characteristicsValue[j]){
+        for (int i = 1; i < matrixDimension; i ++){
+            int k = 0;
+            for (int j = i; j >= 1; j -= 1){
+                if (characteristicsValue[j-1] < characteristicsValue[j]){
                     k = characteristicsValue[j];
-                    characteristicsValue[j] = characteristicsValue[j - h];
-                    characteristicsValue[j - h] = k;
+                    characteristicsValue[j] = characteristicsValue[j - 1];
+                    characteristicsValue[j - 1] = k;
                 }
                 else {
                     break;
@@ -1248,15 +1216,28 @@ public class Solver implements ISolver{
             }
         }
 
+        int colomnNumber = 0;
         for(int position = 0; position < matrixDimension; position++) {
-            for(int i = 0; i < matrixDimension; i++) {
+
+            if (position > 0 && characteristicsValue[position - 1]
+                    == characteristicsValue[position]) {
+                colomnNumber++;
+            } else {
+                colomnNumber = 0;
+            }
+
+            for(int i = colomnNumber; i < matrixDimension; i++) {
+
                 if (characteristicsValue[position] == matrix[matrixDimension][i]) {
                     for (int j = 0; j < matrixDimension; j++) {
                         newMatrix[j][position] = matrix[j][i];
                     }
+                    colomnNumber = i;
+                    break;
                 }
             }
         }
+
         System.out.println(matrixDimension);
         for (int i = 0; i < matrixDimension; i++) {
             for (int j : newMatrix[i]){
@@ -1264,6 +1245,7 @@ public class Solver implements ISolver{
             }
             System.out.println();
         }
+
         scanner.close();
     }
 
