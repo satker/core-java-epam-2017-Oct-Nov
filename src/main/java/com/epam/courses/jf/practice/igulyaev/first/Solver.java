@@ -243,6 +243,7 @@ public class Solver implements ISolver {
         final int n = scanner.nextInt();
         int[][] matrix = readMatrix(scanner);
         Arrays.sort(matrix, Comparator.comparingInt(row -> row[n]));
+        System.out.println(matrix.length);
         System.out.print(matrixToString(matrix));
     }
 
