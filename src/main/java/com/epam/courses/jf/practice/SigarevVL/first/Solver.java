@@ -903,6 +903,7 @@ public class Solver implements ISolver{
     public void task22() {
         Scanner scanner = new Scanner(System.in);
         final int matrixDimension = scanner.nextInt();
+
         double matrix[][] = new double[matrixDimension][matrixDimension];
 
         for (int i = 0; i < matrixDimension; i++) {
