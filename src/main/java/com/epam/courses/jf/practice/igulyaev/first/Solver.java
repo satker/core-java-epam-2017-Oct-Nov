@@ -251,9 +251,9 @@ public class Solver implements ISolver {
         AtomicInteger index = new AtomicInteger(1);
         Arrays.stream(matrix).flatMapToInt(Arrays::stream).forEach(i ->{
             builder.append(i);
-            builder.append(index.getAndIncrement() % matrix.length == 0 ? "\n" :"\t");
+            builder.append(index.getAndIncrement() % matrix.length == 0 ? "\n" :" ");
         });
-        return builder.deleteCharAt(builder.length() - 1).toString();
+        return builder.toString();
     }
     private int[][] readMatrix(Scanner scanner) {
         final int DIMENSION = scanner.nextInt();
