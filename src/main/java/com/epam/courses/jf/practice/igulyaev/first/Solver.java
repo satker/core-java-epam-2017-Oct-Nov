@@ -3,6 +3,9 @@ package com.epam.courses.jf.practice.igulyaev.first;
 import com.epam.courses.jf.practice.common.first.ISolver;
 import com.epam.courses.jf.practice.common.first.Reader;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -156,6 +159,34 @@ public class Solver implements ISolver {
             stringBuilder.append(i % n == 0 ? "\n" :"\t");
         }
         System.out.print(stringBuilder);
+    }
+    @Override
+    public void task10(){
+        final Scanner scanner = new Scanner(System.in);
+        final DecimalFormat df = new DecimalFormat("#0.#");
+        final DecimalFormatSymbols dfs = df.getDecimalFormatSymbols();
+        dfs.setDecimalSeparator('.');
+        df.setDecimalFormatSymbols(dfs);
+        final BigDecimal a = scanner.nextBigDecimal();
+        final BigDecimal b = scanner.nextBigDecimal();
+        final BigDecimal c = scanner.nextBigDecimal();
+        final BigDecimal d = b.pow(2).subtract(a.multiply(c).multiply(BigDecimal.valueOf(4)));
+        if(d.signum() < 0){
+            System.out.println("No solution");
+        } else if(d.signum() == 0){
+            System.out.println("One solution: " +
+                    df.format(b.negate().divide(a.multiply(BigDecimal.valueOf(2))))
+                    );
+        } else {
+            BigDecimal sqrtD = BigDecimal.valueOf(StrictMath.sqrt(d.doubleValue()))
+                    .setScale(2, BigDecimal.ROUND_HALF_UP);
+            BigDecimal minusB = b.negate();
+            BigDecimal a2 = a.multiply(BigDecimal.valueOf(2));
+            System.out.println("Two solutions: " +
+                    df.format(minusB.subtract(sqrtD).divide(a2)) + ", " +
+                    df.format(minusB.add(sqrtD).divide(a2))
+                    );
+        }
     }
 
     @Override
