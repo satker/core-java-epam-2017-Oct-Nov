@@ -269,7 +269,7 @@ public class Solver implements ISolver{
                 characterSet.add(string.charAt(i));
             }
             if (characterSet.size() == string.length()) {
-                resultString.append(string).append(" ");
+                resultString.append(" ").append(string);
                 countOfUniqueWords = false;
             }
             characterSet.clear();
@@ -278,9 +278,8 @@ public class Solver implements ISolver{
         if (countOfUniqueWords) {
             System.out.print("NOT FOUND");
         } else {
-            System.out.print(resultString.toString().trim());
+            System.out.print(resultString.toString());
         }
-
         scanner.close();
     }
 
