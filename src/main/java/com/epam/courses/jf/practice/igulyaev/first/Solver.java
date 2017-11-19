@@ -253,7 +253,7 @@ public class Solver implements ISolver {
             builder.append(i);
             builder.append(index.getAndIncrement() % matrix.length == 0 ? "\n" :"\t");
         });
-        return builder.toString();
+        return builder.deleteCharAt(builder.length() - 1).toString();
     }
     private int[][] readMatrix(Scanner scanner) {
         final int DIMENSION = scanner.nextInt();
@@ -264,5 +264,9 @@ public class Solver implements ISolver {
             }
         }
         return matrix;
+    }
+
+    public static void main(String[] args) {
+        new Solver().task12();
     }
 }
