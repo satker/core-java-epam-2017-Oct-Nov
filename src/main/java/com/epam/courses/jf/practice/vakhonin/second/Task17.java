@@ -4,6 +4,7 @@ import com.epam.courses.jf.practice.common.second.I2DPoint;
 import com.epam.courses.jf.practice.common.second.ITestableTask17;
 
 import java.util.*;
+import java.util.logging.Logger;
 
 /**
  * Created by igorvahonin on 13.11.17.
@@ -108,6 +109,7 @@ public class Task17 implements ITestableTask17{
         List<Line> linesList = new ArrayList<>();
         Map<Double, Set<I2DPoint>> pointsMap= new TreeMap<>();
 
+        Logger log = Logger.getLogger(Task1.class.getName());
 
         for(ISegment segment: segmentsList){
             linesList.add(new Line(segment));
@@ -125,8 +127,9 @@ public class Task17 implements ITestableTask17{
                 lineK = linesList.get(k);
                 segmentK = segmentsList.get(k);
                 point = lineJ.pointOfIntersection(lineK);
+                log.info("x = " + point.getX() + "   y = " + point.getY());
                 if(isPointOfSegments(point, segmentJ, segmentK)){
-//                    log.info("intersection!!!");
+                    log.info("INTO");
                     if(pointsMap.containsKey(point.getX())){
                         pointsMap.get(point.getX()).add(point);
                     }
