@@ -6,12 +6,20 @@ import java.util.LinkedList;
 
 /**
  * Created by asus on 01.11.2017.
+ *
+ * Дана матрица из целых чисел.
+ * Найти в ней прямоугольную подматрицу, состоящую из максимального количества одинаковых элементов.
+ * Использовать стек.
  */
 public class ITestableTask18Impl implements ITestableTask18 {
 
     private LinkedList<IRectangularIntegerMatrix> list = new LinkedList<>();
     private IRectangularIntegerMatrix matrix;
 
+    /**
+     * @param matrix Анализируемая матрица.
+     * @return Подматрица, состоящая из максимального количества одинаковых элементов.
+     */
     @Override
     public IRectangularIntegerMatrix getMaxSubMatrix(IRectangularIntegerMatrix matrix) {
         this.matrix = matrix;
@@ -67,6 +75,9 @@ public class ITestableTask18Impl implements ITestableTask18 {
                 matrix.getWidth() : matrix.getWidth() * matrix.getHeight());
     }
 
+    /**
+     * Прямоугольная матрица целых чисел.
+     */
     private class RectangularIntegerMatrix implements IRectangularIntegerMatrix {
         private int[][] matrix;
         private int width;
@@ -78,16 +89,23 @@ public class ITestableTask18Impl implements ITestableTask18 {
             this.matrix = new int[height][width];
         }
 
+        /** @return Ширина матрицы. */
         @Override
         public int getWidth() {
             return width;
         }
 
+        /** @return Высота матрицы. */
         @Override
         public int getHeight() {
             return height;
         }
 
+        /**
+         * @param indexWidth Индекс по ширине.
+         * @param indexHeight Индекс по высоте.
+         * @return Значение, располагающееся в указанной ячейке.
+         */
         @Override
         public int getValue(int indexWidth, int indexHeight) {
             return matrix[indexHeight][indexWidth];

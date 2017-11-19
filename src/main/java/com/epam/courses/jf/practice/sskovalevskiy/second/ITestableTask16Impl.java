@@ -13,8 +13,21 @@ import java.util.TreeMap;
 
 /**
  * Created by asus on 29.10.2017.
+ *
+ * На клетчатой бумаге нарисован круг.
+ * Вывести в файл описания всех клеток, целиком лежащих внутри круга.
+ * Выводить в порядке возрастания расстояния от клетки до центра круга.
+ * Использовать класс SortedMap.
  */
 public class ITestableTask16Impl implements ITestableTask16 {
+
+    /**
+     * Осуществляет анализ переданных точек, находя среди них попавших внутрь круга.
+     * @param center Точка, в которой расположен центр круга.
+     * @param radius Радиус круга.
+     * @param output Файл для вывода результатов.
+     * @return Файл с результатами анализа.
+     */
     @Override
     public IFileWithPoints analyze(I2DPoint center, int radius, File output) {
         TreeMap<I2DPoint, Double> result = new TreeMap<>((o1, o2) -> {

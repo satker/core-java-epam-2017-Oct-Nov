@@ -7,14 +7,28 @@ import java.util.Set;
 
 /**
  * Created by asus on 01.11.2017.
+ *
+ * Реализовать класс Graph, представляющий собой неориентированный граф.
+ * В конструкторе класса передается количество вершин в графе.
+ * Методы должны поддерживать быстрое добавление и удаление ребер.
  */
 public class ITestableTask13Impl implements ITestableTask13 {
+
+    /**
+     * @param numberNodes Количество вершин в графе.
+     * @return Граф указанной конфигурации.
+     */
     @Override
     public AbstractGraph createGraph(int numberNodes) {
         return new Graph(numberNodes);
     }
 
-
+    /**
+     * Абстрактный граф.
+     * При создании задается количество вершин.
+     * Нумерация вершин начинается с 0.
+     * Допустимы операции добавления, удаления и проверки существования ребер.
+     */
     class Graph extends AbstractGraph{
 
         Set<Edge> edges;
@@ -24,6 +38,11 @@ public class ITestableTask13Impl implements ITestableTask13 {
             edges = new HashSet<>();
         }
 
+        /**
+         * Добавление ребра в граф.
+         * @param first Первая связываемая вершина.
+         * @param second Вторая связываемая вершина.
+         */
         @Override
         public void addEdge(int first, int second) {
             if (first < second){
@@ -33,6 +52,11 @@ public class ITestableTask13Impl implements ITestableTask13 {
             }
         }
 
+        /**
+         * Удаление ребра из графа.
+         * @param first Первая освобождаемая от связи вершина.
+         * @param second Вторая освобождаемая от связи вершина.
+         */
         @Override
         public void removeEdge(int first, int second) {
             if (first < second){
@@ -43,6 +67,11 @@ public class ITestableTask13Impl implements ITestableTask13 {
 
         }
 
+        /**
+         * Проверка наличия ребра.
+         * @param first Первая вершина.
+         * @param second Вторая вершина.
+         */
         @Override
         public boolean isExistEdge(int first, int second) {
             if (first < second){

@@ -7,8 +7,18 @@ import java.util.*;
 
 /**
  * Created by asus on 29.10.2017.
+ *
+ * На плоскости задано N отрезков.
+ * Найти точку (возможно несколько) пересечения двух отрезков, имеющую минимальную абсциссу.
+ * Использовать класс TreeMap.
  */
 public class ITestableTask17Impl implements ITestableTask17 {
+
+    /**
+     * Осуществляет анализ переданных отрезков.
+     * @param segments Множество отрезков.
+     * @return Множество точек пересечения, имеющих минимальную абсциссу.
+     */
     @Override
     public Set<I2DPoint> analyze(Set<ISegment> segments) {
 
@@ -68,6 +78,9 @@ public class ITestableTask17Impl implements ITestableTask17 {
         return resultSet;
     }
 
+    /**
+     * Орезок.
+     */
     static class Segment implements ISegment {
         I2DPoint first;
         I2DPoint second;
@@ -77,11 +90,13 @@ public class ITestableTask17Impl implements ITestableTask17 {
             this.second = second;
         }
 
+        /** @return Первая точка отрезка. */
         @Override
         public I2DPoint first() {
             return first;
         }
 
+        /** @return Вторая точка отрезка. */
         @Override
         public I2DPoint second() {
             return second;

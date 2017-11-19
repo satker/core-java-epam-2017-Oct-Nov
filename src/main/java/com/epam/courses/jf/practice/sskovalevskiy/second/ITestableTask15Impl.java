@@ -8,9 +8,18 @@ import java.util.*;
 
 /**
  * Created by asus on 26.10.2017.
+ *
+ * На плоскости задано N точек.
+ * Вывести в файл описания всех прямых, которые проходят более чем через 2 точки из заданных.
  */
 public class ITestableTask15Impl implements ITestableTask15 {
 
+    /**
+     * Осуществляет анализ переданных точек, вычисляя линии, которые проходят более чем через 2 точки.
+     * @param points Множество точек на плоскости.
+     * @param output Файл для вывода результатов.
+     * @return Файл с результатами анализа.
+     */
     @Override
     public IFileWithLines analyze(Set<I2DPoint> points, File output) {
 
@@ -36,11 +45,18 @@ public class ITestableTask15Impl implements ITestableTask15 {
         lines.addAll(allLines);
 
         return new IFileWithLines() {
+            /**
+             * @return Файл с результатами анализа.
+             */
             @Override
             public File getFile() {
                 return output;
             }
 
+            /**
+             * Извлекает из файла информацию о хранящихся в нем линиях.
+             * @return Множество линий, найденных в результате анализа.
+             */
             @Override
             public Set<ILine> getLines() {
                 return new HashSet<>(lines);
@@ -48,6 +64,9 @@ public class ITestableTask15Impl implements ITestableTask15 {
         };
     }
 
+    /**
+     * Прямая, заданная точками, входящими в исходное множество.
+     */
     class Line implements ILine {
 
         private Set<I2DPoint> points;

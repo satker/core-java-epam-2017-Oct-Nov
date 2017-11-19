@@ -2,18 +2,26 @@ package com.epam.courses.jf.practice.sskovalevskiy.second;
 
 import com.epam.courses.jf.practice.common.second.ITestableTask19;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Created by asus on 28.10.2017.
+ *
+ * На кольцевой гоночной трассе стоит N автомобилей.
+ * Для каждого из них известны начальное положение и скорость.
+ * Определить, сколько произойдет обгонов за указанное количество кругов.
  */
 public class ITestableTask19Impl implements ITestableTask19 {
 
     private int countOvertaking = 0;
 
+    /**
+     * @param cars Расположенные на трассе машины.
+     * @param lengthLap Длина трассы.
+     * @param numberLaps Количество кругов.
+     * @return Количество осуществленных обгонов.
+     */
     @Override
     public int getNumberOvertaking(Set<ICar> cars, long lengthLap, int numberLaps) {
         long[] positionsCars = new long[cars.size()];

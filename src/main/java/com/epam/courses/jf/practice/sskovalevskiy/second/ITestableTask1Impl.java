@@ -8,8 +8,17 @@ import java.util.List;
 
 /**
  * Created by asus on 24.10.2017.
+ *
+ * Ввести строки из файла, записать в список.
+ * Вывести строки в файл в обратном порядке.
  */
 public class ITestableTask1Impl implements ITestableTask1 {
+    /**
+     * Читает строки из исходного файла и сохраняет в выходной в обратном порядке.
+     * @param input Файл с входными данными.
+     * @param output Файл с выходными данными.
+     * @return Список строк, прочитанных из входного файла в прямом порядке.
+     */
     @Override
     public List<String> reverseFile(File input, File output) {
 
