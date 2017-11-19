@@ -589,7 +589,22 @@ public class Solver implements ISolver {
 
     @Override
     public void task23() {
-
+        try (Scanner scanner = new Scanner(System.in)) {
+            int dimension = scanner.nextInt();
+            int k = 0;
+            int[][] matrix = new int[dimension][dimension];
+            Utils.readMatrix(scanner, dimension, matrix);
+            for (int i = 0; i < dimension; i++) {
+                for (int j = 0; j < dimension; j++) {
+                    int min = Utils.getRowMinElement(matrix, i);
+                    int max = Utils.getColumnMaxElement(matrix, j);
+                    if (min == max && matrix[i][j] == min) {
+                        k++;
+                    }
+                }
+            }
+            System.out.println(k);
+        }
     }
 
     @Override
