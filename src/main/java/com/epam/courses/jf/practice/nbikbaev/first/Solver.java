@@ -609,7 +609,14 @@ public class Solver implements ISolver {
 
     @Override
     public void task24() {
-
+        try (Scanner scanner = new Scanner(System.in)) {
+            int dimension = scanner.nextInt();
+            int[][] matrix = new int[dimension][dimension];
+            Utils.readMatrix(scanner, dimension, matrix);
+            Arrays.sort(matrix, Comparator.comparingInt(Utils::sumOfElement));
+            System.out.println(dimension);
+            Utils.printMatrix(matrix, System.out);
+        }
     }
 
     @Override
