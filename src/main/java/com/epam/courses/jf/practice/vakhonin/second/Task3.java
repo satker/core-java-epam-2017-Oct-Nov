@@ -21,10 +21,10 @@ public class Task3 implements ITestableTask3{
 
         strings.sort(new Comparator<String>() {
             public int compare(String s1, String s2) {
-                return s2.length() - s1.length();
+                return s1.length() - s2.length();
             }
         });
-        
+
         return strings;
     }
 }
