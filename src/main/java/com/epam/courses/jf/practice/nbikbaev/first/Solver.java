@@ -352,14 +352,15 @@ public class Solver implements ISolver {
         try (Scanner scanner = new Scanner(System.in)) {
             final int columnNumber = scanner.nextInt();
             int dimension = scanner.nextInt();
-            int[][] matrix = Utils.readIntMatrix(scanner, dimension);
+            int[][] matrix = new int[dimension][dimension];
+            Utils.readMatrix(scanner, dimension, matrix);
             Arrays.sort(matrix, (o1, o2) -> {
                 Integer numOfKeys1 = o1[columnNumber];
                 Integer numOfKeys2 = o2[columnNumber];
                 return numOfKeys1.compareTo(numOfKeys2);
             });
             System.out.println(dimension);
-            Utils.printIntMatrix(matrix, System.out);
+            Utils.printMatrix(matrix, System.out);
         }
     }
 
@@ -369,10 +370,11 @@ public class Solver implements ISolver {
             int shift = scanner.nextInt();
             int shiftAbs = Math.abs(shift);
             int dimension = scanner.nextInt();
-            int[][] matrix = Utils.readIntMatrix(scanner, dimension);
+            int[][] matrix = new int[dimension][dimension];
+            Utils.readMatrix(scanner, dimension, matrix);
             if (shiftAbs == dimension) {
                 System.out.println(dimension);
-                Utils.printIntMatrix(matrix, System.out);
+                Utils.printMatrix(matrix, System.out);
             } else {
                 shiftAbs = (shiftAbs < dimension) ? shiftAbs : shiftAbs % dimension;
                 if (shift < 0) {
@@ -381,7 +383,7 @@ public class Solver implements ISolver {
                     Utils.matrixDownShift(matrix, shiftAbs, dimension);
                 }
                 System.out.println(dimension);
-                Utils.printIntMatrix(matrix, System.out);
+                Utils.printMatrix(matrix, System.out);
             }
         }
     }
@@ -418,7 +420,8 @@ public class Solver implements ISolver {
         int sum = 0;
         try (Scanner scanner = new Scanner(System.in)) {
             int dimension = scanner.nextInt();
-            int[][] matrix = Utils.readIntMatrix(scanner, dimension);
+            int[][] matrix = new int[dimension][dimension];
+            Utils.readMatrix(scanner, dimension, matrix);
             for (int i = 0; i < dimension; i++) {
                 sum += Utils.findSumBetweenPositives(matrix[i]);
             }
@@ -428,22 +431,22 @@ public class Solver implements ISolver {
 
     @Override
     public void task16() {
-        int[][] matrix = null;
         try (Scanner scanner = new Scanner(System.in)) {
             int dimension = scanner.nextInt();
-            matrix = Utils.readIntMatrix(scanner, dimension);
+            int[][] matrix = new int[dimension][dimension];
+            Utils.readMatrix(scanner, dimension, matrix);
             matrix = Utils.rotateMatrix(matrix);
             System.out.println(dimension);
-            Utils.printIntMatrix(matrix, System.out);
+            Utils.printMatrix(matrix, System.out);
         }
     }
 
     @Override
     public void task17() {
-        int[][] matrix = null;
         try (Scanner scanner = new Scanner(System.in)) {
             int dimension = scanner.nextInt();
-            matrix = Utils.readIntMatrix(scanner, dimension);
+            int[][] matrix = new int[dimension][dimension];
+            Utils.readMatrix(scanner, dimension, matrix);
             int x = Utils.determinant(matrix, dimension);
             System.out.println(x);
         }
@@ -451,13 +454,12 @@ public class Solver implements ISolver {
 
     @Override
     public void task18() {
-        int[][] matrix = null;
         try (Scanner scanner = new Scanner(System.in)) {
-
             int dimension = scanner.nextInt();
+            int[][] matrix = new int[dimension][dimension];
             Set<Integer> rowSet = new HashSet<>();
             Set<Integer> columnSet = new HashSet<>();
-            matrix = Utils.readIntMatrix(scanner, dimension);
+            Utils.readMatrix(scanner, dimension, matrix);
             int max = matrix[0][0];
             rowSet.add(0);
             columnSet.add(0);
@@ -477,19 +479,18 @@ public class Solver implements ISolver {
             int[][] newMatrix = Utils.removeColumnsAndRows(matrix, dimension, rowSet, columnSet);
             System.out.println(newMatrix.length);
             System.out.println(newMatrix[0].length);
-            Utils.printIntMatrix(newMatrix, System.out);
+            Utils.printMatrix(newMatrix, System.out);
         }
     }
 
     @Override
     public void task19() {
-        int[][] matrix = null;
         try (Scanner scanner = new Scanner(System.in)) {
-
             int dimension = scanner.nextInt();
+            int[][] matrix = new int[dimension][dimension];
             Set<Integer> rowSet = new HashSet<>();
             Set<Integer> columnSet = new HashSet<>();
-            matrix = Utils.readIntMatrix(scanner, dimension);
+            Utils.readMatrix(scanner, dimension, matrix);
             for (int i = 0; i < dimension; i++) {
                 boolean rowFlag = false;
                 boolean colFlag = false;
@@ -511,20 +512,20 @@ public class Solver implements ISolver {
             int[][] newMatrix = Utils.removeColumnsAndRows(matrix, dimension, rowSet, columnSet);
             System.out.println(newMatrix.length);
             System.out.println(newMatrix[0].length);
-            Utils.printIntMatrix(newMatrix, System.out);
+            Utils.printMatrix(newMatrix, System.out);
         }
     }
 
     @Override
     public void task20() {
-        int[][] matrix = null;
         try (Scanner scanner = new Scanner(System.in)) {
             int newRowIndex = scanner.nextInt();
             int newColumnIndex = scanner.nextInt();
             int dimension = scanner.nextInt();
+            int[][] matrix = new int[dimension][dimension];
             int minRowIndex = 0;
             int minColumnIndex = 0;
-            matrix = Utils.readIntMatrix(scanner, dimension);
+            Utils.readMatrix(scanner, dimension, matrix);
             int min = matrix[0][0];
             for (int i = 0; i < dimension; i++) {
                 for (int j = 0; j < dimension; j++) {
@@ -538,17 +539,17 @@ public class Solver implements ISolver {
             Utils.swapMatrixRows(matrix, minRowIndex, newRowIndex);
             Utils.swapMatrixColumns(matrix, minColumnIndex, newColumnIndex);
             System.out.println(dimension);
-            Utils.printIntMatrix(matrix, System.out);
+            Utils.printMatrix(matrix, System.out);
         }
     }
 
     @Override
     public void task21() {
-        int[][] matrix = null;
         int k = 0;
         try (Scanner scanner = new Scanner(System.in)) {
             int dimension = scanner.nextInt();
-            matrix = Utils.readIntMatrix(scanner, dimension);
+            int[][] matrix = new int[dimension][dimension];
+            Utils.readMatrix(scanner, dimension, matrix);
             for (int i = 0; i < dimension; i++) {
                 for (int j = 0; j < dimension; j++) {
                     if (matrix[i][j] == 0) {
@@ -565,13 +566,25 @@ public class Solver implements ISolver {
                 k = 0;
             }
             System.out.println(dimension);
-            Utils.printIntMatrix(matrix, System.out);
+            Utils.printMatrix(matrix, System.out);
         }
     }
 
     @Override
     public void task22() {
-
+        int k = 0;
+        try (Scanner scanner = new Scanner(System.in)) {
+            int dimension = scanner.nextInt();
+            double[][] matrix = new double[dimension][dimension];
+            Utils.readMatrix(scanner, dimension, matrix);
+            for (int i = 0; i < dimension; i++) {
+                for (int j = 0; j < dimension; j++) {
+                    matrix[i][j] = Math.round(matrix[i][j]);
+                }
+            }
+            System.out.println(dimension);
+            Utils.printMatrix(matrix, System.out);
+        }
     }
 
     @Override
