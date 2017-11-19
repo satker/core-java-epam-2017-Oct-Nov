@@ -97,7 +97,11 @@ public class Task17 implements ITestableTask17{
     static boolean isPointOfSegment(Point point, ISegment segment){
         log.info("point: x = " + point.getX() + "   y = " + point.getY());
         log.info("segment: x1 = " + segment.first().getX() + "   y1 = " + segment.first().getY() + "   x2 = " + segment.second().getX() + "   y2 = " + segment.second().getY());
-        if((point.getX() >= segment.first().getX()) && (point.getX() <= segment.second().getX())   && (point.getY() >= segment.first().getY())   && (point.getY() <= segment.second().getY())){
+
+        if(     (point.getX() >= Math.min(segment.first().getX(), segment.second().getX())) &&
+                (point.getX() <= Math.max(segment.first().getX(), segment.second().getX())) &&
+                (point.getY() >= Math.min(segment.first().getY(), segment.second().getY())) &&
+                (point.getY() <= Math.max(segment.first().getY(), segment.second().getY()))){
             log.info("" + true);
             return true;
         }
