@@ -18,7 +18,6 @@ import java.lang.System;
  */
 public class Solver implements ISolver {
 
-    Scanner scanner = new Scanner(System.in);
     final static String NOT_FOUND = "NOT FOUND";
     /**
      * Описание:
@@ -181,13 +180,14 @@ public class Solver implements ISolver {
     @Override
     public void task4() {
 
-        int N = scanner.nextInt();
+        Scanner reader = new Scanner(System.in);
+        int N = reader.nextInt();
 
         String word = null;
         Set<Character> wordLetters = new HashSet<>();
 
         for (int i = 0; i < N; i++) {
-            String s = scanner.next();
+            String s = reader.next();
 
             Set<Character> characters = new HashSet<>();
             for (int j = 0; j < s.length(); j++) {
@@ -220,12 +220,13 @@ public class Solver implements ISolver {
     @Override
     public void task5() {
 
-        int N = scanner.nextInt();
+        Scanner reader = new Scanner(System.in);
+        int N = reader.nextInt();
 
         List<String> englishWords = new ArrayList<>();
         for (int i = 0; i < N; i++) {
 
-            String word = scanner.next();
+            String word = reader.next();
             if (word.matches("[A-Za-z]+")) {
 
                 Pattern vocals = Pattern.compile("(?iu)[aeiouy]");
@@ -262,11 +263,12 @@ public class Solver implements ISolver {
     @Override
     public void task6() {
 
-        int N = scanner.nextInt();
+        Scanner reader = new Scanner(System.in);
+        int N = reader.nextInt();
 
         List<String> words = new ArrayList<>();
         for (int i = 0; i < N; i++) {
-            words.add(scanner.next());
+            words.add(reader.next());
         }
 
         int amountOfCorrectWords = 0;
@@ -311,6 +313,7 @@ public class Solver implements ISolver {
     @Override
     public void task7() {
 
+        Scanner scanner = new Scanner(System.in);
         int N = scanner.nextInt();
 
         Set<String> words = new LinkedHashSet<>();
@@ -1219,6 +1222,7 @@ public class Solver implements ISolver {
     @Override
     public void task27() {
 
+        Scanner scanner = new Scanner(System.in);
         Integer[][] matrix = Matrix.readMatrix(scanner);
 
         Arrays.sort(matrix, (o1, o2) -> {
