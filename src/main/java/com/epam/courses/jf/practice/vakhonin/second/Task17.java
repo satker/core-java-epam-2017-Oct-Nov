@@ -134,10 +134,12 @@ public class Task17 implements ITestableTask17{
 
         Logger log = Logger.getLogger(Task17.class.getName());
 
+        log.info(pointsMap.toString());
+
         Set<I2DPoint> result = it.next().getValue();
 
 
-        log.info(result.toString());
+
 
         return result;
     }
