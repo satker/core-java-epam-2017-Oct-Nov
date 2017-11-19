@@ -564,13 +564,8 @@ public class Solver implements ISolver {
         Scanner scanner = new Scanner(System.in);
         final int k = scanner.nextInt();
 
-        final int DIMENSION = scanner.nextInt();
-        int[][] matrix = new int[DIMENSION][DIMENSION];
-        for (int row = 0; row < DIMENSION; ++row) {
-            for (int col = 0; col < DIMENSION; ++col) {
-                matrix[row][col] = scanner.nextInt();
-            }
-        }
+        Integer[][] matrix = Matrix.readMatrix(scanner);
+
 //        Логика поведения элементов матрицы при сдвиге
 //          [0 | 1 | 2] -> [2 | 0 | 1] -> [1 | 2 | 0] -> [0 | 1 | 2]
 //          [0 | 1 | 2 | 3] -> [3 | 0 | 1 | 2] -> [2 | 3 | 0 | 1] -> [1 | 2 | 3 | 0]
@@ -580,13 +575,13 @@ public class Solver implements ISolver {
 //            В цикле каждый раз элементы массива смещаются вниз на 1 позицию при k > 0,
 //            либо поднимаются вверх на 1 позицию при k < 0.
             if (k > 0) {
-                int[] temp = matrix[matrix.length - 1];
+                Integer[] temp = matrix[matrix.length - 1];
                 for (int j = matrix.length - 1; j > 0; j--) {
                     matrix[j] = matrix[j - 1];
                 }
                 matrix[0] = temp;
             } else {
-                int[] temp = matrix[0];
+                Integer[] temp = matrix[0];
                 for (int j = 0; j < matrix.length - 1; j++) {
                     matrix[j] = matrix[j + 1];
                 }
@@ -594,13 +589,7 @@ public class Solver implements ISolver {
             }
         }
 
-
-        System.out.println(DIMENSION);
-        for (int i = 0; i < DIMENSION; i++) {
-            for (int j = 0; j < DIMENSION; j++) {
-                System.out.print(matrix[i][j] + ((j == (DIMENSION - 1)) ? "\n" : "\t"));
-            }
-        }
+        Matrix.printMatrix(matrix);
     }
 
     /**
@@ -683,7 +672,7 @@ public class Solver implements ISolver {
      * Повернуть матрицу на 90 градусов против часовой стрелки.
      * <p>
      * Формат входных данных:
-     * Матрица (описание представления матриц)
+     * Матрица
      * <p>
      * Формат выходных данных:
      * В результате выполнения метода task16 в выходной поток должна быть выведена преобразованная матрица.
@@ -701,29 +690,18 @@ public class Solver implements ISolver {
     public void task16() {
 
         Scanner scanner = new Scanner(System.in);
-        int N = scanner.nextInt();
 
-        int[][] A = new int[N][N];
+        Integer[][] matrix = Matrix.readMatrix(scanner);
 
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                A[i][j] = scanner.nextInt();
+        Integer[][] result = new Integer[matrix.length][matrix.length];
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
+                result[i][j] = matrix[j][matrix.length - 1 - i];
             }
         }
 
-        int[][] B = new int[N][N];
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                B[i][j] = A[j][N - 1 - i];
-            }
-        }
-
-        System.out.println(N);
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                System.out.print(B[i][j] + ((j == (N - 1)) ? "\n" : "\t"));
-            }
-        }
+        Matrix.printMatrix(result);
     }
 
     /**
@@ -739,22 +717,19 @@ public class Solver implements ISolver {
     @Override
     public void task17() {
 
-        Scanner sc = new Scanner(System.in);
-        int dimension = sc.nextInt();
-        int[][] matrix = new int[dimension][dimension];
-        for (int i = 0; i < dimension; i++) {
-            for (int j = 0; j < dimension; j++) {
-                matrix[i][j] = sc.nextInt();
-            }
-        }
-        if (dimension == 1) {
+        Scanner scanner = new Scanner(System.in);
+        Integer[][] matrix = Matrix.readMatrix(scanner);
+
+        if (matrix.length == 1) {
             System.out.println(matrix[0][0]);
         }
-        int result = determinant(dimension, matrix);
+
+        int result = determinant(matrix.length, matrix);
+
         System.out.println(result);
     }
 
-    private static int determinant(int dimension, int[][] matrix) {
+    private static int determinant(int dimension, Integer[][] matrix) {
         int sum = 0;
         if (dimension == 2) {
             return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
@@ -766,9 +741,9 @@ public class Solver implements ISolver {
         return sum;
     }
 
-    private static int[][] getMinor(int[][] matrix, int column) {
+    private static Integer[][] getMinor(Integer[][] matrix, int column) {
         int minorLength = matrix.length - 1;
-        int[][] minor = new int[minorLength][minorLength];
+        Integer[][] minor = new Integer[minorLength][minorLength];
         int dJ;
         for (int i = 1; i <= minorLength; i++) {
             dJ = 0;
@@ -921,16 +896,16 @@ public class Solver implements ISolver {
         int Y = scanner.nextInt();
         int N = scanner.nextInt();
 
-        int[][] A = new int[N][N];
+        int[][] matrix = new int[N][N];
 
         int minElement = Integer.MAX_VALUE;
         int minElementX = -1;
         int minElementY = -1;
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                A[i][j] = scanner.nextInt();
-                if (minElement > A[i][j]) {
-                    minElement = A[i][j];
+                matrix[i][j] = scanner.nextInt();
+                if (minElement > matrix[i][j]) {
+                    minElement = matrix[i][j];
                     minElementX = i;
                     minElementY = j;
                 }
@@ -938,23 +913,18 @@ public class Solver implements ISolver {
         }
 
 //        меняем строки местами
-        int[] temp = A[X];
-        A[X] = A[minElementX];
-        A[minElementX] = temp;
+        int[] temp = matrix[X];
+        matrix[X] = matrix[minElementX];
+        matrix[minElementX] = temp;
 
 //        меняем местами значения в столбцах
         for (int i = 0; i < N; i++) {
-            int tmp = A[i][Y];
-            A[i][Y] = A[i][minElementY];
-            A[i][minElementY] = tmp;
+            int tmp = matrix[i][Y];
+            matrix[i][Y] = matrix[i][minElementY];
+            matrix[i][minElementY] = tmp;
         }
 
-        System.out.println(N);
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                System.out.print(A[i][j] + ((j == (N - 1)) ? "\n" : "\t"));
-            }
-        }
+        Matrix.printMatrix(matrix);
     }
 
     /**
@@ -973,40 +943,34 @@ public class Solver implements ISolver {
         Scanner scanner = new Scanner(System.in);
         int N = scanner.nextInt();
 
-        int[][] A = new int[N][N];
+        int[][] matrix = new int[N][N];
 
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                A[i][j] = scanner.nextInt();
+                matrix[i][j] = scanner.nextInt();
             }
         }
 
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N - 1; j++) {
-                if (A[i][j] == 0) {
-                    if (A[i][j + 1] == 0) {
+                if (matrix[i][j] == 0) {
+                    if (matrix[i][j + 1] == 0) {
                         int k = j + 2;
                         for (; k < N; k++) {
-                            if (A[i][k] != 0) {
-                                A[i][j] = A[i][k];
-                                A[i][k] = 0;
+                            if (matrix[i][k] != 0) {
+                                matrix[i][j] = matrix[i][k];
+                                matrix[i][k] = 0;
                             }
                         }
                     } else {
-                        A[i][j] = A[i][j + 1];
-                        A[i][j + 1] = 0;
+                        matrix[i][j] = matrix[i][j + 1];
+                        matrix[i][j + 1] = 0;
                     }
                 }
             }
         }
 
-        System.out.println(N);
-
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                System.out.print(A[i][j] + ((j == (N - 1)) ? "\n" : "\t"));
-            }
-        }
+        Matrix.printMatrix(matrix);
     }
 
     /**
@@ -1131,15 +1095,9 @@ public class Solver implements ISolver {
         Scanner scanner = new Scanner(System.in);
         int N = scanner.nextInt();
 
-        Integer[][] A = new Integer[N][N];
+        Integer[][] matrix = Matrix.readMatrix(scanner);
 
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                A[i][j] = scanner.nextInt();
-            }
-        }
-
-        Arrays.sort(A, (o1, o2) -> {
+        Arrays.sort(matrix, (o1, o2) -> {
             int sum1 = 0;
             int sum2 = 0;
             for (int i = 0; i < N; i++) {
@@ -1149,13 +1107,7 @@ public class Solver implements ISolver {
             return sum1 - sum2;
         });
 
-        System.out.println(N);
-
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                System.out.print(A[i][j] + ((j == (N - 1)) ? "\n" : "\t"));
-            }
-        }
+        Matrix.printMatrix(matrix);
     }
 
     /**
