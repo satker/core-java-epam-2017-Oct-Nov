@@ -38,6 +38,8 @@ public class Task17 implements ITestableTask17{
 
             if((x2-x1) == 0){
                 this.b = 0;
+                this.a = 1;
+                this.c = -x1;
             }
             else {
                 this.b = -1;
