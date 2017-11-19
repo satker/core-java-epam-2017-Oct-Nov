@@ -28,10 +28,10 @@ public class Utils {
      * @param scanner   Scanner
      * @param dimension Matrix dimension
      */
-    public static void readMatrix(Scanner scanner, int dimension, double[][] matrix) {
+    public static void readMatrix(Scanner scanner, int dimension, float[][] matrix) {
         for (int row = 0; row < dimension; ++row) {
             for (int col = 0; col < dimension; ++col) {
-                matrix[row][col] = scanner.nextDouble();
+                matrix[row][col] = scanner.nextFloat();
             }
         }
     }
@@ -62,11 +62,11 @@ public class Utils {
      * @param matrix      Matrix to be printed
      * @param printStream The output stream to which matrix will be printed
      */
-    public static void printMatrix(double[][] matrix, PrintStream printStream) {
+    public static void printMatrix(float[][] matrix, PrintStream printStream) {
         int dimension = matrix.length;
-        for (double[] aMatrix : matrix) {
+        for (float[] row : matrix) {
             for (int j = 0; j < dimension; j++) {
-                printStream.print(aMatrix[j]);
+                printStream.print(row[j]);
                 if (j == dimension - 1) {
                     printStream.print("\n");
                 } else {

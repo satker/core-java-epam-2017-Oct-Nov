@@ -572,18 +572,18 @@ public class Solver implements ISolver {
 
     @Override
     public void task22() {
-        int k = 0;
         try (Scanner scanner = new Scanner(System.in)) {
             int dimension = scanner.nextInt();
-            double[][] matrix = new double[dimension][dimension];
+            float[][] matrix = new float[dimension][dimension];
+            int[][] matrix2 = new int[dimension][dimension];
             Utils.readMatrix(scanner, dimension, matrix);
             for (int i = 0; i < dimension; i++) {
                 for (int j = 0; j < dimension; j++) {
-                    matrix[i][j] = Math.round(matrix[i][j]);
+                    matrix2[i][j] = Math.round(matrix[i][j]);
                 }
             }
             System.out.println(dimension);
-            Utils.printMatrix(matrix, System.out);
+            Utils.printMatrix(matrix2, System.out);
         }
     }
 
