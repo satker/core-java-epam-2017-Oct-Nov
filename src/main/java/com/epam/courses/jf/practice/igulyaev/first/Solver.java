@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class Solver implements ISolver {
@@ -235,5 +236,34 @@ public class Solver implements ISolver {
                 str = "INCORRECT INPUT DATA";
         }
         System.out.println(str);
+    }
+    @Override
+    public void task12(){
+        final Scanner scanner = new Scanner(System.in);
+        final int n = scanner.nextInt();
+        int[][] matrix = readMatrix(scanner);
+        Arrays.sort(matrix, Comparator.comparingInt(row -> row[n]));
+        System.out.println(printMatrix(matrix));
+    }
+
+
+    private StringBuilder printMatrix(final int[][] matrix){
+        StringBuilder builder = new StringBuilder();
+        AtomicInteger index = new AtomicInteger(1);
+        Arrays.stream(matrix).flatMapToInt(Arrays::stream).forEach(i ->{
+            builder.append(i);
+            builder.append(index.getAndIncrement() % matrix.length == 0 ? "\n" :"\t");
+        });
+        return builder;
+    }
+    private int[][] readMatrix(Scanner scanner) {
+        final int DIMENSION = scanner.nextInt();
+        int[][] matrix = new int[DIMENSION][DIMENSION];
+        for (int row = 0; row < DIMENSION; ++row) {
+            for (int col = 0; col < DIMENSION; ++col) {
+                matrix[row][col] = scanner.nextInt();
+            }
+        }
+        return matrix;
     }
 }
