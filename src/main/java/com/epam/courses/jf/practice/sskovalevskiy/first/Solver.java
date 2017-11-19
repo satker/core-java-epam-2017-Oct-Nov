@@ -18,7 +18,7 @@ import java.lang.System;
  */
 public class Solver implements ISolver {
 
-    private static Scanner scanner = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in);
     final static String NOT_FOUND = "NOT FOUND";
     /**
      * Описание:
