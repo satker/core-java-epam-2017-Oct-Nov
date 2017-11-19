@@ -129,7 +129,7 @@ public class Solver implements ISolver {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
         Pattern vowelPattern = Pattern.compile("[AEIOUaeiou]");
-        while (scanner.hasNext()) {
+        for (int i = 0; i < n; i++) {
             String word = scanner.next();
             if (word.matches("[A-Za-z]+")) {
                 int vowelCount = 0;
