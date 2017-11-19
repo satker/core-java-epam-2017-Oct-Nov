@@ -476,31 +476,45 @@ public class Solver implements ISolver {
                     }
                 }
             }
-            int newRows = dimension - rowSet.size();
-            int newColumnsSize = dimension - columnSet.size();
-            int[][] result = new int[newRows][newColumnsSize];
-            int k = 0;
-            for (int i = 0; i < dimension; i++) {
-                int n = 0;
-                if (!(rowSet.contains(i))) {
-                    for (int j = 0; j < dimension; j++) {
-                        if (!(columnSet.contains(j))) {
-                            result[k][n] = matrix[i][j];
-                            n++;
-                        }
-                    }
-                    k++;
-                }
-            }
-            System.out.println(newRows);
-            System.out.println(newColumnsSize);
-            Utils.printIntMatrix(result, System.out);
+            int[][] newMatrix = Utils.removeColumnsAndRows(matrix, dimension, rowSet, columnSet);
+            System.out.println(newMatrix.length);
+            System.out.println(newMatrix[0].length);
+            Utils.printIntMatrix(newMatrix, System.out);
         }
     }
 
     @Override
     public void task19() {
+        int[][] matrix = null;
+        try (Scanner scanner = new Scanner(System.in)) {
 
+            int dimension = scanner.nextInt();
+            Set<Integer> rowSet = new HashSet<>();
+            Set<Integer> columnSet = new HashSet<>();
+            matrix = Utils.readIntMatrix(scanner, dimension);
+            for (int i = 0; i < dimension; i++) {
+                boolean rowFlag = false;
+                boolean colFlag = false;
+                for (int j = 0; j < dimension; j++) {
+                    if (matrix[i][j] != 0) {
+                        rowFlag = true;
+                    }
+                    if (matrix[j][i] != 0) {
+                        colFlag = true;
+                    }
+                }
+                if (!rowFlag) {
+                    rowSet.add(i);
+                }
+                if (!colFlag) {
+                    columnSet.add(i);
+                }
+            }
+            int[][] newMatrix = Utils.removeColumnsAndRows(matrix, dimension, rowSet, columnSet);
+            System.out.println(newMatrix.length);
+            System.out.println(newMatrix[0].length);
+            Utils.printIntMatrix(newMatrix, System.out);
+        }
     }
 
     @Override
