@@ -61,7 +61,7 @@ public class Task17 implements ITestableTask17{
             c2 = line2.getC();
 
             y0 = (a2*c1/a1 - c2)/(b2-b1*a2/a1);
-            x0 = -c1-b1*y0;
+            x0 = (-c1-b1*y0)/a1;
 
             Point result = new Point(x0,y0);
 
