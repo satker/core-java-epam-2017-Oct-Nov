@@ -240,11 +240,28 @@ public class Solver implements ISolver {
     @Override
     public void task12(){
         final Scanner scanner = new Scanner(System.in);
-        final int n = scanner.nextInt();
+        final int k = scanner.nextInt();
         int[][] matrix = readMatrix(scanner);
-        Arrays.sort(matrix, Comparator.comparingInt(row -> row[n]));
+        Arrays.sort(matrix, Comparator.comparingInt(row -> row[k]));
         System.out.println(matrix.length);
         System.out.print(matrixToString(matrix));
+    }
+
+    @Override
+    public void task13(){
+        final Scanner scanner = new Scanner(System.in);
+        final int k = scanner.nextInt();
+        int[][] matrix = readMatrix(scanner);
+        System.out.println(matrix.length);
+        System.out.print(matrixToString(shiftRows(matrix, k)));
+    }
+
+    private int[][] shiftRows(final int[][] matrix, int shift){
+        int[][] newMatrix = new int[matrix.length][matrix.length];
+        for (int i = 0; i < matrix.length; ++i){
+            newMatrix[(i + (shift % matrix.length) + matrix.length) % matrix.length] = matrix[i];
+        }
+        return newMatrix;
     }
 
     private String matrixToString(final int[][] matrix){
@@ -265,9 +282,5 @@ public class Solver implements ISolver {
             }
         }
         return matrix;
-    }
-
-    public static void main(String[] args) {
-        new Solver().task12();
     }
 }
