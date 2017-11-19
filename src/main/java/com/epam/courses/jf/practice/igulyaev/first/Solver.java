@@ -125,7 +125,10 @@ public class Solver implements ISolver {
         if(stringList.isEmpty()){
             System.out.println("NOT FOUND");
         } else {
-            stringList.forEach(s -> System.out.printf("%s ", s));
+            StringBuilder stringBuilder = new StringBuilder();
+            stringList.forEach(s -> stringBuilder.append(s).append(" "));
+            stringBuilder.setLength(stringBuilder.length() - 1);
+            System.out.println(stringBuilder);
         }
     }
 
