@@ -335,6 +335,28 @@ public class Solver implements ISolver {
         System.out.println(count);
     }
 
+    @Override
+    public void task26(){
+        final Scanner scanner = new Scanner(System.in);
+        int[][] matrix = readMatrix(scanner);
+        int[][] expandedMatrix = expandMatrix(matrix);
+        List<Integer> localMins =new ArrayList<>();
+        for (int row = 1; row < expandedMatrix.length - 1; ++row) {
+            for (int col = 1; col < expandedMatrix.length - 1; ++col) {
+                int value = expandedMatrix[row][col];
+                if(value > expandedMatrix[row - 1][col - 1] && value > expandedMatrix[row - 1][col] &&
+                        value > expandedMatrix[row - 1][col + 1] && value > expandedMatrix[row][col - 1] &&
+                        value > expandedMatrix[row][col + 1] && value > expandedMatrix[row + 1][col - 1] &&
+                        value > expandedMatrix[row + 1][col] && value > expandedMatrix[row + 1][col + 1]){
+                    localMins.add(value);
+                }
+            }
+        }
+        System.out.println(
+                localMins.stream().max(Integer::compareTo).map(Object::toString).orElse("NOT FOUND")
+        );
+    }
+
     private int[][] expandMatrix(final int[][] matrix){
         int[][] expandedMatrix = new int[matrix.length + 2][matrix.length + 2];
         for (int row = 0; row < expandedMatrix.length; ++row) {
