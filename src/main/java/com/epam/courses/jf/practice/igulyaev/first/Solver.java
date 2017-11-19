@@ -306,6 +306,15 @@ public class Solver implements ISolver {
         );
     }
 
+    @Override
+    public void task24(){
+        final Scanner scanner = new Scanner(System.in);
+        int[][] matrix = readMatrix(scanner);
+        Arrays.sort(matrix, Comparator.comparingInt(row -> IntStream.of(row).sum()));
+        System.out.println(matrix.length);
+        System.out.print(matrixToString(matrix));
+    }
+
     private int[][] shiftRows(final int[][] matrix, int shift){
         int[][] newMatrix = new int[matrix.length][matrix.length];
         for (int i = 0; i < matrix.length; ++i){
@@ -332,5 +341,9 @@ public class Solver implements ISolver {
             }
         }
         return matrix;
+    }
+
+    public static void main(String[] args) {
+        new Solver().task24();
     }
 }
