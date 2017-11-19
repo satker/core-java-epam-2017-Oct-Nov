@@ -2,6 +2,7 @@ package com.epam.courses.jf.practice.nbikbaev.first;
 
 
 import java.io.PrintStream;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Scanner;
@@ -231,6 +232,16 @@ public class Utils {
             }
         }
         return max;
+    }
+
+    /**
+     * Returns sum of all elements of the given array
+     *
+     * @param array Array which elements to be summed
+     * @return Sum of all elements
+     */
+    public static int sumOfElement(int[] array) {
+        return Arrays.stream(array).sum();
     }
 
     /**
