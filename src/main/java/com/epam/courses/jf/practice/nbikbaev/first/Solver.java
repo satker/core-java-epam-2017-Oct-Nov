@@ -125,11 +125,11 @@ public class Solver implements ISolver {
 
     @Override
     public void task5() {
-        try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in))) {
-            String sentence = in.readLine();
-            Pattern vowelPattern = Pattern.compile("[AEIOUaeiou]");
+        try (Scanner scanner = new Scanner(System.in)) {
             int k = 0;
-            for (String word : sentence.trim().split(" ")) {
+            Pattern vowelPattern = Pattern.compile("[AEIOUaeiou]");
+            while (scanner.hasNext()) {
+                String word = scanner.next();
                 if (word.matches("\\w+")) {
                     int vowelCount = 0;
                     Matcher vowelMatcher = vowelPattern.matcher(word);
@@ -142,8 +142,6 @@ public class Solver implements ISolver {
                 }
             }
             System.out.println(k);
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -546,7 +544,20 @@ public class Solver implements ISolver {
 
     @Override
     public void task21() {
-
+        int[][] matrix = null;
+        try (Scanner scanner = new Scanner(System.in)) {
+            int dimension = scanner.nextInt();
+            matrix = Utils.readIntMatrix(scanner, dimension);
+            for (int i = 0; i < dimension; i++) {
+                for (int j = 0; j < dimension - 1; j++) {
+                    if (matrix[i][j] == 0) {
+                        Utils.swap(matrix[i], j, j + 1);
+                    }
+                }
+            }
+            System.out.println(dimension);
+            Utils.printIntMatrix(matrix, System.out);
+        }
     }
 
     @Override
