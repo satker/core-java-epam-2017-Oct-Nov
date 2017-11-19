@@ -200,6 +200,40 @@ public class Utils {
     }
 
     /**
+     * Returns minimal element in the specified row of the specified matrix
+     *
+     * @param matrix Target matrix
+     * @param row    The index of row
+     * @return minimal element
+     */
+    public static int getRowMinElement(int[][] matrix, int row) {
+        int min = matrix[row][0];
+        for (int i = 0; i < matrix.length; i++) {
+            if (matrix[row][i] < min) {
+                min = matrix[row][i];
+            }
+        }
+        return min;
+    }
+
+    /**
+     * Returns maximal element in the specified column of the specified matrix
+     *
+     * @param matrix Target matrix
+     * @param column The index of row
+     * @return maximal element
+     */
+    public static int getColumnMaxElement(int[][] matrix, int column) {
+        int max = matrix[0][column];
+        for (int i = 0; i < matrix.length; i++) {
+            if (matrix[i][column] > max) {
+                max = matrix[i][column];
+            }
+        }
+        return max;
+    }
+
+    /**
      * Removes columns and rows specified in rowSet and columnSet from specified matrix
      *
      * @param matrix    Target matrix
