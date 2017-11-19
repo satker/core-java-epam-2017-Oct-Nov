@@ -141,7 +141,7 @@ public class Solver implements ISolver {
                     }
                 }
             }
-            System.out.println(k);
+            System.out.print(k);
         }
     }
 
