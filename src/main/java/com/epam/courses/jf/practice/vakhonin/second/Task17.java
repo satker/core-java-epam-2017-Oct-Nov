@@ -130,6 +130,7 @@ public class Task17 implements ITestableTask17{
                 log.info("lineK: a = " + lineK.getA()+ "  b="+ lineK.getB()+ "  c="+ lineK.getC());
 //                log.info("parallel? " + lineJ.isParallel(lineK));
                 point = lineJ.pointOfIntersection(lineK);
+                log.info("intersection: x = " + point.getX() + "  y = " + point.getY());
                 if(isPointOfSegments(point, segmentJ, segmentK)){
 //                    log.info("intersection!!!");
                     if(pointsMap.containsKey(point.getX())){
