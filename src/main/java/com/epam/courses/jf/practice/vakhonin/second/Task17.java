@@ -121,13 +121,13 @@ public class Task17 implements ITestableTask17{
             lineJ = linesList.get(j);
             segmentJ = segmentsList.get(j);
 
-//            log.info("J: first - (" + segmentJ.first().getX() + " " + segmentJ.first().getY() + ");   second - ("+ segmentJ.second().getX() + " " + segmentJ.second().getY() + ")");
-//            log.info("lineJ: K = " + lineJ.getK());
+            log.info("J: first - (" + segmentJ.first().getX() + " " + segmentJ.first().getY() + ");   second - ("+ segmentJ.second().getX() + " " + segmentJ.second().getY() + ")");
+            log.info("lineJ: a = " + lineJ.getA()+ "  b="+ lineJ.getB()+ "  c="+ lineJ.getC());
             for(int k = j+1; k<size; k++){
                 lineK = linesList.get(k);
                 segmentK = segmentsList.get(k);
-//                log.info("K: first - (" + segmentK.first().getX() + " " + segmentK.first().getY() + ");   second - ("+ segmentK.second().getX() + " " + segmentK.second().getY() + ")");
-//                log.info("lineK: K = " + lineK.getK());
+                log.info("K: first - (" + segmentK.first().getX() + " " + segmentK.first().getY() + ");   second - ("+ segmentK.second().getX() + " " + segmentK.second().getY() + ")");
+                log.info("lineK: a = " + lineK.getA()+ "  b="+ lineK.getB()+ "  c="+ lineK.getC());
 //                log.info("parallel? " + lineJ.isParallel(lineK));
                 point = lineJ.pointOfIntersection(lineK);
                 if(isPointOfSegments(point, segmentJ, segmentK)){
