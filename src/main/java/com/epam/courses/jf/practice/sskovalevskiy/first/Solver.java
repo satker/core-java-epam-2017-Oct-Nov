@@ -1223,12 +1223,20 @@ public class Solver implements ISolver {
     public void task27() {
 
         Scanner scanner = new Scanner(System.in);
-        Integer[][] matrix = Matrix.readMatrix(scanner);
+        int N = scanner.nextInt();
+
+        Integer[][] matrix = new Integer[N][N];
+
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                matrix[j][i] = scanner.nextInt();
+            }
+        }
 
         Arrays.sort(matrix, (o1, o2) -> {
             int sum1 = 0;
             int sum2 = 0;
-            for (int i = 0; i < matrix.length; i++) {
+            for (int i = 0; i < N; i++) {
                 sum1 += Math.abs(o1[i]);
                 sum2 += Math.abs(o2[i]);
             }
