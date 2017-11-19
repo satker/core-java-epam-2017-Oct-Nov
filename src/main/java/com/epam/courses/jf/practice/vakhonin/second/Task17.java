@@ -128,6 +128,7 @@ public class Task17 implements ITestableTask17{
                 segmentK = segmentsList.get(k);
                 point = lineJ.pointOfIntersection(lineK);
                 log.info("x = " + point.getX() + "   y = " + point.getY());
+                log.info("" + isPointOfSegments(point, segmentJ, segmentK));
                 if(isPointOfSegments(point, segmentJ, segmentK)){
                     log.info("INTO");
                     if(pointsMap.containsKey(point.getX())){
