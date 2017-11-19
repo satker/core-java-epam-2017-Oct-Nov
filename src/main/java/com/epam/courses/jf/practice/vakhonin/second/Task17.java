@@ -112,14 +112,18 @@ public class Task17 implements ITestableTask17{
         for(int j = 0; j < size-1; j++){
             lineJ = linesList.get(j);
             segmentJ = segmentsList.get(j);
+
+            log.info("J: " + segmentJ.first().getX() + " " + segmentJ.first().getY());
+
             for(int k = j+1; k<size; k++){
                 lineK = linesList.get(k);
                 segmentK = segmentsList.get(k);
+                log.info("K: " + segmentK.first().getX() + " " + segmentK.first().getY());
                 if(! lineJ.isParallel(lineK)){
                     point = lineJ.pointOfIntersection(lineK);
                     if(isPointOfSegments(point, segmentJ, segmentK)){
-                        log.info(pointsMap.toString());
-                        log.info("" + point.getX() + "" + point.getY());
+//                        log.info(pointsMap.toString());
+//                        log.info("" + point.getX() + "" + point.getY());
                         if(pointsMap.containsKey(point.getX())){
                             pointsMap.get(point.getX()).add(point);
                         }
@@ -136,8 +140,6 @@ public class Task17 implements ITestableTask17{
         Iterator<Map.Entry<Double, Set<I2DPoint>>> it = pointsMap.entrySet().iterator();
 
 
-
-        log.info(pointsMap.toString());
 
         Set<I2DPoint> result = it.next().getValue();
 
