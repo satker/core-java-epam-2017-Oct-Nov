@@ -93,8 +93,8 @@ public class Task17 implements ITestableTask17{
     }
 
 //    TODO: doing one segment and use second segment!!!
-    static boolean isPointOfSegments(Point point, ISegment segment1, ISegment segment2){
-        if(           (point.getX() >= segment1.first().getX()) && (point.getX() <= segment1.second().getX())   && (point.getY() >= segment1.first().getY())   && (point.getY() <= segment1.second().getY())         ){
+    static boolean isPointOfSegment(Point point, ISegment segment1){
+        if((point.getX() >= segment1.first().getX()) && (point.getX() <= segment1.second().getX())   && (point.getY() >= segment1.first().getY())   && (point.getY() <= segment1.second().getY())){
             return true;
         }
         else{
@@ -128,8 +128,8 @@ public class Task17 implements ITestableTask17{
                 segmentK = segmentsList.get(k);
                 point = lineJ.pointOfIntersection(lineK);
                 log.info("x = " + point.getX() + "   y = " + point.getY());
-                log.info("" + isPointOfSegments(point, segmentJ, segmentK));
-                if(isPointOfSegments(point, segmentJ, segmentK)){
+                log.info("" + isPointOfSegment(point, segmentJ) + "" + isPointOfSegment(point, segmentK));
+                if(isPointOfSegment(point, segmentJ) && isPointOfSegment(point, segmentK)){
                     log.info("INTO");
                     if(pointsMap.containsKey(point.getX())){
                         pointsMap.get(point.getX()).add(point);
