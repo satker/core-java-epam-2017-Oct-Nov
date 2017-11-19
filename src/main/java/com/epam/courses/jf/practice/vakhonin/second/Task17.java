@@ -92,6 +92,8 @@ public class Task17 implements ITestableTask17{
 
     @Override
     public Set<I2DPoint> analyze(Set<ISegment> segments) {
+        Logger log = Logger.getLogger(Task17.class.getName());
+
         List<ISegment> segmentsList = new ArrayList<>(segments);
         List<Line> linesList = new ArrayList<>();
         Set<I2DPoint> pointsSet = new HashSet<>();
@@ -116,6 +118,8 @@ public class Task17 implements ITestableTask17{
                 if(! lineJ.isParallel(lineK)){
                     point = lineJ.pointOfIntersection(lineK);
                     if(isPointOfSegments(point, segmentJ, segmentK)){
+                        log.info(pointsMap.toString());
+                        log.info("" + point.getX() + "" + point.getY());
                         if(pointsMap.containsKey(point.getX())){
                             pointsMap.get(point.getX()).add(point);
                         }
@@ -132,7 +136,6 @@ public class Task17 implements ITestableTask17{
         Iterator<Map.Entry<Double, Set<I2DPoint>>> it = pointsMap.entrySet().iterator();
 
 
-        Logger log = Logger.getLogger(Task17.class.getName());
 
         log.info(pointsMap.toString());
 
