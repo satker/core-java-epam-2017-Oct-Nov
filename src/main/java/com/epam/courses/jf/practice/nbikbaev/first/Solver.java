@@ -125,8 +125,8 @@ public class Solver implements ISolver {
 
     @Override
     public void task5() {
+        int k = 0;
         try (Scanner scanner = new Scanner(System.in)) {
-            int k = 0;
             Pattern vowelPattern = Pattern.compile("[AEIOUaeiou]");
             while (scanner.hasNext()) {
                 String word = scanner.next();
@@ -141,8 +141,8 @@ public class Solver implements ISolver {
                     }
                 }
             }
-            System.out.print(k);
         }
+        System.out.println(k);
     }
 
     @Override
