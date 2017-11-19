@@ -109,7 +109,7 @@ public class Task17 implements ITestableTask17{
         for(int j = 0; j < size-1; j++){
             lineJ = linesList.get(j);
             segmentJ = segmentsList.get(j);
-            for(int k = j+1; j<size; k++){
+            for(int k = j+1; k<size; k++){
                 lineK = linesList.get(k);
                 segmentK = segmentsList.get(k);
                 if(! lineJ.isParallel(lineK)){
