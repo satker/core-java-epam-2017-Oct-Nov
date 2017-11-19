@@ -5,6 +5,7 @@ import com.epam.courses.jf.practice.common.second.ITestableTask17;
 
 import java.util.*;
 
+import java.util.logging.*;
 /**
  * Created by igorvahonin on 13.11.17.
  */
@@ -131,6 +132,9 @@ public class Task17 implements ITestableTask17{
         Iterator<Map.Entry<Double, Set<I2DPoint>>> it = pointsMap.entrySet().iterator();
 
 
+        Logger log = Logger.getLogger(Task17.class.getName());
+
+        log.info("Some message");
 
         return it.next().getValue();
     }
