@@ -125,23 +125,48 @@ public class Solver implements ISolver {
 
     @Override
     public void task5() {
-        int k = 0;
-        Scanner scanner = new Scanner(System.in);
-        Pattern vowelPattern = Pattern.compile("[AEIOUaeiou]");
-        while (scanner.hasNext()) {
-            String word = scanner.next();
-            if (word.matches("[A-Za-z]+")) {
-                int vowelCount = 0;
-                Matcher vowelMatcher = vowelPattern.matcher(word);
-                while (vowelMatcher.find()) {
-                    vowelCount++;
+//        int k = 0;
+//        Scanner scanner = new Scanner(System.in);
+//        Pattern vowelPattern = Pattern.compile("[AEIOUaeiou]");
+//        while (scanner.hasNext()) {
+//            String word = scanner.next();
+//            if (word.matches("[A-Za-z]+")) {
+//                int vowelCount = 0;
+//                Matcher vowelMatcher = vowelPattern.matcher(word);
+//                while (vowelMatcher.find()) {
+//                    vowelCount++;
+//                }
+//                if (vowelCount * 2 == word.length()) {
+//                    k++;
+//                }
+//            }
+//        }
+//        System.out.println(k);
+        Scanner input = new Scanner(System.in);
+        int wordsConsistingOfLatinChars = 0;
+        final int N = input.nextInt();
+        String[] words = new String[N];
+        int countVowelsInWord = 0;
+        input.nextLine();
+        for (int i = 0; i < N; ++i) {
+            words[i] = input.next();
+            countVowelsInWord = 0;
+            if (words[i].matches("\\w+")) {
+
+                for (int j = 0; j < words[i].length(); ++j) {
+                    char x = words[i].charAt(j);
+                    if(x == 'a' || x == 'e' || x == 'i'
+                            || x == 'o' || x == 'u'){
+                        countVowelsInWord++;
+                    }
                 }
-                if (vowelCount * 2 == word.length()) {
-                    k++;
+
+                if (countVowelsInWord * 2 == words[i].length()) {
+                    wordsConsistingOfLatinChars++;
                 }
             }
         }
-        System.out.println(k);
+        System.out.println(wordsConsistingOfLatinChars);
     }
 
     @Override
