@@ -2,6 +2,7 @@ package com.epam.courses.jf.practice.igulyaev.first;
 
 import com.epam.courses.jf.practice.common.first.ISolver;
 import com.epam.courses.jf.practice.common.first.Reader;
+import org.omg.PortableInterceptor.INACTIVE;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -319,7 +320,7 @@ public class Solver implements ISolver {
     public void task25(){
         final Scanner scanner = new Scanner(System.in);
         int[][] matrix = readMatrix(scanner);
-        int[][] expandedMatrix = expandMatrix(matrix);
+        int[][] expandedMatrix = expandMatrix(matrix, Integer.MAX_VALUE);
         int count = 0;
         for (int row = 1; row < expandedMatrix.length - 1; ++row) {
             for (int col = 1; col < expandedMatrix.length - 1; ++col) {
@@ -339,7 +340,7 @@ public class Solver implements ISolver {
     public void task26(){
         final Scanner scanner = new Scanner(System.in);
         int[][] matrix = readMatrix(scanner);
-        int[][] expandedMatrix = expandMatrix(matrix);
+        int[][] expandedMatrix = expandMatrix(matrix, Integer.MIN_VALUE);
         List<Integer> localMins =new ArrayList<>();
         for (int row = 1; row < expandedMatrix.length - 1; ++row) {
             for (int col = 1; col < expandedMatrix.length - 1; ++col) {
@@ -357,15 +358,15 @@ public class Solver implements ISolver {
         );
     }
 
-    private int[][] expandMatrix(final int[][] matrix){
+    private int[][] expandMatrix(final int[][] matrix, int border){
         int[][] expandedMatrix = new int[matrix.length + 2][matrix.length + 2];
         for (int row = 0; row < expandedMatrix.length; ++row) {
-            expandedMatrix[row][0] = Integer.MAX_VALUE;
-            expandedMatrix[row][expandedMatrix.length - 1] = Integer.MAX_VALUE;
+            expandedMatrix[row][0] = border;
+            expandedMatrix[row][expandedMatrix.length - 1] = border;
         }
         for (int col = 0; col < expandedMatrix.length; ++col) {
-            expandedMatrix[0][col] = Integer.MAX_VALUE;
-            expandedMatrix[expandedMatrix.length - 1][col] = Integer.MAX_VALUE;
+            expandedMatrix[0][col] = border;
+            expandedMatrix[expandedMatrix.length - 1][col] = border;
         }
         for (int row = 0; row < matrix.length; ++row) {
             System.arraycopy(matrix[row], 0, expandedMatrix[row + 1], 1, matrix.length);
@@ -398,5 +399,10 @@ public class Solver implements ISolver {
             }
         }
         return matrix;
+    }
+
+
+    public static void main(String[] args) {
+        new Solver().task26();
     }
 }
