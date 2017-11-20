@@ -665,6 +665,7 @@ public class Solver implements ISolver {
             int dimension = scanner.nextInt();
             int[][] matrix = new int[dimension][dimension];
             Utils.readMatrix(scanner, dimension, matrix);
+            Utils.transposeMatrix(matrix);
             Arrays.sort(matrix, (o1, o2) -> {
                 int sum1 = 0;
                 int sum2 = 0;
@@ -676,6 +677,7 @@ public class Solver implements ISolver {
                 }
                 return Integer.compare(sum1, sum2);
             });
+            Utils.transposeMatrix(matrix);
             System.out.println(dimension);
             Utils.printMatrix(matrix, System.out);
         }
