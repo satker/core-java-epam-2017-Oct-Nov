@@ -290,7 +290,9 @@ public class Utils {
         boolean lowerColumnsNeighbors = false;
         boolean lowerThanDiagonalNeighbors;
         int dimension = matrix.length;
-
+        if (dimension == 1) {
+            return true;
+        }
         lowerRowNeighbors = isLowerThanRowNeighbors(matrix, i, j);
         lowerColumnsNeighbors = isLowerThanColumnNeighbors(matrix, i, j);
         lowerThanDiagonalNeighbors = isLowerThanDiagonalNeighbors(matrix, i, j);
@@ -301,20 +303,23 @@ public class Utils {
     private static boolean isLowerThanDiagonalNeighbors(int[][] matrix, int i, int j) {
         int dimension = matrix.length;
         boolean result = true;
-        if (i < dimension - 1 && j < dimension - 1) {
-            result = result && matrix[i][j] < matrix[i + 1][j + 1];
-        } else if (i > 0 && j > 0) {
+        if (i > 0 && i <= dimension - 1 && j < dimension - 1 && j >= 0) {
+            result = result && matrix[i][j] < matrix[i - 1][j + 1];
+        }
+        if (i > 0 && i <= dimension - 1 && j > 0 && j <= dimension - 1) {
             result = result && matrix[i][j] < matrix[i - 1][j - 1];
-        } else if (i < dimension - 1 && j > 0) {
+        }
+        if (i >= 0 && i < dimension - 1 && j > 0 && j <= dimension - 1) {
             result = result && matrix[i][j] < matrix[i + 1][j - 1];
-        } else if (i < dimension - 1 && j < dimension - 1) {
+        }
+        if (i >= 0 && i < dimension - 1 && j < dimension - 1 && j >= 0) {
             result = result && matrix[i][j] < matrix[i + 1][j + 1];
         }
         return result;
     }
 
     private static boolean isLowerThanColumnNeighbors(int[][] matrix, int i, int j) {
-        boolean result = false;
+        boolean result;
         if (j == 0) {
             result = matrix[i][j] < matrix[i][j + 1];
         } else if (j < matrix.length - 1) {
