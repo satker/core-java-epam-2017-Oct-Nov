@@ -18,7 +18,7 @@ import java.lang.System;
  */
 public class Solver implements ISolver {
 
-    final static String NOT_FOUND = "NOT FOUND";
+    private final static String NOT_FOUND = "NOT FOUND";
     /**
      * Описание:
      * Ввести N строк, найти самую короткую и самую длинную строки. Вывести найденные строки и их длину.
@@ -355,6 +355,7 @@ public class Solver implements ISolver {
     public void task8() {
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+
             int N = Integer.parseInt(reader.readLine());
 
             List<String> words = new ArrayList<>(Arrays.asList(reader.readLine().split(" ")));
@@ -779,41 +780,32 @@ public class Solver implements ISolver {
         Scanner scanner = new Scanner(System.in);
         int N = scanner.nextInt();
 
-        int[][] A = new int[N][N];
+        int[][] matrix = new int[N][N];
 
         int maxElement = Integer.MIN_VALUE;
 
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                A[i][j] = scanner.nextInt();
-                if (maxElement < A[i][j]){
-                    maxElement = A[i][j];
+                matrix[i][j] = scanner.nextInt();
+                if (maxElement < matrix[i][j]){
+                    maxElement = matrix[i][j];
                 }
             }
         }
 
         Set<Integer> linesToDelete = new HashSet<>();
-        Set<Integer> columnToDelete = new HashSet<>();
+        Set<Integer> columnsToDelete = new HashSet<>();
 
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                if (maxElement == A[i][j]) {
+                if (maxElement == matrix[i][j]) {
                     linesToDelete.add(i);
-                    columnToDelete.add(j);
+                    columnsToDelete.add(j);
                 }
             }
         }
 
-        System.out.println(N - linesToDelete.size());
-        System.out.println(N - columnToDelete.size());
-
-        for (Integer i = 0; i < N; i++) {
-            if (linesToDelete.contains(i)) continue;
-            for (Integer j = 0; j < N; j++) {
-                if (columnToDelete.contains(j)) continue;
-                System.out.print(A[i][j] + (j.equals(N - 1) ? "\n" : "\t"));
-            }
-        }
+        Matrix.printReducedMatrix(matrix,linesToDelete,columnsToDelete);
     }
 
     /**
@@ -836,14 +828,14 @@ public class Solver implements ISolver {
         Scanner scanner = new Scanner(System.in);
         int N = scanner.nextInt();
 
-        int[][] A = new int[N][N];
+        int[][] matrix = new int[N][N];
 
         Set<Integer> linesToDelete = new HashSet<>();
         for (int i = 0; i < N; i++) {
             boolean deleteLine = true;
             for (int j = 0; j < N; j++) {
-                A[i][j] = scanner.nextInt();
-                if (A[i][j] != 0) {
+                matrix[i][j] = scanner.nextInt();
+                if (matrix[i][j] != 0) {
                     deleteLine = false;
                 }
             }
@@ -852,28 +844,20 @@ public class Solver implements ISolver {
             }
         }
 
-        Set<Integer> columnToDelete = new HashSet<>();
+        Set<Integer> columnsToDelete = new HashSet<>();
         for (int j = 0; j < N; j++) {
             boolean deleteColumn = true;
             for (int i = 0; i < N; i++) {
-                if (A[i][j] != 0) {
+                if (matrix[i][j] != 0) {
                     deleteColumn = false;
                 }
             }
             if (deleteColumn) {
-                columnToDelete.add(j);
+                columnsToDelete.add(j);
             }
         }
 
-        System.out.println(N - linesToDelete.size());
-        System.out.println(N - columnToDelete.size());
-        for (Integer i = 0; i < N; i++) {
-            if (linesToDelete.contains(i)) continue;
-            for (Integer j = 0; j < N; j++) {
-                if (columnToDelete.contains(j)) continue;
-                System.out.print(A[i][j] + (j.equals(N - 1) ? "\n" : "\t"));
-            }
-        }
+        Matrix.printReducedMatrix(matrix,linesToDelete,columnsToDelete);
     }
 
     /**
@@ -941,22 +925,14 @@ public class Solver implements ISolver {
     public void task21() {
 
         Scanner scanner = new Scanner(System.in);
-        int N = scanner.nextInt();
+        Integer[][] matrix = Matrix.readMatrix(scanner);
 
-        int[][] matrix = new int[N][N];
-
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                matrix[i][j] = scanner.nextInt();
-            }
-        }
-
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N - 1; j++) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length - 1; j++) {
                 if (matrix[i][j] == 0) {
                     if (matrix[i][j + 1] == 0) {
                         int k = j + 2;
-                        for (; k < N; k++) {
+                        for (; k < matrix.length; k++) {
                             if (matrix[i][k] != 0) {
                                 matrix[i][j] = matrix[i][k];
                                 matrix[i][k] = 0;

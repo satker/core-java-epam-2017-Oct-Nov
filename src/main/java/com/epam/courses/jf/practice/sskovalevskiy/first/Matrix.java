@@ -1,6 +1,7 @@
 package com.epam.courses.jf.practice.sskovalevskiy.first;
 
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  * Created by asus on 19.11.2017.
@@ -54,5 +55,24 @@ public class Matrix {
         System.out.println();
     }
 
+    /**
+     * @param matrix метод принимает на вход матрицу int[][] matrix
+     * @param linesToDelete - множество строк, которые не нужно печатать
+     * @param columnToDelete - множество столбцов, которые не нужно печатать
+     * выводит в консоль размерность матрицы и её саму
+     */
+    public static void printReducedMatrix(int[][] matrix,Set<Integer> linesToDelete,Set<Integer> columnToDelete) {
+
+        System.out.println(matrix.length - linesToDelete.size());
+        System.out.println(matrix.length - columnToDelete.size());
+
+        for (Integer i = 0; i < matrix.length; i++) {
+            if (linesToDelete.contains(i)) continue;
+            for (Integer j = 0; j < matrix.length; j++) {
+                if (columnToDelete.contains(j)) continue;
+                System.out.print(matrix[i][j] + (j.equals(matrix.length - 1) ? "\n" : "\t"));
+            }
+        }
+    }
 
 }
