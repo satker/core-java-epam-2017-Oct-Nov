@@ -286,8 +286,8 @@ public class Utils {
     }
 
     public static boolean isLocalMinimum(int[][] matrix, int i, int j) {
-        boolean lowerRowNeighbors = false;
-        boolean lowerColumnsNeighbors = false;
+        boolean lowerRowNeighbors;
+        boolean lowerColumnsNeighbors;
         boolean lowerThanDiagonalNeighbors;
         int dimension = matrix.length;
         if (dimension == 1) {
@@ -341,5 +341,64 @@ public class Utils {
         }
         return result;
     }
+
+
+    public static boolean isLocalMaximum(int[][] matrix, int i, int j) {
+        boolean greaterRowNeighbors;
+        boolean greaterColumnsNeighbors;
+        boolean greaterThanDiagonalNeighbors;
+        int dimension = matrix.length;
+        if (dimension == 1) {
+            return true;
+        }
+        greaterRowNeighbors = isGreaterThanRowNeighbors(matrix, i, j);
+        greaterColumnsNeighbors = isGreaterThanColumnNeighbors(matrix, i, j);
+        greaterThanDiagonalNeighbors = isGreaterThanDiagonalNeighbors(matrix, i, j);
+
+        return greaterColumnsNeighbors && greaterRowNeighbors && greaterThanDiagonalNeighbors;
+    }
+
+    private static boolean isGreaterThanDiagonalNeighbors(int[][] matrix, int i, int j) {
+        int dimension = matrix.length;
+        boolean result = true;
+        if (i > 0 && i <= dimension - 1 && j < dimension - 1 && j >= 0) {
+            result = result && matrix[i][j] > matrix[i - 1][j + 1];
+        }
+        if (i > 0 && i <= dimension - 1 && j > 0 && j <= dimension - 1) {
+            result = result && matrix[i][j] > matrix[i - 1][j - 1];
+        }
+        if (i >= 0 && i < dimension - 1 && j > 0 && j <= dimension - 1) {
+            result = result && matrix[i][j] > matrix[i + 1][j - 1];
+        }
+        if (i >= 0 && i < dimension - 1 && j < dimension - 1 && j >= 0) {
+            result = result && matrix[i][j] > matrix[i + 1][j + 1];
+        }
+        return result;
+    }
+
+    private static boolean isGreaterThanColumnNeighbors(int[][] matrix, int i, int j) {
+        boolean result;
+        if (j == 0) {
+            result = matrix[i][j] > matrix[i][j + 1];
+        } else if (j < matrix.length - 1) {
+            result = matrix[i][j] > matrix[i][j + 1] && matrix[i][j] < matrix[i][j - 1];
+        } else {
+            result = matrix[i][j] > matrix[i][j - 1];
+        }
+        return result;
+    }
+
+    private static boolean isGreaterThanRowNeighbors(int[][] matrix, int i, int j) {
+        boolean result;
+        if (i == 0) {
+            result = matrix[i][j] > matrix[i + 1][j];
+        } else if (i < matrix.length - 1) {
+            result = matrix[i][j] > matrix[i + 1][j] && matrix[i][j] < matrix[i - 1][j];
+        } else {
+            result = matrix[i][j] > matrix[i - 1][j];
+        }
+        return result;
+    }
+
 
 }
