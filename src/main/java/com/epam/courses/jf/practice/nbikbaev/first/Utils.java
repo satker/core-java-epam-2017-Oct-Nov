@@ -400,15 +400,12 @@ public class Utils {
         return result;
     }
 
-    public static void transposeMatrix(int[][] m) {
-        int tmp;
-        for (int i = 0; i < m.length; i++) {
-            for (int j = 0; j < m[0].length; j++) {
-                tmp = m[j][i];
-                m[i][j] = m[j][i];
-                m[j][i] = tmp;
-            }
-        }
+    public static int[][] transposeMatrix(int[][] m) {
+        int[][] temp = new int[m[0].length][m.length];
+        for (int i = 0; i < m.length; i++)
+            for (int j = 0; j < m[0].length; j++)
+                temp[j][i] = m[i][j];
+        return temp;
     }
 
 }
