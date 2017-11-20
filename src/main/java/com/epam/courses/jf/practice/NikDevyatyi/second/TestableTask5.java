@@ -11,10 +11,13 @@ public class TestableTask5 implements ITestableTask5 {
         BigDecimal SumUI = new BigDecimal(0.);
         BigDecimal SumUU = new BigDecimal(0.);
         for(IMeasurement item: measurements){
-            SumUI = SumUI.add(new BigDecimal(item.getCurrent()*item.getVoltage()));
-            SumUU = SumUU.add(new BigDecimal(item.getVoltage()*item.getVoltage()));
+            SumUI = SumUI.add(new BigDecimal(item.getCurrent()).multiply(new BigDecimal(item.getVoltage())));
+            SumUU = SumUU.add(new BigDecimal(item.getVoltage()).multiply(new BigDecimal(item.getVoltage())));
         }
-        return SumUU.divide(SumUI,1).doubleValue();
+        if(SumUI.doubleValue()==0.){
+            return 0.;
+        }
+        return SumUU.divide(SumUI,0).doubleValue();
 
     }
 }
