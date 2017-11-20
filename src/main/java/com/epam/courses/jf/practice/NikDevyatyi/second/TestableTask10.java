@@ -29,7 +29,10 @@ public class TestableTask10 implements ITestableTask10 {
             e.printStackTrace();
         }
         result.sort(String::compareTo);
-        String tmp = result.get(result.size() - 1);
+        String tmp = "";
+        if(result.size()>0){
+            tmp = result.get(result.size() - 1);
+        }
         for (String item: result){
             if(tmp.equals(item)){
                 counter++;
