@@ -7,6 +7,19 @@ import java.util.List;
 public class Task5 implements ITestableTask5{
     @Override
     public double calcResistance(List<IMeasurement> measurements) {
-        return 0;
+        
+        double numerator = 0;
+        double denominator = 0;
+
+        for (IMeasurement measurement : measurements) {
+             numerator += measurement.getVoltage() * measurement.getCurrent();
+             denominator += measurement.getCurrent() * measurement.getCurrent();
+        }
+
+        if(denominator != 0) {
+            return numerator / denominator;
+        }else {
+            return 0;
+        }
     }
 }
