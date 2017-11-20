@@ -3,9 +3,10 @@ package com.epam.courses.jf.practice.mallayarov.second;
 import com.epam.courses.jf.practice.common.second.I2DPoint;
 import com.epam.courses.jf.practice.common.second.ITestableTask15;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashSet;
-import java.util.Scanner;
 import java.util.Set;
 
 /**
@@ -23,7 +24,7 @@ public class Task15Impl implements ITestableTask15 {
     @Override
     public IFileWithLines analyze(Set<I2DPoint> points, File output) {
         if (points.size() <= 2) {
-            return new MyFile(output/*, new HashSet<>()*/);
+            return new MyFile(output, new HashSet<>());
         }
 
         Set<Line> allLines = new HashSet<>();
@@ -64,7 +65,7 @@ public class Task15Impl implements ITestableTask15 {
            e.printStackTrace();
        }
 
-        return new MyFile(output/*, allLines*/);
+        return new MyFile(output, allLines);
     }
 
     /**
@@ -73,11 +74,11 @@ public class Task15Impl implements ITestableTask15 {
     public class MyFile implements IFileWithLines {
 
         private File file;
-       // private Set<Line> allLines;
+        private Set<Line> allLines;
 
-        public MyFile(File file/*, Set<Line> allLines*/) {
+        public MyFile(File file, Set<Line> allLines) {
             this.file = file;
-           // this.allLines = allLines;
+            this.allLines = allLines;
         }
 
         /**
@@ -94,17 +95,6 @@ public class Task15Impl implements ITestableTask15 {
          */
         @Override
         public Set<ILine> getLines() {
-            Set<Line> allLines = new HashSet<>();
-
-            try (Scanner sc = new Scanner(file)) {
-                if (sc.hasNextDouble()) {
-                    allLines.add(new Line(
-                            new SinglePoint(sc.nextDouble(), sc.nextDouble()),
-                            new SinglePoint(sc.nextDouble(), sc.nextDouble())));
-                }
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
             return new HashSet<>(allLines);
         }
     }
