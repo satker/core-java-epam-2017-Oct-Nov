@@ -18,6 +18,6 @@ public class Task4 implements ITestableTask4 {
     public Set<Integer> union(Set<Integer> first, Set<Integer> second) {
         Set<Integer> unionOfMany = new HashSet<>(first);
         unionOfMany.addAll(second);
-        return null;
+        return unionOfMany;
     }
 }
