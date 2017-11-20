@@ -7,7 +7,7 @@ import java.util.List;
 public class Task5 implements ITestableTask5{
     @Override
     public double calcResistance(List<IMeasurement> measurements) {
-        
+
         double numerator = 0;
         double denominator = 0;
 

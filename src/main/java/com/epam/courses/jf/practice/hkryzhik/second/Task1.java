@@ -24,7 +24,7 @@ public class Task1 implements ITestableTask1{
 
                 String[] inputStringArray = new String(inputLineBuffer).split(" ");
 
-                inputStringList.addAll(Arrays.asList(inputStringArray));
+                inputStringList = new ArrayList<>(Arrays.asList(inputStringArray));
 
                 OutputStreamWriter fileWriter = new OutputStreamWriter(new FileOutputStream(output));
 
