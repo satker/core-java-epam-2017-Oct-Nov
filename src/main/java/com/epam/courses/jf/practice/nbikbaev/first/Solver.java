@@ -641,7 +641,22 @@ public class Solver implements ISolver {
 
     @Override
     public void task26() {
-
+        int max = Integer.MIN_VALUE;
+        try (Scanner scanner = new Scanner(System.in)) {
+            int dimension = scanner.nextInt();
+            int[][] matrix = new int[dimension][dimension];
+            Utils.readMatrix(scanner, dimension, matrix);
+            for (int i = 0; i < dimension; i++) {
+                for (int j = 0; j < dimension; j++) {
+                    if (Utils.isLocalMaximum(matrix, i, j)) {
+                        if (matrix[i][j] > max) {
+                            max = matrix[i][j];
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println(max);
     }
 
     @Override
