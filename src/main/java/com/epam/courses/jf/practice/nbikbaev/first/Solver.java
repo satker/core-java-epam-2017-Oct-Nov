@@ -7,8 +7,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.IntStream;
 
 public class Solver implements ISolver {
 
@@ -621,7 +623,20 @@ public class Solver implements ISolver {
 
     @Override
     public void task25() {
-
+        int k = 0;
+        try (Scanner scanner = new Scanner(System.in)) {
+            int dimension = scanner.nextInt();
+            int[][] matrix = new int[dimension][dimension];
+            Utils.readMatrix(scanner, dimension, matrix);
+            for (int i = 0; i < dimension; i++) {
+                for (int j = 0; j < dimension; j++) {
+                    if (Utils.isLocalMinimum(matrix, i, j)) {
+                        k++;
+                    }
+                }
+            }
+        }
+        System.out.println(k);
     }
 
     @Override
