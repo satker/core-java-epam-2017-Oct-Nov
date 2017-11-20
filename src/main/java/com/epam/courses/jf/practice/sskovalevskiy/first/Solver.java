@@ -968,23 +968,18 @@ public class Solver implements ISolver {
     public void task22() {
 
         Scanner scanner = new Scanner(System.in);
+
         int N = scanner.nextInt();
 
-        double[][] A = new double[N][N];
+        int[][] A = new int[N][N];
 
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                A[i][j] = scanner.nextDouble();
+                A[i][j] = (int) Math.round(scanner.nextDouble());
             }
         }
 
-        System.out.println(N);
-
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                System.out.print(Math.round(A[i][j]) + ((j == (N - 1)) ? "\n" : "\t"));
-            }
-        }
+        Matrix.printMatrix(A);
     }
 
     /**

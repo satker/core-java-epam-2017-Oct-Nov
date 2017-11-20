@@ -7,7 +7,7 @@ import java.util.Set;
 
 /**
  * Created by asus on 01.11.2017.
- *
+ * <p>
  * Реализовать класс Graph, представляющий собой неориентированный граф.
  * В конструкторе класса передается количество вершин в графе.
  * Методы должны поддерживать быстрое добавление и удаление ребер.
@@ -29,7 +29,7 @@ public class ITestableTask13Impl implements ITestableTask13 {
      * Нумерация вершин начинается с 0.
      * Допустимы операции добавления, удаления и проверки существования ребер.
      */
-    class Graph extends AbstractGraph{
+    class Graph extends AbstractGraph {
 
         Set<Edge> edges;
 
@@ -40,12 +40,13 @@ public class ITestableTask13Impl implements ITestableTask13 {
 
         /**
          * Добавление ребра в граф.
-         * @param first Первая связываемая вершина.
+         *
+         * @param first  Первая связываемая вершина.
          * @param second Вторая связываемая вершина.
          */
         @Override
         public void addEdge(int first, int second) {
-            if (first < second){
+            if (first < second) {
                 edges.add(new Edge(first, second));
             } else {
                 edges.add(new Edge(second, first));
@@ -54,12 +55,13 @@ public class ITestableTask13Impl implements ITestableTask13 {
 
         /**
          * Удаление ребра из графа.
-         * @param first Первая освобождаемая от связи вершина.
+         *
+         * @param first  Первая освобождаемая от связи вершина.
          * @param second Вторая освобождаемая от связи вершина.
          */
         @Override
         public void removeEdge(int first, int second) {
-            if (first < second){
+            if (first < second) {
                 edges.remove(new Edge(first, second));
             } else {
                 edges.remove(new Edge(second, first));
@@ -69,12 +71,13 @@ public class ITestableTask13Impl implements ITestableTask13 {
 
         /**
          * Проверка наличия ребра.
-         * @param first Первая вершина.
+         *
+         * @param first  Первая вершина.
          * @param second Вторая вершина.
          */
         @Override
         public boolean isExistEdge(int first, int second) {
-            if (first < second){
+            if (first < second) {
                 return edges.contains(new Edge(first, second));
             } else {
                 return edges.contains(new Edge(second, first));
@@ -97,8 +100,8 @@ public class ITestableTask13Impl implements ITestableTask13 {
 
                 Edge<?> edge = (Edge<?>) o;
 
-                if (first != null ? !first.equals(edge.first) : edge.first != null) return false;
-                return second != null ? second.equals(edge.second) : edge.second == null;
+                return (first != null ? first.equals(edge.first) : edge.first == null) &&
+                        (second != null ? second.equals(edge.second) : edge.second == null);
             }
 
             @Override

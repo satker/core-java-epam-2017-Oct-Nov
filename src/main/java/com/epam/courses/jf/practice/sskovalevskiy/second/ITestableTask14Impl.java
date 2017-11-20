@@ -19,7 +19,7 @@ public class ITestableTask14Impl implements ITestableTask14 {
      */
     @Override
     public <T extends Number> INumberCollection<T> createCollection(Class<T> required) {
-        return new NumberCollection<T>();
+        return new NumberCollection<>();
     }
 
     /**

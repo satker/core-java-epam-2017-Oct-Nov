@@ -42,10 +42,6 @@ public class ITestableTask8Impl implements ITestableTask8 {
             }
         }
 
-        if (deque.size() == 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return deque.size() == 0;
     }
 }

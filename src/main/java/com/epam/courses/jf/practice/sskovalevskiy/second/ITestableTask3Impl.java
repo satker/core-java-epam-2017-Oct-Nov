@@ -25,18 +25,11 @@ public class ITestableTask3Impl implements ITestableTask3 {
 
         for (IPoem poem : poems) {
             if (poem.getAuthor().equals(author)) {
-                for (String poemLine : poem.getLines()) {
-                    sortedByAuthorPoemsLines.add(poemLine);
-                }
+                sortedByAuthorPoemsLines.addAll(poem.getLines());
             }
         }
 
-        Collections.sort(sortedByAuthorPoemsLines, new Comparator<String>() {
-            @Override
-            public int compare(String o1, String o2) {
-                return o1.length() - o2.length();
-            }
-        });
+        Collections.sort(sortedByAuthorPoemsLines, (o1, o2) -> o1.length() - o2.length());
 
         return sortedByAuthorPoemsLines;
     }
