@@ -7,15 +7,26 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeMap;
 
+/**
+ * На плоскости задано N отрезков.
+ * Найти точку (возможно несколько) пересечения двух отрезков, имеющую минимальную абсциссу.
+ * Использовать класс TreeMap.
+ */
 public class Task17Impl implements ITestableTask17 {
+
+    /**
+     * Осуществляет анализ переданных отрезков.
+     * @param segments Множество отрезков.
+     * @return Множество точек пересечения, имеющих минимальную абсциссу.
+     */
     @Override
     public Set<I2DPoint> analyze(Set<ISegment> segments) {
-        TreeMap<Integer, SimplePoint> crossedSegments = new TreeMap<>();
+        TreeMap<Integer, SinglePoint> crossedSegments = new TreeMap<>();
         ISegment[] segmentsArray = segments.toArray(new ISegment[segments.size()]);
 
         for (int i = 0; i < segmentsArray.length - 1; ++i) {
             for (int j = 1; j < segmentsArray.length; ++j) {
-                SimplePoint crossPoint = crossPoint(segmentsArray[i], segmentsArray[j]);
+                SinglePoint crossPoint = crossPoint(segmentsArray[i], segmentsArray[j]);
                 if (crossPoint != null) {
                     crossedSegments.put(i * segmentsArray.length + j, crossPoint);
                 }
@@ -23,12 +34,12 @@ public class Task17Impl implements ITestableTask17 {
         }
 
         double minAbs = Double.MAX_VALUE;
-        for (SimplePoint point : crossedSegments.values()) {
+        for (SinglePoint point : crossedSegments.values()) {
             minAbs = Math.min(minAbs, point.getX());
         }
 
-        Set<SimplePoint> pointsWithMinAbs = new HashSet<>();
-        for (SimplePoint point : crossedSegments.values()) {
+        Set<SinglePoint> pointsWithMinAbs = new HashSet<>();
+        for (SinglePoint point : crossedSegments.values()) {
             if (point.getX() == minAbs) {
                 pointsWithMinAbs.add(point);
             }
@@ -37,7 +48,13 @@ public class Task17Impl implements ITestableTask17 {
         return new HashSet<>(pointsWithMinAbs);
     }
 
-    public SimplePoint crossPoint(ISegment firstSegment, ISegment secondSegment) {
+    /**
+     * Create cross point between two segments
+     * @param firstSegment first segment
+     * @param secondSegment second segment
+     * @return cross point between two segments if exists, else null
+     */
+    private SinglePoint crossPoint(ISegment firstSegment, ISegment secondSegment) {
         // https://en.wikipedia.org/wiki/Line%E2%80%93line_intersection
 
         double x1 = firstSegment.first().getX();
@@ -64,56 +81,21 @@ public class Task17Impl implements ITestableTask17 {
             double y = (firstAdditionalPart * secondYDelta - firstYDelta * secondAdditionalPart) / denominator;
 
             if (isPointBelongsToSegment(firstSegment, x, y) && isPointBelongsToSegment(secondSegment, x, y)) {
-                return new SimplePoint(x + 0d, y + 0d);
+                return new SinglePoint(x + 0d, y + 0d);
             }
         }
         return null;
     }
 
-    public boolean isPointBelongsToSegment(ISegment segment, double x, double y) {
+    /**
+     * Checks if point belongs to segment
+     * @param segment checking segment
+     * @param x x coordinate of point
+     * @param y y coordinate of point
+     * @return result of check
+     */
+    private boolean isPointBelongsToSegment(ISegment segment, double x, double y) {
         return (segment.first().getX() <= x && segment.second().getX() >= x) ||
                 (segment.first().getY() <= y && segment.second().getY() >= y);
-    }
-
-    public class SimplePoint implements I2DPoint {
-
-        double x;
-        double y;
-
-        public SimplePoint(double x, double y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        @Override
-        public double getX() {
-            return x;
-        }
-
-        @Override
-        public double getY() {
-            return y;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-
-            SimplePoint point = (SimplePoint) o;
-
-            return Double.compare(point.x, x) == 0 && Double.compare(point.y, y) == 0;
-        }
-
-        @Override
-        public int hashCode() {
-            int result;
-            long temp;
-            temp = Double.doubleToLongBits(x);
-            result = (int) (temp ^ (temp >>> 32));
-            temp = Double.doubleToLongBits(y);
-            result = 31 * result + (int) (temp ^ (temp >>> 32));
-            return result;
-        }
     }
 }

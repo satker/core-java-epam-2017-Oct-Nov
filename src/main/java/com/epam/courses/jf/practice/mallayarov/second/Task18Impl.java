@@ -4,16 +4,29 @@ import com.epam.courses.jf.practice.common.second.ITestableTask18;
 
 import java.util.ArrayList;
 
+/**
+ * Дана матрица из целых чисел.
+ * Найти в ней прямоугольную подматрицу, состоящую из максимального количества одинаковых элементов.
+ * Использовать стек.
+ */
 public class Task18Impl implements ITestableTask18 {
+
+    /**
+     * @param matrix Анализируемая матрица.
+     * @return Подматрица, состоящая из максимального количества одинаковых элементов.
+     */
     @Override
     public IRectangularIntegerMatrix getMaxSubMatrix(IRectangularIntegerMatrix matrix) {
         int height = matrix.getHeight();
         int width = matrix.getWidth();
-        if (height == 1 && width == 1)
+
+        if (height == 1 && width == 1) {
             return matrix;
+        }
 
        ArrayList<ArrayList<Pair>> coefMatrix = new ArrayList<>();
-       // initialize init matrix with zeroes
+
+        // initialize init matrix with zeroes
         for (int i = 0; i < height; ++i) {
             ArrayList<Pair> row = new ArrayList<>();
             for (int j = 0; j < width; ++j) {
@@ -105,15 +118,27 @@ public class Task18Impl implements ITestableTask18 {
                 resultMatrix[i - maxI][j - maxJ] = matrix.getValue(j, i);
             }
         }
+
         return new RectangularIntegerMatrix(resultMatrix);
     }
 
-    public Pair maxPair(Pair f, Pair s) {
-        if (f.height * f.width >= s.height * s.width)
+    /**
+     * Compare two pairs by square
+     * @param f first pair
+     * @param s second pair
+     * @return the largest pair
+     */
+    private Pair maxPair(Pair f, Pair s) {
+        if (f.height * f.width >= s.height * s.width) {
             return f;
+        }
+
         return s;
     }
 
+    /**
+     * Class represents a pair of height and width
+     */
     public class Pair {
         private int height; // is height
         private int width; // is width
@@ -132,6 +157,9 @@ public class Task18Impl implements ITestableTask18 {
         }
     }
 
+    /**
+     * Прямоугольная матрица целых чисел.
+     */
     public class RectangularIntegerMatrix implements IRectangularIntegerMatrix {
 
         private int[][] matrix;
@@ -140,16 +168,23 @@ public class Task18Impl implements ITestableTask18 {
             this.matrix = matrix;
         }
 
+        /** @return Ширина матрицы. */
         @Override
         public int getWidth() {
             return matrix[0].length;
         }
 
+        /** @return Высота матрицы. */
         @Override
         public int getHeight() {
             return matrix.length;
         }
 
+        /**
+         * @param indexWidth Индекс по ширине.
+         * @param indexHeight Индекс по высоте.
+         * @return Значение, располагающееся в указанной ячейке.
+         */
         @Override
         public int getValue(int indexWidth, int indexHeight) {
             return matrix[indexHeight][indexWidth];
