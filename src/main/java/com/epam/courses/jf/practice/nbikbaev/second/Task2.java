@@ -10,12 +10,12 @@ public class Task2 implements ITestableTask2 {
     public Set<File> getFiles(File directory) {
         Set<File> files = new HashSet<>();
         Collection<File> fileCollection = Arrays.asList(directory.listFiles());
+        files.addAll(fileCollection);
         for (File file : fileCollection) {
             if (file.isDirectory()) {
-                files.addAll(Arrays.asList(file.listFiles()));
+                files.addAll(getFiles(file));
             }
         }
-        files.addAll(fileCollection);
         return files;
     }
 }
