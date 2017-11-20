@@ -3,7 +3,7 @@ package com.epam.courses.jf.practice.klimenko.second;
 import com.epam.courses.jf.practice.common.second.I2DPoint;
 
 public class Point2DImpl implements I2DPoint {
-    double x, y;
+    private double x, y;
 
     Point2DImpl() {
         x = y = 0;

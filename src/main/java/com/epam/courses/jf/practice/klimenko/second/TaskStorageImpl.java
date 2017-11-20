@@ -3,6 +3,7 @@ package com.epam.courses.jf.practice.klimenko.second;
 import com.epam.courses.jf.practice.common.second.*;
 
 public class TaskStorageImpl implements ITaskStorage {
+    @SuppressWarnings("unchecked")
     @Override
     public <T extends ITestableTask> T getSolver(Class<T> taskInterface) {
         if( taskInterface == ITestableTask1.class) {
