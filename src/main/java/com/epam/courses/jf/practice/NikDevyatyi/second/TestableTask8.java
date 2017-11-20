@@ -18,35 +18,43 @@ public class TestableTask8 implements ITestableTask8 {
             result.append(s);
         }
         for(char item: result.toString().toCharArray()){
-            switch (item){
-                case (')'):
-                    if(temp.peek() == '('){
-                        temp.pop();
-                    }
-                    else {
-                        return false;
-                    }
-                    break;
-                case (']'):
-                    if(temp.peek() == '['){
-                        temp.pop();
-                    }
-                    else {
-                        return false;
-                    }
-                    break;
-                case ('}'):
-                    if(temp.peek() == '{'){
-                        temp.pop();
-                    }
-                    else {
-                        return false;
-                    }
-                    break;
-                 default:
-                     temp.push(item);
+            if(!temp.empty()){
+                switch (item){
+                    case (')'):
+                        if(temp.peek() == '('){
+                            temp.pop();
+                        }
+                        else {
+                            return false;
+                        }
+                        break;
+                    case (']'):
+                        if(temp.peek() == '['){
+                            temp.pop();
+                        }
+                        else {
+                            return false;
+                        }
+                        break;
+                    case ('}'):
+                        if(temp.peek() == '{'){
+                            temp.pop();
+                        }
+                        else {
+                            return false;
+                        }
+                        break;
+                    default:
+                        temp.push(item);
+                }
+            }
+            else {
+                temp.push(item);
             }
         }
-        return true;
+        if(temp.empty()){
+            return true;
+        }
+        return false;
     }
 }
