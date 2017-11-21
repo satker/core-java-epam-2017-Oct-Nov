@@ -11,10 +11,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Solver implements ISolver {
-    //private Reader reader;
-    /*public Solver(){
 
-    }*/
     @Override
     public void task1() {
         final Reader reader = new Reader(System.in);
@@ -311,6 +308,15 @@ public class Solver implements ISolver {
                     }
                 }).sum()
         );
+    }
+
+    @Override
+    public void task16(){
+        final Scanner scanner = new Scanner(System.in);
+        int[][] matrix = readMatrix(scanner);
+        rotateMatrixLeft(matrix);
+        System.out.println(matrix.length);
+        System.out.print(matrixToString(matrix));
     }
 
     @Override
