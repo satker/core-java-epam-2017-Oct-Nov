@@ -265,48 +265,22 @@ public class Task16 implements ITestableTask16 {
 
         Point2D point = new Point2D(j,k);
 
-//        int xStart = (int) (center.getX() - radius);
-//        int xFinish = (int) (center.getX() + radius);
-//        int yStart = (int) (center.getY() - radius);
-//        int yFinish = (int) (center.getY() + radius);
-//        for (int x = xStart; x <= xFinish; x++) {
-//            for (int y = yStart; y <= yFinish; y++) {
-//                I2DPoint currentPoint = new Point2D(x, y);
-//                if (dist(currentPoint, center) < radius) {
-//                    queue.offer(currentPoint);
-//                }
-//            }
-//        }
-
-
-
-        while(isPointInCircle(point, center, radius)){
-            while(isPointInCircle(point, center, radius)){
-                map.put(point, distance(point, center));
-                point.setX(point.getX()+1);
+        int xStart = (int) (center.getX() - radius);
+        int xFinish = (int) (center.getX() + radius);
+        int yStart = (int) (center.getY() - radius);
+        int yFinish = (int) (center.getY() + radius);
+        for (int x = xStart; x <= xFinish; x++) {
+            for (int y = yStart; y <= yFinish; y++) {
+                I2DPoint currentPoint = new Point2D(x, y);
+                if (dist(currentPoint, center) < radius) {
+                    map.put(currentPoint, dist(currentPoint,center));
+                    queue.offer(currentPoint);
+                }
             }
-            point.setX(integerCenterX);
-            while(isPointInCircle(point, center, radius)){
-                map.put(point, distance(point, center));
-                point.setX(point.getX()-1);
-            }
-            point.setY(point.getY()+1);
-            point.setX(integerCenterX);
         }
 
-        while(isPointInCircle(point, center, radius)){
-            while(isPointInCircle(point, center, radius)){
-                map.put(point, distance(point, center));
-                point.setX(point.getX()+1);
-            }
-            point.setY(integerCenterY);
-            while(isPointInCircle(point, center, radius)){
-                map.put(point, distance(point, center));
-                point.setX(point.getX()-1);
-            }
-            point.setX(integerCenterX);
-            point.setY(point.getY()-1);
-        }
+
+
 
 
 
