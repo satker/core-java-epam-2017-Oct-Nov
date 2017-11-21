@@ -285,20 +285,21 @@ public class Task16 implements ITestableTask16 {
 
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(output))) {
-//            writer.write(String.valueOf(center.getX()));
-//            writer.write(" ");
-//            writer.write(String.valueOf(center.getY()));
-//            writer.write("\n");
+            writer.write(String.valueOf(center.getX()));
+            writer.write(" ");
+            writer.write(String.valueOf(center.getY()));
+            writer.write("\n");
 
 
-
-            for (SortedMap.Entry<I2DPoint, Double> entry : map.entrySet()) {
-                writer.write(String.valueOf(entry.getKey().getX()));
-                writer.write(" ");
-                writer.write(String.valueOf(entry.getKey().getY()));
-                writer.write(" ");
-                writer.write(String.valueOf(dist(entry.getKey(), center)));
-                writer.write("\n");
+            if(!map.isEmpty()) {
+                for (SortedMap.Entry<I2DPoint, Double> entry : map.entrySet()) {
+                    writer.write(String.valueOf(entry.getKey().getX()));
+                    writer.write(" ");
+                    writer.write(String.valueOf(entry.getKey().getY()));
+                    writer.write(" ");
+                    writer.write(String.valueOf(dist(entry.getKey(), center)));
+                    writer.write("\n");
+                }
             }
 //            while (!queue.isEmpty()) {
 //                I2DPoint currentPoint = queue.poll();
