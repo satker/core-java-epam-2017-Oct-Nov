@@ -4,7 +4,7 @@ import com.epam.courses.jf.practice.common.second.ITestableTask10;
 
 import java.io.*;
 import java.util.HashMap;
-import java.util.Map;
+
 
 public class Task10 implements ITestableTask10{
 
@@ -24,8 +24,14 @@ public class Task10 implements ITestableTask10{
             e.printStackTrace();
         }
 
-        String allWords[] = stringBuilder.toString().split(" ");
+        String allWords[] = stringBuilder.toString().trim().split(" ");
+
+        if (stringBuilder.length() == 0) {
+            return wordsMap;
+        }
+
         for (String string : allWords) {
+            System.out.print(string);
             if (wordsMap.containsKey(string)) {
                 wordsMap.put(string, wordsMap.get(string) + 1);
             } else {
