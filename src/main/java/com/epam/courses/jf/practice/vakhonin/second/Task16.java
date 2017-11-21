@@ -241,6 +241,7 @@ public class Task16 implements ITestableTask16 {
         };
 
         SortedMap<I2DPoint, Double> map = new TreeMap<>(comparator);
+        Queue<I2DPoint> pointsFound = new PriorityQueue<>();
 
         Point2D point = new Point2D(j,k);
 
@@ -252,7 +253,7 @@ public class Task16 implements ITestableTask16 {
             for (int y = yStart; y <= yFinish; y++) {
                 I2DPoint currentPoint = new Point2D(x, y);
                 if (dist(currentPoint, center) < radius) {
-                    map.put(currentPoint, dist(currentPoint, center));
+                    pointsFound.offer(currentPoint);
                 }
             }
         }
@@ -263,8 +264,8 @@ public class Task16 implements ITestableTask16 {
             writer.write(String.valueOf(center.getY()));
             writer.write("\n");
 
-            for (Map.Entry<I2DPoint, Double> entry : map.entrySet()) {
-                I2DPoint currentPoint = entry.getKey();
+            while (!pointsFound.isEmpty()) {
+                I2DPoint currentPoint = pointsFound.poll();
                 writer.write(String.valueOf(currentPoint.getX()));
                 writer.write(" ");
                 writer.write(String.valueOf(currentPoint.getY()));
@@ -301,7 +302,10 @@ public class Task16 implements ITestableTask16 {
                 String[] centerInfo =  reader.readLine().split("\\s");
                 double centerX = Double.parseDouble(centerInfo[0]);
                 double centerY = Double.parseDouble(centerInfo[1]);
+
+
                 I2DPoint center = new Point2D(centerX, centerY);
+
                 SortedMap<I2DPoint, Double> points = new TreeMap<>(new Comparator<I2DPoint>() {
                     @Override
                     public int compare(I2DPoint o1, I2DPoint o2) {
