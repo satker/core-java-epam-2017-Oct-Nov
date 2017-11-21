@@ -27,9 +27,7 @@ public class Task12 implements ITestableTask12 {
 
     @Override
     public List<Integer> transform(List<Integer> integers, int value) {
-
-        List<Integer> resultList = new ArrayList<>(integers);
-        Collections.sort(resultList);
+        Collections.sort(integers);
         return null;
     }
 }
