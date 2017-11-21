@@ -251,7 +251,8 @@ public class Task16 implements ITestableTask16 {
             return distance1.compareTo(distance2);
         };
 
-        SortedMap<I2DPoint, Double> map = new TreeMap<>(comparator);
+//        SortedMap<I2DPoint, Double> map = new TreeMap<>(comparator);
+        Map<I2DPoint, Double> map = new HashMap<>();
         Queue<I2DPoint> pointsFound = new PriorityQueue<>(comparator);
 
 
