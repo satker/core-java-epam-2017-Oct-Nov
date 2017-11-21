@@ -172,7 +172,10 @@ import com.epam.courses.jf.practice.common.second.I2DPoint;
 import com.epam.courses.jf.practice.common.second.ITestableTask16;
 
 import java.io.*;
-import java.util.*;
+import java.util.Comparator;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 public class Task16 implements ITestableTask16 {
 
@@ -189,106 +192,76 @@ public class Task16 implements ITestableTask16 {
 
         @Override
         public double getX() {
-            return 0;
+            return x;
         }
 
         @Override
         public double getY() {
-            return 0;
+            return y;
         }
     }
 
     @Override
     public IFileWithPoints analyze(I2DPoint center, int radius, File output) {
-        Queue<I2DPoint> pointsFound = new PriorityQueue<>(new Comparator<I2DPoint>() {
-            @Override
-            public int compare(I2DPoint o1, I2DPoint o2) {
-                Double dist1 = dist(o1, center);
-                Double dist2 = dist(o2, center);
-                return dist1.compareTo(dist2);
-            }
+        SortedMap<I2DPoint, Double> points = new TreeMap<>((p1, p2) -> {
+            double r1 = Math.pow(p1.getX() - center.getX(), 2) + Math.pow(p1.getY() - center.getY(), 2);
+            double r2 = Math.pow(p2.getX() - center.getX(), 2) + Math.pow(p2.getY() - center.getY(), 2);
+            return Double.compare(r1, r2);
         });
-        int xStart = (int) (center.getX() - radius);
-        int xFinish = (int) (center.getX() + radius);
-        int yStart = (int) (center.getY() - radius);
-        int yFinish = (int) (center.getY() + radius);
-        for (int x = xStart; x <= xFinish; x++) {
-            for (int y = yStart; y <= yFinish; y++) {
-                I2DPoint currentPoint = new Point2D(x, y);
-                if (dist(currentPoint, center) < radius) {
-                    pointsFound.offer(currentPoint);
+        for(long x = (long)(center.getX() - radius); x < Math.ceil(center.getX() - radius); ++x){
+            for(long y = (long)(center.getY() - radius); y < Math.ceil(center.getY() - radius); ++y){
+                double distance = Math.sqrt(Math.pow(x - center.getX(), 2) + Math.pow(y - center.getY(), 2));
+                if(distance < radius){
+                    points.put(new Point2D(x, y), distance);
                 }
             }
         }
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(output))) {
-            writer.write(String.valueOf(center.getX()));
-            writer.write(" ");
-            writer.write(String.valueOf(center.getY()));
-            writer.write("\n");
-            while (!pointsFound.isEmpty()) {
-                I2DPoint currentPoint = pointsFound.poll();
-                writer.write(String.valueOf(currentPoint.getX()));
-                writer.write(" ");
-                writer.write(String.valueOf(currentPoint.getY()));
-                writer.write(" ");
-                writer.write(String.valueOf(dist(currentPoint, center)));
-                writer.write("\n");
-            }
+        try(FileOutputStream fileOutputStream = new FileOutputStream(output);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)){
+            points.entrySet().forEach(obj -> {
+                try {
+                    objectOutputStream.writeObject(obj);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return new FileWithPoints(output, (Comparator<I2DPoint>) points.comparator());
 
-        return new FileWithPoints(output);
     }
 
-    private double dist (I2DPoint point1, I2DPoint point2) {
-        return Math.sqrt(Math.pow(point1.getX() - point2.getX(), 2) +  Math.pow(point1.getY() - point2.getY(), 2));
-    }
+    public static class FileWithPoints implements IFileWithPoints{
+        private final File file;
+        private final Comparator<I2DPoint> comparator;
+        private SortedMap<I2DPoint, Double> points;
 
-    private class FileWithPoints implements IFileWithPoints {
-
-        private File file;
-
-        FileWithPoints (File file) {
+        FileWithPoints(File file, Comparator<I2DPoint> comparator) {
             this.file = file;
+
+
+            this.comparator = comparator;
         }
 
-        public File getFile() {
+        public File getFile(){
             return file;
         }
 
-        public SortedMap<I2DPoint, Double> getPoints() {
-            try (BufferedReader reader = new BufferedReader(new FileReader(file))){
-                String[] centerInfo =  reader.readLine().split("\\s");
-                double centerX = Double.parseDouble(centerInfo[0]);
-                double centerY = Double.parseDouble(centerInfo[1]);
-                I2DPoint center = new Point2D(centerX, centerY);
-                SortedMap<I2DPoint, Double> points = new TreeMap<>(new Comparator<I2DPoint>() {
-                    @Override
-                    public int compare(I2DPoint o1, I2DPoint o2) {
-                        Double dist1 = dist(o1, center);
-                        Double dist2 = dist(o2, center);
-                        if (Double.compare(dist1, dist2) == 0) {
-                            return -1;
-                        } else {
-                            return dist1.compareTo(dist2);
-                        }
+        public SortedMap<I2DPoint, Double> getPoints(){
+            if(points == null){
+                points = new TreeMap<>(comparator);
+                try(FileInputStream fileInputStream = new FileInputStream(file);
+                    ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)){
+                    Map.Entry<I2DPoint, Double> entry;
+                    while ((entry = (Map.Entry<I2DPoint, Double>) objectInputStream.readObject()) != null){
+                        points.put(entry.getKey(), entry.getValue());
                     }
-                });
-                String string;
-                while ((string = reader.readLine()) != null) {
-                    String[] row = string.split("\\s");
-                    I2DPoint currentPoint = new Point2D(Double.parseDouble(row[0]), Double.parseDouble(row[1]));
-                    points.put(currentPoint, Double.parseDouble(row[2]));
+                } catch (IOException | ClassNotFoundException e) {
+                    e.printStackTrace();
                 }
-                return points;
-            } catch (IOException e) {
-                e.printStackTrace();
             }
-            return null;
+            return points;
         }
     }
-
-
 }
