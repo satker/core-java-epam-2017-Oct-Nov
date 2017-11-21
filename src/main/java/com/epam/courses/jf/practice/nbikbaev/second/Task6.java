@@ -10,12 +10,12 @@ import java.util.Set;
 public class Task6 implements ITestableTask6 {
     @Override
     public HashMap<Integer, Integer> addPolynomials(HashMap<Integer, Integer> first, HashMap<Integer, Integer> second) {
-        Set<Integer> integerSet = new HashSet<>();
-        integerSet.addAll(first.keySet());
-        integerSet.addAll(second.keySet());
+        Set<Integer> coefficientsUnion = new HashSet<>();
+        coefficientsUnion.addAll(first.keySet());
+        coefficientsUnion.addAll(second.keySet());
         HashMap<Integer, Integer> result = new HashMap<>();
         int sum;
-        for (int i : integerSet) {
+        for (int i : coefficientsUnion) {
             sum = 0;
             if (first.containsKey(i)) {
                 sum += first.get(i);
