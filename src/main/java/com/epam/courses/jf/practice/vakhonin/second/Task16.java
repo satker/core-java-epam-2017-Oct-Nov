@@ -226,17 +226,17 @@ public class Task16 implements ITestableTask16 {
         }
 
     }
-//    static Logger log = Logger.getLogger(Task16.class.getName());
+    static Logger log = Logger.getLogger(Task16.class.getName());
 
 
 
-//    String mapString(Map<I2DPoint, Double> map){
-//        String result = "MAP_STRING: ";
-//        for (Map.Entry<I2DPoint, Double> entry : map.entrySet()) {
-//            result += "x = " + entry.getKey().getX() + "  y = " + entry.getKey().getY() + "\n";
-//        }
-//        return result;
-//    }
+    String mapString(Map<I2DPoint, Double> map){
+        String result = "MAP_STRING: ";
+        for (Map.Entry<I2DPoint, Double> entry : map.entrySet()) {
+            result += "x = " + entry.getKey().getX() + "  y = " + entry.getKey().getY() + "\n";
+        }
+        return result;
+    }
 
     @Override
     public IFileWithPoints analyze(I2DPoint center, int radius, File output) {
@@ -270,6 +270,37 @@ public class Task16 implements ITestableTask16 {
                 }
             }
         }
+
+
+
+//        while(isPointInCircle(point, center, radius)){
+//            while(isPointInCircle(point, center, radius)){
+//                queue.offer(currentPoint);
+//                map.put(point, distance(point, center));
+//                point.setX(point.getX()+1);
+//            }
+//            point.setX(integerCenterX);
+//            while(isPointInCircle(point, center, radius)){
+//                map.put(point, distance(point, center));
+//                point.setX(point.getX()-1);
+//            }
+//            point.setY(point.getY()+1);
+//            point.setX(integerCenterX);
+//        }
+//
+//        while(isPointInCircle(point, center, radius)){
+//            while(isPointInCircle(point, center, radius)){
+//                map.put(point, distance(point, center));
+//                point.setX(point.getX()+1);
+//            }
+//            point.setY(integerCenterY);
+//            while(isPointInCircle(point, center, radius)){
+//                map.put(point, distance(point, center));
+//                point.setX(point.getX()-1);
+//            }
+//            point.setX(integerCenterX);
+//            point.setY(point.getY()-1);
+//        }
 
 
 
@@ -340,6 +371,11 @@ public class Task16 implements ITestableTask16 {
                     I2DPoint currentPoint = new Point2D(Double.parseDouble(row[0]), Double.parseDouble(row[1]));
                     points.put(currentPoint, Double.parseDouble(row[2]));
                 }
+
+
+
+                log.info(mapString(points));
+                points.put(new Point2D(2, 3), 356.0);
                 return points;
             } catch (IOException e) {
                 e.printStackTrace();
