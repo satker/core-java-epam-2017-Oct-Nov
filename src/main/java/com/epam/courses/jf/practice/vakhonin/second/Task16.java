@@ -244,11 +244,15 @@ public class Task16 implements ITestableTask16 {
 
         Point2D point = new Point2D(j,k);
 
-        for(long x = (long)(center.getX() - radius); x < Math.ceil(center.getX() - radius); ++x){
-            for(long y = (long)(center.getY() - radius); y < Math.ceil(center.getY() - radius); ++y){
-                double distance = Math.sqrt(Math.pow(x - center.getX(), 2) + Math.pow(y - center.getY(), 2));
-                if(distance < radius){
-                    map.put(new Point2D(x, y), distance);
+        int xStart = (int) (center.getX() - radius);
+        int xFinish = (int) (center.getX() + radius);
+        int yStart = (int) (center.getY() - radius);
+        int yFinish = (int) (center.getY() + radius);
+        for (int x = xStart; x <= xFinish; x++) {
+            for (int y = yStart; y <= yFinish; y++) {
+                I2DPoint currentPoint = new Point2D(x, y);
+                if (dist(currentPoint, center) < radius) {
+                    map.put(currentPoint, dist(currentPoint, center));
                 }
             }
         }
