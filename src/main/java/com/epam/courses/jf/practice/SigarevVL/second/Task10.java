@@ -31,7 +31,6 @@ public class Task10 implements ITestableTask10{
         }
 
         for (String string : allWords) {
-            System.out.print(string);
             if (wordsMap.containsKey(string)) {
                 wordsMap.put(string, wordsMap.get(string) + 1);
             } else {
