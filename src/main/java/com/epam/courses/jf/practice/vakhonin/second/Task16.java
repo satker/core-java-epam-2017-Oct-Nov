@@ -173,6 +173,7 @@ import com.epam.courses.jf.practice.common.second.ITestableTask16;
 
 import java.io.*;
 import java.util.*;
+import java.util.logging.Logger;
 
 public class Task16 implements ITestableTask16 {
 
@@ -225,6 +226,7 @@ public class Task16 implements ITestableTask16 {
         }
 
     }
+    static Logger log = Logger.getLogger(Task16.class.getName());
 
 
     @Override
@@ -241,7 +243,7 @@ public class Task16 implements ITestableTask16 {
         };
 
         SortedMap<I2DPoint, Double> map = new TreeMap<>(comparator);
-//        Queue<I2DPoint> pointsFound = new PriorityQueue<>(comparator);
+        Queue<I2DPoint> pointsFound = new PriorityQueue<>(comparator);
 
 
         Point2D point = new Point2D(j,k);
@@ -254,17 +256,27 @@ public class Task16 implements ITestableTask16 {
             for (int y = yStart; y <= yFinish; y++) {
                 I2DPoint currentPoint = new Point2D(x, y);
                 if (dist(currentPoint, center) < radius) {
-//                    pointsFound.offer(currentPoint);
+                    pointsFound.offer(currentPoint);
                     map.put(currentPoint, dist(currentPoint, center));
                 }
             }
         }
 
+        log.info("map.size = " + map.size());
+        log.info("queue.size = " + pointsFound.size());
+
+
+//        log.info("map.first " + map.get(map.firstKey()));
+//        log.info("queue.size = " + pointsFound.);
+
+
+
+
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(output))) {
-//            writer.write(String.valueOf(center.getX()));
-//            writer.write(" ");
-//            writer.write(String.valueOf(center.getY()));
-//            writer.write("\n");
+            writer.write(String.valueOf(center.getX()));
+            writer.write(" ");
+            writer.write(String.valueOf(center.getY()));
+            writer.write("\n");
 
 
             if(!map.isEmpty()) {
