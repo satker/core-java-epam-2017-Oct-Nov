@@ -244,32 +244,13 @@ public class Task16 implements ITestableTask16 {
 
         Point2D point = new Point2D(j,k);
 
-        while(isPointInCircle(point, center, radius)){
-            while(isPointInCircle(point, center, radius)){
-                map.put(point, distance(point, center));
-                point.setX(point.getX()+1);
+        for(long x = (long)(center.getX() - radius); x < Math.ceil(center.getX() - radius); ++x){
+            for(long y = (long)(center.getY() - radius); y < Math.ceil(center.getY() - radius); ++y){
+                double distance = Math.sqrt(Math.pow(x - center.getX(), 2) + Math.pow(y - center.getY(), 2));
+                if(distance < radius){
+                    map.put(new Point2D(x, y), distance);
+                }
             }
-            point.setX(integerCenterX);
-            while(isPointInCircle(point, center, radius)){
-                map.put(point, distance(point, center));
-                point.setX(point.getX()-1);
-            }
-            point.setY(point.getY()+1);
-            point.setX(integerCenterX);
-        }
-
-        while(isPointInCircle(point, center, radius)){
-            while(isPointInCircle(point, center, radius)){
-                map.put(point, distance(point, center));
-                point.setX(point.getX()+1);
-            }
-            point.setY(integerCenterY);
-            while(isPointInCircle(point, center, radius)){
-                map.put(point, distance(point, center));
-                point.setX(point.getX()-1);
-            }
-            point.setX(integerCenterX);
-            point.setY(point.getY()-1);
         }
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(output))) {
