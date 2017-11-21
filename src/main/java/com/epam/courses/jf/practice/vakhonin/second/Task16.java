@@ -226,17 +226,17 @@ public class Task16 implements ITestableTask16 {
         }
 
     }
-    static Logger log = Logger.getLogger(Task16.class.getName());
+//    static Logger log = Logger.getLogger(Task16.class.getName());
 
 
 
-    String mapString(Map<I2DPoint, Double> map){
-        String result = "MAP_STRING: ";
-        for (Map.Entry<I2DPoint, Double> entry : map.entrySet()) {
-            result += "x = " + entry.getKey().getX() + "  y = " + entry.getKey().getY() + "\n";
-        }
-        return result;
-    }
+//    String mapString(Map<I2DPoint, Double> map){
+//        String result = "MAP_STRING: ";
+//        for (Map.Entry<I2DPoint, Double> entry : map.entrySet()) {
+//            result += "x = " + entry.getKey().getX() + "  y = " + entry.getKey().getY() + "\n";
+//        }
+//        return result;
+//    }
 
     @Override
     public IFileWithPoints analyze(I2DPoint center, int radius, File output) {
@@ -251,9 +251,9 @@ public class Task16 implements ITestableTask16 {
             return distance1.compareTo(distance2);
         };
 
-//        SortedMap<I2DPoint, Double> map = new TreeMap<>(comparator);
-        Map<I2DPoint, Double> map = new HashMap<>();
-        Queue<I2DPoint> pointsFound = new PriorityQueue<>(comparator);
+
+
+        Queue<I2DPoint> queue = new PriorityQueue<>(comparator);
 
 
         Point2D point = new Point2D(j,k);
@@ -266,22 +266,10 @@ public class Task16 implements ITestableTask16 {
             for (int y = yStart; y <= yFinish; y++) {
                 I2DPoint currentPoint = new Point2D(x, y);
                 if (dist(currentPoint, center) < radius) {
-                    log.info("point: x = " + currentPoint.getX() + "   y = " + currentPoint.getY());
-                    pointsFound.offer(currentPoint);
-                    map.put(currentPoint, dist(currentPoint, center));
+                    queue.offer(currentPoint);
                 }
             }
         }
-
-
-
-        log.info("map = " + mapString(map));
-//        log.info("queue = " + pointsFound);
-
-
-//        log.info("map.first " + map.get(map.firstKey()));
-//        log.info("queue.size = " + pointsFound.);
-
 
 
 
@@ -292,16 +280,14 @@ public class Task16 implements ITestableTask16 {
             writer.write("\n");
 
 
-            if(!map.isEmpty()) {
-                for (Map.Entry<I2DPoint, Double> entry : map.entrySet()) {
-                    I2DPoint currentPoint = entry.getKey();
-                    writer.write(String.valueOf(currentPoint.getX()));
-                    writer.write(" ");
-                    writer.write(String.valueOf(currentPoint.getY()));
-                    writer.write(" ");
-                    writer.write(String.valueOf(dist(currentPoint, center)));
-                    writer.write("\n");
-                }
+            while (!queue.isEmpty()) {
+                I2DPoint currentPoint = queue.poll();
+                writer.write(String.valueOf(currentPoint.getX()));
+                writer.write(" ");
+                writer.write(String.valueOf(currentPoint.getY()));
+                writer.write(" ");
+                writer.write(String.valueOf(dist(currentPoint, center)));
+                writer.write("\n");
             }
 
         } catch (IOException e) {
