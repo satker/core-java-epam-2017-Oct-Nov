@@ -18,9 +18,13 @@ public class Solver implements ISolver {
 
     private static boolean isSorted(char[] characters){
 
+        if(characters.length == 1){
+            return false;
+        }
+
         for(int i = 1; i < characters.length; i++) {
 
-            if((int)characters[i - 1] > (int)characters[i]) {
+            if(characters[i - 1] >= characters[i]) {
 
                 return false;
             }
@@ -349,8 +353,8 @@ public class Solver implements ISolver {
                     result.append('\t');
                     out++;
                 }
-                result.deleteCharAt(result.length() - 1);
-                System.out.println("\n");
+                result.deleteCharAt(result.lastIndexOf("\t"));
+                System.out.print(result + "\n");
             }
         }else {
             System.out.println(0);
@@ -649,13 +653,7 @@ public class Solver implements ISolver {
 
         int[][] inputArray = new int[size][size];
 
-       // System.out.println(determinant(inputArray));
-        
     }
-
-//    private int determinant(int[][] inputArray) {
-//
-//    }
 
     @Override
     public void task18() {
