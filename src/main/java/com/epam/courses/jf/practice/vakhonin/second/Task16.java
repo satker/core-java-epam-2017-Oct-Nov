@@ -241,7 +241,8 @@ public class Task16 implements ITestableTask16 {
         };
 
         SortedMap<I2DPoint, Double> map = new TreeMap<>(comparator);
-        Queue<I2DPoint> pointsFound = new PriorityQueue<>(comparator);
+//        Queue<I2DPoint> pointsFound = new PriorityQueue<>(comparator);
+
 
         Point2D point = new Point2D(j,k);
 
@@ -253,7 +254,8 @@ public class Task16 implements ITestableTask16 {
             for (int y = yStart; y <= yFinish; y++) {
                 I2DPoint currentPoint = new Point2D(x, y);
                 if (dist(currentPoint, center) < radius) {
-                    pointsFound.offer(currentPoint);
+//                    pointsFound.offer(currentPoint);
+                    map.put(currentPoint, dist(currentPoint, center));
                 }
             }
         }
@@ -264,14 +266,17 @@ public class Task16 implements ITestableTask16 {
             writer.write(String.valueOf(center.getY()));
             writer.write("\n");
 
-            while (!pointsFound.isEmpty()) {
-                I2DPoint currentPoint = pointsFound.poll();
-                writer.write(String.valueOf(currentPoint.getX()));
-                writer.write(" ");
-                writer.write(String.valueOf(currentPoint.getY()));
-                writer.write(" ");
-                writer.write(String.valueOf(dist(currentPoint, center)));
-                writer.write("\n");
+
+            if(!map.isEmpty()) {
+                for (Map.Entry<I2DPoint, Double> entry : map.entrySet()) {
+                    I2DPoint currentPoint = entry.getKey();
+                    writer.write(String.valueOf(currentPoint.getX()));
+                    writer.write(" ");
+                    writer.write(String.valueOf(currentPoint.getY()));
+                    writer.write(" ");
+                    writer.write(String.valueOf(dist(currentPoint, center)));
+                    writer.write("\n");
+                }
             }
 
         } catch (IOException e) {
