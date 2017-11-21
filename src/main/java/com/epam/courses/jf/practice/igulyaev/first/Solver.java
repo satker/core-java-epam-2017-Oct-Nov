@@ -322,7 +322,7 @@ public class Solver implements ISolver {
     @Override
     public void task18(){
         final Scanner scanner = new Scanner(System.in);
-        int[][] matrix = readMatrix(scanner);
+        final int[][] matrix = readMatrix(scanner);
         final Set<Integer> invalidRows = new HashSet<>();
         final Set<Integer> invalidColumns = new HashSet<>();
         final int max = Stream.of(matrix).flatMapToInt(Arrays::stream).max().getAsInt();
@@ -366,6 +366,23 @@ public class Solver implements ISolver {
         System.out.println(matrixToString(resultMatrix));
     }
 
+    @Override
+    public void task21(){
+        final Scanner scanner = new Scanner(System.in);
+        final int[][] matrix = readMatrix(scanner);
+        for (int row = 0; row < matrix.length; ++row) {
+            matrix[row] = Arrays.stream(matrix[row]).boxed()
+                    .sorted((Integer i1, Integer i2) -> {
+                        if ((i1 == 0 && i2 == 0) || (i1 != 0 && i2 != 0)) {
+                            return 0;
+                        }
+                        return i1 == 0 ? 1 : -1;
+                    })
+                    .mapToInt(i -> i).toArray();
+        }
+        System.out.println(matrix.length);
+        System.out.print(matrixToString(matrix));
+    }
     @Override
     public void task24(){
         final Scanner scanner = new Scanner(System.in);
