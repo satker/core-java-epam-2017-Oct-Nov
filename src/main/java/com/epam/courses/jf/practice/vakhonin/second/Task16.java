@@ -241,7 +241,7 @@ public class Task16 implements ITestableTask16 {
         };
 
         SortedMap<I2DPoint, Double> map = new TreeMap<>(comparator);
-        Queue<I2DPoint> pointsFound = new PriorityQueue<>();
+        Queue<I2DPoint> pointsFound = new PriorityQueue<>(comparator);
 
         Point2D point = new Point2D(j,k);
 
