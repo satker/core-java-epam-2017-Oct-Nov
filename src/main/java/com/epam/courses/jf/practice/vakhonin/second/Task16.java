@@ -248,59 +248,65 @@ public class Task16 implements ITestableTask16 {
         Comparator<I2DPoint> comparator = (p1, p2) -> {
             Double distance1 = dist(p1, center);
             Double distance2 = dist(p2, center);
-            return distance1.compareTo(distance2);
+            int comparison = distance1.compareTo(distance2);
+            if(comparison == 0){
+                return -1;
+            }
+            else{
+                return comparison;
+            }
         };
 
 
 
         Queue<I2DPoint> queue = new PriorityQueue<>(comparator);
+        SortedMap<I2DPoint, Double> map = new TreeMap<>(comparator);
 
 
         Point2D point = new Point2D(j,k);
 
-        int xStart = (int) (center.getX() - radius);
-        int xFinish = (int) (center.getX() + radius);
-        int yStart = (int) (center.getY() - radius);
-        int yFinish = (int) (center.getY() + radius);
-        for (int x = xStart; x <= xFinish; x++) {
-            for (int y = yStart; y <= yFinish; y++) {
-                I2DPoint currentPoint = new Point2D(x, y);
-                if (dist(currentPoint, center) < radius) {
-                    queue.offer(currentPoint);
-                }
+//        int xStart = (int) (center.getX() - radius);
+//        int xFinish = (int) (center.getX() + radius);
+//        int yStart = (int) (center.getY() - radius);
+//        int yFinish = (int) (center.getY() + radius);
+//        for (int x = xStart; x <= xFinish; x++) {
+//            for (int y = yStart; y <= yFinish; y++) {
+//                I2DPoint currentPoint = new Point2D(x, y);
+//                if (dist(currentPoint, center) < radius) {
+//                    queue.offer(currentPoint);
+//                }
+//            }
+//        }
+
+
+
+        while(isPointInCircle(point, center, radius)){
+            while(isPointInCircle(point, center, radius)){
+                map.put(point, distance(point, center));
+                point.setX(point.getX()+1);
             }
+            point.setX(integerCenterX);
+            while(isPointInCircle(point, center, radius)){
+                map.put(point, distance(point, center));
+                point.setX(point.getX()-1);
+            }
+            point.setY(point.getY()+1);
+            point.setX(integerCenterX);
         }
 
-
-
-//        while(isPointInCircle(point, center, radius)){
-//            while(isPointInCircle(point, center, radius)){
-//                queue.offer(currentPoint);
-//                map.put(point, distance(point, center));
-//                point.setX(point.getX()+1);
-//            }
-//            point.setX(integerCenterX);
-//            while(isPointInCircle(point, center, radius)){
-//                map.put(point, distance(point, center));
-//                point.setX(point.getX()-1);
-//            }
-//            point.setY(point.getY()+1);
-//            point.setX(integerCenterX);
-//        }
-//
-//        while(isPointInCircle(point, center, radius)){
-//            while(isPointInCircle(point, center, radius)){
-//                map.put(point, distance(point, center));
-//                point.setX(point.getX()+1);
-//            }
-//            point.setY(integerCenterY);
-//            while(isPointInCircle(point, center, radius)){
-//                map.put(point, distance(point, center));
-//                point.setX(point.getX()-1);
-//            }
-//            point.setX(integerCenterX);
-//            point.setY(point.getY()-1);
-//        }
+        while(isPointInCircle(point, center, radius)){
+            while(isPointInCircle(point, center, radius)){
+                map.put(point, distance(point, center));
+                point.setX(point.getX()+1);
+            }
+            point.setY(integerCenterY);
+            while(isPointInCircle(point, center, radius)){
+                map.put(point, distance(point, center));
+                point.setX(point.getX()-1);
+            }
+            point.setX(integerCenterX);
+            point.setY(point.getY()-1);
+        }
 
 
 
@@ -353,16 +359,13 @@ public class Task16 implements ITestableTask16 {
 
                 I2DPoint center = new Point2D(centerX, centerY);
 
-                SortedMap<I2DPoint, Double> points = new TreeMap<>(new Comparator<I2DPoint>() {
-                    @Override
-                    public int compare(I2DPoint o1, I2DPoint o2) {
-                        Double dist1 = dist(o1, center);
-                        Double dist2 = dist(o2, center);
-                        if (Double.compare(dist1, dist2) == 0) {
-                            return -1;
-                        } else {
-                            return dist1.compareTo(dist2);
-                        }
+                SortedMap<I2DPoint, Double> points = new TreeMap<>((o1, o2) -> {
+                    Double dist1 = dist(o1, center);
+                    Double dist2 = dist(o2, center);
+                    if (Double.compare(dist1, dist2) == 0) {
+                        return -1;
+                    } else {
+                        return dist1.compareTo(dist2);
                     }
                 });
                 String string;
@@ -371,11 +374,7 @@ public class Task16 implements ITestableTask16 {
                     I2DPoint currentPoint = new Point2D(Double.parseDouble(row[0]), Double.parseDouble(row[1]));
                     points.put(currentPoint, Double.parseDouble(row[2]));
                 }
-
-
-
                 log.info(mapString(points));
-                points.put(new Point2D(2, 3), 356.0);
                 return points;
             } catch (IOException e) {
                 e.printStackTrace();
