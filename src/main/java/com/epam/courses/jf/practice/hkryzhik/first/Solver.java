@@ -592,18 +592,16 @@ public class Solver implements ISolver {
             for(int j = 0; j < size; j++){
                 if(!flag && inputArray[i][j] > 0){
                     flag = true;
-                    continue;
                 }
-                if(flag && inputArray[i][j] < 0){
+                else if(flag && inputArray[i][j] < 0){
                     result += inputArray[i][j];
                     /*result += inputArray[i][j];
                     if (inputArray[i][j + 1] < 0 && j != size - 1) {
                         break;
                     }*/
-                } else if (inputArray[i][j] > 0) {
+                } else if (flag && inputArray[i][j] > 0) {
                     break;
                 }
-                flag = false;
             }
         }
 
