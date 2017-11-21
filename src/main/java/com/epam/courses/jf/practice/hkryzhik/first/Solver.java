@@ -6,9 +6,6 @@ package com.epam.courses.jf.practice.hkryzhik.first;
 
 import com.epam.courses.jf.practice.common.first.ISolver;
 
-import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,7 +20,7 @@ public class Solver implements ISolver {
 
         for(int i = 1; i < characters.length; i++) {
 
-            if(characters[i - 1] > characters[i]) {
+            if((int)characters[i - 1] > (int)characters[i]) {
 
                 return false;
             }
@@ -150,7 +147,7 @@ public class Solver implements ISolver {
 
         for(String str : inputStrings){
             HashSet<Character> characterSet = new HashSet<>();
-            for (Character ch : str.toLowerCase().toCharArray()) {
+            for (Character ch : str.toCharArray()) {
                 characterSet.add(ch);
             }
             sets.add(characterSet);
@@ -215,20 +212,20 @@ public class Solver implements ISolver {
         String[] inputStrings = inputData.nextLine().split(" ");
 
         ArrayList<String> strings = new ArrayList<>();
-        boolean flag = true;
+        boolean flag = false;
 
         for (String string : inputStrings) {
 
             char[] charactersInWord = string.toCharArray();
 
             if(isSorted(charactersInWord)){
-                String outWord = new String(charactersInWord);
-                System.out.println(outWord);
-            }else {
-                flag = false;
+
+                System.out.println(new String(charactersInWord));
+
+                flag = true;
             }
         }
-        if(flag){
+        if(!flag){
             System.out.println("NOT FOUND");
         }
     }
@@ -244,7 +241,8 @@ public class Solver implements ISolver {
         }
 
         String[] inputStrings = inputData.nextLine().split(" ");
-        boolean flag = true;
+
+        HashSet<String> result = new HashSet<>();
 
         for (String word : inputStrings) {
 
@@ -258,15 +256,21 @@ public class Solver implements ISolver {
 
             if(charactersInWord.length == charactersSet.size()){
 
-                String outString = new String(charactersInWord);
+                result.add(new String(charactersInWord));
 
-                System.out.print(outString + " ");
-            }else {
-                flag = false;
             }
         }
-        if(flag){
+        if(result.isEmpty()){
             System.out.println("NOT FOUND");
+        }else {
+            StringBuilder formatedResult = new StringBuilder();
+            for (String stringInResult : result) {
+
+                formatedResult.append(stringInResult);
+                formatedResult.append(' ');
+            }
+            formatedResult.deleteCharAt(formatedResult.length() - 1);
+            System.out.println(formatedResult);
         }
     }
 
@@ -288,10 +292,12 @@ public class Solver implements ISolver {
 
         boolean flag = true;
 
+        List<String> resultList = new ArrayList<>();
+
         for (String word : inputStrings) {
 
             try {
-                if (Integer.parseInt(word) != 0) {
+                if (Double.parseDouble(word) != 0) {
                     char[] charactersInWord = word.toCharArray();
                     int i1 = 0;
                     int i2 = charactersInWord.length - 1;
@@ -306,13 +312,18 @@ public class Solver implements ISolver {
                         --i2;
                     }
                     if (flag) {
-                        System.out.println(word);
+                        resultList.add(word);
                     }
                 }
             }catch (NumberFormatException e){
                 continue;
             }
 
+        }
+        if(resultList.isEmpty()){
+            System.out.println("NOT FOUND");
+        }else {
+            System.out.println(resultList.get(resultList.size() - 1));
         }
 
     }
@@ -329,12 +340,20 @@ public class Solver implements ISolver {
 
         int out = 1;
 
-        for(int i = 0; i < size; i++){
-            for(int j = 0; j < size; j++) {
-                System.out.print(out + " ");
-                out++;
+        if(size != 0) {
+
+            for (int i = 0; i < size; i++) {
+                StringBuilder result = new StringBuilder();
+                for (int j = 0; j < size; j++) {
+                    result.append(out);
+                    result.append('\t');
+                    out++;
+                }
+                result.deleteCharAt(result.length() - 1);
+                System.out.println("\n");
             }
-            System.out.println("\n");
+        }else {
+            System.out.println(0);
         }
     }
 
@@ -620,8 +639,23 @@ public class Solver implements ISolver {
     //TODO: Shit to be done
     @Override
     public void task17() {
+        Scanner inputData = new Scanner(System.in);
 
+        int size = 0;
+
+        if (inputData.hasNextInt()) {
+            size = Integer.parseInt(inputData.nextLine());
+        }
+
+        int[][] inputArray = new int[size][size];
+
+       // System.out.println(determinant(inputArray));
+        
     }
+
+//    private int determinant(int[][] inputArray) {
+//
+//    }
 
     @Override
     public void task18() {
@@ -820,9 +854,15 @@ public class Solver implements ISolver {
                     bufferList.add(Integer.valueOf(inputLine[j]));
                 }
             }
-            if(bufferList.size() < size){
-                for(int k = 0; k <= size - bufferList.size(); k++){
+            if(bufferList.isEmpty()){
+                for(int k = 0; k <size; k++){
                     bufferList.add(0);
+                }
+            }else {
+                if (bufferList.size() < size) {
+                    for (int k = 0; k <= size - bufferList.size(); k++) {
+                        bufferList.add(0);
+                    }
                 }
             }
             inputArray.add(bufferList);
