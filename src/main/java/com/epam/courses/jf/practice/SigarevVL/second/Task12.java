@@ -28,6 +28,6 @@ public class Task12 implements ITestableTask12 {
     @Override
     public List<Integer> transform(List<Integer> integers, int value) {
         Collections.sort(integers);
-        return null;
+        return integers;
     }
 }
