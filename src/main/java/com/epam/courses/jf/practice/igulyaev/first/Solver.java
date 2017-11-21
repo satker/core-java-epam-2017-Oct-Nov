@@ -9,6 +9,7 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Solver implements ISolver {
 
@@ -317,6 +318,26 @@ public class Solver implements ISolver {
         rotateMatrixLeft(matrix);
         System.out.println(matrix.length);
         System.out.print(matrixToString(matrix));
+    }
+    @Override
+    public void task18(){
+        final Scanner scanner = new Scanner(System.in);
+        int[][] matrix = readMatrix(scanner);
+        final Set<Integer> invalidRows = new HashSet<>();
+        final Set<Integer> invalidColumns = new HashSet<>();
+        final int max = Stream.of(matrix).flatMapToInt(Arrays::stream).max().getAsInt();
+        for (int row = 0; row < matrix.length; ++row) {
+            for (int col = 0; col < matrix.length; ++col) {
+                if(matrix[row][col] == max){
+                    invalidRows.add(row);
+                    invalidColumns.add(col);
+                }
+            }
+        }
+        int[][] resultMatrix = deleteRowsAndColumns(invalidRows, invalidColumns, matrix);
+        System.out.println(resultMatrix.length);
+        System.out.println(resultMatrix[0].length);
+        System.out.println(matrixToString(resultMatrix));
     }
 
     @Override
