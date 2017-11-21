@@ -311,27 +311,36 @@ public class Task16 implements ITestableTask16 {
 
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(output))) {
-            writer.write(String.valueOf(center.getX()));
-            writer.write(" ");
-            writer.write(String.valueOf(center.getY()));
-            writer.write("\n");
+//            writer.write(String.valueOf(center.getX()));
+//            writer.write(" ");
+//            writer.write(String.valueOf(center.getY()));
+//            writer.write("\n");
 
 
-            while (!queue.isEmpty()) {
-                I2DPoint currentPoint = queue.poll();
-                writer.write(String.valueOf(currentPoint.getX()));
+
+            for (SortedMap.Entry<I2DPoint, Double> entry : map.entrySet()) {
+                writer.write(String.valueOf(entry.getKey().getX()));
                 writer.write(" ");
-                writer.write(String.valueOf(currentPoint.getY()));
+                writer.write(String.valueOf(entry.getKey().getY()));
                 writer.write(" ");
-                writer.write(String.valueOf(dist(currentPoint, center)));
+                writer.write(String.valueOf(dist(entry.getKey(), center)));
                 writer.write("\n");
             }
+//            while (!queue.isEmpty()) {
+//                I2DPoint currentPoint = queue.poll();
+//                writer.write(String.valueOf(currentPoint.getX()));
+//                writer.write(" ");
+//                writer.write(String.valueOf(currentPoint.getY()));
+//                writer.write(" ");
+//                writer.write(String.valueOf(dist(currentPoint, center)));
+//                writer.write("\n");
+//            }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return new FileWithPoints(output);
+        return new FileWithPoints(output, comparator);
     }
 
     private double dist (I2DPoint point1, I2DPoint point2) {
@@ -342,8 +351,11 @@ public class Task16 implements ITestableTask16 {
 
         private File file;
 
-        FileWithPoints (File file) {
+        private Comparator<I2DPoint> comparator;
+
+        FileWithPoints (File file, Comparator<I2DPoint> comparator) {
             this.file = file;
+            this.comparator = comparator;
         }
 
         public File getFile() {
@@ -359,22 +371,14 @@ public class Task16 implements ITestableTask16 {
 
                 I2DPoint center = new Point2D(centerX, centerY);
 
-                SortedMap<I2DPoint, Double> points = new TreeMap<>((o1, o2) -> {
-                    Double dist1 = dist(o1, center);
-                    Double dist2 = dist(o2, center);
-                    if (Double.compare(dist1, dist2) == 0) {
-                        return -1;
-                    } else {
-                        return dist1.compareTo(dist2);
-                    }
-                });
+                SortedMap<I2DPoint, Double> points = new TreeMap<>(comparator);
                 String string;
                 while ((string = reader.readLine()) != null) {
                     String[] row = string.split("\\s");
                     I2DPoint currentPoint = new Point2D(Double.parseDouble(row[0]), Double.parseDouble(row[1]));
                     points.put(currentPoint, Double.parseDouble(row[2]));
                 }
-                log.info(mapString(points));
+//                log.info(mapString(points));
                 return points;
             } catch (IOException e) {
                 e.printStackTrace();
