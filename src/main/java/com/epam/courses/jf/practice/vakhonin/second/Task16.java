@@ -176,9 +176,6 @@ import java.util.*;
 
 public class Task16 implements ITestableTask16 {
 
-
-
-
     class Point2D implements I2DPoint{
         double x, y;
 
@@ -196,32 +193,83 @@ public class Task16 implements ITestableTask16 {
         public double getY() {
             return y;
         }
+
+        void setX(double x){
+            this.x = x;
+        }
+
+        void setY(double y){
+            this.y = y;
+        }
     }
 
 //    TODO: SQRT!!!
 
 
+    public double distance(I2DPoint point1, I2DPoint point2){
+        double result;
+        result = Math.sqrt(Math.pow(point1.getX() - point2.getX(), 2) + Math.pow(point1.getY() - point2.getY(), 2));
+        return result;
+    }
+
+
+    public boolean isPointInCircle(I2DPoint point, I2DPoint center, int radius){
+
+        double distance = distance(point, center);
+
+        if(distance < Double.valueOf(radius)){
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+
+
     @Override
     public IFileWithPoints analyze(I2DPoint center, int radius, File output) {
-        Queue<I2DPoint> pointsFound = new PriorityQueue<>(new Comparator<I2DPoint>() {
-            @Override
-            public int compare(I2DPoint o1, I2DPoint o2) {
-                Double dist1 = dist(o1, center);
-                Double dist2 = dist(o2, center);
-                return dist1.compareTo(dist2);
+        int integerCenterX = (int) center.getX();
+        int integerCenterY = (int) center.getY();
+        int j = integerCenterX;
+        int k = integerCenterY;
+
+        Comparator<I2DPoint> comparator = (p1, p2) -> {
+            Double distance1 = dist(p1, center);
+            Double distance2 = dist(p2, center);
+            return distance1.compareTo(distance2);
+        };
+
+        SortedMap<I2DPoint, Double> map = new TreeMap<>(comparator);
+
+        Point2D point = new Point2D(j,k);
+
+        while(isPointInCircle(point, center, radius)){
+            while(isPointInCircle(point, center, radius)){
+                map.put(point, distance(point, center));
+                point.setX(point.getX()+1);
             }
-        });
-        int xStart = (int) (center.getX() - radius);
-        int xFinish = (int) (center.getX() + radius);
-        int yStart = (int) (center.getY() - radius);
-        int yFinish = (int) (center.getY() + radius);
-        for (int x = xStart; x <= xFinish; x++) {
-            for (int y = yStart; y <= yFinish; y++) {
-                I2DPoint currentPoint = new Point2D(x, y);
-                if (dist(currentPoint, center) < radius) {
-                    pointsFound.offer(currentPoint);
-                }
+            point.setX(integerCenterX);
+            while(isPointInCircle(point, center, radius)){
+                map.put(point, distance(point, center));
+                point.setX(point.getX()-1);
             }
+            point.setY(point.getY()+1);
+            point.setX(integerCenterX);
+        }
+
+        while(isPointInCircle(point, center, radius)){
+            while(isPointInCircle(point, center, radius)){
+                map.put(point, distance(point, center));
+                point.setX(point.getX()+1);
+            }
+            point.setY(integerCenterY);
+            while(isPointInCircle(point, center, radius)){
+                map.put(point, distance(point, center));
+                point.setX(point.getX()-1);
+            }
+            point.setX(integerCenterX);
+            point.setY(point.getY()-1);
         }
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(output))) {
@@ -229,8 +277,9 @@ public class Task16 implements ITestableTask16 {
             writer.write(" ");
             writer.write(String.valueOf(center.getY()));
             writer.write("\n");
-            while (!pointsFound.isEmpty()) {
-                I2DPoint currentPoint = pointsFound.poll();
+
+            for (Map.Entry<I2DPoint, Double> entry : map.entrySet()) {
+                I2DPoint currentPoint = entry.getKey();
                 writer.write(String.valueOf(currentPoint.getX()));
                 writer.write(" ");
                 writer.write(String.valueOf(currentPoint.getY()));
@@ -238,6 +287,7 @@ public class Task16 implements ITestableTask16 {
                 writer.write(String.valueOf(dist(currentPoint, center)));
                 writer.write("\n");
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -292,6 +342,4 @@ public class Task16 implements ITestableTask16 {
             return null;
         }
     }
-
-
 }
