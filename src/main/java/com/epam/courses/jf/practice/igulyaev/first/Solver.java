@@ -574,7 +574,4 @@ public class Solver implements ISolver {
         }
         return resultMatrix;
     }
-    public static void main(String[] args) {
-        new Solver().task22();
-    }
 }
