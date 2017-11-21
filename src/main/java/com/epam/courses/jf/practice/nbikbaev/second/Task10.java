@@ -18,6 +18,8 @@ public class Task10 implements ITestableTask10 {
                     int count = hashMap.get(word);
                     count++;
                     hashMap.put(word, count);
+                } else {
+                    hashMap.put(word, 1);
                 }
             }
         } catch (IOException e) {
