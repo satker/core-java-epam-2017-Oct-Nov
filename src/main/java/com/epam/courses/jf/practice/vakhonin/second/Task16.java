@@ -261,10 +261,10 @@ public class Task16 implements ITestableTask16 {
         }
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(output))) {
-            writer.write(String.valueOf(center.getX()));
-            writer.write(" ");
-            writer.write(String.valueOf(center.getY()));
-            writer.write("\n");
+//            writer.write(String.valueOf(center.getX()));
+//            writer.write(" ");
+//            writer.write(String.valueOf(center.getY()));
+//            writer.write("\n");
 
 
             if(!map.isEmpty()) {
