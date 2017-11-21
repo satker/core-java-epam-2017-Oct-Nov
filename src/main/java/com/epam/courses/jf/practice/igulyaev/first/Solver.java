@@ -320,6 +320,32 @@ public class Solver implements ISolver {
     }
 
     @Override
+    public void task19(){
+        final Scanner scanner = new Scanner(System.in);
+        int[][] matrix = readMatrix(scanner);
+        Set<Integer> invalidRows = new HashSet<>();
+        Set<Integer> invalidColumns = new HashSet<>();
+        for (int row = 0; row < matrix.length; ++row) {
+            if(IntStream.of(matrix[row]).map(Math::abs).sum() == 0){
+                invalidRows.add(row);
+            }
+        }
+        for (int col = 0; col < matrix.length; ++col){
+            int sum = 0;
+            for (int row = 0; row < matrix.length; ++row) {
+                sum += Math.abs(matrix[row][col]);
+            }
+            if(sum == 0){
+                invalidColumns.add(col);
+            }
+        }
+        int[][] resultMatrix = deleteRowsAndColumns(invalidRows, invalidColumns, matrix);
+        System.out.println(resultMatrix.length);
+        System.out.println(resultMatrix[0].length);
+        System.out.println(matrixToString(resultMatrix));
+    }
+
+    @Override
     public void task24(){
         final Scanner scanner = new Scanner(System.in);
         int[][] matrix = readMatrix(scanner);
@@ -410,7 +436,7 @@ public class Solver implements ISolver {
         AtomicInteger index = new AtomicInteger(1);
         Arrays.stream(matrix).flatMapToInt(Arrays::stream).forEach(i ->{
             builder.append(i);
-            builder.append(index.getAndIncrement() % matrix.length == 0 ? "\n" :" ");
+            builder.append(index.getAndIncrement() % matrix[0].length == 0 ? "\n" :" ");
         });
         return builder.toString();
     }
@@ -461,5 +487,29 @@ public class Solver implements ISolver {
                 matrix[length - j][i] = temp;
             }
         }
+    }
+
+    private int[][] deleteRowsAndColumns(Set<Integer> invalidRows, Set<Integer> invalidColumns, int[][] matrix){
+        Set<Integer> validRows = new HashSet<>();
+        Set<Integer> validColumns = new HashSet<>();
+        for (int i = 0; i < matrix.length; ++i){
+            validRows.add(i);
+            validColumns.add(i);
+        }
+        validColumns.removeAll(invalidColumns);
+        validRows.removeAll(invalidRows);
+        int[][] shiftRowsMatrix = new int[validRows.size()][matrix[0].length];
+        int[][] resultMatrix = new int[validRows.size()][validColumns.size()];
+        final AtomicInteger destIndex = new AtomicInteger(0);
+        validRows.iterator().forEachRemaining(srcIndex -> System.arraycopy(matrix[srcIndex], 0,
+                shiftRowsMatrix[destIndex.getAndIncrement()], 0, matrix[0].length));
+        destIndex.set(0);
+        for (int srcCol : validColumns) {
+            int destCol = destIndex.getAndIncrement();
+            for (int row = 0; row < validRows.size(); row++) {
+                resultMatrix[row][destCol] = shiftRowsMatrix[row][srcCol];
+            }
+        }
+        return resultMatrix;
     }
 }
