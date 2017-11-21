@@ -383,6 +383,19 @@ public class Solver implements ISolver {
         System.out.println(matrix.length);
         System.out.print(matrixToString(matrix));
     }
+
+    @Override
+    public void task22(){
+        final Scanner scanner = new Scanner(System.in);
+        final double[][] matrix = readDoubleMatrix(scanner);
+        int[][] intMatrix = new int[matrix.length][matrix.length];
+        for (int row = 0; row < matrix.length; ++row) {
+            intMatrix[row] = Arrays.stream(matrix[row]).mapToLong(Math::round).mapToInt(i -> (int)i).toArray();
+        }
+        System.out.println(intMatrix.length);
+        System.out.print(matrixToString(intMatrix));
+    }
+
     @Override
     public void task24(){
         final Scanner scanner = new Scanner(System.in);
@@ -485,6 +498,18 @@ public class Solver implements ISolver {
         for (int row = 0; row < DIMENSION; ++row) {
             for (int col = 0; col < DIMENSION; ++col) {
                 matrix[row][col] = scanner.nextInt();
+            }
+        }
+        return matrix;
+    }
+
+    private double[][] readDoubleMatrix(Scanner scanner) {
+        scanner.useLocale(Locale.US);
+        final int DIMENSION = scanner.nextInt();
+        double[][] matrix = new double[DIMENSION][DIMENSION];
+        for (int row = 0; row < DIMENSION; ++row) {
+            for (int col = 0; col < DIMENSION; ++col) {
+                matrix[row][col] = scanner.nextDouble();
             }
         }
         return matrix;
