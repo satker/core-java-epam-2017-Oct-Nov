@@ -256,16 +256,15 @@ public class Task16 implements ITestableTask16 {
             for (int y = yStart; y <= yFinish; y++) {
                 I2DPoint currentPoint = new Point2D(x, y);
                 if (dist(currentPoint, center) < radius) {
-                    log.info("point: x = " + map.size());
-
+                    log.info("point: x = " + currentPoint.getX() + "   y = " + currentPoint.getY());
                     pointsFound.offer(currentPoint);
                     map.put(currentPoint, dist(currentPoint, center));
                 }
             }
         }
 
-        log.info("map = " + map.toString());
-        log.info("queue = " + pointsFound.toString());
+        log.info("map = " + map);
+        log.info("queue = " + pointsFound);
 
 
 //        log.info("map.first " + map.get(map.firstKey()));
