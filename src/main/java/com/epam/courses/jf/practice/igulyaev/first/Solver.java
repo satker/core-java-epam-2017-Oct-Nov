@@ -1,8 +1,6 @@
 package com.epam.courses.jf.practice.igulyaev.first;
 
 import com.epam.courses.jf.practice.common.first.ISolver;
-import com.epam.courses.jf.practice.common.first.Reader;
-import org.omg.PortableInterceptor.INACTIVE;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -349,7 +347,7 @@ public class Solver implements ISolver {
         final Scanner scanner = new Scanner(System.in);
         int[][] matrix = readMatrix(scanner);
         int[][] expandedMatrix = expandMatrix(matrix, Integer.MIN_VALUE);
-        List<Integer> localMins =new ArrayList<>();
+        List<Integer> localMins = new ArrayList<>();
         for (int row = 1; row < expandedMatrix.length - 1; ++row) {
             for (int col = 1; col < expandedMatrix.length - 1; ++col) {
                 int value = expandedMatrix[row][col];
@@ -364,6 +362,17 @@ public class Solver implements ISolver {
         System.out.println(
                 localMins.stream().max(Integer::compareTo).map(Object::toString).orElse("NOT FOUND")
         );
+    }
+
+    @Override
+    public void task27(){
+        final Scanner scanner = new Scanner(System.in);
+        int[][] matrix = readMatrix(scanner);
+        rotateMatrixLeft(matrix);
+        Arrays.sort(matrix, Comparator.comparingInt(col -> IntStream.of(col).map(Math::abs).sum()));
+        rotateMatrixRight(matrix);
+        System.out.println(matrix.length);
+        System.out.print(matrixToString(matrix));
     }
 
     private int[][] expandMatrix(final int[][] matrix, int border){
@@ -381,6 +390,7 @@ public class Solver implements ISolver {
         }
         return expandedMatrix;
     }
+
     private int[][] shiftRows(final int[][] matrix, int shift){
         int[][] newMatrix = new int[matrix.length][matrix.length];
         for (int i = 0; i < matrix.length; ++i){
@@ -398,6 +408,7 @@ public class Solver implements ISolver {
         });
         return builder.toString();
     }
+
     private int[][] readMatrix(Scanner scanner) {
         final int DIMENSION = scanner.nextInt();
         int[][] matrix = new int[DIMENSION][DIMENSION];
@@ -407,5 +418,42 @@ public class Solver implements ISolver {
             }
         }
         return matrix;
+    }
+
+    private int[][] readMatrixByColumn(Scanner scanner) {
+        final int DIMENSION = scanner.nextInt();
+        int[][] matrix = new int[DIMENSION][DIMENSION];
+        for (int row = 0; row < DIMENSION; ++row) {
+            for (int col = 0; col < DIMENSION; ++col) {
+                matrix[col][row] = scanner.nextInt();
+            }
+        }
+        return matrix;
+    }
+
+    private void rotateMatrixRight(int[][] matrix) {
+        final int length = matrix.length - 1;
+        for (int i = 0; i <= (length)/2; ++i) {
+            for (int j = i; j < length - i; ++j) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[length - j][i];
+                matrix[length - j][i] = matrix[length - i][length - j];
+                matrix[length - i][length - j] = matrix[j][length - i];
+                matrix[j][length - i] = temp;
+            }
+        }
+    }
+
+    private void rotateMatrixLeft(int[][] matrix) {
+        final int length = matrix.length - 1;
+        for (int i = 0; i <= (length)/2; ++i) {
+            for (int j = i; j < length - i; ++j) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][length - i];
+                matrix[j][length - i] = matrix[length - i][length - j];
+                matrix[length - i][length - j] = matrix[length - j][i];
+                matrix[length - j][i] = temp;
+            }
+        }
     }
 }
