@@ -504,7 +504,6 @@ public class Solver implements ISolver {
     }
 
     private double[][] readDoubleMatrix(Scanner scanner) {
-        scanner.useLocale(Locale.US);
         final int DIMENSION = scanner.nextInt();
         double[][] matrix = new double[DIMENSION][DIMENSION];
         for (int row = 0; row < DIMENSION; ++row) {
@@ -574,5 +573,8 @@ public class Solver implements ISolver {
             }
         }
         return resultMatrix;
+    }
+    public static void main(String[] args) {
+        new Solver().task22();
     }
 }
