@@ -229,6 +229,15 @@ public class Task16 implements ITestableTask16 {
     static Logger log = Logger.getLogger(Task16.class.getName());
 
 
+
+    String mapString(Map<I2DPoint, Double> map){
+        String result = "MAP_STRING: ";
+        for (Map.Entry<I2DPoint, Double> entry : map.entrySet()) {
+            result += "x = " + entry.getKey().getX() + "  y = " + entry.getKey().getY() + "\n";
+        }
+        return result;
+    }
+
     @Override
     public IFileWithPoints analyze(I2DPoint center, int radius, File output) {
         int integerCenterX = (int) center.getX();
@@ -263,8 +272,10 @@ public class Task16 implements ITestableTask16 {
             }
         }
 
-        log.info("map = " + map);
-        log.info("queue = " + pointsFound);
+
+
+        log.info("map = " + mapString(map));
+//        log.info("queue = " + pointsFound);
 
 
 //        log.info("map.first " + map.get(map.firstKey()));
